@@ -15,15 +15,21 @@ type MyNewProps = {
 }
 
 export const News: ({ item }: MyNewProps) => any = ({ item }): any => {
+  const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
+
   return <div className={ css(styles.wrapper) }>
     <div className={ css(styles.content) }>
-      <Image className={ css(styles.img) } src={ item.cover } layout='intrinsic' alt={ item.title } width={336} height={190} />
+      <Link href={`/post/[id]`} as={`/post/${ _id }`} >
+        <a>
+          <Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={336} height={190} />
+        </a>
+      </Link>
       <div className={ css(styles.block) }>
-        <Author isArticle={ false } author={ item.author } date={ item.createdAt } />
-        <Link href={`/post/[id]`} as={`/post/${ item._id }`} >
+        <Author isArticle={ false } author={ author } date={ createdAt } />
+        <Link href={`/post/[id]`} as={`/post/${ _id }`} >
           <div className={ css(baseStyles.block, baseStyles.blockText) }>
-            <h3>{ item.title }</h3>
-            <p>{ item.small_text }</p>
+            <h3>{ title }</h3>
+            <p>{ small_text }</p>
             <div className={ css(baseStyles.shadow) } />
           </div>
         </Link>
@@ -31,8 +37,8 @@ export const News: ({ item }: MyNewProps) => any = ({ item }): any => {
     </div>
     <div className={ css(styles.block) }>
       <div className={css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom)}>
-        <ArticleStats isArticle={ false } views={ item.views } comments={ item.comments } />
-        <Likes likes={ item.likes } id={ item._id } post={ false } />
+        <ArticleStats isArticle={ false } views={ views } comments={ comments } />
+        <Likes likes={ likes } id={ _id } post={ false } />
       </div>
     </div>
   </div>

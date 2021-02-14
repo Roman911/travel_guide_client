@@ -1,11 +1,8 @@
-import React from "react"
 import { useQuery } from "@apollo/react-hooks"
 import { getDataFromTree } from '@apollo/react-ssr'
 import withApollo from '../lib/withApollo'
 import { postsQuery } from "../apollo/queries/posts"
-// import { Populars } from "../modules"
-// import { MainLayout, SectionTitle } from "../Components"
-
+import { PopularsPost } from "../modules"
 import { MainLayout, News, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 
 const Home = () => {
@@ -24,7 +21,7 @@ const Home = () => {
         { news }
       </LeftBlock>
       <RightBlock>
-        Right
+        <PopularsPost />
       </RightBlock>
     </WithRightBlock>
   </MainLayout>
