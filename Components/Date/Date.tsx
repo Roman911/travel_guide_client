@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import { css } from "aphrodite"
+import { css } from "aphrodite/no-important"
 import styles from "./styles"
 
 interface DateProps {

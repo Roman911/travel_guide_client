@@ -1,10 +1,11 @@
+import React from 'react'
 import { useQuery } from "@apollo/react-hooks"
-import { postsQuery } from './querys'
+import { popularsPostsQuery } from './querys'
 import { LoadingSpin } from '../../../Components'
 import {PopularPost, WrapperPopularPosts} from '../Components'
 
-export const PopularsPost = () => {
-  const {loading, error, data} = useQuery(postsQuery)
+export const PopularsPosts: React.FC = (): any => {
+  const {loading, error, data} = useQuery(popularsPostsQuery)
   if (loading) return <LoadingSpin/>
   if (error) return `Error! ${error}`
   const {popularsPosts} = data

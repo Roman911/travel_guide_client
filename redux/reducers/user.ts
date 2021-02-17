@@ -1,4 +1,4 @@
-import { CreateUserData, UserData } from "../../types/user"
+import { CreateUserData, UserData } from "../../typeScript/user"
 
 const initialState = {
   data: null,

@@ -11,7 +11,9 @@ export default StyleSheet.create({
   },
   //Left Block
   leftBlock: {
-    width: `calc(100% - ${ widthBlocks.rightBlock }px)`,
+    width: `calc(100% - ${ widthBlocks.rightBlock }px)`
+  },
+  leftBlockNews: {
     display: 'flex',
     flexWrap: 'wrap'
   },

@@ -1,4 +1,4 @@
-import { Locations } from '../../types/locations'
+import { Locations } from '../../typeScript/locations'
 
 const Actions = {
   setLocations: (mapsData: Locations) => {

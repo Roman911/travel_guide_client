@@ -1,4 +1,4 @@
-import { Modal } from "../../types/modal"
+import { Modal } from "../../typeScript/modal"
 const initialState = {
   text: null,
   timeout: null,

@@ -27,5 +27,10 @@ export default StyleSheet.create({
     height: 15,
     width: 'auto !important',
     color: '#e84a43'
+  },
+  title: {
+    fontFamily: 'Montserrat, sans-serif',
+    margin: '12px 0 16px',
+    fontWeight: 100
   }
 })

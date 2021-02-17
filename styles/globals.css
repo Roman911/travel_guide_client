@@ -6,7 +6,7 @@ body {
   font-family: 'Roboto',arial sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: rgb(56, 56, 56);
+  color: #6b7073;
   background-color: #ffffff;
   line-height: 26px;
 }
@@ -21,7 +21,9 @@ code {
 }
 p {
   font-size: 1.2rem;
-  line-height: 30px
+  line-height: 30px;
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  text-rendering: optimizeLegibility;
 }
 ul {
   padding: 0;
@@ -69,32 +71,28 @@ button {
   background: none;
   cursor: pointer;
 }
-h1, h2, h3, h4, h5 {
-  font-family: Montserrat, sans-serif;
-  font-weight: 100;
-}
 h1 {
-  font-size: 2.4rem;
-  margin: 0.8rem 0 1.2rem;
-  letter-spacing: 20px
+  font-size: 2.2rem;
+  margin: 2.4rem 0 1.8rem;
+  letter-spacing: 10px
 }
 h2 {
   font-size: 2rem;
-  margin: 0.7rem 0 1rem;
-  letter-spacing: 15px
+  margin: 2.2rem 0 1.6rem;
+  letter-spacing: 8px
 }
 h3 {
   font-size: 1.6rem;
-  letter-spacing: 9px;
-  margin: 0.7rem 0 1rem;
+  letter-spacing: 6px;
+  margin: 1.8rem 0 1.2rem;
 }
 h4 {
   font-size: 1.4rem;
-  margin: 0.5rem 0 0.6rem;
+  margin: 1.6rem 0 1rem;
 }
 h5 {
   font-size: 1.2rem;
-  margin: 0.5rem 0 0.6rem;
+  margin: 1.4rem 0 0.8rem;
 }
 p {
   margin: 0;

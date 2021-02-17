@@ -1,26 +1,26 @@
 import React from 'react'
 import { css } from "aphrodite/no-important"
 
-import { Avatar, UserName, Date } from "../"
+import {Avatar, UserName, Date, Rating} from "../"
 import baseStyles from "../../styles/"
 import styles from "./styles"
 
 type MyAuthorPostProps = {
   isArticle: boolean
-  author: { avatar: string, name: string }
-  date: string
+  author: { avatar: string, name: string, rating?: number }
+  date?: string
 }
 
 export const Author = ({ isArticle, author, date }: MyAuthorPostProps) => {
-  const { avatar, name } = author
+  const { avatar, name, rating } = author
 
-  return <div className={css(baseStyles.flexSB, baseStyles.block)}>
-    <div className={css(baseStyles.flex)}>
-      <Avatar avatar={ avatar } name={ name } size='S' />
-      <div className={css(!isArticle ? styles.blockName : styles.isArticle)}>
+  return <div className={ css(baseStyles.flexSB, baseStyles.block) }>
+    <div className={ css(baseStyles.flex) }>
+      <Avatar avatar={ avatar } name={ name } size={ isArticle ? 'M' : 'S' } />
+      <div className={ css(!isArticle ? styles.blockName : styles.isArticle) }>
         <UserName name={ name } />
-        { isArticle && <div className={ css(styles.separator) } /> }
-        <Date date={ date } format='LL'/>
+        { date && <Date date={ date } format='LL'/> }
+        { isArticle && <Rating rating={ rating } /> }
       </div>
     </div>
   </div>

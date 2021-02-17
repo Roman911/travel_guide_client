@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks"
 import { getDataFromTree } from '@apollo/react-ssr'
 import withApollo from '../lib/withApollo'
 import { postsQuery } from "../apollo/queries/posts"
-import { PopularsPost } from "../modules"
+import { PopularsPosts } from "../modules"
 import { MainLayout, News, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 
 const Home = () => {
@@ -17,11 +17,11 @@ const Home = () => {
 
   return <MainLayout title='Home' header='Новини'>
     <WithRightBlock>
-      <LeftBlock>
+      <LeftBlock isNews={ true }>
         { news }
       </LeftBlock>
       <RightBlock>
-        <PopularsPost />
+        <PopularsPosts />
       </RightBlock>
     </WithRightBlock>
   </MainLayout>

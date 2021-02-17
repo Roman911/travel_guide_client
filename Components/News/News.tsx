@@ -28,7 +28,7 @@ export const News: ({ item }: MyNewProps) => any = ({ item }): any => {
         <Author isArticle={ false } author={ author } date={ createdAt } />
         <Link href={`/post/[id]`} as={`/post/${ _id }`} >
           <div className={ css(baseStyles.block, baseStyles.blockText) }>
-            <h3>{ title }</h3>
+            <h3 className={ css(styles.title) }>{ title }</h3>
             <p>{ small_text }</p>
             <div className={ css(baseStyles.shadow) } />
           </div>

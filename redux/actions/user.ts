@@ -1,4 +1,4 @@
-import { UserData, CreateUserData } from '../../types/user'
+import { UserData, CreateUserData } from '../../typeScript/user'
 
 const Actions = {
   setData: (data: UserData | null) => {

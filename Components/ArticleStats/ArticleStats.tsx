@@ -7,7 +7,7 @@ import baseStyles from '../../styles'
 interface ArticleStatsProps {
   isArticle: boolean
   views: number
-  comments: number
+  comments?: number
 }
 
 export const ArticleStats = ({isArticle, views, comments}: ArticleStatsProps) => {

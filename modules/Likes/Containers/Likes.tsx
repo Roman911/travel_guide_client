@@ -19,23 +19,23 @@ export const Likes:React.FC<MyLikesProps> = ({ id, likes, post }): any => {
   const user = useSelector((state: { user: User }) => state.user)
   const dispatch = useDispatch()
   const { data } = user
-  const userId = data ? data.userId : undefined
+  const _id = data ? data._id : undefined
 
   useEffect(() => {
     likes.filter((item: string | undefined) => {
-      setUserLike(item === userId)
+      setUserLike(item === _id)
     })
-  }, [likes, userId])
+  }, [likes, _id])
 
   const [ changeLike ] = useMutation(likeMutation)
 
   const options = {
-    variables: { postId: id, userId: userId }
+    variables: { postId: id, userId: _id }
   }
 
   const handleClick = () => {
     if (post) {
-      if (userId) {
+      if (_id) {
         setQuantityLikes( userLike ? quantityLikes -1 : quantityLikes +1)
         setUserLike(prevState => !prevState)
         changeLike(options).then()

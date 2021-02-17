@@ -4,7 +4,7 @@ import styles from "./styles"
 
 export const WrapperPopularPosts: React.FC = ({ children }): any => {
   return <section className={ css(styles.wrapper) }>
-    <h4>ПОПУЛЯРНІ</h4>
+    <h4 className={ css(styles.wrapperTitle) }>ПОПУЛЯРНІ</h4>
     { children }
   </section>
 }

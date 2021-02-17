@@ -1,3 +1,5 @@
+export { InformUserLocation } from './InformUserLocation'
 export { Likes } from './Likes'
 export { UseRoutes } from './NavBar'
-export { PopularsPost } from './Posts'
+export { PopularsPosts, Post } from './Posts'
+export { Tags } from './Tags'

@@ -1,0 +1,1 @@
+export { InformLocation } from './InformLocation'

@@ -20,6 +20,9 @@ export const Avatar = ({ avatar, name , size }: MyAvatarProps) => {
     case 'S':
       avatarSize = styles.avatarS
       break
+    case 'M':
+      avatarSize = styles.avatarM
+      break
     case 'L':
       avatarSize = styles.avatarL
       break

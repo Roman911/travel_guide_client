@@ -1,5 +1,4 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { icons } from "../../variabels"
 
 export default StyleSheet.create({
   //Author
@@ -9,14 +8,8 @@ export default StyleSheet.create({
   isArticle: {
     marginLeft: 10,
     display: 'flex',
-    alignItems: 'center'
-  },
-  separator: {
-    width: 2,
-    height: 2,
-    borderRadius: '50%',
-    margin: '0 10px',
-    background: icons
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   //Avatar
   background: {
@@ -32,6 +25,11 @@ export default StyleSheet.create({
     width: 40,
     height: 40,
     fontSize: 20
+  },
+  avatarM: {
+    width: 50,
+    height: 50,
+    fontSize: 30
   },
   avatarL: {
     width: 80,
@@ -54,5 +52,14 @@ export default StyleSheet.create({
     width: 'auto !important',
     color: '#af5f0c',
     margin: '0 6px 10px'
+  },
+  //Rating
+  rating: {
+    background: 'linear-gradient(90deg,#db4454,#9f406d)',
+    fontSize: 12,
+    padding: '5px 12px',
+    color: '#fff',
+    margin: '4px 0 4px 10px',
+    lineHeight: 'initial'
   }
 })

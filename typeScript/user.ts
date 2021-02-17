@@ -4,7 +4,7 @@ export type User = {
 }
 
 export type UserData = {
-  userId: string
+  _id: string
   token: string
   avatar: string
   name: string
