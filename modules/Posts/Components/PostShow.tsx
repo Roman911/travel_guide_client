@@ -13,7 +13,7 @@ import { googleMapsActions } from '../../../redux/actions'
 import { PostData } from '../../../typeScript/post'
 import { User } from "../../../typeScript/user"
 import { ArticleStats, Author, Date, LeftBlock, RightBlock, WithRightBlock } from "../../../Components"
-import { Source } from "./Source"
+import { InfoBar, Source } from "./"
 
 type MyPostProps = {
   post: PostData
@@ -73,7 +73,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
         </div>
       </LeftBlock>
       <RightBlock>
-        {/*<InfoBar tickets={ tickets } work_time={ work_time } location={ location } />*/}
+        <InfoBar tickets={ tickets } work_time={ work_time } location={ location } />
         { data && <InformUserLocation locationId={ locationId } user={ user } /> }
         <PopularsPosts />
       </RightBlock>
