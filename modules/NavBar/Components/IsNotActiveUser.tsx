@@ -7,7 +7,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons"
 import baseStyles from '../../../styles'
 import styles from "./styles"
 
-export const IsNotActiveUser = () => {
+export const IsNotActiveUser: React.FC = () => {
   return <Link href={ '/login' }>
     <a>
       <div className={ css(baseStyles.flexSB) } >

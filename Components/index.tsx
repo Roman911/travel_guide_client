@@ -1,5 +1,5 @@
 export { ArticleStats } from './ArticleStats'
-export { Button } from './Button'
+export { Button, ButtonLink } from './Button'
 export { Date } from './Date'
 export { FormikControl } from './Formik'
 export { AuthForm, HeaderForm } from './Forms'

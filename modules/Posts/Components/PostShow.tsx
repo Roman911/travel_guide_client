@@ -4,33 +4,32 @@ import dynamic from "next/dynamic"
 import { useDispatch } from 'react-redux'
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
+import { googleMapsActions } from '../../../redux/actions'
 import { PopularsPosts } from '../'
 import { Likes, Tags, InformUserLocation } from "../../"
-// import {ArticleStats, AuthorPost, Images, InfoBar, LoadingSpin} from "../../../Components"
+import { InfoBar, Source } from "./"
+import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './styles'
-import { googleMapsActions } from '../../../redux/actions'
 import { PostData } from '../../../typeScript/post'
 import { User } from "../../../typeScript/user"
-import { ArticleStats, Author, Date, LeftBlock, RightBlock, WithRightBlock } from "../../../Components"
-import { InfoBar, Source } from "./"
 
 type MyPostProps = {
   post: PostData
   user: User
 }
 type CommentsProps = {
-  id: string
+  postId: string
 }
 
-// const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, {
-//   loading: () => <LoadingSpin />
-// })
+const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, {
+  loading: () => <LoadingSpin />
+})
 
 export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
   const dispatch = useDispatch()
   const { data } = user
-  const { _id, title, small_text, cover, views, likes, author, createdAt, coordinates, tickets, location, work_time, isType, editor, locationId, tags, link, rating } = post
+  const { _id, title, small_text, cover, views, likes, author, createdAt, coordinates, tickets, location, work_time, isType, editor, locationId, tags, link } = post
   const [ inView, setInView ] = useState(false)
   const handleChange = (e) => {
     if (e) {
@@ -68,12 +67,12 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
             <Likes id={ _id } likes={ likes } post={ true } />
           </div>
           <InView onChange={ handleChange } >
-            {/*{ inView && <Comments id={ _id } /> }*/}
+            { inView && <Comments postId={ _id } /> }
           </InView>
         </div>
       </LeftBlock>
       <RightBlock>
-        <InfoBar tickets={ tickets } work_time={ work_time } location={ location } />
+        <InfoBar tickets={ tickets } work_time={ work_time } address={ location.address } />
         { data && <InformUserLocation locationId={ locationId } user={ user } /> }
         <PopularsPosts />
       </RightBlock>

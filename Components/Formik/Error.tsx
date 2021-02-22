@@ -2,7 +2,12 @@ import React from "react"
 import { css } from "aphrodite/no-important"
 import styles from './styles'
 
-export const Error = ({ className, children }) => {
+type ErrorProps = {
+  className: string
+  children: string
+}
+
+export const Error: React.FC<ErrorProps> = ({ className, children }) => {
 
   const element = ({ styleWrapper, triangle }) => {
     return <div className={ css(styles.wrapper, styleWrapper) }>

@@ -1,11 +1,19 @@
+import React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { css } from "aphrodite/no-important"
 import baseStyles from '../../../styles'
 import styles from './styles'
 
-export const PopularPost = ({ item }) => {
-  const { _id, cover, title } = item
+type PopularPostProps = {
+  item: {
+    _id: string
+    cover: string
+    title: string
+  }
+}
+
+export const PopularPost: React.FC<PopularPostProps> = ({ item: { _id, cover, title } }) => {
 
   return <div className={ css(styles.wrapperLink) }>
     <Link href={`/post/[id]`} as={`/post/${ _id }`} >

@@ -5,12 +5,10 @@ export type PostData = {
   text: string
   cover: string
   views: number
-  likes: Array<string>
-  author: { avatar: string; name: string; }
+  likes: string[]
   createdAt: string
   coordinates: string
   tickets: string[]
-  location: string
   work_time: string
   isType: string
   editor: string
@@ -19,4 +17,12 @@ export type PostData = {
   tags: [string]
   link: string
   rating: number
+  author: {
+    avatar: string
+    name: string
+  }
+  location: {
+    address: string[]
+    coordinates: string[]
+  }
 }

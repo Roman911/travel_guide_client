@@ -10,11 +10,11 @@ import styles from './styles'
 
 import { Item } from '../../typeScript/news'
 
-type MyNewProps = {
+type NewProps = {
   item: Item
 }
 
-export const News: ({ item }: MyNewProps) => any = ({ item }): any => {
+export const News: React.FC<NewProps> = ({ item }): any => {
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
 
   return <div className={ css(styles.wrapper) }>

@@ -10,7 +10,7 @@ interface ArticleStatsProps {
   comments?: number
 }
 
-export const ArticleStats = ({isArticle, views, comments}: ArticleStatsProps) => {
+export const ArticleStats: React.FC<ArticleStatsProps> = ({isArticle, views, comments}) => {
   return <div className={css(baseStyles.flex)}>
       <span className={css(baseStyles.views)}>
         <FontAwesomeIcon className={css(baseStyles.iconS)} icon={faEye}/>

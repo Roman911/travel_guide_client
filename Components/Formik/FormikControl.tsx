@@ -5,6 +5,10 @@ type Props = {
   rest: any
 }
 
+type FormikControlProps = {
+  control: string
+}
+
 const Checkbox = dynamic<Props>(() => import('./Checkbox') as any)
 const Input = dynamic<Props>(() => import('./Input') as any)
 const InputGroup = dynamic<Props>(() => import('./InputGroup') as any)
@@ -12,7 +16,7 @@ const Select = dynamic<Props>(() => import('./Select') as any)
 const Radio = dynamic<Props>(() => import('./Radio') as any)
 const TextArea = dynamic<Props>(() => import('./Textarea') as any)
 
-export const FormikControl = ({ control, ...rest }) => {
+export const FormikControl: React.FC<FormikControlProps> = ({ control, ...rest }) => {
   switch (control) {
     case 'checkbox':
       return <Checkbox rest={ rest } />

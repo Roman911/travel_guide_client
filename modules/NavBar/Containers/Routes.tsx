@@ -2,9 +2,14 @@ import React from "react"
 import { useDispatch } from 'react-redux'
 import { sidebarActions } from "../../../redux/actions"
 import { NavBar, NavBarAuthorization } from '../Components'
-import { User } from "../../../typeScript/user"
+import {  UserData } from "../../../typeScript/user"
 
-export const UseRoutes = ({ authorization, data }: { authorization: boolean | undefined, data: User }): any => {
+type UseRoutesProps = {
+  authorization: boolean | undefined
+  data: UserData
+}
+
+export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): any => {
   const dispatch = useDispatch()
 
   const showSidebar = () => {

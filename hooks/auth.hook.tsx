@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { userActions } from "../redux/actions"
 const storageName = 'userData'
 
-export const UseAuth = () => {
+export const UseAuth: React.FC = (): any => {
   const dispatch = useDispatch()
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem(storageName) as string)

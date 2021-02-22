@@ -15,7 +15,7 @@ type InformWindowProps = {
   handleClick: () => void
 }
 
-const InformWindow = ({ id, children, closedModal, handleClick }): React.FC<InformWindowProps> => {
+const InformWindow: React.FC<InformWindowProps> = ({ id, children, closedModal, handleClick }) => {
   const target = usePortal(id)
   const cln = closedModal ? css(styles.wrapper, styles.closedModal) : css(styles.wrapper, styles.openModal)
 

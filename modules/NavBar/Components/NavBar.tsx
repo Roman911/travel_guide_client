@@ -9,8 +9,14 @@ import { IsActiveUser, IsNotActiveUser } from './'
 import baseStyles from '../../../styles'
 import styles from './styles'
 import { Links } from "../config/linksNavBar"
+import { UserData } from "../../../typeScript/user"
 
-export const NavBar = ({ data, showSidebar }) => {
+type NavBarProps = {
+  data: UserData
+  showSidebar: () => void
+}
+
+export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar }) => {
   const router = useRouter()
   const pathname = router.pathname
 

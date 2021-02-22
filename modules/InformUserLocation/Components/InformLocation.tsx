@@ -1,5 +1,6 @@
 import React from "react"
 import { css } from "aphrodite/no-important"
+import baseStyles from '../../../styles'
 import styles from "./styles"
 import { Button } from "../../../Components"
 
@@ -19,7 +20,7 @@ export const InformLocation: React.FC<InformLocationProps> = ({ addLocationMyLis
     </div>
   }
 
-  return <section className={ css(styles.wrapper) }>
+  return <section className={ css(baseStyles.rightBlock, styles.wrapper) }>
     {
       locationsUser?.action === 'visited' ?
         block(

@@ -1,13 +1,8 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { btn, shadows } from '../../../variabels'
+import { btn } from '../../../variabels'
 
 export default StyleSheet.create({
   //Wrapper Populars Post
-  wrapper: {
-    margin: '10px 5px',
-    padding: 10,
-    boxShadow: `2px 2px 10px 0px ${ shadows.shadow }`
-  },
   wrapperTitle: {
     margin: 0,
     fontFamily: 'Montserrat, sans-serif',

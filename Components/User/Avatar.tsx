@@ -4,13 +4,13 @@ import { css } from "aphrodite/no-important"
 import baseStyles from "../../styles"
 import styles from "./styles"
 
-type MyAvatarProps = {
+type AvatarProps = {
   avatar: string
   name: string
   size: string
 }
 
-export const Avatar = ({ avatar, name , size }: MyAvatarProps) => {
+export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
   const avatarIcon = avatar !== 'undefined' ?
     <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' width={ 100 } height={ 100 } /> :
     <p>{ name[0].toUpperCase() }</p>

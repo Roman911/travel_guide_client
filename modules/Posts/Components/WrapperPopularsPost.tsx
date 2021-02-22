@@ -1,9 +1,10 @@
 import React from "react"
 import { css } from "aphrodite/no-important"
-import styles from "./styles"
+import baseStyles from "../../../styles"
+import styles from './styles'
 
 export const WrapperPopularPosts: React.FC = ({ children }): any => {
-  return <section className={ css(styles.wrapper) }>
+  return <section className={ css(baseStyles.rightBlock) }>
     <h4 className={ css(styles.wrapperTitle) }>ПОПУЛЯРНІ</h4>
     { children }
   </section>

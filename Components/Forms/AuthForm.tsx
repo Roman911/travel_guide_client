@@ -13,11 +13,11 @@ type AuthFormProps = {
 export const AuthForm: React.FC<AuthFormProps> = ({ formik, dataForm, btn }) => {
 
   const inputs = dataForm.map((item, index) => {
-    const id = item.id
     return <FormikControl
       key={ index }
       control={ item.control }
-      id={ id }
+      // @ts-ignore
+      id={ item.id }
       type={ item.type }
       label={ item.label }
     />

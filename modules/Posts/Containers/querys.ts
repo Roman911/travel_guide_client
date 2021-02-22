@@ -36,6 +36,7 @@ export const postQuery = gql`
       }
       location {
         coordinates
+        address
       }
     }
   }

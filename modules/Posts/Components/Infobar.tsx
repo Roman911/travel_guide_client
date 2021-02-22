@@ -11,10 +11,11 @@ import styles from './infoBarStyles'
 type MyInfoBarProps = {
   tickets: string[]
   work_time: string
-  location: string
+  address: string[]
 }
 
-export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location }) => {
+export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, address }) => {
+
   const viewTickets = tickets.length !== 0 && <div className={ css(styles.content) }>
     <div className={ css(baseStyles.flex, styles.block) }>
       <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faTicketAlt } />
@@ -25,7 +26,7 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location
     })}
   </div>
 
-  return <section className={ css( styles.wrapper) }>
+  return <section className={ css( baseStyles.rightBlock) }>
     {/*<Link href={ '/maps' } >*/}
     {/*  <a>*/}
     {/*    <GoogleMaps disableDefaultUI={ true } search={ false } />*/}
@@ -36,7 +37,11 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location
         <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faMapMarkerAlt } />
         <p className={ css(styles.title) }>Місце знаходження:</p>
       </div>
-      <p className={ css(styles.text) }>{ location }</p>
+      {
+        address.map((item, index) => {
+          return <span key={ index } className={ css(styles.text) }>{ index !== address.length -1 ? item + ', ' : item }</span>
+        })
+      }
     </div>
     { viewTickets }
     <div className={ css(styles.content) }>

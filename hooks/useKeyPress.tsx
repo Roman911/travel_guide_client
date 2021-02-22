@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 
-export const useKeyPress = (keyCode, action) => {
+export const useKeyPress: (keyCode: string, action: () => void) => void = (keyCode, action) => {
   const upHandler = ({ key }) => {
     if (key === keyCode) {
       action()

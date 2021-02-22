@@ -5,13 +5,13 @@ import {Avatar, UserName, Date, Rating} from "../"
 import baseStyles from "../../styles/"
 import styles from "./styles"
 
-type MyAuthorPostProps = {
+type AuthorPostProps = {
   isArticle: boolean
   author: { avatar: string, name: string, rating?: number }
   date?: string
 }
 
-export const Author = ({ isArticle, author, date }: MyAuthorPostProps) => {
+export const Author: React.FC<AuthorPostProps> = ({ isArticle, author, date }) => {
   const { avatar, name, rating } = author
 
   return <div className={ css(baseStyles.flexSB, baseStyles.block) }>
