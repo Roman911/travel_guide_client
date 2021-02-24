@@ -1,3 +1,4 @@
+export { GoogleMaps, SortLocations } from './GoogleMaps'
 export { InformUserLocation } from './InformUserLocation'
 export { Likes } from './Likes'
 export { UseRoutes } from './NavBar'
