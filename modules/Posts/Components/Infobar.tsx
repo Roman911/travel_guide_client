@@ -4,7 +4,7 @@ import { css } from 'aphrodite/no-important'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarkerAlt, faTicketAlt } from "@fortawesome/free-solid-svg-icons"
 import { faClock } from "@fortawesome/free-regular-svg-icons"
-// import { GoogleMaps } from '../../modules'
+import { GoogleMaps } from '../../../modules'
 import baseStyles from '../../../styles'
 import styles from './infoBarStyles'
 
@@ -27,11 +27,11 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, address 
   </div>
 
   return <section className={ css( baseStyles.rightBlock) }>
-    {/*<Link href={ '/maps' } >*/}
-    {/*  <a>*/}
-    {/*    <GoogleMaps disableDefaultUI={ true } search={ false } />*/}
-    {/*  </a>*/}
-    {/*</Link>*/}
+    <Link href={ '/maps' } >
+      <a>
+        <GoogleMaps disableDefaultUI={ true } search={ false } />
+      </a>
+    </Link>
     <div className={ css(styles.content) }>
       <div className={ css(baseStyles.flex, styles.block) }>
         <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faMapMarkerAlt } />

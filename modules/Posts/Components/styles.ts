@@ -2,6 +2,9 @@ import { StyleSheet } from 'aphrodite/no-important'
 import { btn } from '../../../variabels'
 
 export default StyleSheet.create({
+  wrapper: {
+    padding: 10
+  },
   //Wrapper Populars Post
   wrapperTitle: {
     margin: 0,

@@ -7,6 +7,12 @@ type Props = {
 
 type FormikControlProps = {
   control: string
+  name?: string
+  id?: string
+  type?: string
+  label?: string
+  options?: any
+  valueMap?: any
 }
 
 const Checkbox = dynamic<Props>(() => import('./Checkbox') as any)

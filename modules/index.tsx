@@ -1,6 +1,7 @@
 export { GoogleMaps, SortLocations } from './GoogleMaps'
 export { InformUserLocation } from './InformUserLocation'
 export { Likes } from './Likes'
+export { CreateLocationSelector } from './Locations'
 export { UseRoutes } from './NavBar'
 export { PopularsPosts, Post } from './Posts'
 export { Tags } from './Tags'

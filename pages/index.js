@@ -1,6 +1,4 @@
 import { useQuery } from "@apollo/react-hooks"
-import { getDataFromTree } from '@apollo/react-ssr'
-import withApollo from '../lib/withApollo'
 import { postsQuery } from "../apollo/queries/posts"
 import { PopularsPosts } from "../modules"
 import { MainLayout, News, WithRightBlock, LeftBlock, RightBlock } from '../Components'
@@ -27,4 +25,4 @@ const Home = () => {
   </MainLayout>
 }
 
-export default withApollo(Home, { getDataFromTree })
+export default Home

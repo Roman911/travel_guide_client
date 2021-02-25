@@ -79,7 +79,7 @@ export default StyleSheet.create({
   },
   rightBlock: {
     margin: '10px 5px',
-    padding: 10,
     boxShadow: `2px 2px 10px 0px ${ shadows.shadow }`
-  }
+  },
+
 })
