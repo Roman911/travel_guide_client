@@ -4,9 +4,8 @@ import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import { addLocationMutation } from "./mutations"
-import { modalActions, googleMapsActions } from '../../../redux/actions'
+import { modalActions, googleMapsActions, uploadActions } from '../../../redux/actions'
 import { User } from "../../../typeScript/user"
-import Redirect from "../../../hooks/useRedirect"
 import { CreateLocation, WrapperLocationSelector } from '../Components'
 
 type clsProps = {
@@ -16,9 +15,17 @@ type clsProps = {
   } | null
 }
 
+type UploadFileType = {
+  file: {
+    _id: string
+    url: string
+  }
+}
+
 export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps): any => {
   const dispatch = useDispatch()
   const { data } = useSelector((state: { user: User }) => state.user)
+  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
   const [ createLocations ] = useMutation(addLocationMutation)
   const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['Київська обл.', 'м. Київ', 'вул. Хрещатик'] }
   const validationSchema = Yup.object({
@@ -27,27 +34,26 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps)
       .max(50, 'Дуже велика назва')
       .required('Required')
   })
+
   const onSubmit = (values, onSubmitProps) => {
     const coordinates = [ values.coordinateY, values.coordinateX ]
-    const idAuthor = data ? data.userId : null
     createLocations({
       variables: {
         locationsInput: {
-          idAuthor: idAuthor,
+          token: data.token,
           title: values.title,
-          cover: values.cover,
-          linkToPost: values.linkToPost,
+          cover: file._id,
           small_text: values.small_text,
           coordinates: coordinates,
           isType: values.isType,
-          location: values.location
+          address: values.location
         }
       }
     }).then(data => {
       if (data) {
         dispatch(modalActions.showModal('Локація успішно добавлена!'))
+        dispatch(uploadActions.setData(null))
         onSubmitProps.resetForm()
-        return <Redirect to={ '/login' } />
       }
       onSubmitProps.setSubmitting(false)
     }).catch( () => {

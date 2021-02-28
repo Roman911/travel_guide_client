@@ -3,7 +3,7 @@ import { css } from "aphrodite/no-important"
 import { locationsType } from "../../../config/locations"
 import { Button, FormikControl } from "../../../Components"
 import baseStyle from "../../../styles"
-import { UploadFile } from "../../UploadFile/Containers/UploadFile"
+import { UploadFile } from "../../UploadFile"
 
 type CreateLocationProps = {
   formik: any
@@ -14,8 +14,7 @@ export const CreateLocation: React.FC<CreateLocationProps> = ({ formik }) => {
 
   return <>
     <FormikControl control='input' id='title' type='text' label='Назва локації:' />
-    <FormikControl control='input' id='cover' type='text' label='Обкладинка' />
-    <UploadFile />
+    <UploadFile label='Обкладинка' nameBtn='Завантажити обкладинку' />
     <FormikControl control='select' id='isType' type='text' label='Тип локації:' options={ locationsType } />
     <FormikControl control='inputGroup' id='location' valueMap={ location } />
     <FormikControl control='textarea' name='small_text' type='text' label='Короткий опис:' />

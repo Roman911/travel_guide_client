@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-const reducers = [ 'googleMaps', 'modal', 'sidebar', 'user' ]
+const reducers = [ 'googleMaps', 'modal', 'sidebar', 'user', 'uploadFile' ]
 
 export default combineReducers(
   reducers.reduce((initial: any, name: string) => {
