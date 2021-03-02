@@ -1,11 +1,11 @@
-import { CreateUserData, UserData } from "../../typeScript/user"
+import { UserData } from "../../typeScript/user"
 
 const initialState = {
   data: null
 }
 
 type ActionType = {
-  payload: UserData | CreateUserData
+  payload: UserData
   type: string
 }
 
