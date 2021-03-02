@@ -86,5 +86,12 @@ export default StyleSheet.create({
     ':hover': {
       color: btn
     }
+  },
+  a: {
+    color: '#fff',
+    fontSize: '1.1rem',
+    letterSpacing: 0,
+    textTransform: 'none',
+    fontWeight: 400
   }
 })

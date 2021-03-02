@@ -4,9 +4,14 @@ export type Item = {
   idAuthor: string
   createdAt: string
   small_text: string
-  cover: string
   views: number
   comments: number
   likes: []
-  author: { avatar: string; name: string; }
+  author: {
+    avatar: string
+    name: string
+  }
+  cover: {
+    url: string
+  }
 }

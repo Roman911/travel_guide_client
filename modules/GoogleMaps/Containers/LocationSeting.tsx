@@ -5,12 +5,14 @@ import { Modal } from "../Components"
 import { modalActions } from "../../../redux/actions"
 import { addLocationsUserListMutation } from './mutations'
 import { User } from "../../../typeScript/user"
+import { Location } from '../../../typeScript/locations'
 
 type LocationSettingProps = {
   mapInformation?: boolean
+  location: Location
 }
 
-export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation }) => {
+export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation, location }) => {
   const { data } = useSelector((state: { user: User }) => state.user)
   const dispatch = useDispatch()
   const [showModalSetting, setShowModalSetting] = useState(false)
@@ -46,5 +48,5 @@ export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation
     })
   }
 
-  return <Modal mapInformation={ mapInformation } handleClick={ handleClick } showModalSetting={ showModalSetting } closeModalSetting={ closeModalSetting } addLocationMyList={ addLocationMyList } />
+  return <Modal mapInformation={ mapInformation } handleClick={ handleClick } showModalSetting={ showModalSetting } closeModalSetting={ closeModalSetting } addLocationMyList={ addLocationMyList } location={ location } />
 }

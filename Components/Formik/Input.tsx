@@ -9,11 +9,12 @@ type InputProps = {
     id: string
     type: string
     label: string
+    disabled?: boolean
   }
 }
 
 const Input: React.FC<InputProps> = ({ rest }) => {
-  const { id, type, label } = rest
+  const { id, type, label, disabled } = rest
 
   return <div className={ css(styles.inputWrapper) }>
     <Field id={ id } name={ id }>
@@ -21,7 +22,7 @@ const Input: React.FC<InputProps> = ({ rest }) => {
         const { value } = field
         return <>
           <label className={ css(styles.label, value !== '' ? styles.labelTouched : null) } htmlFor={ id }>{ label }</label>
-          <input type={type} {...field} {...rest} />
+          <input type={type} {...field} {...rest} disabled={ disabled } />
           { touched[field.name] && errors[field.name] && <p className={ css(styles.icon) }>!</p> }
         </>
       }}

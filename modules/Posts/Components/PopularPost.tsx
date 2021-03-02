@@ -8,7 +8,9 @@ import styles from './styles'
 type PopularPostProps = {
   item: {
     _id: string
-    cover: string
+    cover: {
+      url: string
+    }
     title: string
   }
 }
@@ -18,7 +20,7 @@ export const PopularPost: React.FC<PopularPostProps> = ({ item: { _id, cover, ti
   return <div className={ css(styles.wrapperLink) }>
     <Link href={`/post/[id]`} as={`/post/${ _id }`} >
       <a className={ css(baseStyles.flex, styles.link) }>
-        <Image className={ css(styles.img) } src={ cover } layout='fixed' alt={ title } width={35} height={35} />
+        <Image className={ css(styles.img) } src={ cover.url } layout='fixed' alt={ title } width={35} height={35} />
         <span className={ css(styles.title) }>{ title }</span>
       </a>
     </Link>

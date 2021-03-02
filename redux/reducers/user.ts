@@ -1,8 +1,7 @@
 import { CreateUserData, UserData } from "../../typeScript/user"
 
 const initialState = {
-  data: null,
-  registerData: null
+  data: null
 }
 
 type ActionType = {
@@ -16,11 +15,6 @@ const user = (state = initialState, actions: ActionType) => {
       return {
         ...state,
         data: actions.payload
-      }
-    case 'USER:REGISTER_DATA':
-      return {
-        ...state,
-        registerData: actions.payload
       }
     default:
       return state

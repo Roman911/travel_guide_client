@@ -26,7 +26,7 @@ export const Information: React.FC<MyInformationProps> = ({ location, handleClic
     <div className={ css(styles.block, baseStyle.flexSB) }>
       <FontAwesomeIcon onClick={ handleClick } className={ css(styles.icon) } icon={ faArrowLeft }/>
       <p className={ css(styles.title) }>{ title }</p>
-      <LocationSetting mapInformation={ true } />
+      <LocationSetting mapInformation={ true } location={ location } />
     </div>
     <div className={ css(styles.blockText) }>
       <p className={ css(styles.text) }>{ small_text }</p>

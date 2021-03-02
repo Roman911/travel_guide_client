@@ -3,7 +3,6 @@ export type PostData = {
   title: string
   small_text: string
   text: string
-  cover: string
   views: number
   likes: string[]
   createdAt: string
@@ -24,5 +23,8 @@ export type PostData = {
   location: {
     address: string[]
     coordinates: string[]
+  }
+  cover: {
+    url
   }
 }

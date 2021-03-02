@@ -1,6 +1,5 @@
 export type User = {
   data: UserData
-  registerData: null | CreateUserData
 }
 
 export type UserData = {
@@ -9,11 +8,5 @@ export type UserData = {
   avatar: string
   name: string
   email: string
-}
-
-export type CreateUserData = {
-  createUser: {
-    _id: string
-    _typename: string
-  }
+  rating:number
 }

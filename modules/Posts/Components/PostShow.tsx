@@ -46,6 +46,8 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
 
   dispatch(googleMapsActions.changeLocations(changeData))
 
+  console.log(post)
+
   return <div className={ css(styles.postWrapper)}>
     <div className={ css(baseStyles.flexSB) }>
       <h1 className={ css(styles.postTitle) }>{ title }</h1>
@@ -58,7 +60,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
       <LeftBlock isNews={ false }>
         <div className={ css(styles.wrapperContent) }>
           <p className={ css(styles.text) }>{small_text}</p>
-          <Image src={ cover } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={ 980 } height={ 450 } />
+          <Image src={ cover.url } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={ 980 } height={ 450 } />
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
           { link && <Source link={ link } /> }
           <Author isArticle={ true } author={ author } />

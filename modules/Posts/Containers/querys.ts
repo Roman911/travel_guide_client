@@ -1,11 +1,12 @@
-import { gql } from 'apollo-boost'
+import { gql } from '@apollo/client'
 
 export const popularsPostsQuery = gql`
   query popularsPosts {
     popularsPosts {
       _id
-      title
-      cover
+      cover {
+        url
+      }
     }
   }
 `
@@ -14,19 +15,13 @@ export const postQuery = gql`
   query post($_id: ID!) {
     post(_id: $_id) {
       _id
-      title
-      cover
       createdAt
-      small_text
-      text
       views
       likes
       tickets
-      coordinates
       work_time
       isType
       editor
-      locationId
       tags
       link
       author {
@@ -37,6 +32,9 @@ export const postQuery = gql`
       location {
         coordinates
         address
+      }
+      cover {
+        url
       }
     }
   }
