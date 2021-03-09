@@ -1,25 +1,16 @@
-import React, { useEffect } from "react"
-import { useRouter } from "next/router"
+import React from "react"
 import { useSelector } from "react-redux"
 import { useQuery } from "@apollo/client"
-import { ProfileContainer } from '../../modules'
+import { ProfileContainer } from "../../modules"
 import { LoadingPost, MainLayout } from "../../Components"
 import { userQuery } from "../../apollo/queries/user"
-import { User } from '../../typeScript/user'
+import { User } from "../../typeScript/user"
+import { UseAuth } from "../../hooks/auth.hook"
 
 const Profile: React.FC = (): any => {
-  const router = useRouter()
-  const _id = router.query.id
+  UseAuth()
   const { data: userData } = useSelector((state: { user: User }) => state.user)
-
-  useEffect(() => {
-    if (data) {
-      if (userData._id === _id) {
-        router.push('/profile').then()
-      }
-    }
-  }, [userData, _id])
-
+  const _id = userData ? userData._id : undefined
   const { loading, error, data } = useQuery(userQuery, {
     variables: { _id }
   })
@@ -28,7 +19,7 @@ const Profile: React.FC = (): any => {
   const { user } = data
 
   return <MainLayout title='Profile' header='Профіль' >
-    <ProfileContainer user={ user } />
+    <ProfileContainer user={ user } isUserProfile={ true } />
   </MainLayout>
 }
 

@@ -1,0 +1,1 @@
+export { ADD_AVATAR } from './user'

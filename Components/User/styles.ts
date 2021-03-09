@@ -41,6 +41,11 @@ export default StyleSheet.create({
     height: 100,
     fontSize: 50
   },
+  avatarXXL: {
+    width: 140,
+    height: 140,
+    fontSize: 50
+  },
   //UserName
   name: {
     paddingBottom: 3,

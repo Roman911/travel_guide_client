@@ -7,6 +7,10 @@ export const userQuery = gql`
       name
       avatar
       rating
+      socials {
+        social
+        link
+      }
     }
   }
 `

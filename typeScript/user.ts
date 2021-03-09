@@ -8,5 +8,11 @@ export type UserData = {
   avatar: string
   name: string
   email: string
-  rating:number
+  rating: number
+  socials: [Social]
+}
+
+type Social = {
+  social: string
+  link: string
 }

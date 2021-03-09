@@ -33,6 +33,7 @@ export default StyleSheet.create({
   icon: {
     marginLeft: 20,
     transition: '0.2s',
+    cursor: 'pointer',
     ':hover': {
       opacity: 0.6
     }
@@ -120,5 +121,8 @@ export default StyleSheet.create({
   iconMap: {
     marginRight: 30,
     height: 28
+  },
+  btnSetting: {
+    marginRight: 14
   }
 })

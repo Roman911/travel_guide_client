@@ -12,7 +12,7 @@ type AvatarProps = {
 
 export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
   const avatarIcon = avatar !== 'undefined' ?
-    <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' width={ 100 } height={ 100 } /> :
+    <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' width={ 140 } height={ 140 } /> :
     <p>{ name[0].toUpperCase() }</p>
 
   let avatarSize
@@ -28,6 +28,9 @@ export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
       break
     case 'XL':
       avatarSize = styles.avatarXL
+      break
+    case 'XXL':
+      avatarSize = styles.avatarXXL
       break
     default:
       return null

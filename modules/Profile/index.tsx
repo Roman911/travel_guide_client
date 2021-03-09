@@ -1,1 +1,1 @@
-export { ProfileContainer } from './Containers'
+export { ProfileContainer, ProfileSetting } from './Containers'

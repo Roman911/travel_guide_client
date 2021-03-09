@@ -1,39 +1,29 @@
 import React from "react"
 import Link from "next/link"
 import { css } from "aphrodite/no-important"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import baseStyles from '../../../styles'
 import styles from './styles'
 import { Avatar, Button, Rating } from "../../../Components"
 import { UserData } from '../../../typeScript/user'
-// import { ToVisit } from "./ToVisit"
-import { IconDefinition } from "@fortawesome/fontawesome-common-types"
+import { ToVisit } from "./ToVisit"
+import { SocialLink } from "./SocialLink"
 
 type ProfileMainProps = {
   isUserProfile: boolean
   user: UserData
-  handleClick?: (arg: string) => void
-  nameSection?: string
-  locationsUserList?: [{
+  handleClick: (arg: string) => void
+  nameSection: string
+  locationsUserList: [{
     _id: string
     locationId: string
     userId: string
   }]
+  logout: () => void
 }
 
-export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSection, isUserProfile }): any => {
-  const { name, avatar, rating } = user
+export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSection, locationsUserList, isUserProfile, logout }): any => {
+  const { name, avatar, rating, socials } = user
 
-  if (isUserProfile) {
-    console.log(isUserProfile)
-  }
-
-  const linkSS = ( link: string, iconStyle: any, icon: IconDefinition ) => {
-    return <Link href={'/'} as={ link }>
-      <FontAwesomeIcon className={ css(baseStyles.icon, styles.icon, iconStyle) } icon={ icon } />
-    </Link>
-  }
   return <section className={css(baseStyles.wrapper, styles.wrapper)}>
     <div className={ css(styles.header, baseStyles.flexSB) }>
       <div className={ css(baseStyles.flex) }>
@@ -45,25 +35,33 @@ export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSec
         </div>
       </div>
       <div className={ css(styles.right) }>
-        <Link href={'/setting'} >
-          <Button nameBtn='налаштування' isSubmitting={ false } />
-        </Link>
-        <div className={ css(styles.links) }>
-          { linkSS( '/', styles.iconF, faFacebookF ) }
-          { linkSS( '/', styles.iconI, faInstagram ) }
-          { linkSS( '/', styles.iconT, faTwitter ) }
-          { linkSS( '/', styles.iconY, faYoutube ) }
-        </div>
+        {
+          isUserProfile && <div>
+            <Link href={'/profile/setting'} >
+              <a className={ css(styles.btnSetting) }>
+                <Button nameBtn='налаштування' isSubmitting={ false } />
+              </a>
+            </Link>
+            <Button nameBtn='Вийти' isSubmitting={ false } handleClick={ logout } />
+          </div>
+        }
+        {
+          socials && <div className={ css(styles.links) }>
+            <SocialLink socials={ socials } />
+          </div>
+        }
       </div>
     </div>
     <div>
       <div className={ css(styles.wrapperTabs, baseStyles.flex) }>
         <button onClick={ () => handleClick('wantToVisit') } className={ css(styles.link, nameSection === 'wantToVisit' && styles.linkActive) }>Хочу відвідати</button>
         <button onClick={ () => handleClick('visited') } className={ css(styles.link, nameSection === 'visited' && styles.linkActive) }>Відвідав</button>
-        <button className={ css(styles.link) }>Мої статті</button>
-        <button className={ css(styles.link) }>Чорновики</button>
+        <button className={ css(styles.link) }>{ isUserProfile ? 'Мої статті' : 'Статі'}</button>
+        {
+          isUserProfile && <button className={ css(styles.link) }>Чорновики</button>
+        }
       </div>
-      {/*<ToVisit locationsUserList={ locationsUserList } nameSection={ nameSection } handleClick={ handleClick } />*/}
+      <ToVisit locationsUserList={ locationsUserList } nameSection={ nameSection } handleClick={ handleClick } />
     </div>
   </section>
 }

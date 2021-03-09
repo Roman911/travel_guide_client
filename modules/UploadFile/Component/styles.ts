@@ -3,7 +3,7 @@ import { btn } from "../../../variabels"
 
 export default StyleSheet.create({
   wrapper: {
-    margin: '40px 0'
+    margin: '30px 0'
   },
   input: {
     display: 'none'

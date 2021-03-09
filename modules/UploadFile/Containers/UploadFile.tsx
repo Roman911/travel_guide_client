@@ -1,25 +1,18 @@
 import React from "react"
 import { useMutation } from '@apollo/client'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { UploadFileInput } from "../Component"
 import { UPLOAD_FILE } from './mutations'
 import { uploadActions } from '../../../redux/actions'
 
 type UploadFileProps = {
-  label: string
+  label?: string
   nameBtn: string
+  setUrl?: any
 }
 
-type UploadFileType = {
-  file: {
-    _id: string
-    url: string
-  }
-}
-
-export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn }) => {
+export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn, setUrl }) => {
   const dispatch = useDispatch()
-  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
   const [uploadFile] = useMutation(UPLOAD_FILE, {
     onCompleted: data => {
       if (data) {
@@ -29,11 +22,11 @@ export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn }) => {
     }
   })
 
-  const handleFileChange = e => {
-    const file = e.target.files[0]
+  const handleFileChange = async e => {
+    const file = await e.target.files[0]
     if (!file) return
-    uploadFile({ variables: { file } }).then(r => r)
+    uploadFile({ variables: { file } }).then(r => setUrl(r.data.uploadFile.url))
   }
 
-  return <UploadFileInput handleFileChange={ handleFileChange } label={ label } nameBtn={ nameBtn } file={ file } />
+  return <UploadFileInput handleFileChange={ handleFileChange } label={ label } nameBtn={ nameBtn } />
 }
