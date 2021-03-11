@@ -20,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({ rest }) => {
         const { value } = field
         return <>
           <label htmlFor={ name } className={ css(styles.label, styles.labelTextarea, value !== '' && styles.labelTouched) } >{ label }</label>
-          <textarea id={ name } name={ name } { ...field } { ...rest } className={ css(styles.textarea) } />
+          <textarea id={ name } name={ name } { ...field } { ...rest } className={ css(styles.textarea) } rows={ 5 } />
         </>
       }}
     </Field>

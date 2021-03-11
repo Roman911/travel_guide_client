@@ -5,14 +5,14 @@ import { Formik, Form } from "formik"
 import { useDispatch } from "react-redux"
 import withApollo from "../lib/withApollo"
 import { MainLayout, HeaderForm, AuthForm } from "../Components"
-import { createUserMutation } from "../apollo/mutations/createUser"
+import { CREATE_USER } from "../apollo/mutations"
 import validateForm from '../utils/validate'
 import { userActions, modalActions } from "../redux/actions"
 
 const Registration: React.FC = () => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const [createUse] = useMutation(createUserMutation)
+  const [createUse] = useMutation(CREATE_USER)
   const initialValues = { name: '', email: '', password: '', password2: '' }
   const validate = values => {
     let errors = {}

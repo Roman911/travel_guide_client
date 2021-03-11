@@ -22,25 +22,28 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
     <div className={ css(baseStyles.flexVFS) }>
       <div className={ css( type_material !== 'new' ? styles.wrapperBlock : styles.wrapperBlockNews)}>
         <FormikControl control='radio' name='type_material' label='Тип матеріалу:' options={ options } />
-        <div className={ css( inputStyles.inputWrapper, baseStyles.flex, styles.btnBlock ) }>
-          <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Додати локацію:</p>
-          <Link href={ '/maps' }><a><Button nameBtn='Вибрати на карті' isSubmitting={ false } /></a></Link>
-          <div className={ css(baseStyles.br) } />
-          <Link href={{
-            pathname: '/create-location',
-            query: {
-              isCreatePost: true
-            }
-          }}>
-            <a><Button nameBtn='Створити локацію' isSubmitting={ false } /></a>
-          </Link>
-        </div>
-        <FormikControl control='input' id='title' type='text' label='Заголовок:' disabled={ true } />
-        <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Обкладинка:</p>
         {
-          location && <Image src={ location.cover.url } alt={ title } width={ 350 } height={ 240 } />
+          !location && <div className={ css( inputStyles.inputWrapper, baseStyles.flex, styles.btnBlock ) }>
+            <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Додати локацію:</p>
+            <Link href={ '/maps' }><a><Button nameBtn='Вибрати на карті' isSubmitting={ false } /></a></Link>
+            <div className={ css(baseStyles.br) } />
+            <Link href={{
+              pathname: '/create-location',
+              query: {
+                isCreatePost: true
+              }
+            }}>
+              <a><Button nameBtn='Створити локацію' isSubmitting={ false } /></a>
+            </Link>
+          </div>
         }
-        <FormikControl control='input' id='small_text' type='text' label='Короткий опис:' disabled={ true } />
+        <FormikControl control='input' id='title' type='text' label='Заголовок:' />
+        {
+          location && <>
+            <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Обкладинка:</p>
+            <Image src={ location.cover.url } alt={ title } width={ 350 } height={ 240 } />
+          </>
+        }
         <FormikControl control='input' id='tag' type='text' label='Теги:' />
       </div>
       {
@@ -55,6 +58,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
         </div>
       }
     </div>
+    <FormikControl control='textarea' name='small_text' label='Короткий опис:' />
     {
       type_material !== 'new' && <>
         <FormikControl control='input' id='work_time' type='text' label='Час роботи:' />

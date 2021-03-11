@@ -4,7 +4,7 @@ import { Form, Formik } from "formik"
 import { useMutation } from "@apollo/react-hooks"
 import * as Yup from "yup"
 import { CreatePostForm, WrapperCreatePost } from '../Components'
-import { createPostMutation } from "../../../apollo/mutations/createPost"
+import { CREATE_POST } from "../../../apollo/mutations"
 import { modalActions } from "../../../redux/actions"
 import { UserData } from "../../../typeScript/user"
 import { Location } from '../../../typeScript/locations'
@@ -16,7 +16,7 @@ type CreatePostProps = {
 
 export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
   const dispatch = useDispatch()
-  const [ createPost ] = useMutation(createPostMutation)
+  const [ createPost ] = useMutation(CREATE_POST)
   const initialValues = {
     editor: '',
     type_material: 'post',
@@ -44,6 +44,7 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
         postInput: {
           token,
           location: location._id,
+          title: values.title,
           tags,
           editor: values.editor,
           type_material: values.type_material,
@@ -51,7 +52,8 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
           link: values.link,
           work_time: values.work_time,
           isPrice: values.isPrice,
-          how_to_get_there: values.how_to_get_there
+          how_to_get_there: values.how_to_get_there,
+          small_text: values.small_text
         }
       }
     }).then(data => {

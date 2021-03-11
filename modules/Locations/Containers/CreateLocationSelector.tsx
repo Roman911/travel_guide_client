@@ -27,7 +27,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps)
   const { data } = useSelector((state: { user: User }) => state.user)
   const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
   const [ createLocations ] = useMutation(addLocationMutation)
-  const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['Київська обл.', 'м. Київ', 'вул. Хрещатик'] }
+  const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['область', 'місто', 'вулиця'] }
   const validationSchema = Yup.object({
     title: Yup.string()
       .min(5, 'Коротка назва')
@@ -80,7 +80,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps)
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validationSchema={ validationSchema }>
       {formik => {
         return <Form>
-          <CreateLocation formik={ formik } />
+          <CreateLocation formik={ formik } file={ file } />
           <AutoRef />
         </Form>
       }}

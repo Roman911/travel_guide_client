@@ -25,7 +25,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn, setUrl }
   const handleFileChange = async e => {
     const file = await e.target.files[0]
     if (!file) return
-    uploadFile({ variables: { file } }).then(r => setUrl(r.data.uploadFile.url))
+    uploadFile({ variables: { file } }).then(r => setUrl ? setUrl(r.data.uploadFile.url) : r)
   }
 
   return <UploadFileInput handleFileChange={ handleFileChange } label={ label } nameBtn={ nameBtn } />
