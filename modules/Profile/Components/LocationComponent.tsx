@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { css } from "aphrodite/no-important"
 import { faMapMarkerAlt, faMapPin, faTimes } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -17,7 +18,7 @@ type VisualContentProps = {
 
 export const LocationComponent: React.FC<VisualContentProps> = ({ location, nameSection, updateLocationMyList, removeLocation }) => {
   return <section className={ css(baseStyles.flexSB, styles.wrapperVisit) }>
-    <img className={ css(styles.img) } src="http://326b53d9806dcac09833-a590b81c812a57d0f4b1c3b1d1b7a9ea.r50.cf3.rackcdn.com/news/pz_450.jpg" alt=""/>
+    <Image src={ location.cover.url } className={ css(styles.img) } width={ 120 } height={ 90 } />
     <div className={ css(styles.item) }>
       <div className={ css(baseStyles.flexSB) }>
         <Link href={'/'} >
@@ -29,7 +30,11 @@ export const LocationComponent: React.FC<VisualContentProps> = ({ location, name
         </div>
       </div>
       <p className={ css(styles.location) }><FontAwesomeIcon className={ css(baseStyles.icon, styles.marker) } icon={ faMapMarkerAlt } />
-        {/*Село { location.city }, { location.district } район, { location.region } область*/}
+        {
+          location.address.map(item => {
+            return <span className={ css(styles.address) }>{ item }</span>
+          })
+        }
       </p>
       <p className={ css(styles.paragraph) }>{ location.small_text }</p>
     </div>

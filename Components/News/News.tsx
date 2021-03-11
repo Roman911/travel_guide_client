@@ -21,7 +21,7 @@ export const News: React.FC<NewProps> = ({ item }): any => {
     <div className={ css(styles.content) }>
       <Link href={`/post/[id]`} as={`/post/${ _id }`} >
         <a>
-          <Image className={ css(styles.img) } src={ cover.url } layout='intrinsic' alt={ title } width={336} height={190} />
+          <Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={336} height={190} />
         </a>
       </Link>
       <div className={ css(styles.block) }>

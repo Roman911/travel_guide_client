@@ -85,6 +85,9 @@ export default StyleSheet.create({
     letterSpacing: 1,
     fontWeight: 600
   },
+  address: {
+    marginRight: 6
+  },
   paragraph: {
     fontSize: 12
   },

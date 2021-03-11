@@ -2,8 +2,8 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { Formik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
-import { CreateCommentMutation, addedAnswerMutation } from './mutations'
-import { commentsQuery } from "./querys"
+import { ADDED_ANSWER, CREATE_COMMENT } from '../../../apollo/mutations'
+import { COMMENTS } from "../../../apollo/queries"
 import { User } from "../../../typeScript/user"
 import { CreateComment } from '../Components'
 
@@ -17,12 +17,12 @@ type CreateCommentProps = {
 
 export const CreateComments: React.FC<CreateCommentProps> = ({ postId, _id, isFirstComment, handleClick, commentsId }: CreateCommentProps): any => {
   const { data } = useSelector((state: { user: User }) => state.user)
-  const [ createComment ] = useMutation(CreateCommentMutation)
-  const [ addedAnswer ] = useMutation(addedAnswerMutation)
+  const [ createComment ] = useMutation(CREATE_COMMENT)
+  const [ addedAnswer ] = useMutation(ADDED_ANSWER)
   const initialValues = { content: '' }
   const onSubmit = (values, { resetForm }) => {
     const ref = [{
-      query: commentsQuery,
+      query: COMMENTS,
       variables: { postId }
     }]
     if (isFirstComment) {

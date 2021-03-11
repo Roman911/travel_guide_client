@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
 import { Like } from '../Components'
-import { likeMutation } from './mutations'
+import { LIKE } from '../../../apollo/mutations'
 import { modalActions } from "../../../redux/actions"
 
 import { User } from "../../../typeScript/user"
@@ -27,7 +27,7 @@ export const Likes:React.FC<MyLikesProps> = ({ id, likes, post }): any => {
     })
   }, [likes, _id])
 
-  const [ changeLike ] = useMutation(likeMutation)
+  const [ changeLike ] = useMutation(LIKE)
 
   const options = {
     variables: { postId: id, userId: _id }

@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { Formik, Form } from 'formik'
 import { useLazyQuery } from '@apollo/react-hooks'
-import { loginQuery } from '../apollo/queries/login'
+import { LOGIN } from '../apollo/queries'
 import validateForm from '../utils/validate'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
 import withApollo from "../lib/withApollo"
@@ -11,7 +11,7 @@ import Redirect from "../hooks/useRedirect"
 
 const Login: React.FC = () => {
   const dispatch = useDispatch()
-  const [ userData, { loading, data, error } ] = useLazyQuery( loginQuery )
+  const [ userData, { loading, data, error } ] = useLazyQuery( LOGIN )
   const initialValues = { email: '', password: '' }
   const validate = values => {
     let errors = {}
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     return <Redirect to={ '/' } />
   }
 
-  const dataForm = [
+  const registerFormData = [
     {
       control: 'input',
       id: 'email',
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validate={ validate } >
       {formik => {
         return <Form>
-          <AuthForm formik={ formik } dataForm={ dataForm } btn='Увійти' />
+          <AuthForm formik={ formik } registerFormData={ registerFormData } btn='Увійти' />
         </Form>
       }}
     </Formik>

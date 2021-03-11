@@ -57,7 +57,7 @@ export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSec
           isUserProfile && <button className={ css(styles.link) }>Чорновики</button>
         }
       </div>
-      <ToVisit locationsUserList={ locationsUserList } nameSection={ nameSection } handleClick={ handleClick } />
+      <ToVisit user={ user } locationsUserList={ locationsUserList } nameSection={ nameSection } handleClick={ handleClick } />
     </div>
   </section>
 }

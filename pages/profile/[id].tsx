@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 import { useQuery } from "@apollo/client"
 import { ProfileContainer } from '../../modules'
 import { LoadingPost, MainLayout } from "../../Components"
-import { userQuery } from "../../apollo/queries/user"
+import { USER } from "../../apollo/queries"
 import { User } from '../../typeScript/user'
 
 const Profile: React.FC = (): any => {
@@ -20,7 +20,7 @@ const Profile: React.FC = (): any => {
     }
   }, [userData, _id])
 
-  const { loading, error, data } = useQuery(userQuery, {
+  const { loading, error, data } = useQuery(USER, {
     variables: { _id }
   })
   if (loading) return <LoadingPost isPost={ true } />

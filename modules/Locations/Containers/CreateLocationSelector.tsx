@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
-import { addLocationMutation } from "./mutations"
+import { CREATE_LOCATION } from "../../../apollo/mutations"
 import { modalActions, googleMapsActions, uploadActions } from '../../../redux/actions'
 import { User } from "../../../typeScript/user"
 import { CreateLocation, WrapperLocationSelector } from '../Components'
@@ -26,7 +26,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps)
   const dispatch = useDispatch()
   const { data } = useSelector((state: { user: User }) => state.user)
   const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
-  const [ createLocations ] = useMutation(addLocationMutation)
+  const [ createLocations ] = useMutation(CREATE_LOCATION)
   const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['область', 'місто', 'вулиця'] }
   const validationSchema = Yup.object({
     title: Yup.string()

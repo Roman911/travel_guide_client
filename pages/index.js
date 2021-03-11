@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks"
-import { postsQuery } from "../apollo/queries/posts"
+import { ALL_POSTS } from "../apollo/queries"
 import { PopularsPosts } from "../modules"
 import { MainLayout, News, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 
 const Home = () => {
-  const { loading, error, data } = useQuery(postsQuery)
+  const { loading, error, data } = useQuery(ALL_POSTS)
   if (loading) return ''
   if  (error ) return `Error! ${error}`
   const { allPosts } = data

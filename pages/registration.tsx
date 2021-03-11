@@ -8,6 +8,7 @@ import { MainLayout, HeaderForm, AuthForm } from "../Components"
 import { CREATE_USER } from "../apollo/mutations"
 import validateForm from '../utils/validate'
 import { userActions, modalActions } from "../redux/actions"
+import { registerFormData } from '../config/registerFormData'
 
 const Registration: React.FC = () => {
   const router = useRouter()
@@ -42,38 +43,13 @@ const Registration: React.FC = () => {
       onSubmitProps.setSubmitting(false)
     })
   }
-  const dataForm = [
-    {
-      control: 'input',
-      id: 'name',
-      type: 'text',
-      label: 'Ведіть імя'
-    },
-    {
-      control: 'input',
-      id: 'email',
-      type: 'email',
-      label: 'Введіть email'
-    },
-    {
-      control: 'input',
-      id: 'password',
-      type: 'password',
-      label: 'Придумайте пароль'
-    },
-    {
-      control: 'input',
-      id: 'password2',
-      type: 'password',
-      label: 'Повторіть пароль'
-    }
-  ]
+
   return <MainLayout title='Registration' authorization={ true } >
     <HeaderForm title='Реєстрація' text='Вже є акаунт?' link='/login' btn='Авторизуватися' />
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validate={ validate }>
       {formik => {
         return <Form>
-          <AuthForm formik={ formik } dataForm={ dataForm } btn='Створити акаунт' />
+          <AuthForm formik={ formik } registerFormData={ registerFormData } btn='Створити акаунт' />
         </Form>
       }}
     </Formik>

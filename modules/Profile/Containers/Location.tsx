@@ -1,21 +1,23 @@
 import React from "react"
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { locationQuery } from "./querys"
+import { LOCATION } from "../../../apollo/queries"
 import { LoadingSpin } from "../../../Components"
 import { LocationComponent } from '../Components'
-import { addLocationsUserListMutation, removeLocationWithUserListMutation } from './mutations'
+import { ADD_LOCATION_USER_LIST, REMOVE_LOCATION_USER_LIST } from '../../../apollo/mutations'
+import { UserData } from "../../../typeScript/user"
 
 type LocationProps = {
+  user: UserData
   _id: string
   locationId: string
   nameSection: string
   handleClick: (arg: string) => void
 }
 
-export const Location: React.FC<LocationProps> = ({ _id, locationId, nameSection, handleClick }): any => {
-  const [ addLocationsUserList ] = useMutation(addLocationsUserListMutation)
-  const [ removeLocationWithUserList ] = useMutation(removeLocationWithUserListMutation)
-  const { loading, error, data } = useQuery(locationQuery, {
+export const Location: React.FC<LocationProps> = ({ _id, user, locationId, nameSection, handleClick }): any => {
+  const [ addLocationsUserList ] = useMutation(ADD_LOCATION_USER_LIST)
+  const [ removeLocationWithUserList ] = useMutation(REMOVE_LOCATION_USER_LIST)
+  const { loading, error, data } = useQuery(LOCATION, {
     variables: {
       _id: locationId
     }
@@ -23,8 +25,11 @@ export const Location: React.FC<LocationProps> = ({ _id, locationId, nameSection
   const updateLocationMyList = () => {
     addLocationsUserList({
       variables: {
-        _id: _id,
-        action: 'visited'
+        addLocation: {
+          userId: user._id,
+          locationId,
+          action: 'visited'
+        }
       }
     }).then(data => {
       if (data) {

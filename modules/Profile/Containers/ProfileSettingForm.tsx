@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { SettingForm } from "../Components"
 import { UPDATE_USER } from '../../../apollo/mutations'
-import {User, UserData} from '../../../typeScript/user'
+import { User, UserData } from '../../../typeScript/user'
 
 type ProfileSettingFormProps = {
   user: UserData

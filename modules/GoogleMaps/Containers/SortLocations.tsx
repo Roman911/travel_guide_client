@@ -3,16 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/client'
 import { SortLocation } from "../Components"
 import { googleMapsActions } from '../../../redux/actions'
-import { locationsSortQuery } from './querys'
+import { LOCATIONS_SORT, ALL_LOCATIONS } from '../../../apollo/queries'
 import { GoogleMapsProps } from "../../../typeScript/googleMaps"
-import { locationsQuery } from "../../../apollo/queries/maps"
 
 export const SortLocations: React.FC = (): any => {
   const [ selectLocationsTrue, setSelectLocationsTrue ] = useState(false)
   const dispatch = useDispatch()
   const { selectLocations } = useSelector((state: { googleMaps: GoogleMapsProps }) => state.googleMaps)
-  const [ getLocations, { data } ] = useLazyQuery(locationsSortQuery)
-  const [ getAllLocations, { data: dataAll } ] = useLazyQuery(locationsQuery)
+  const [ getLocations, { data } ] = useLazyQuery(LOCATIONS_SORT)
+  const [ getAllLocations, { data: dataAll } ] = useLazyQuery(ALL_LOCATIONS)
   const locationsSort = data ? data.locationsSortByType : undefined
   const locationsAll = dataAll ? dataAll.allLocations : undefined
 

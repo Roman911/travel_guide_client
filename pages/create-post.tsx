@@ -5,7 +5,7 @@ import { useLazyQuery } from "@apollo/react-hooks"
 import { CreatePost } from '../modules'
 import { LoadingSpin, MainLayout } from "../Components"
 import { User } from '../typeScript/user'
-import { locationQuery } from "../modules/GoogleMaps/Containers/querys"
+import { LOCATION } from "../apollo/queries"
 
 const CreatePosts = () => {
   const router = useRouter()
@@ -18,7 +18,7 @@ const CreatePosts = () => {
   }, [_id])
 
   const { data } = useSelector((state: { user: User }) => state.user)
-  const [getLocation, { loading, data: locationData }] = useLazyQuery(locationQuery)
+  const [getLocation, { loading, data: locationData }] = useLazyQuery(LOCATION)
   if (loading) return <LoadingSpin />
   const location = locationData ? locationData.location : undefined
 

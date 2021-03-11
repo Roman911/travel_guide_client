@@ -19,6 +19,7 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
   const [ createPost ] = useMutation(CREATE_POST)
   const initialValues = {
     editor: '',
+    cover: location.cover.url,
     type_material: 'post',
     title:  location ? location.title : '',
     tickets: ['Дорослий: 50грн', 'Дитячий: 50грн', 'Студенський: 50грн', 'Пенсійний: 50грн'],

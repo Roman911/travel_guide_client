@@ -6,7 +6,6 @@ export type PostData = {
   views: number
   likes: string[]
   createdAt: string
-  coordinates: string
   tickets: string[]
   work_time: string
   isType: string
@@ -21,10 +20,9 @@ export type PostData = {
     name: string
   }
   location: {
+    _id: string
     address: string[]
     coordinates: string[]
   }
-  cover: {
-    url
-  }
+  cover: string
 }

@@ -4,8 +4,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { InformLocation } from "../Components"
 import { modalActions } from "../../../redux/actions"
 import { User } from "../../../typeScript/user"
-import { locationUserQuery } from './querys'
-import { addLocationsUserListMutation } from "./mutations"
+import { LOCATION_USER } from '../../../apollo/queries'
+import { ADD_LOCATION_USER_LIST } from "../../../apollo/mutations"
 import { LoadingSpin } from "../../../Components"
 
 type InformUserLocationProps = {
@@ -24,8 +24,8 @@ type variablesProps = {
 
 export const InformUserLocation: React.FC<InformUserLocationProps> = ({ user, locationId }): any => {
   const dispatch = useDispatch()
-  const [ addLocationsUserList ] = useMutation(addLocationsUserListMutation)
-  const { loading, error, data } = useQuery(locationUserQuery, {
+  const [ addLocationsUserList ] = useMutation(ADD_LOCATION_USER_LIST)
+  const { loading, error, data } = useQuery(LOCATION_USER, {
     variables: {
       userId: user.data._id,
       locationId
@@ -44,7 +44,7 @@ export const InformUserLocation: React.FC<InformUserLocationProps> = ({ user, lo
     addLocationsUserList({
       variables,
       refetchQueries: [{
-        query: locationUserQuery,
+        query: LOCATION_USER,
         variables: {
           userId: user.data._id,
           locationId

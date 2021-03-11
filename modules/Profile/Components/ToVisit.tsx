@@ -6,8 +6,10 @@ import baseStyles from '../../../styles'
 import styles from './styles'
 import { Button } from "../../../Components"
 import { Location } from "../Containers"
+import { UserData } from "../../../typeScript/user"
 
 type ToVisitProps = {
+  user: UserData
   locationsUserList: [{
     _id: string
     locationId: string
@@ -17,10 +19,10 @@ type ToVisitProps = {
   handleClick: (arg: string) => void
 }
 
-export const ToVisit: React.FC<ToVisitProps> = ({ locationsUserList, nameSection, handleClick }) => {
+export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameSection, handleClick }) => {
   if (locationsUserList.length > 0) {
     const location = locationsUserList.map((item, index) => {
-      return <Location key={ index } _id={ item._id } locationId={ item.locationId } nameSection={ nameSection } handleClick={ handleClick } />
+      return <Location key={ index } user={ user } _id={ item._id } locationId={ item.locationId } nameSection={ nameSection } handleClick={ handleClick } />
     })
 
     return <section>

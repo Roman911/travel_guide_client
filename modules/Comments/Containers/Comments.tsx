@@ -1,6 +1,6 @@
 import React from "react"
 import { useQuery } from "@apollo/client"
-import { commentsQuery } from "./querys"
+import { COMMENTS } from "../../../apollo/queries"
 import { CreateComments } from "./"
 import { LoadingSpin } from "../../../Components"
 import { WrapperComments } from '../Components'
@@ -12,7 +12,7 @@ type CommentsProps = {
 
 const Comments: React.FC<CommentsProps> = ({ postId }): any => {
 
-  const { loading, error, data } = useQuery( commentsQuery, {
+  const { loading, error, data } = useQuery( COMMENTS, {
     variables: { postId }
   })
   if (loading) return <LoadingSpin />

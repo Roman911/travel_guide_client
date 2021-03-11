@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost'
 
-export const commentsQuery = gql`
+export const COMMENTS = gql`
   query comments($postId: ID!) {
     comments(postId: $postId) {
       _id

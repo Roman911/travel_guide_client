@@ -1,2 +1,6 @@
-export { CREATE_POST } from './createPost'
+export { ADDED_ANSWER, CREATE_COMMENT } from './comments'
+export { LIKE } from './likes'
+export { CREATE_LOCATION } from './location'
+export { CREATE_POST } from './post'
 export { ADD_AVATAR, CREATE_USER, UPDATE_USER } from './user'
+export { ADD_LOCATION_USER_LIST, REMOVE_LOCATION_USER_LIST } from './userList'

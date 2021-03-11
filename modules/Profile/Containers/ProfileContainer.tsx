@@ -6,7 +6,7 @@ import { Profile } from '../Components'
 import { UserData } from '../../../typeScript/user'
 import { userActions } from "../../../redux/actions"
 import { LoadingSpin } from "../../../Components"
-import { locationsUserQuery } from './querys'
+import { LOCATION_USER_LIST } from '../../../apollo/queries'
 
 type ProfileContainerProps = {
   isUserProfile?: boolean
@@ -18,7 +18,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = ({ isUserProfil
   const dispatch = useDispatch()
 
   const [ nameSection, setNameSection ] = useState('wantToVisit')
-  const { loading, error, data, refetch } = useQuery(locationsUserQuery, {
+  const { loading, error, data, refetch } = useQuery(LOCATION_USER_LIST, {
     variables: {
       userId: user._id,
       action: 'wantToVisit'

@@ -11,7 +11,5 @@ export type Item = {
     avatar: string
     name: string
   }
-  cover: {
-    url: string
-  }
+  cover: string
 }

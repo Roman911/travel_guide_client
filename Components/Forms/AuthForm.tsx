@@ -6,13 +6,13 @@ import { Button, FormikControl } from ".."
 
 type AuthFormProps = {
   formik: any
-  dataForm: any
+  registerFormData: any
   btn: string
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ formik, dataForm, btn }) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ formik, registerFormData, btn }) => {
 
-  const inputs = dataForm.map((item, index) => {
+  const inputs = registerFormData.map((item, index) => {
     return <FormikControl
       key={ index }
       control={ item.control }

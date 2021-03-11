@@ -29,7 +29,7 @@ const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/
 export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
   const dispatch = useDispatch()
   const { data } = user
-  const { _id, title, small_text, cover, views, likes, author, createdAt, coordinates, tickets, location, work_time, isType, editor, locationId, tags, link } = post
+  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location: { _id: locationId, coordinates, address }, work_time, isType, editor, tags, link } = post
   const [ inView, setInView ] = useState(false)
   const handleChange = (e) => {
     if (e) {
@@ -46,8 +46,6 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
 
   dispatch(googleMapsActions.changeLocations(changeData))
 
-  console.log(post)
-
   return <div className={ css(styles.postWrapper)}>
     <div className={ css(baseStyles.flexSB) }>
       <h1 className={ css(styles.postTitle) }>{ title }</h1>
@@ -59,8 +57,8 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
     <WithRightBlock>
       <LeftBlock isNews={ false }>
         <div className={ css(styles.wrapperContent) }>
-          <p className={ css(styles.text) }>{small_text}</p>
-          <Image src={ cover.url } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={ 980 } height={ 450 } />
+          <p className={ css(styles.text) }>{ small_text }</p>
+          <Image src={ cover } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={ 980 } height={ 450 } />
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
           { link && <Source link={ link } /> }
           <Author isArticle={ true } author={ author } />
@@ -74,7 +72,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
         </div>
       </LeftBlock>
       <RightBlock>
-        <InfoBar tickets={ tickets } work_time={ work_time } address={ location.address } />
+        <InfoBar tickets={ tickets } work_time={ work_time } address={ address } />
         { data && <InformUserLocation locationId={ locationId } user={ user } /> }
         <PopularsPosts />
       </RightBlock>

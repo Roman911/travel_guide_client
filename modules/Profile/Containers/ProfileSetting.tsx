@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useMutation } from "@apollo/client"
+import { useMutation } from "@apollo/react-hooks"
 import { Setting } from "../Components"
 import { ADD_AVATAR } from '../../../apollo/mutations'
 import { userActions } from '../../../redux/actions'

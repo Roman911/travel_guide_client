@@ -1,7 +1,7 @@
 import React from "react"
 import { useQuery } from '@apollo/react-hooks'
 import { Information } from "../Components/Information"
-import { locationQuery } from './querys'
+import { LOCATION } from '../../../apollo/queries'
 import { LoadingSpin } from "../../../Components"
 
 type MyLocationInformationProps = {
@@ -11,7 +11,7 @@ type MyLocationInformationProps = {
 }
 
 export const LocationInformation: React.FC<MyLocationInformationProps> = ({ _id, handleClick, closeWindow }): any => {
-  const { loading, error, data } = useQuery(locationQuery, {
+  const { loading, error, data } = useQuery(LOCATION, {
     variables: { _id }
   })
   if (loading) return <LoadingSpin />

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
 import { Modal } from "../Components"
 import { modalActions } from "../../../redux/actions"
-import { addLocationsUserListMutation } from './mutations'
+import { ADD_LOCATION_USER_LIST } from '../../../apollo/mutations'
 import { User } from "../../../typeScript/user"
 import { Location } from '../../../typeScript/locations'
 
@@ -17,7 +17,7 @@ export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation
   const dispatch = useDispatch()
   const [showModalSetting, setShowModalSetting] = useState(false)
   const [closeModalSetting, setCloseModalSetting] = useState(false)
-  const [addLocationsUserList] = useMutation(addLocationsUserListMutation)
+  const [addLocationsUserList] = useMutation(ADD_LOCATION_USER_LIST)
   const handleClick = () => {
     if (data) {
       if (showModalSetting) {
@@ -37,9 +37,11 @@ export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation
     handleClick()
     addLocationsUserList({
       variables: {
-        userId: data.userId,
-        locationId: '5e8dd38b3e3a8b4608faf12d',
-        action: action
+        addLocation: {
+          userId: data._id,
+          locationId: location._id,
+          action: action
+        }
       }
     }).then(data => {
       if (data) {
