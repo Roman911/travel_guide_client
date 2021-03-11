@@ -45,11 +45,7 @@ export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSec
             <Button nameBtn='Вийти' isSubmitting={ false } handleClick={ logout } />
           </div>
         }
-        {
-          socials && <div className={ css(styles.links) }>
-            <SocialLink socials={ socials } />
-          </div>
-        }
+        { socials && <SocialLink socials={ socials } /> }
       </div>
     </div>
     <div>

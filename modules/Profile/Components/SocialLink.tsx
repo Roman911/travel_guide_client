@@ -4,7 +4,8 @@ import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import baseStyles from "../../../styles"
-import styles from "./styles"
+import styles from '../../../styles/socialIconStyle'
+import style from './styles'
 
 type SocialLinkProps = {
   socials: any
@@ -34,7 +35,13 @@ export const SocialLink: React.FC<SocialLinkProps> = ({ socials }): any => {
     }
   }
 
-  return socials.map((item, index) => {
-    return link( item.link, item.social, index )
-  })
+  return <div className={ css(style.links) }>
+    {
+      Object.keys(socials).map((item, index) => {
+        if (socials[item]) {
+          return link(socials[item], item, index)
+        }
+      })
+    }
+  </div>
 }

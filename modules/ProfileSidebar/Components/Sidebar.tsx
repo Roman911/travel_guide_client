@@ -6,18 +6,18 @@ import { css } from "aphrodite/no-important"
 import { sidebarMenuItems } from "./sidebar.config"
 import styles from "./styles"
 import { Avatar, Button } from "../../../Components"
+import { UserData } from '../../../typeScript/user'
 
 type SidebarProps = {
-  name: string
-  avatar: string
-  email: string
+  user: UserData
   closeSidebar: () => void
   isOpen: null | boolean
   logout: () => void
   setClassName: any
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ name, avatar, email, closeSidebar, isOpen, logout, setClassName }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, logout, setClassName }) => {
+  const { name, avatar, email, rating } = user
   const sidebar = sidebarMenuItems.map((item, index) => {
     return <li className={ css(styles.li) } key={ index }>
       <Link href={ item.route }><a onClick={ () => closeSidebar() } className={ css(styles.link) }>{ item.title }</a></Link>
@@ -37,7 +37,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ name, avatar, email, closeSide
       </button>
       <Avatar avatar={ avatar } name={ name } size='L' />
       <p className={ css(styles.email) }>{ email }</p>
-      <p className={ css(styles.rating) }>рейтинг: 100</p>
+      <p className={ css(styles.rating) }>рейтинг: { rating }</p>
       <div className={ css(styles.btnWrapper) }>
         <Link href={ '/create-route' }>
           <a onClick={ () => closeSidebar() }>

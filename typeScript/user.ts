@@ -9,10 +9,13 @@ export type UserData = {
   name: string
   email: string
   rating: number
-  socials: [Social]
+  aboutMy: string
+  socials: Social
 }
 
 type Social = {
-  social: string
-  link: string
+  facebook: string,
+  instagram: string,
+  twitter: string,
+  youtube: string
 }

@@ -116,6 +116,23 @@ export default StyleSheet.create({
     fontSize: 16,
     color: error
   },
+  // InputSocial
+  socialWrapper: {
+    margin: '15px 0 20px'
+  },
+  social: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  socialInput: {
+    paddingLeft: 40
+  },
+  socialIcon: {
+    margin: 0
+  },
+  socialLabel: {
+    padding: '0 0 0 10px'
+  },
   // Error
   wrapper: {
     width: 225,

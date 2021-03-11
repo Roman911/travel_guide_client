@@ -1,1 +1,1 @@
-export { ADD_AVATAR } from './user'
+export { ADD_AVATAR, UPDATE_USER } from './user'

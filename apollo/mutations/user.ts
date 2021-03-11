@@ -10,3 +10,11 @@ export const ADD_AVATAR = gql`
     }
   }
 `
+
+export const UPDATE_USER = gql`
+  mutation updateUser($updateUser: UpdateUserInput!) {
+    updateUser(updateUser: $updateUser) {
+      _id
+    }
+  }
+`

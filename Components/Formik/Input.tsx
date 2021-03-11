@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = ({ rest }) => {
         const { value } = field
         return <>
           <label className={ css(styles.label, value !== '' ? styles.labelTouched : null) } htmlFor={ id }>{ label }</label>
-          <input type={type} {...field} {...rest} disabled={ disabled } />
+          <input type={ type } id={ id } {...field} {...rest} disabled={ disabled } />
           { touched[field.name] && errors[field.name] && <p className={ css(styles.icon) }>!</p> }
         </>
       }}

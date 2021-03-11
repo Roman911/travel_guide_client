@@ -15,7 +15,25 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  right: {
+    width: 'calc(100% - 140px)',
+    paddingLeft: 60
+  },
   btn: {
     margin: '30px 0'
+  },
+  center: {
+    width: 'calc(100% - 360px)'
+  },
+  socials: {
+    width: 360,
+    paddingLeft: 60
+  },
+  link: {
+    paddingLeft: 25,
+    textTransform: 'none',
+    letterSpacing: 1,
+    fontSize: '1.1rem',
+    fontWeight: 400
   }
 })

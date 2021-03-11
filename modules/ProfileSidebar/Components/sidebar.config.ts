@@ -9,7 +9,7 @@ export const sidebarMenuItems = [
   },
   {
     title: 'Налаштування',
-    route: '/settings'
+    route: '/profile/setting'
   },
   {
     title: 'Обране',

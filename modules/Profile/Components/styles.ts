@@ -1,6 +1,6 @@
 import { StyleSheet } from 'aphrodite/no-important'
 
-import { background, btn, socSet } from '../../../variabels'
+import { background, btn } from '../../../variabels'
 
 export default StyleSheet.create({
   wrapper: {
@@ -29,26 +29,6 @@ export default StyleSheet.create({
   },
   links: {
     marginTop: 25
-  },
-  icon: {
-    marginLeft: 20,
-    transition: '0.2s',
-    cursor: 'pointer',
-    ':hover': {
-      opacity: 0.6
-    }
-  },
-  iconF: {
-    color: socSet.facebook
-  },
-  iconT: {
-    color: socSet.twitter
-  },
-  iconI: {
-    color: socSet.instagram
-  },
-  iconY: {
-    color: socSet.youtube
   },
   //TabsLink
   wrapperTabs: {

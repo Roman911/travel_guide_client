@@ -14,7 +14,6 @@ type ProfileSidebarProps = {
 const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ data }) => {
   const [ className, setClassName ] = useState(null)
   const dispatch = useDispatch()
-  const { name, avatar, email } = data
   const { isOpen } = useSelector((state: { sidebar: SidebarProps }) => state.sidebar)
   const logout = () => {
     dispatch(sidebarActions.closeSidebar())
@@ -31,7 +30,7 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ data }) => {
   useKeyPress('Escape', closeSidebar)
   useClickOutside(className, closeSidebar)
 
-  return <Sidebar name={ name } avatar={ avatar } email={ email } closeSidebar={ closeSidebar } isOpen={ isOpen } logout={ logout } setClassName={ setClassName } />
+  return <Sidebar user={ data } closeSidebar={ closeSidebar } isOpen={ isOpen } logout={ logout } setClassName={ setClassName } />
 }
 
 export default ProfileSidebar

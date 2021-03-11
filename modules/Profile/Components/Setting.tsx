@@ -1,10 +1,11 @@
 import React from "react"
 import { css } from "aphrodite/no-important"
-import {Avatar, Button} from "../../../Components"
+import { Avatar, Button } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './settingStyles'
 import { UserData } from "../../../typeScript/user"
 import { UploadFile } from "../../UploadFile"
+import { ProfileSettingForm } from "../Containers"
 
 type SettingProps = {
   user: UserData
@@ -28,11 +29,8 @@ export const Setting: React.FC<SettingProps> = ({ user, setUrl, file, handleClic
           file ? <div className={ css(styles.btn) }><Button nameBtn='Готово' isSubmitting={ false } handleClick={ handleClick } /></div> : <UploadFile nameBtn='Завантажити' setUrl={ setUrl } />
         }
       </div>
-      <div>
-        user data
-      </div>
-      <div>
-        social
+      <div className={ css(styles.right) }>
+        <ProfileSettingForm user={ user } />
       </div>
     </div>
   </div>

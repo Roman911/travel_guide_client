@@ -1,5 +1,6 @@
 export { LocationComponent } from './LocationComponent'
 export { Profile } from './Profile'
 export { Setting } from './Setting'
+export { SettingForm } from './SettingForm'
 export { SocialLink } from './SocialLink'
 export { ToVisit } from './ToVisit'
