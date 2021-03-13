@@ -49,7 +49,7 @@ const Registration: React.FC = () => {
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validate={ validate }>
       {formik => {
         return <Form>
-          <AuthForm formik={ formik } registerFormData={ registerFormData } btn='Створити акаунт' />
+          <AuthForm formik={ formik } formData={ registerFormData } btn='Створити акаунт' />
         </Form>
       }}
     </Formik>

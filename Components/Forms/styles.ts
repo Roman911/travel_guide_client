@@ -3,9 +3,20 @@ import { StyleSheet } from 'aphrodite/no-important'
 export default StyleSheet.create({
   title: {
     textAlign: 'center',
-    fontSize: 56,
+    fontSize: 52,
     fontWeight: 800,
-    margin: 50
+    letterSpacing: 8,
+    margin: '50px 10px',
+    '@media (max-width: 400px)': {
+      margin: '20px 10px 50px',
+      fontSize: 46,
+      letterSpacing: 6
+    },
+    '@media (max-width: 360px)': {
+      margin: '0 10px 30px',
+      fontSize: 43,
+      letterSpacing: 4
+    }
   },
   wrapperForm: {
     background: '#fff',

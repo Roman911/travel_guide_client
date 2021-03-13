@@ -6,13 +6,12 @@ import { Button, FormikControl } from ".."
 
 type AuthFormProps = {
   formik: any
-  registerFormData: any
+  formData: any
   btn: string
 }
 
-export const AuthForm: React.FC<AuthFormProps> = ({ formik, registerFormData, btn }) => {
-
-  const inputs = registerFormData.map((item, index) => {
+export const AuthForm: React.FC<AuthFormProps> = ({ formik, formData, btn }) => {
+  const inputs = formData.map((item, index) => {
     return <FormikControl
       key={ index }
       control={ item.control }
@@ -22,7 +21,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({ formik, registerFormData, bt
       label={ item.label }
     />
   })
-
   return <div className={ css(styles.wrapperForm) }>
     { inputs }
     <div className={ css(styles.inputSub, btn !== 'Увійти' && styles.inputSubRegister) }>

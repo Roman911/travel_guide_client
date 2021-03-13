@@ -8,6 +8,7 @@ import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
 import withApollo from "../lib/withApollo"
 import { userActions, modalActions } from '../redux/actions'
 import Redirect from "../hooks/useRedirect"
+import { loginFormData } from '../config/loginFormData'
 
 const Login: React.FC = () => {
   const dispatch = useDispatch()
@@ -38,27 +39,12 @@ const Login: React.FC = () => {
     return <Redirect to={ '/' } />
   }
 
-  const registerFormData = [
-    {
-      control: 'input',
-      id: 'email',
-      type: 'email',
-      label: 'Введіть email'
-    },
-    {
-      control: 'input',
-      id: 'password',
-      type: 'password',
-      label: 'Введіть пароль'
-    }
-  ]
-
   return <MainLayout title='Вхід' authorization={ true } >
     <HeaderForm title='Вхід' text='У вас ще нема акаунта?' link='/registration' btn='Створити' />
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validate={ validate } >
       {formik => {
         return <Form>
-          <AuthForm formik={ formik } registerFormData={ registerFormData } btn='Увійти' />
+          <AuthForm formik={ formik } formData={ loginFormData } btn='Увійти' />
         </Form>
       }}
     </Formik>

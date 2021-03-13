@@ -1,8 +1,8 @@
-import React from "react"
+import React, { useState } from "react"
 import { useDispatch } from 'react-redux'
 import { sidebarActions } from "../../../redux/actions"
 import { NavBar, NavBarAuthorization } from '../Components'
-import {  UserData } from "../../../typeScript/user"
+import { UserData } from "../../../typeScript/user"
 
 type UseRoutesProps = {
   authorization: boolean | undefined
@@ -11,10 +11,15 @@ type UseRoutesProps = {
 
 export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): any => {
   const dispatch = useDispatch()
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   const showSidebar = () => {
     dispatch(sidebarActions.showSidebar())
   }
 
-  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } />
+  const handleClick = () => {
+    setShowMobileMenu(prev => !prev)
+  }
+
+  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } showMobileMenu={ showMobileMenu } handleClick={ handleClick } />
 }

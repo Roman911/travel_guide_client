@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { btn } from '../../../variabels'
+import { btn, text } from '../../../variabels'
 
 export default StyleSheet.create({
   // NavBar
@@ -23,12 +23,55 @@ export default StyleSheet.create({
   linkActive: {
     color: btn
   },
+  block: {
+    width: 250
+  },
+  blockS: {
+    width: 50
+  },
+  burger: {
+    cursor: 'pointer'
+  },
+  burgerLine: {
+    margin: '6px 0',
+    height: 2,
+    backgroundColor: text.main,
+    ':nth-child(1)': {
+      width: 25
+    },
+    ':nth-child(2)': {
+      width: 16
+    },
+    ':nth-child(3)': {
+      width: 20
+    }
+  },
+  times: {
+    height: 30
+  },
+  mobileMenu: {
+    display: 'none',
+    '@media (max-width: 960px)': {
+      display: 'block'
+    }
+  },
+  desktopMenu: {
+    '@media (max-width: 960px)': {
+      display: 'none'
+    }
+  },
   //NavBarAuth
   wrapper: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '20px 50px 70px'
+    padding: '20px 50px 70px',
+    '@media (max-width: 760px)': {
+      padding: '20px 20px 40px'
+    },
+    '@media (max-width: 360px)': {
+      padding: '20px 20px 0'
+    }
   },
   closed: {
     fontFamily: 'Montserrat, sans-serif',
@@ -43,6 +86,23 @@ export default StyleSheet.create({
     position: 'relative',
     cursor: 'pointer',
     marginLeft: 14
+  },
+  // NavBarMobile
+  mobileWrapper: {
+    paddingTop: 50,
+    position: 'absolute',
+    top: 73,
+    left: 0,
+    background: '#fff',
+    width: '100%',
+    height: '100%',
+    textAlign: 'center',
+    zIndex: 12
+  },
+  mobileLi: {
+    display: 'block'
+  },
+  mobileLink: {
+    fontSize: 20
   }
-
 })

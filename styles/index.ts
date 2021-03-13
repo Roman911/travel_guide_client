@@ -10,7 +10,10 @@ export default StyleSheet.create({
   },
   wrapperLogin: {
     width: 400,
-    margin: '20px auto'
+    margin: '20px auto',
+    '@media (max-width: 400px)': {
+      width: '100%'
+    }
   },
   flexSB: {
     display: 'flex',
