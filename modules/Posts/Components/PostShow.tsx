@@ -58,7 +58,9 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post }) => {
       <LeftBlock isNews={ false }>
         <div className={ css(styles.wrapperContent) }>
           <p className={ css(styles.text) }>{ small_text }</p>
-          <Image src={ cover } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={ 980 } height={ 450 } />
+          <div className={ css(styles.imgWrapper) } >
+            <Image src={ cover } className={ css(styles.imgPost) } layout='fill' alt={ title } />
+          </div>
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
           { link && <Source link={ link } /> }
           <Author isArticle={ true } author={ author } />

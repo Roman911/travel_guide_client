@@ -84,7 +84,13 @@ export default StyleSheet.create({
     margin: '10px 5px',
     boxShadow: `2px 2px 10px 0px ${ shadows.shadow }`
   },
+  imgWrapper: {
+    marginTop: 20,
+    position: 'relative',
+    width: 235,
+    height: 120
+  },
   img: {
-    marginTop: 20
+    objectFit: 'cover'
   }
 })

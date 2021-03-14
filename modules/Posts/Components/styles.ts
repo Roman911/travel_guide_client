@@ -24,8 +24,14 @@ export default StyleSheet.create({
       color: btn
     }
   },
+  imgWrap: {
+    position: 'relative',
+    width: 35,
+    height: 35
+  },
   img: {
-    borderRadius: '50%'
+    borderRadius: '50%',
+    objectFit: 'cover'
   },
   title: {
     marginLeft: 15,
@@ -52,9 +58,14 @@ export default StyleSheet.create({
     marginBottom: 30,
     textAlign: 'justify'
   },
+  imgWrapper: {
+    position: 'relative',
+    width: 980,
+    height: 450
+  },
   imgPost: {
     margin: '10px auto 30px',
-    display: 'block'
+    objectFit: 'cover'
   },
   source: {
     paddingBottom: 20

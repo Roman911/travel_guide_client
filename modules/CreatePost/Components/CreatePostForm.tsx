@@ -41,10 +41,11 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
         {
           location && <>
             <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Обкладинка:</p>
-            <Image src={ location.cover.url } alt={ title } width={ 350 } height={ 240 } />
+            <div className={ css(styles.imgWrapper) }>
+              <Image src={ location.cover.url } className={ css(styles.img) } alt={ title } layout='fill' />
+            </div>
           </>
         }
-        <FormikControl control='input' id='tag' type='text' label='Теги:' />
       </div>
       {
         type_material !== 'new' && <div className={ css(styles.container) }>
@@ -59,6 +60,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
       }
     </div>
     <FormikControl control='textarea' name='small_text' label='Короткий опис:' />
+    <FormikControl control='input' id='tag' type='text' label='Теги:' />
     {
       type_material !== 'new' && <>
         <FormikControl control='input' id='work_time' type='text' label='Час роботи:' />

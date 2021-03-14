@@ -37,5 +37,13 @@ export default StyleSheet.create({
   submit: {
     marginTop: 30,
     justifyContent: 'flex-end'
+  },
+  imgWrapper: {
+    position: 'relative',
+    width: 350,
+    height: 240
+  },
+  img: {
+    objectFit: 'cover'
   }
 })

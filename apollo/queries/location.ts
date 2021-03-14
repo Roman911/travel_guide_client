@@ -20,6 +20,9 @@ export const LOCATION = gql`
       cover {
         url
       }
+      post {
+        _id
+      }
     }
   }
 `

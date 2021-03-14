@@ -18,33 +18,37 @@ export default StyleSheet.create({
     margin: '0 auto',
     background: 'linear-gradient(-60deg,#16a085,#f4d03f)'
   },
+  imgWrapper: {
+    position: 'relative'
+  },
   imgAv: {
     borderRadius: '50%'
   },
   avatarS: {
     width: 40,
-    height: 40,
-    fontSize: 20
+    height: 40
   },
   avatarM: {
     width: 50,
-    height: 50,
-    fontSize: 30
+    height: 50
   },
   avatarL: {
     width: 80,
-    height: 80,
-    fontSize: 40
+    height: 80
   },
   avatarXL: {
     width: 100,
-    height: 100,
-    fontSize: 50
+    height: 100
   },
   avatarXXL: {
     width: 140,
-    height: 140,
-    fontSize: 50
+    height: 140
+  },
+  fontSizeXL: {
+    fontSize: '3rem'
+  },
+  fontSizeXXL: {
+    fontSize: '4rem'
   },
   //UserName
   name: {

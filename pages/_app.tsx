@@ -5,7 +5,7 @@ import moment from 'moment'
 import 'react-quill/dist/quill.snow.css'
 import 'moment/locale/uk'
 import store from "../redux/store"
-import '../styles/globals.css'
+import '../styles/globals.scss'
 
 import { useApollo } from '../lib/apolloClient'
 

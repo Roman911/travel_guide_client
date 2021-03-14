@@ -12,4 +12,7 @@ export type Location = {
   small_text: string
   title: string
   _id: string
+  post: {
+    _id
+  }
 }

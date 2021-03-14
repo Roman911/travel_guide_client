@@ -18,7 +18,7 @@ export const CreateLocation: React.FC<CreateLocationProps> = ({ formik, file }) 
     <FormikControl control='input' id='title' type='text' label='Назва локації:' />
     <UploadFile label='Обкладинка' nameBtn='Завантажити обкладинку' />
     {
-      file && <div className={ css(baseStyle.img) }><Image src={ file.url } alt={ title } width={ 235 } height={ 120 } /></div>
+      file && <div className={ css(baseStyle.imgWrapper) }><Image src={ file.url } className={ css(baseStyle.img) } layout='fill' alt={ title } /></div>
     }
     <FormikControl control='select' id='isType' type='text' label='Тип локації:' options={ locationsType } />
     <FormikControl control='inputGroup' id='location' valueMap={ location } />

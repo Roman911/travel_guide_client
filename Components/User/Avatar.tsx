@@ -11,31 +11,30 @@ type AvatarProps = {
 }
 
 export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
-  const avatarIcon = avatar !== 'undefined' ?
-    <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' width={ 140 } height={ 140 } /> :
-    <p>{ name[0].toUpperCase() }</p>
+  const Avatar = (avatarSize, fontSize?) => {
+    return <div className={ css(styles.imgAv, avatarSize, baseStyles.flex, styles.background) }>
+      {
+        avatar !== 'undefined' ?
+          <div className={ css(styles.imgWrapper, avatarSize) }>
+            <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' layout='fill' />
+          </div> :
+          <p className={ css(fontSize) }>{ name[0].toUpperCase() }</p>
+      }
+    </div>
+  }
 
-  let avatarSize
   switch (size) {
     case 'S':
-      avatarSize = styles.avatarS
-      break
+      return Avatar(styles.avatarS)
     case 'M':
-      avatarSize = styles.avatarM
-      break
+      return Avatar(styles.avatarM)
     case 'L':
-      avatarSize = styles.avatarL
-      break
+      return Avatar(styles.avatarL)
     case 'XL':
-      avatarSize = styles.avatarXL
-      break
+      return Avatar(styles.avatarXL, styles.fontSizeXL)
     case 'XXL':
-      avatarSize = styles.avatarXXL
-      break
+      return Avatar(styles.avatarXXL, styles.fontSizeXXL)
     default:
       return null
   }
-  return <div className={ css(styles.imgAv, avatarSize, baseStyles.flex, styles.background) }>
-    { avatarIcon }
-  </div>
 }

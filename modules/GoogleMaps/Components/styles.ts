@@ -41,8 +41,13 @@ export default StyleSheet.create({
   blockImg: {
     lineHeight: 0
   },
+  imgWrapper: {
+    position: 'relative',
+    width: 350,
+    height: 200
+  },
   cover: {
-    maxWidth: '100%'
+    objectFit: 'cover'
   },
   title: {
     color: '#fff'
