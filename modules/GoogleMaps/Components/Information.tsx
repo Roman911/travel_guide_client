@@ -16,8 +16,9 @@ type MyInformationProps = {
 }
 
 export const Information: React.FC<MyInformationProps> = ({ location, handleClick, closeWindow }) => {
-  const { cover, small_text, title, post: { _id } } = location
+  const { cover, small_text, title, post } = location
   const viewWindow = closeWindow ? css(styles.wrapper, styles.closedWindow) : css(styles.wrapper)
+  const _id = post ? post._id : undefined
 
   return <div className={ viewWindow }>
     <div className={ css(styles.blockImg) }>
