@@ -18,9 +18,6 @@ export default StyleSheet.create({
     margin: '0 auto',
     background: 'linear-gradient(-60deg,#16a085,#f4d03f)'
   },
-  imgWrapper: {
-    position: 'relative'
-  },
   imgAv: {
     borderRadius: '50%'
   },

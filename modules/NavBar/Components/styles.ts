@@ -49,17 +49,6 @@ export default StyleSheet.create({
   times: {
     height: 30
   },
-  mobileMenu: {
-    display: 'none',
-    '@media (max-width: 960px)': {
-      display: 'block'
-    }
-  },
-  desktopMenu: {
-    '@media (max-width: 960px)': {
-      display: 'none'
-    }
-  },
   //NavBarAuth
   wrapper: {
     display: 'flex',

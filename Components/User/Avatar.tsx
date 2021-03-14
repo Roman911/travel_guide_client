@@ -11,13 +11,11 @@ type AvatarProps = {
 }
 
 export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
-  const Avatar = (avatarSize, fontSize?) => {
-    return <div className={ css(styles.imgAv, avatarSize, baseStyles.flex, styles.background) }>
+  const Avatar = (width: number, avatarSize, fontSize?) => {
+    return <div className={ css(styles.imgAv, baseStyles.flex, avatarSize, styles.background) }>
       {
         avatar !== 'undefined' ?
-          <div className={ css(styles.imgWrapper, avatarSize) }>
-            <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' layout='fill' />
-          </div> :
+          <Image src={ avatar } className={ css(styles.imgAv) } alt='avatar' layout='fixed' width={ width } height={ width } /> :
           <p className={ css(fontSize) }>{ name[0].toUpperCase() }</p>
       }
     </div>
@@ -25,15 +23,15 @@ export const Avatar: React.FC<AvatarProps> = ({ avatar, name , size }) => {
 
   switch (size) {
     case 'S':
-      return Avatar(styles.avatarS)
+      return Avatar(40, styles.avatarS)
     case 'M':
-      return Avatar(styles.avatarM)
+      return Avatar(50, styles.avatarM)
     case 'L':
-      return Avatar(styles.avatarL)
+      return Avatar(80, styles.avatarL)
     case 'XL':
-      return Avatar(styles.avatarXL, styles.fontSizeXL)
+      return Avatar(100, styles.avatarXL, styles.fontSizeXL)
     case 'XXL':
-      return Avatar(styles.avatarXXL, styles.fontSizeXXL)
+      return Avatar(140, styles.avatarXXL, styles.fontSizeXXL)
     default:
       return null
   }

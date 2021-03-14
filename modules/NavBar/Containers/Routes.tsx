@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { sidebarActions } from "../../../redux/actions"
 import { NavBar, NavBarAuthorization } from '../Components'
 import { UserData } from "../../../typeScript/user"
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 
 type UseRoutesProps = {
   authorization: boolean | undefined
@@ -12,6 +13,7 @@ type UseRoutesProps = {
 export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): any => {
   const dispatch = useDispatch()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const { width } = useWindowDimensions()
 
   const showSidebar = () => {
     dispatch(sidebarActions.showSidebar())
@@ -21,5 +23,5 @@ export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): an
     setShowMobileMenu(prev => !prev)
   }
 
-  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } showMobileMenu={ showMobileMenu } handleClick={ handleClick } />
+  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } showMobileMenu={ showMobileMenu } handleClick={ handleClick } width={ width } />
 }

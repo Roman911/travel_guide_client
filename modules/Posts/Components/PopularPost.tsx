@@ -17,9 +17,7 @@ export const PopularPost: React.FC<PopularPostProps> = ({ item: { _id, cover, ti
   return <div className={ css(styles.wrapperLink) }>
     <Link href={`/post/[id]`} as={`/post/${ _id }`} >
       <a className={ css(baseStyles.flex, styles.link) }>
-        <div className={ css(styles.imgWrap) }>
-          <Image className={ css(styles.img) } src={ cover } layout='fill' alt={ title } />
-        </div>
+        <Image className={ css(styles.img) } src={ cover } layout='fixed' alt={ title } width={35} height={35} />
         <span className={ css(styles.title) }>{ title }</span>
       </a>
     </Link>

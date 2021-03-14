@@ -17,9 +17,10 @@ type NavBarProps = {
   showSidebar: () => void
   handleClick: () => void
   showMobileMenu: boolean
+  width: number
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMenu, handleClick }) => {
+export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMenu, handleClick, width }) => {
   const router = useRouter()
   const pathname = router.pathname
 
@@ -31,25 +32,29 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
 
   return <nav className={ css(styles.nav) }>
     <div className={ css(baseStyles.wrapper, baseStyles.flexSB) }>
-      <div className={ css(styles.block, styles.mobileMenu, showMobileMenu && styles.blockS) }>
-        <div onClick={ () => handleClick() } className={ css(styles.burger) }>
-          {
-            showMobileMenu ? <FontAwesomeIcon className={ css(baseStyles.icon, styles.times) } icon={ faTimes }/> :
-              <>
-                <div className={ css(styles.burgerLine) } />
-                <div className={ css(styles.burgerLine) } />
-                <div className={ css(styles.burgerLine) } />
-              </>
-          }
+      {
+        width <= 960 && <div className={ css(styles.block, showMobileMenu && styles.blockS) }>
+          <div onClick={ () => handleClick() } className={ css(styles.burger) }>
+            {
+              showMobileMenu ? <FontAwesomeIcon className={ css(baseStyles.icon, styles.times) } icon={ faTimes }/> :
+                <>
+                  <div className={ css(styles.burgerLine) } />
+                  <div className={ css(styles.burgerLine) } />
+                  <div className={ css(styles.burgerLine) } />
+                </>
+            }
+          </div>
         </div>
-      </div>
+      }
       <div className={ css(baseStyles.flexSB) }>
         <div className={ css(styles.navLogo) } >
           <Image src="/logo.png" layout="fixed" width={100} height={45} alt="Travel guide logo" />
         </div>
-        <ul className={ css(styles.desktopMenu) }>
-          { links }
-        </ul>
+        {
+          width >= 961 && <ul>
+            { links }
+          </ul>
+        }
       </div>
       <div className={ css(baseStyles.flexSB, styles.block, showMobileMenu && styles.blockS) }>
         {
