@@ -15,7 +15,11 @@ export default StyleSheet.create({
   wrapperInput: {
     borderLeft: '1px solid #333',
     width: 150,
-    paddingRight: 20
+    paddingRight: 20,
+    '@media (max-width: 590px)': {
+      border: 'none',
+      width: 'auto'
+    }
   },
   input: {
     width: '100%'
@@ -24,7 +28,10 @@ export default StyleSheet.create({
     color: btn
   },
   block: {
-    width: 250
+    width: 250,
+    '@media (max-width: 590px)': {
+      width: 115
+    }
   },
   blockS: {
     width: 50

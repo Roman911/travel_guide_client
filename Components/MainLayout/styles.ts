@@ -11,7 +11,10 @@ export default StyleSheet.create({
   },
   //Left Block
   leftBlock: {
-    width: `calc(100% - ${ widthBlocks.rightBlock }px)`
+    width: `calc(100% - ${ widthBlocks.rightBlock }px)`,
+    '@media (max-width: 1270px)': {
+      width: '100%'
+    }
   },
   leftBlockNews: {
     display: 'flex',
@@ -19,6 +22,9 @@ export default StyleSheet.create({
   },
   //Right Block
   rightBlock: {
-    width: widthBlocks.rightBlock
+    width: widthBlocks.rightBlock,
+    '@media (max-width: 1270px)': {
+      display: 'none'
+    }
   }
 })

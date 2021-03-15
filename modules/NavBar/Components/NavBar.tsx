@@ -60,7 +60,7 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
         {
           !showMobileMenu && <>
             <div className={ css(baseStyles.flexSB, styles.wrapperInput) }>
-              <input className={ css(styles.input) } placeholder='Search' type="text"/>
+              { width >= 590 && <input className={ css(styles.input) } placeholder='Search' type="text"/> }
               <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faSearch }/>
             </div>
             {

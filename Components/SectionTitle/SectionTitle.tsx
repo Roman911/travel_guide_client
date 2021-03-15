@@ -7,7 +7,7 @@ type MySectionTitleProps = {
 }
 
 export const SectionTitle: React.FC<MySectionTitleProps> = ({ title }) => {
-  return <section className={css(styles.fontStyle)}>
+  return <section className={ css(styles.fontStyle) }>
     { title }
   </section>
 }

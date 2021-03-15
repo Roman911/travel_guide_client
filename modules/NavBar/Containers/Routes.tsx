@@ -11,9 +11,9 @@ type UseRoutesProps = {
 }
 
 export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): any => {
+  const { width } = useWindowDimensions()
   const dispatch = useDispatch()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const { width } = useWindowDimensions()
 
   const showSidebar = () => {
     dispatch(sidebarActions.showSidebar())

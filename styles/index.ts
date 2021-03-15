@@ -6,7 +6,10 @@ export default StyleSheet.create({
   wrapper: {
     maxWidth: widthsDescTop.widthL,
     margin: '0 auto',
-    padding: '10px 20px'
+    padding: '10px 20px',
+    '@media (max-width: 590px)': {
+      padding: '10px 5px'
+    }
   },
   wrapperLogin: {
     width: 400,
@@ -35,7 +38,10 @@ export default StyleSheet.create({
   blockText: {
     height: 200,
     overflowY: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    '@media (max-width: 690px)': {
+      height: 'auto'
+    }
   },
   shadow: {
     position: 'absolute',
