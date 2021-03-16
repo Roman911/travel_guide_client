@@ -15,14 +15,18 @@ const Home = () => {
     return <News key={ index } item={ item } width={ width } />
   })
 
+  const widthTransform = width > 1270
+
   return <MainLayout title='Home' header='Новини'>
     <WithRightBlock>
-      <LeftBlock isNews={ true }>
+      <LeftBlock isNews={ true } widthBlock={ widthTransform } >
         { news }
       </LeftBlock>
-      <RightBlock>
-        <PopularsPosts />
-      </RightBlock>
+      {
+        widthTransform && <RightBlock>
+          <PopularsPosts />
+        </RightBlock>
+      }
     </WithRightBlock>
   </MainLayout>
 }

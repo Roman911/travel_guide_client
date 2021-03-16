@@ -15,8 +15,7 @@ export const Editor: React.FC<EditorProps> = (props): any => {
 
   const modules = {
     toolbar: [
-      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-      [{size: []}],
+      [{ 'header': '1'}, {'header': '2'}],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'},
         {'indent': '-1'}, {'indent': '+1'}],
@@ -28,7 +27,7 @@ export const Editor: React.FC<EditorProps> = (props): any => {
     }
   }
   const formats = [
-    'header', 'font', 'size',
+    'header',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
     'link', 'image', 'video'

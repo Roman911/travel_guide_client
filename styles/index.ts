@@ -32,6 +32,10 @@ export default StyleSheet.create({
     display: 'flex',
     alignItems: 'center'
   },
+  flexFW: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
   block: {
     paddingBottom: 10
   },

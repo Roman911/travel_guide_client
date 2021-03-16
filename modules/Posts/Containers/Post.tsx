@@ -5,12 +5,14 @@ import { POST } from "../../../apollo/queries"
 import { LoadingPost } from "../../../Components"
 import { PostShow } from '../Components'
 import { User } from "../../../typeScript/user"
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 
 type PostShowProps = {
   _id: any
 }
 
 export const Post: React.FC<PostShowProps> =  ({ _id }): any => {
+  const { width } = useWindowDimensions()
   const user = useSelector((state: { user: User }) => state.user)
   const { loading, error, data } = useQuery(POST, {
     variables: { _id }
@@ -19,5 +21,5 @@ export const Post: React.FC<PostShowProps> =  ({ _id }): any => {
   if (error) return `Error! ${error}`
   const { post } = data
 
-  return <PostShow post={ post } user={ user } />
+  return <PostShow post={ post } user={ user } width={ width } />
 }

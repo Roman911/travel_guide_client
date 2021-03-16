@@ -11,20 +11,17 @@ export default StyleSheet.create({
   },
   //Left Block
   leftBlock: {
-    width: `calc(100% - ${ widthBlocks.rightBlock }px)`,
-    '@media (max-width: 1270px)': {
-      width: '100%'
-    }
+    width: `calc(100% - ${ widthBlocks.rightBlock }px)`
   },
   leftBlockNews: {
     display: 'flex',
     flexWrap: 'wrap'
   },
+  leftBlockWidth: {
+    width: '100%'
+  },
   //Right Block
   rightBlock: {
-    width: widthBlocks.rightBlock,
-    '@media (max-width: 1270px)': {
-      display: 'none'
-    }
+    width: widthBlocks.rightBlock
   }
 })
