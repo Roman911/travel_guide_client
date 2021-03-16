@@ -106,5 +106,17 @@ export default StyleSheet.create({
     '@media (max-width: 960px)': {
       fontSize: 20
     }
+  },
+  wrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '20px 50px 70px',
+    '@media (max-width: 760px)': {
+      padding: '20px 20px 40px'
+    },
+    '@media (max-width: 360px)': {
+      padding: '20px 20px 0'
+    }
   }
 })
