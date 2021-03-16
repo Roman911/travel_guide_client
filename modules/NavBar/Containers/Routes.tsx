@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import { sidebarActions } from "../../../redux/actions"
 import { NavBar, NavBarAuthorization } from '../Components'
 import { UserData } from "../../../typeScript/user"
-import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 import { useDocumentOverflowHidden } from '../../../hooks/useDocumentOverflowHidden'
 
 type UseRoutesProps = {
@@ -12,7 +11,6 @@ type UseRoutesProps = {
 }
 
 export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): any => {
-  const { width } = useWindowDimensions()
   const dispatch = useDispatch()
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   useDocumentOverflowHidden(showMobileMenu)
@@ -25,5 +23,5 @@ export const UseRoutes: React.FC<UseRoutesProps> = ({ authorization, data }): an
     setShowMobileMenu(prev => !prev)
   }
 
-  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } showMobileMenu={ showMobileMenu } handleClick={ handleClick } width={ width } />
+  return authorization ? <NavBarAuthorization /> : <NavBar showSidebar={ showSidebar } data={ data } showMobileMenu={ showMobileMenu } handleClick={ handleClick } />
 }

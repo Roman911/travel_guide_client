@@ -7,37 +7,43 @@ export default StyleSheet.create({
     background: '#fff',
     width: '100%',
     zIndex: 2,
-    top: 0
+    top: 0,
+    display: 'flex',
+    position: 'relative',
+    '@media (max-width: 960px)': {
+      justifyContent: 'center'
+    }
   },
-  navLogo: {
-    marginRight: 30
+  logo: {
+    zIndex: 6
   },
   wrapperInput: {
     borderLeft: '1px solid #333',
-    width: 150,
-    paddingRight: 20,
+    position: 'absolute',
+    top: '50%',
+    right: 20,
+    transform: 'translateY(-50%)',
+    width: 200,
     '@media (max-width: 590px)': {
-      border: 'none',
-      width: 'auto'
+      border: 'none'
     }
   },
-  input: {
-    width: '100%'
+  searchIcon: {
+    marginRight: 10
   },
   linkActive: {
     color: btn
   },
-  block: {
-    width: 250,
-    '@media (max-width: 590px)': {
-      width: 115
+  btnMenu: {
+    position: 'absolute',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    left: 10,
+    display: 'none',
+    zIndex: 6,
+    '@media (max-width: 960px)': {
+      display: 'block'
     }
-  },
-  blockS: {
-    width: 50
-  },
-  burger: {
-    cursor: 'pointer'
   },
   burgerLine: {
     margin: '6px 0',
@@ -57,18 +63,6 @@ export default StyleSheet.create({
     height: 30
   },
   //NavBarAuth
-  wrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '20px 50px 70px',
-    '@media (max-width: 760px)': {
-      padding: '20px 20px 40px'
-    },
-    '@media (max-width: 360px)': {
-      padding: '20px 20px 0'
-    }
-  },
   closed: {
     fontFamily: 'Montserrat, sans-serif',
     fontSize: 28,
@@ -84,21 +78,33 @@ export default StyleSheet.create({
     marginLeft: 14
   },
   // NavBarMobile
-  mobileWrapper: {
-    paddingTop: 50,
-    position: 'absolute',
-    top: 73,
-    left: 0,
-    background: '#fff',
-    width: '100%',
-    height: '100%',
-    textAlign: 'center',
-    zIndex: 12
+  mobileUl: {
+    paddingLeft: 20,
+    '@media (max-width: 960px)': {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100vh',
+      zIndex: 5,
+      background: '#fff',
+      paddingTop: 80,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      opacity: 'hidden',
+      visibility: 'hidden'
+    }
   },
-  mobileLi: {
-    display: 'block'
+  mobileUlActive: {
+    '@media (max-width: 960px)': {
+      opacity: 1,
+      visibility: 'visible'
+    }
   },
   mobileLink: {
-    fontSize: 20
+    '@media (max-width: 960px)': {
+      fontSize: 20
+    }
   }
 })
