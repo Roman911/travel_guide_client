@@ -42,7 +42,10 @@ export default StyleSheet.create({
     width: 300,
     background: background.modal,
     padding: '30px 10px',
-    textAlign: 'center'
+    textAlign: 'center',
+    '@media (max-width: 420px)': {
+      width: '100%'
+    }
   },
   openSidebar: {
     animationName: [translateSidebar, opacityBackgroundSidebar],
@@ -55,7 +58,10 @@ export default StyleSheet.create({
   btn: {
     position: 'fixed',
     top: 30,
-    right: 320
+    right: 320,
+    '@media (max-width: 420px)': {
+      left: 30
+    }
   },
   icon: {
     width: 'auto !important',

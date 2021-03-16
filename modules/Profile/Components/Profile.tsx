@@ -13,6 +13,7 @@ type ProfileMainProps = {
   user: UserData
   handleClick: (arg: string) => void
   nameSection: string
+  width: number
   locationsUserList: [{
     _id: string
     locationId: string
@@ -21,27 +22,32 @@ type ProfileMainProps = {
   logout: () => void
 }
 
-export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSection, locationsUserList, isUserProfile, logout }): any => {
-  const { name, avatar, rating, socials } = user
+export const Profile: React.FC<ProfileMainProps> = ({ user, handleClick, nameSection, locationsUserList, isUserProfile, logout, width }): any => {
+  const { name, avatar, rating, socials, aboutMy } = user
+
+  const LinkSetting = <Link href={'/profile/setting'} >
+    <a className={ css(styles.btnSetting) }>
+      <Button nameBtn='налаштування' isSubmitting={ false } />
+    </a>
+  </Link>
 
   return <section className={css(baseStyles.wrapper, styles.wrapper)}>
     <div className={ css(styles.header, baseStyles.flexSB) }>
-      <div className={ css(baseStyles.flex) }>
+      <div className={ css(baseStyles.flex, styles.userInfoMobile) }>
         <Avatar avatar={ avatar } name={ name } size='XL' />
+        { width < 760 && LinkSetting }
         <div className={ css(styles.content) }>
           <p className={ css(styles.name) }>{ name }</p>
           <Rating rating={ rating } />
-          <p className={ css(styles.text) }>Люблю подоружувати</p>
+          {
+            aboutMy && <p className={ css(styles.text) }>{ aboutMy }</p>
+          }
         </div>
       </div>
       <div className={ css(styles.right) }>
         {
-          isUserProfile && <div>
-            <Link href={'/profile/setting'} >
-              <a className={ css(styles.btnSetting) }>
-                <Button nameBtn='налаштування' isSubmitting={ false } />
-              </a>
-            </Link>
+          width > 760 && isUserProfile && <div>
+            { LinkSetting }
             <Button nameBtn='Вийти' isSubmitting={ false } handleClick={ logout } />
           </div>
         }

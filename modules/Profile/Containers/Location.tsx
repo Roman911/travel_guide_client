@@ -4,6 +4,7 @@ import { LOCATION } from "../../../apollo/queries"
 import { LoadingSpin } from "../../../Components"
 import { LocationComponent } from '../Components'
 import { ADD_LOCATION_USER_LIST, REMOVE_LOCATION_USER_LIST } from '../../../apollo/mutations'
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 import { UserData } from "../../../typeScript/user"
 
 type LocationProps = {
@@ -15,6 +16,7 @@ type LocationProps = {
 }
 
 export const Location: React.FC<LocationProps> = ({ _id, user, locationId, nameSection, handleClick }): any => {
+  const { width } = useWindowDimensions()
   const [ addLocationsUserList ] = useMutation(ADD_LOCATION_USER_LIST)
   const [ removeLocationWithUserList ] = useMutation(REMOVE_LOCATION_USER_LIST)
   const { loading, error, data } = useQuery(LOCATION, {
@@ -52,5 +54,5 @@ export const Location: React.FC<LocationProps> = ({ _id, user, locationId, nameS
   if (error) return `Error! ${error}`
   const { location } = data
 
-  return <LocationComponent location={ location } nameSection={ nameSection } updateLocationMyList={ updateLocationMyList } removeLocation={ removeLocation } />
+  return <LocationComponent location={ location } nameSection={ nameSection } updateLocationMyList={ updateLocationMyList } removeLocation={ removeLocation } width={ width } />
 }

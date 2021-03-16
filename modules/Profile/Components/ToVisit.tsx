@@ -21,8 +21,8 @@ type ToVisitProps = {
 
 export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameSection, handleClick }) => {
   if (locationsUserList.length > 0) {
-    const location = locationsUserList.map((item, index) => {
-      return <Location key={ index } user={ user } _id={ item._id } locationId={ item.locationId } nameSection={ nameSection } handleClick={ handleClick } />
+    const location = locationsUserList.map((item) => {
+      return <Location key={ item._id } user={ user } _id={ item._id } locationId={ item.locationId } nameSection={ nameSection } handleClick={ handleClick } />
     })
 
     return <section>

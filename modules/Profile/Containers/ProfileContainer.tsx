@@ -7,6 +7,7 @@ import { UserData } from '../../../typeScript/user'
 import { userActions } from "../../../redux/actions"
 import { LoadingSpin } from "../../../Components"
 import { LOCATION_USER_LIST } from '../../../apollo/queries'
+import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 
 type ProfileContainerProps = {
   isUserProfile?: boolean
@@ -14,6 +15,7 @@ type ProfileContainerProps = {
 }
 
 export const ProfileContainer: React.FC<ProfileContainerProps> = ({ isUserProfile, user }): any => {
+  const { width } = useWindowDimensions()
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -42,5 +44,5 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = ({ isUserProfil
     await dispatch(userActions.setData(null))
   }
 
-  return <Profile user={ user } isUserProfile={ isUserProfile } nameSection={ nameSection } locationsUserList={ locationsUserList } handleClick={ handleClick } logout={ logout } />
+  return <Profile user={ user } isUserProfile={ isUserProfile } nameSection={ nameSection } locationsUserList={ locationsUserList } handleClick={ handleClick } logout={ logout } width={ width } />
 }

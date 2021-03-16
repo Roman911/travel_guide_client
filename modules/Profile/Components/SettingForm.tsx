@@ -29,22 +29,24 @@ export const SettingForm: React.FC<SettingFormProps> = ({ formik, user }): any =
     })
   }, [])
 
-  return <div className={ css(baseStyles.flexVFS) }>
-    <div className={ css(styles.center) }>
-      <FormikControl control='input' id='name' label="Ім'я:" />
-      <FormikControl control='input' id='aboutMy' label='Про себе:' />
-      <Button nameBtn='Зберегти' isSubmitting={ false } />
-      <Link href={ '/profile' } >
-        <a className={ css(styles.link) }>Повернутись до профілю</a>
-      </Link>
+  return <div>
+    <div className={ css(baseStyles.flexVFS, styles.rightBlock) }>
+      <div className={ css(styles.center) }>
+        <FormikControl control='input' id='name' label="Ім'я:" />
+        <FormikControl control='input' id='aboutMy' label='Про себе:' />
+      </div>
+      <div className={ css(styles.socials) }>
+        <h5 className={ css(styles.socialHeaderMobile) }>Посилання на соц. мережі:</h5>
+        {
+          social.map((item, index) => {
+            return <FormikControl key={ index } control='inputSocial' id={ `socials.${ item }` } socialName={ item } />
+          })
+        }
+      </div>
     </div>
-    <div className={ css(styles.socials) }>
-      <h5>Посилання на соц. мережі:</h5>
-      {
-        social.map((item, index) => {
-          return <FormikControl key={ index } control='inputSocial' id={ `socials.${ item }` } socialName={ item } />
-        })
-      }
-    </div>
+    <Button nameBtn='Зберегти' isSubmitting={ false } />
+    <Link href={ '/profile' } >
+      <a className={ css(styles.link) }>Повернутись до профілю</a>
+    </Link>
   </div>
 }

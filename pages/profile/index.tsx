@@ -6,6 +6,7 @@ import { LoadingPost, MainLayout } from "../../Components"
 import { USER } from "../../apollo/queries"
 import { User } from "../../typeScript/user"
 import { UseAuth } from "../../hooks/auth.hook"
+import Redirect from '../../hooks/useRedirect'
 
 const Profile: React.FC = (): any => {
   UseAuth()
@@ -17,6 +18,10 @@ const Profile: React.FC = (): any => {
   if (loading) return <LoadingPost isPost={ true } />
   if (error) return `Error! ${error}`
   const { user } = data
+
+  if (!user) {
+    return <Redirect to='/' />
+  }
 
   return <MainLayout title='Profile' header='Профіль' >
     <ProfileContainer user={ user } isUserProfile={ true } />

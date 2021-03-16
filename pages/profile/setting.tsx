@@ -5,6 +5,7 @@ import { UseAuth } from "../../hooks/auth.hook"
 import { USER } from "../../apollo/queries"
 import { ProfileSetting } from '../../modules'
 import { LoadingPost, MainLayout } from "../../Components"
+import Redirect from '../../hooks/useRedirect'
 import { User } from "../../typeScript/user"
 
 const Setting = () => {
@@ -17,6 +18,10 @@ const Setting = () => {
   if (loading) return <LoadingPost isPost={ true } />
   if (error) return `Error! ${error}`
   const { user } = data
+
+  if (!user) {
+    return <Redirect to='/' />
+  }
 
   return <MainLayout title='Setting' header='Налаштування' >
     <ProfileSetting user={ user } />

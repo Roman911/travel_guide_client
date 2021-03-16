@@ -9,10 +9,22 @@ export default StyleSheet.create({
   //ProfileMain
   header: {
     background: background.main,
-    padding: 20
+    padding: 20,
+    '@media (max-width: 760px)': {
+      flexDirection: 'column'
+    }
+  },
+  userInfoMobile: {
+    '@media (max-width: 760px)': {
+      flexDirection: 'column'
+    }
   },
   content: {
-    marginLeft: 35
+    marginLeft: 35,
+    '@media (max-width: 760px)': {
+      marginLeft: 0,
+      textAlign: 'center'
+    }
   },
   name: {
     fontWeight: 700,
@@ -28,12 +40,18 @@ export default StyleSheet.create({
     textAlign: 'end'
   },
   links: {
-    marginTop: 25
+    marginTop: 25,
+    '@media (max-width: 760px)': {
+      marginTop: 10
+    }
   },
   //TabsLink
   wrapperTabs: {
     margin: '30px 0',
-    borderBottom: '1px solid hsla(0,0%,89.8%,.8)'
+    borderBottom: '1px solid hsla(0,0%,89.8%,.8)',
+    '@media (max-width: 760px)': {
+      flexWrap: 'wrap'
+    }
   },
   link: {
     transition: '0.2s',
@@ -51,13 +69,20 @@ export default StyleSheet.create({
   },
   linkActive: {
     borderBottom: '2px solid #db4454',
-    color: 'rgba(48,51,53,.9)'
+    color: 'rgba(48,51,53,.9)',
+    '@media (max-width: 760px)': {
+      border: 'none',
+      color: btn
+    }
   },
   //ToVisit
   wrapperVisit: {
     borderBottom: '1px solid hsla(0,0%,89.8%,.8)',
     paddingBottom: 4,
-    marginBottom: 4
+    marginBottom: 4,
+    '@media (max-width: 520px)': {
+      flexDirection: 'column'
+    }
   },
   wrapperNoVisit: {
     maxWidth: 500,
@@ -69,10 +94,23 @@ export default StyleSheet.create({
   },
   item: {
     paddingLeft: 20,
-    width: '100%'
+    width: 'calc(100% - 210px)',
+    '@media (max-width: 760px)': {
+      width: 'calc(100% - 170px)'
+    },
+    '@media (max-width: 520px)': {
+      width: '100%',
+      paddingLeft: 0,
+      paddingTop: 10
+    }
+  },
+  itemMobile: {
+    '@media (max-width: 760px)': {
+      flexDirection: 'column'
+    }
   },
   img: {
-    width: 120
+    objectFit: 'cover'
   },
   title: {
     margin: '0 0 2px',
@@ -106,6 +144,10 @@ export default StyleSheet.create({
     height: 28
   },
   btnSetting: {
-    marginRight: 14
+    marginRight: 14,
+    '@media (max-width: 760px)': {
+      marginTop: 20,
+      marginRight: 0
+    }
   }
 })

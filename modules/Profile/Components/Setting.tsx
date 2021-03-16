@@ -22,7 +22,7 @@ export const Setting: React.FC<SettingProps> = ({ user, setUrl, file, handleClic
 
   return <div>
     <h3 className={ css(styles.head) }>Профіль</h3>
-    <div className={ css(baseStyles.flexVFS) }>
+    <div className={ css(baseStyles.flexVFS, styles.wrapperMobile) }>
       <div className={ css(styles.avatar) }>
         <Avatar avatar={ avatar } name={ name } size='XXL' />
         {

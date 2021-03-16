@@ -22,6 +22,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang='en'>
         <Head>
+          <link rel='preconnect' href='http://35.225.249.204:3005' />
           <link href="https://fonts.googleapis.com/css?family=Montserrat:200&display=swap&subset=cyrillic" />
           <link rel="icon" href={'/favicon.ico'} />
           <style data-aphrodite dangerouslySetInnerHTML={{__html: this.props.css.content}}/>

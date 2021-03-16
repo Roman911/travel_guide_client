@@ -9,6 +9,7 @@ import { Modal } from "../../typeScript/modal"
 import { User, UserData } from "../../typeScript/user"
 import { SidebarProps } from '../../typeScript/sidebar'
 import { UseAuth } from "../../hooks/auth.hook"
+import { useDocumentOverflowHidden } from '../../hooks/useDocumentOverflowHidden'
 import baseStyles from "../../styles"
 
 import { UseRoutes } from '../../modules'
@@ -42,6 +43,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
   const { showSidebar } = useSelector((state: { sidebar: SidebarProps }) => state.sidebar)
   const { text, timeout } = useSelector((state: { modal: Modal }) => state.modal)
   UseAuth()
+  useDocumentOverflowHidden(showSidebar)
   const handleClick = () => {
     dispatch(modalActions.handleClick())
   }
