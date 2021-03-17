@@ -9,11 +9,9 @@ import styles from "./styles"
 
 export const IsNotActiveUser: React.FC = () => {
   return <Link href={ '/login' }>
-    <a>
-      <div className={ css(baseStyles.flexSB) } >
-        <span>Увійти</span>
-        <FontAwesomeIcon className={ css(baseStyles.icon, styles.user) } icon={ faUser }/>
-      </div>
+    <a className={ css(baseStyles.flexSB) }>
+      <span className={ css(styles.span) }>Увійти</span>
+      <FontAwesomeIcon className={ css(baseStyles.icon, styles.user) } icon={ faUser }/>
     </a>
   </Link>
 }

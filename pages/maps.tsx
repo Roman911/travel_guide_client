@@ -18,7 +18,7 @@ const Map: React.FC = (): any => {
 
   return <MainLayout title='Maps' header='Карти' >
     <div style={{ position: 'relative' }}>
-      <GoogleMaps disableDefaultUI={ false } search={ true } />
+      <GoogleMaps disableDefaultUI={ false } search={ true } width='100%' />
       <SortLocations />
     </div>
   </MainLayout>

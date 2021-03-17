@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { btn, text } from '../../../variabels'
+import { btn } from '../../../variabels'
 
 export default StyleSheet.create({
   // NavBar
@@ -25,11 +25,20 @@ export default StyleSheet.create({
     transform: 'translateY(-50%)',
     width: 200,
     '@media (max-width: 590px)': {
-      border: 'none'
+      border: 'none',
+      width: 'auto'
+    }
+  },
+  input: {
+    '@media (max-width: 590px)': {
+      display: 'none'
     }
   },
   searchIcon: {
-    marginRight: 10
+    marginRight: 10,
+    '@media (max-width: 370px)': {
+      display: 'none'
+    }
   },
   linkActive: {
     color: btn
@@ -45,20 +54,6 @@ export default StyleSheet.create({
       display: 'block'
     }
   },
-  burgerLine: {
-    margin: '6px 0',
-    height: 2,
-    backgroundColor: text.main,
-    ':nth-child(1)': {
-      width: 25
-    },
-    ':nth-child(2)': {
-      width: 16
-    },
-    ':nth-child(3)': {
-      width: 20
-    }
-  },
   times: {
     height: 30
   },
@@ -69,6 +64,11 @@ export default StyleSheet.create({
     fontWeight: 800
   },
   // IsActiveUser
+  span: {
+    '@media (max-width: 420px)': {
+      display: 'none'
+    }
+  },
   user: {
     margin: '0 10px'
   },
@@ -93,7 +93,8 @@ export default StyleSheet.create({
       flexDirection: 'column',
       alignItems: 'center',
       opacity: 'hidden',
-      visibility: 'hidden'
+      visibility: 'hidden',
+      paddingLeft: 0
     }
   },
   mobileUlActive: {

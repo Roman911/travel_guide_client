@@ -5,10 +5,14 @@ import { borders, shadows, text } from '../../../variabels'
 export default StyleSheet.create({
   wrapper: {
     position: 'absolute',
-    zIndex: 10,
+    zIndex: 1,
     top: 60,
     right: 10,
-    width: 400
+    width: 400,
+    '@media (max-width: 920px)': {
+      top: 10,
+      width: 308
+    }
   },
   form: {
     display: 'flex',

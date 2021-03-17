@@ -21,11 +21,12 @@ type MyGoogleMapsProps = {
   disableDefaultUI: boolean
   click?: (event) => any
   search: boolean
+  width: string
 }
 
 const libraries = ["places"]
 
-export const GoogleMaps: React.FC<MyGoogleMapsProps> = ({ disableDefaultUI, click, search }) => {
+export const GoogleMaps: React.FC<MyGoogleMapsProps> = ({ disableDefaultUI, click, search, width }) => {
   const dispatch = useDispatch()
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_KAY,
@@ -62,7 +63,7 @@ export const GoogleMaps: React.FC<MyGoogleMapsProps> = ({ disableDefaultUI, clic
   useKeyPress('Escape', handleClick)
 
   const renderMap = () => {
-    return <div style={{ position: 'relative', width: '100%' }}>
+    return <div style={{ position: 'relative', width }}>
       { search && <Search panTo={ panTo } /> }
       <GoogleMap
         mapContainerStyle={ mapContainerStyle }

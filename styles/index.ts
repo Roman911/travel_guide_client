@@ -1,6 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-
-import { widthsDescTop, heightIcons, shadows, icons } from '../variabels'
+import {widthsDescTop, heightIcons, shadows, icons, text} from '../variabels'
 
 export default StyleSheet.create({
   wrapper: {
@@ -85,7 +84,29 @@ export default StyleSheet.create({
   wrapperCreateLocation: {
     marginTop: 20,
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative',
+    overflow: 'hidden'
+  },
+  btnCreateLocation: {
+    display: 'none',
+    position: 'absolute',
+    top: 70,
+    right: 12,
+    padding: '5px 10px',
+    background: '#fff',
+    borderRadius: 4,
+    zIndex: 3,
+    '@media (max-width: 920px)':{
+      display: 'block'
+    }
+  },
+  btnClosedLocationSelect: {
+    top: 5,
+    right: 20
+  },
+  iconCreateLocation: {
+    height: 26
   },
   br: {
     marginRight: 15
@@ -102,5 +123,19 @@ export default StyleSheet.create({
   },
   img: {
     objectFit: 'cover'
+  },
+  burgerLine: {
+    margin: '6px 0',
+    height: 2,
+    backgroundColor: text.main,
+    ':nth-child(1)': {
+      width: 25
+    },
+    ':nth-child(2)': {
+      width: 16
+    },
+    ':nth-child(3)': {
+      width: 20
+    }
   }
 })

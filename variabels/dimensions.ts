@@ -6,8 +6,7 @@ export const widthsDescTop = {
 
 export const widthBlocks = {
   newsBlock: 336,
-  rightBlock: 280,
-  locationSelect: 350
+  rightBlock: 280
 }
 
 export const heightIcons = {

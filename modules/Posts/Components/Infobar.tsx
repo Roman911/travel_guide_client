@@ -29,7 +29,7 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, address 
   return <section className={ css( baseStyles.rightBlock) }>
     <Link href={ '/maps' } >
       <a>
-        <GoogleMaps disableDefaultUI={ true } search={ false } />
+        <GoogleMaps disableDefaultUI={ true } search={ false } width='100%' />
       </a>
     </Link>
     <div className={ css(styles.content) }>

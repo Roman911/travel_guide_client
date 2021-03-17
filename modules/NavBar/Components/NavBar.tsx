@@ -33,9 +33,9 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
       {
         showMobileMenu ? <FontAwesomeIcon className={ css(baseStyles.icon, styles.times) } icon={ faTimes }/> :
           <>
-            <div className={ css(styles.burgerLine) } />
-            <div className={ css(styles.burgerLine) } />
-            <div className={ css(styles.burgerLine) } />
+            <div className={ css(baseStyles.burgerLine) } />
+            <div className={ css(baseStyles.burgerLine) } />
+            <div className={ css(baseStyles.burgerLine) } />
           </>
       }
     </button>
@@ -48,7 +48,7 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
       { links }
     </ul>
     <div className={ css(baseStyles.flexSB, styles.wrapperInput) }>
-      <input placeholder='Search' type="text"/>
+      <input className={ css(styles.input) } placeholder='Search' type="text"/>
       <FontAwesomeIcon className={ css(baseStyles.icon, styles.searchIcon) } icon={ faSearch }/>
       { data ? <IsActiveUser data={ data } showSidebar={ showSidebar } /> : <IsNotActiveUser /> }
     </div>
