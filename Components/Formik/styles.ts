@@ -84,6 +84,12 @@ export default StyleSheet.create({
     background: icons,
     transition: '200ms'
   },
+  flexC: {
+    '@media (max-width: 440px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start'
+    }
+  },
   // Textarea
   wrapperTextarea: {
     position: 'relative'

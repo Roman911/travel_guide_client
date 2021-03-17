@@ -7,7 +7,7 @@ import { LoadingSpin, MainLayout } from "../Components"
 import { User } from '../typeScript/user'
 import { LOCATION } from "../apollo/queries"
 
-const CreatePosts = () => {
+const CreatePosts: React.FC = () => {
   const router = useRouter()
   const _id = router.query.location
 

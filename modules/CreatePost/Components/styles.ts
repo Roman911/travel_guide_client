@@ -4,10 +4,27 @@ export default StyleSheet.create({
   wrapper: {
     marginTop: 20,
     padding: '40px 30px',
-    background: '#fff'
+    background: '#fff',
+    '@media (max-width: 960px)': {
+      padding: '20px 10px'
+    },
+    '@media (max-width: 730px)': {
+      marginTop: 0
+    },
+    '@media (max-width: 620px)': {
+      padding: '10px 0'
+    }
+  },
+  wrapperMobile: {
+    '@media (max-width: 960px)': {
+      flexDirection: 'column'
+    }
   },
   wrapperBlock: {
-    width: 'calc(100% - 360px)'
+    width: 'calc(100% - 360px)',
+    '@media (max-width: 960px)': {
+      width: '100%'
+    }
   },
   wrapperBlockNews: {
     width: '100%'
@@ -17,7 +34,11 @@ export default StyleSheet.create({
   },
   container: {
     width: 350,
-    margin: '10px 5px'
+    margin: '10px 5px',
+    '@media (max-width: 960px)': {
+      width: '100%',
+      margin: 0
+    }
   },
   text: {
     padding: '15px 20px',
@@ -45,5 +66,16 @@ export default StyleSheet.create({
   },
   img: {
     objectFit: 'cover'
+  },
+  flexC: {
+    '@media (max-width: 440px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start'
+    }
+  },
+  btn: {
+    '@media (max-width: 440px)': {
+      marginTop: 10
+    }
   }
 })

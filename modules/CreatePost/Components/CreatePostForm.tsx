@@ -19,13 +19,13 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
   const { values: { title, type_material, isPrice, editor, tickets }, setFieldValue } = formik
 
   return <>
-    <div className={ css(baseStyles.flexVFS) }>
+    <div className={ css(baseStyles.flexVFS, styles.wrapperMobile) }>
       <div className={ css( type_material !== 'new' ? styles.wrapperBlock : styles.wrapperBlockNews)}>
         <FormikControl control='radio' name='type_material' label='Тип матеріалу:' options={ options } />
         {
-          !location && <div className={ css( inputStyles.inputWrapper, baseStyles.flex, styles.btnBlock ) }>
+          !location && <div className={ css( inputStyles.inputWrapper, baseStyles.flex, styles.btnBlock, styles.flexC ) }>
             <p className={ css( inputStyles.label, inputStyles.labelTouched ) }>Додати локацію:</p>
-            <Link href={ '/maps' }><a><Button nameBtn='Вибрати на карті' isSubmitting={ false } /></a></Link>
+            <Link href={ '/maps' }><a className={ css(styles.btn) }><Button nameBtn='Вибрати на карті' isSubmitting={ false } /></a></Link>
             <div className={ css(baseStyles.br) } />
             <Link href={{
               pathname: '/create-location',
@@ -33,7 +33,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ formik, location
                 isCreatePost: true
               }
             }}>
-              <a><Button nameBtn='Створити локацію' isSubmitting={ false } /></a>
+              <a className={ css(styles.btn) }><Button nameBtn='Створити локацію' isSubmitting={ false } /></a>
             </Link>
           </div>
         }
