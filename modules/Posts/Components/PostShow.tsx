@@ -1,10 +1,8 @@
 import React, { useState } from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import { useDispatch } from 'react-redux'
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
-import { googleMapsActions } from '../../../redux/actions'
 import { PopularsPosts } from '../'
 import { Likes, Tags, InformUserLocation } from "../../"
 import { InfoBar, Source } from "./"
@@ -28,9 +26,8 @@ const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/
 })
 
 export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
-  const dispatch = useDispatch()
   const { data } = user
-  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location: { _id: locationId, coordinates, address }, work_time, isType, editor, tags, link } = post
+  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link } = post
   const [ inView, setInView ] = useState(false)
   const widthTransform = width > 1070
   const handleChange = (e) => {
@@ -38,15 +35,6 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
       setInView(e)
     }
   }
-  const locations = { lat: Number(coordinates[0]), lng: Number(coordinates[1]) }
-  const changeData = {
-    mapContainerStyle: { height: "200px", width: "100%" },
-    center: locations,
-    locations,
-    isType
-  }
-
-  dispatch(googleMapsActions.changeLocations(changeData))
 
   return <div className={ css(styles.postWrapper)}>
     <div className={ css(baseStyles.flexSB, styles.postTitleWrapper) }>
@@ -75,8 +63,8 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <InfoBar tickets={ tickets } work_time={ work_time } address={ address } />
-          { data && <InformUserLocation locationId={ locationId } user={ user } /> }
+          <InfoBar tickets={ tickets } work_time={ work_time } location={ location } />
+          { data && <InformUserLocation locationId={ location._id } user={ user } /> }
           <PopularsPosts />
         </RightBlock>
       }

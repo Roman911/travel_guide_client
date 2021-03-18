@@ -11,10 +11,24 @@ import styles from './infoBarStyles'
 type MyInfoBarProps = {
   tickets: string[]
   work_time: string
-  address: string[]
+  location: {
+    _id: string
+    address: string[]
+    coordinates: string[]
+    isType: string
+  }
 }
 
-export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, address }) => {
+export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location }): any => {
+  const { _id, address, coordinates: [ lat, lng ], isType } = location
+  const position = { lat: Number(lat), lng: Number(lng) }
+  const locationOptions = { position, isType }
+  const changeData = {
+    disableDefaultUI: true,
+    mapContainerStyle: { height: "200px", width: "100%" },
+    zoom: 11,
+    center: position
+  }
 
   const viewTickets = tickets.length !== 0 && <div className={ css(styles.content) }>
     <div className={ css(baseStyles.flex, styles.block) }>
@@ -27,9 +41,12 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, address 
   </div>
 
   return <section className={ css( baseStyles.rightBlock) }>
-    <Link href={ '/maps' } >
+    <Link href={{
+      pathname: '/maps',
+      query: { _id, lat, lng, isType }
+    }} >
       <a>
-        <GoogleMaps disableDefaultUI={ true } search={ false } width='100%' />
+        <GoogleMaps search={ false } changeData={ changeData } location={ locationOptions } />
       </a>
     </Link>
     <div className={ css(styles.content) }>

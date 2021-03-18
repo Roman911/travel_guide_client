@@ -1,21 +1,30 @@
 import { Locations } from "./locations"
 
-export type GoogleMapsProps = {
-  mapContainerStyle:
-    {
-      height: string
-      width: string
-    }
-  center:
-    {
-      lat: number
-      lng: number
-    }
-  zoom: number,
-  locations: Locations,
-  control: string,
-  selectLocations: [] | [{
-    isType: string
-    select: boolean
-  }]
+export type ChangeData = {
+  disableDefaultUI: boolean
+  mapContainerStyle: MapContainerStyle
+  center: Center
+  zoom: number
+}
+
+export type OptionsLocation = {
+  control: string
+  location: Locations | Location
+}
+
+export type Location = {
+  lat: number
+  lng: number
+  isType: string
+  _id?: string
+}
+
+type MapContainerStyle = {
+  height: string
+  width: string
+}
+
+type Center = {
+  lat: number
+  lng: number
 }

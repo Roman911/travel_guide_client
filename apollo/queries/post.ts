@@ -54,6 +54,7 @@ export const POST = gql`
         _id
         coordinates
         address
+        isType
       }
       cover
     }

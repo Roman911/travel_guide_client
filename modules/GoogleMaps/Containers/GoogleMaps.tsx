@@ -1,96 +1,45 @@
-import dynamic from "next/dynamic"
-import { useDispatch, useSelector } from 'react-redux'
-import React, { useCallback, useRef, useState } from "react"
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { useRouter } from "next/router"
+import React, { useState } from "react"
+import { Maps } from "../Components/Maps"
+import { useLoadScript } from "@react-google-maps/api"
 import { LoadingSpin } from "../../../Components"
-import { LocationInformation } from "./"
-import { GoogleMapsProps } from '../../../typeScript/googleMaps'
-import { MarkersController } from '../Components'
-import { googleMapsActions } from '../../../redux/actions'
-import { useKeyPress } from '../../../hooks/useKeyPress'
+import { ChangeData } from '../../../typeScript/googleMaps'
 
-type SearchProps = {
-  panTo: any
-}
-
-const Search = dynamic<SearchProps>(() => import('./Search') as any, {
-  loading: () => <LoadingSpin />
-})
-
-type MyGoogleMapsProps = {
-  disableDefaultUI: boolean
-  click?: (event) => any
+type GoogleMapsProps = {
+  changeData?: ChangeData
   search: boolean
-  width: string
+  location?: any
+  locations?: any
+
+  disableDefaultUI?: any
+  click?: any
+  width?: any
 }
 
 const libraries = ["places"]
 
-export const GoogleMaps: React.FC<MyGoogleMapsProps> = ({ disableDefaultUI, click, search, width }) => {
-  const dispatch = useDispatch()
+export const GoogleMaps: React.FC<GoogleMapsProps> = ({ changeData, locations, location }) => {
+  let libRef = React.useRef(libraries)
+  const router = useRouter()
+  const query = router.query
+  const { _id, lat, lng, isType } = query
+  const position = { lat: Number(lat), lng: Number(lng) }
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_KAY,
     // @ts-ignore
-    libraries
+    libraries: libRef.current
   })
-  const { mapContainerStyle, center, zoom, locations, control } = useSelector((state: { googleMaps: GoogleMapsProps }) => state.googleMaps)
-
-  const mapRef = useRef()
-  const onMapLoad = useCallback((map) => {
-    mapRef.current = map
-  }, [])
-  const panTo = useCallback(({ lat, lng }) => {
-    // @ts-ignore
-    mapRef.current.panTo({ lat, lng })
-    // @ts-ignore
-    mapRef.current.setZoom(12)
-  }, [])
-
   const [ selectedPark, setSelectedPark ] = useState<null | string>(null)
-  const [ closeWindow, setCloseWindow ] = useState<boolean>(false)
-  const handleClick = useCallback(() => {
-    setCloseWindow(true)
-    setTimeout(() => {
-      setSelectedPark(null)
-      setCloseWindow(false)
-    }, 700)
-  }, [])
-
-  const options = {
-    disableDefaultUI: disableDefaultUI
-  }
-
-  useKeyPress('Escape', handleClick)
+  const optionsLocation = isType ? { location: { position, isType, _id }, control: 'MarkerQuery' } : locations ? { location: locations, control: 'MarkersMap' } : { location, control: 'MarkerQuery' }
 
   const renderMap = () => {
-    return <div style={{ position: 'relative', width }}>
-      { search && <Search panTo={ panTo } /> }
-      <GoogleMap
-        mapContainerStyle={ mapContainerStyle }
-        zoom={ zoom }
-        center={ center }
-        options={ options }
-        onLoad={ onMapLoad }
-        onClick={ click ? (event) => {
-          click(event)
-          const locations = {
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng()
-          }
-          const options = {
-            locations,
-            control: 'MarkerQuery'
-          }
-          dispatch(googleMapsActions.createLocation(options))
-        } : null}
-      >
-        { selectedPark && <LocationInformation _id={ selectedPark } handleClick={ handleClick } closeWindow={ closeWindow } /> }
-        <MarkersController control={ control } options={ locations } setSelectedPark={ setSelectedPark } />
-      </GoogleMap>
-    </div>
+    return <Maps changeData={ changeData } optionsLocation={ optionsLocation } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } />
   }
+
   if (loadError) {
     return <div>Неможливо завантажити карту</div>
   }
+
   return isLoaded ? renderMap() : <LoadingSpin />
 }

@@ -23,6 +23,7 @@ export type PostData = {
     _id: string
     address: string[]
     coordinates: string[]
+    isType: string
   }
   cover: string
 }

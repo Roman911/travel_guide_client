@@ -1,23 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-
 import { btn } from '../../../variabels'
-
-const translateKeyframes = {
-  '0%': {
-    transform: 'translateX(-350px)'
-  },
-  '100%': {
-    transform: 'translateX(0)',
-  },
-};
-const closedWindow = {
-  '0%': {
-    transform: 'translateX(0)'
-  },
-  '100%': {
-    transform: 'translateX(-350px)',
-  },
-};
 
 export default StyleSheet.create({
   wrapper: {
@@ -26,12 +8,11 @@ export default StyleSheet.create({
     zIndex: 2,
     background: '#fff',
     height: '100%',
-    animationName: [translateKeyframes],
-    animationDuration: '0.7s'
+    transform: 'translateX(-350px)',
+    transition: '500ms'
   },
-  closedWindow: {
-    animationName: [closedWindow],
-    animationDuration: '0.7s'
+  open: {
+    transform: 'translateX(0)'
   },
   block: {
     width: '100%',
