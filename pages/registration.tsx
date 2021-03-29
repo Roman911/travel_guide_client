@@ -3,7 +3,6 @@ import { useRouter } from "next/router"
 import { useMutation } from "@apollo/client"
 import { Formik, Form } from "formik"
 import { useDispatch } from "react-redux"
-import withApollo from "../lib/withApollo"
 import { MainLayout, HeaderForm, AuthForm } from "../Components"
 import { CREATE_USER } from "../apollo/mutations"
 import validateForm from '../utils/validate'
@@ -22,24 +21,18 @@ const Registration: React.FC = () => {
   }
   const onSubmit = ( values, onSubmitProps ) => {
     createUse({
-      variables: {
-        newUser: { name: values.name, email: values.email, password: values.password }
-      }
+      variables: { newUser: { name: values.name, email: values.email, password: values.password }}
     }).then(data => {
       if (data) {
         const { registerUser }: any = data.data
         dispatch(userActions.setData(registerUser))
-        localStorage.setItem('userData', JSON.stringify({
-          ...registerUser
-        }))
+        localStorage.setItem('userData', JSON.stringify({ ...registerUser }))
         dispatch(modalActions.showModal('Користувач успішно створений! Увійдіть в свій акаунт'))
         router.push('/').then()
       }
       onSubmitProps.setSubmitting(false)
-    }).catch((errors) => {
-      if (errors) {
-        dispatch(modalActions.showModal('Користувач з таким емейлом зайнятий'))
-      }
+    }).catch(errors => {
+      if (errors) dispatch(modalActions.showModal('Користувач з таким емейлом зайнятий'))
       onSubmitProps.setSubmitting(false)
     })
   }
@@ -56,4 +49,4 @@ const Registration: React.FC = () => {
   </MainLayout>
 }
 
-export default withApollo(Registration)
+export default Registration

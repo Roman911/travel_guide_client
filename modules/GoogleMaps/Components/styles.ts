@@ -1,9 +1,16 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { btn } from '../../../variabels'
 
+const width350 = {
+  width: 350,
+  '@media (max-width: 420px)': {
+    width: '100%'
+  }
+}
+
 export default StyleSheet.create({
   wrapper: {
-    width: 350,
+    ...width350,
     position: 'absolute',
     zIndex: 2,
     background: '#fff',
@@ -24,7 +31,7 @@ export default StyleSheet.create({
   },
   imgWrapper: {
     position: 'relative',
-    width: 350,
+    ...width350,
     height: 200
   },
   cover: {

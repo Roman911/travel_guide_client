@@ -1,62 +1,40 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { background, borders, text, socSet, shadows } from '../../../variabels'
 
-const openBar = {
-  'from': {
-    transform: 'scaleY(0)'
-  },
-  'to': {
-    transform: 'scaleY(1)'
-  }
-}
-
-const closeBar = {
-  'from': {
-    transform: 'scaleY(1)'
-  },
-  'to': {
-    transform: 'scaleY(0)'
-  }
-}
-
 export default StyleSheet.create({
   wrapper: {
     position: 'absolute',
     right: 10,
-    top: 120,
-    zIndex: 10,
-    width: 250
+    top: 60,
+    zIndex: 2
   },
   content: {
     border: `1px solid ${ borders.borderInput }`,
     backgroundColor: '#fff',
-    padding: 10
-  },
-  title: {
-    fontSize: '1.2rem',
-    cursor: 'pointer',
-    ':hover': {
-      opacity: 0.8
-    }
+    borderRadius: 4,
+    padding: 10,
+    cursor: 'pointer'
   },
   titleIcon: {
     color: shadows.shadowDark,
-    transition: '300ms'
-  },
-  titleIconRotate: {
-    transform: 'rotate(180deg)'
+    transition: '300ms',
+    fontSize: '1.4rem'
   },
   bar: {
-    transformOrigin: 'top right',
-    animationName: [openBar],
-    animationDuration: '300ms',
+    position: 'absolute',
+    top: 60,
+    right: 0,
+    width: 250,
+    transform: 'scale(0,0)',
+    transition: '500ms',
+    transformOrigin: 'top right'
   },
-  closeBar: {
-    animationName: [closeBar],
-    animationDuration: '300ms'
+  activeBar: {
+    transform: 'scale(1,1)'
   },
   sortInput: {
-    margin: '5px 0'
+    margin: '5px 0',
+    width: 230
   },
   element: {
     padding: '0 10px',
@@ -81,7 +59,7 @@ export default StyleSheet.create({
     opacity: 1
   },
   sortInputActive: {
-    color: socSet.facebook
+    color: socSet.twitter
   },
   sortInputRemove: {
     color: text.hover

@@ -1,18 +1,28 @@
 import React from "react"
 import dynamic from "next/dynamic"
-import { Locations, Location } from "../../../typeScript/locations"
+import {ChangeData, Location} from "../../../typeScript/googleMaps"
 
 type MarkersMapProps = {
   rest: {
-    options: Locations | Location
+    changeData: ChangeData
     setSelectedPark: (_id) => void
+    options?: {
+      _id?: string
+      isType: string
+      location: Location
+    }
   }
 }
 
 type MarkerProps = {
   control: string
-  options: any
+  changeData: any
   setSelectedPark: (_id) => void
+  options?: {
+    _id?: string
+    isType: string
+    location: Location
+  }
 }
 
 const MarkersMap = dynamic<MarkersMapProps>(() => import('./MarkersMap') as any)
@@ -26,7 +36,6 @@ export const MarkersController: React.FC<MarkerProps> = ({ control, ...rest }): 
     case 'MarkerQuery': {
       return <MarkerQuery rest={ rest } />
     }
-    default:
-      return null
+    default: return null
   }
 }

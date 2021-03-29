@@ -28,7 +28,7 @@ export const LOCATION = gql`
 `
 
 export const LOCATIONS_SORT = gql`
-  query locationsSortByType($type: String) {
+  query locationsSortByType($type: [String]) {
     locationsSortByType(type: $type) {
       _id
       coordinates

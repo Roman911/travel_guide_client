@@ -10,6 +10,9 @@ export default StyleSheet.create({
       padding: '10px 5px'
     }
   },
+  mt: {
+    marginTop: 73
+  },
   wrapperLogin: {
     width: 400,
     margin: '20px auto',
@@ -137,5 +140,9 @@ export default StyleSheet.create({
     ':nth-child(3)': {
       width: 20
     }
+  },
+  a: {
+    textTransform: 'none',
+    letterSpacing: 0
   }
 })

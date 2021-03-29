@@ -2,29 +2,24 @@ import { Locations } from "./locations"
 
 export type ChangeData = {
   disableDefaultUI: boolean
+  search: boolean
   mapContainerStyle: MapContainerStyle
-  center: Center
   zoom: number
-}
-
-export type OptionsLocation = {
   control: string
-  location: Locations | Location
+  width: string
+  center: Location
+  location?: Location
+  locations?: Locations
+  isType?: string,
+  _id: string
 }
 
 export type Location = {
   lat: number
   lng: number
-  isType: string
-  _id?: string
 }
 
-type MapContainerStyle = {
+export type MapContainerStyle = {
   height: string
   width: string
-}
-
-type Center = {
-  lat: number
-  lng: number
 }

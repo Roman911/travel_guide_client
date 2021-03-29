@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux"
 import { useQuery } from "@apollo/react-hooks"
 import { ALL_POSTS } from "../apollo/queries"
 import { PopularsPosts } from "../modules"
@@ -6,15 +7,12 @@ import { useWindowDimensions } from '../hooks/useWindowDimensions'
 
 const Home = () => {
   const { width } = useWindowDimensions()
+  const { data: userData } = useSelector(state => state.user)
   const { loading, error, data } = useQuery(ALL_POSTS)
   if (loading) return ''
   if  (error ) return `Error! ${error}`
   const { allPosts } = data
-
-  const news = allPosts.map((item, index) => {
-    return <News key={ index } item={ item } width={ width } />
-  })
-
+  const news = allPosts.map((item, index) => <News key={ index } item={ item } width={ width } userData={ userData } />)
   const widthTransform = width > 1270
 
   return <MainLayout title='Home' header='Новини'>

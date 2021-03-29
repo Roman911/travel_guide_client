@@ -5,7 +5,6 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import { LOGIN } from '../apollo/queries'
 import validateForm from '../utils/validate'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
-import withApollo from "../lib/withApollo"
 import { userActions, modalActions } from '../redux/actions'
 import Redirect from "../hooks/useRedirect"
 import { loginFormData } from '../config/loginFormData'
@@ -21,20 +20,16 @@ const Login: React.FC = () => {
   }
   const onSubmit = (values, onSubmitProps) => {
     userData({
-      variables: { email: values.email, password: values.password },
+      variables: { email: values.email, password: values.password }
     })
     onSubmitProps.setSubmitting(false)
   }
   if (loading) return <LoadingSpin />
-  if (error) {
-    dispatch(modalActions.showModal('Неправильний логін або пароль'))
-  }
+  if (error) dispatch(modalActions.showModal('Неправильний логін або пароль'))
   if (data) {
     const { loginUser } = data
     dispatch(userActions.setData(loginUser))
-    localStorage.setItem('userData', JSON.stringify({
-      ...loginUser
-    }))
+    localStorage.setItem('userData', JSON.stringify({ ...loginUser }))
     dispatch(modalActions.showModal('Ви успішно увійшли!'))
     return <Redirect to={ '/' } />
   }
@@ -51,4 +46,4 @@ const Login: React.FC = () => {
   </MainLayout>
 }
 
-export default withApollo(Login)
+export default Login

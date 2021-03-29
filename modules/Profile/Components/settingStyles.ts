@@ -66,9 +66,18 @@ export default StyleSheet.create({
       flexDirection: 'column'
     }
   },
+  sort: {
+    marginBottom: 20,
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
   socialHeaderMobile: {
     '@media (max-width: 980px)': {
       marginTop: 0
     }
+  },
+  btnClear: {
+    margin: '1.4rem 0 0.8rem',
+    fontSize: '0.8rem'
   }
 })

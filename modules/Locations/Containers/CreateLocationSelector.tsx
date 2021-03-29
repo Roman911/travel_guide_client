@@ -4,7 +4,7 @@ import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
 import { CREATE_LOCATION } from "../../../apollo/mutations"
-import { modalActions, googleMapsActions, uploadActions } from '../../../redux/actions'
+import { modalActions, uploadActions } from '../../../redux/actions'
 import { User } from "../../../typeScript/user"
 import { CreateLocation, WrapperLocationSelector } from '../Components'
 import { css } from "aphrodite/no-important"
@@ -14,9 +14,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons"
 
 type clsProps = {
   latLng: {
-    coordinateY: number,
-    coordinateX: number
+    lat: number,
+    lng: number
   } | null
+  setIsType: (isType) => void
 }
 
 type UploadFileType = {
@@ -26,7 +27,7 @@ type UploadFileType = {
   }
 }
 
-export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps): any => {
+export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }: clsProps): any => {
   const dispatch = useDispatch()
   const { data } = useSelector((state: { user: User }) => state.user)
   const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
@@ -69,13 +70,13 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng }: clsProps)
     const { values, setFieldValue } = useFormikContext()
     useEffect(() => {
       if (latLng) {
-        setFieldValue( 'coordinateY', String(latLng.coordinateY) )
-        setFieldValue( 'coordinateX', String(latLng.coordinateX) )
+        setFieldValue( 'coordinateY', String(latLng.lat) )
+        setFieldValue( 'coordinateX', String(latLng.lng) )
       }
     }, [latLng])
     useEffect(() => {
       // @ts-ignore
-      dispatch(googleMapsActions.changeIsType(values.isType))
+      setIsType(values.isType)
       // @ts-ignore
     }, [values.isType])
     return null

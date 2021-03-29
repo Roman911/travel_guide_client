@@ -1,19 +1,29 @@
 import React from "react"
 import { Marker } from '@react-google-maps/api'
+import { ChangeData, Location } from '../../../typeScript/googleMaps'
 
 type MarkerQueryProps = {
-  rest: any
+  rest: {
+    changeData: ChangeData
+    setSelectedPark?: (_id) => void
+    options?: {
+      _id?: string
+      isType: string
+      location: Location
+    }
+  }
 }
 
 const MarkerQuery: React.FC<MarkerQueryProps> = ({ rest }) => {
-  const { options: { position, isType, _id }, setSelectedPark } = rest
+  const { changeData, options, setSelectedPark } = rest
+  const { _id, isType, location } = options ? options : changeData
 
   return <Marker
-    position={ position }
-    icon={ isType && isType !== 'other' ? { url: `${process.env.STATIC_IMAGES}/${isType}.png` } : null }
-    onClick={_id ? () => {
+    position={ location }
+    icon={ isType && isType !== 'other' ? { url: `/static/images/${isType}.png` } : null }
+    onClick={ _id ? () => {
       setSelectedPark(_id )
-    } : null}
+    } : null }
   />
 }
 

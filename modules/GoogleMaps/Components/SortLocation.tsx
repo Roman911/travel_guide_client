@@ -1,45 +1,37 @@
 import React, { useState } from "react"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
+import { faFilter } from "@fortawesome/free-solid-svg-icons"
 import baseStyles from '../../../styles'
 import styles from './stylesSortLocations'
 import { SortLocationInput } from "./SortLocationInput"
 import { locationsType } from '../../../config/locations'
 
 type SortLocationProps = {
-  handleClick: (isType: any, select: any) => void
-  selectLocations: any
+  locationsChange: Types[]
+  setLocationsChange: any
 }
 
-export const SortLocation: React.FC<SortLocationProps> = ({ handleClick, selectLocations }): any => {
-  const [ showBar, setShowBar ] = useState( false )
-  const [ animationBar, setAnimationBar ] = useState( false )
+type Types = {
+  type: string
+  select: boolean
+}
 
-  const handleClickTitle = () => {
-    if (!showBar) {
-      setShowBar(prev => !prev)
-    } else {
-      setAnimationBar( prev => !prev )
-      setTimeout(() => {
-        setAnimationBar( prev => !prev )
-        setShowBar(prev => !prev)
-      }, 300)
-    }
-  }
+export const SortLocation: React.FC<SortLocationProps> = ({ locationsChange, setLocationsChange }): any => {
+  const [ showBar, setShowBar ] = useState( false )
+  const handleClickTitle = () => setShowBar(prev => !prev)
 
   return <div className={ css(styles.wrapper) }>
-    <div onClick={ () => handleClickTitle() } className={ css(baseStyles.flexSB, styles.title, styles.content) }>
-      <p>Відсортувати</p>
-      <FontAwesomeIcon className={ css(styles.titleIcon, showBar && styles.titleIconRotate) } icon={ faAngleDown } />
+    <div onClick={ () => handleClickTitle() } className={ css(baseStyles.flexSB, styles.content) }>
+      <FontAwesomeIcon className={ css(styles.titleIcon) } icon={ faFilter } />
     </div>
-    { showBar && <div className={ css(styles.content, styles.bar, animationBar && styles.closeBar) }>
-      { locationsType.map((item, index) => {
-        const filterSelect = selectLocations.leading !== 0 && selectLocations.filter(sel => {
-          return item.value === sel.isType
+    <div className={ css(styles.content, styles.bar, showBar && styles.activeBar) }>
+      { locationsType.map((item) => {
+        const filterSelect = locationsChange.filter(select => {
+          return item.value === select.type
         })
-        return <SortLocationInput filterSelect={ filterSelect } key={ index } value={ item.value } title={ item.title } handleClick={ handleClick } />
+        return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } setLocationsChange={ setLocationsChange } filterSelect={ filterSelect } locationsChange={ locationsChange } />
       }) }
-    </div> }
+    </div>
   </div>
 }

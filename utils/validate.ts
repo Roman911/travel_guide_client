@@ -1,5 +1,4 @@
-const validate = (props: any) => {
-  const { values, errors } = props
+const validate = ({ values, errors }: any) => {
   const rules = {
     name: (value: string) => {
       if (!value) {

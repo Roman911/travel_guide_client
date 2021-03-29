@@ -11,6 +11,7 @@ export type UserData = {
   rating: number
   aboutMy: string
   socials: Social
+  selectedLocations: SelectedLocations[]
 }
 
 type Social = {
@@ -18,4 +19,9 @@ type Social = {
   instagram: string,
   twitter: string,
   youtube: string
+}
+
+type SelectedLocations = {
+  type: string
+  select: boolean
 }

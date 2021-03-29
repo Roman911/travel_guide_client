@@ -3,19 +3,22 @@ import { btn } from '../../../variabels'
 
 export default StyleSheet.create({
   // NavBar
-  nav: {
-    background: '#fff',
-    width: '100%',
-    zIndex: 2,
+  headerWrapper: {
+    position: 'absolute',
+    zIndex: 10,
     top: 0,
-    display: 'flex',
+    width: '100%'
+  },
+  header: {
     position: 'relative',
+    background: '#fff',
+    display: 'flex',
     '@media (max-width: 960px)': {
       justifyContent: 'center'
     }
   },
   logo: {
-    zIndex: 6
+    zIndex: 10
   },
   wrapperInput: {
     borderLeft: '1px solid #333',

@@ -1,23 +1,31 @@
-import React, {useState} from "react"
+import React, { useState } from "react"
+import Link from "next/link"
 import { css } from "aphrodite/no-important"
 import baseStyle from "../../../styles"
 import styles from "./styles"
 import { Avatar, ButtonLink, Date, UserName } from "../../../Components"
 import { CommentsMap, CreateComments } from "../Containers"
-
 import { Comments } from '../../../typeScript/comments'
 
-export const Comment: React.FC<Comments> = ({ _id, author, createdAt, content, answers, postId, commentsId }: Comments): any => {
+export const Comment: React.FC<Comments> = ({ _id, author, createdAt, content, answers, postId, commentsId, userId }: Comments): any => {
   const [ showCreateComment, setShowCreateComment ] = useState(false)
-  const handleClick = () => {
-    setShowCreateComment(!showCreateComment)
-  }
+  const link = userId && userId === author._id ? [`/profile`, `/profile`] : [`/profile/[id]`, `/profile/${ author._id }`]
+  const [ href, as ] = link
+  const handleClick = () => setShowCreateComment(!showCreateComment)
 
   return <section className={ css(baseStyle.flexVFS) }>
-    <Avatar avatar={ author.avatar } name={ author.name } size='S' />
+    <Link href={ href } as={ as } >
+      <a>
+        <Avatar avatar={ author.avatar } name={ author.name } size='S' />
+      </a>
+    </Link>
     <div className={ css(styles.blockUser) }>
       <div className={ css(baseStyle.flexSB) }>
-        <UserName name={ author.name } />
+        <Link href={ href } as={ as } >
+          <a className={ css(baseStyle.a) }>
+            <UserName name={ author.name } />
+          </a>
+        </Link>
         <Date date={ createdAt } format={ 'LL' } />
       </div>
       <div className={ css(styles.blockText) }>
@@ -25,9 +33,7 @@ export const Comment: React.FC<Comments> = ({ _id, author, createdAt, content, a
       </div>
       <ButtonLink handleClick={ handleClick } nameBtn='відповісти' />
       { showCreateComment && <CreateComments _id={ _id } isFirstComment={ false } handleClick={ handleClick } postId={ postId } commentsId={ commentsId } /> }
-      {
-        answers && answers.length > 0 && <CommentsMap comments={ answers } postId={ postId } commentsId={ _id } />
-      }
+      { answers && answers.length > 0 && <CommentsMap comments={ answers } postId={ postId } commentsId={ _id } /> }
     </div>
   </section>
 }

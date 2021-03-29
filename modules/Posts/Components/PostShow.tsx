@@ -21,19 +21,16 @@ type CommentsProps = {
   postId: string
 }
 
-const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, {
-  loading: () => <LoadingSpin />
-})
+const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, { loading: () => <LoadingSpin /> })
 
 export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
   const { data } = user
+  const userId = data ? data._id : undefined
   const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link } = post
   const [ inView, setInView ] = useState(false)
   const widthTransform = width > 1070
-  const handleChange = (e) => {
-    if (e) {
-      setInView(e)
-    }
+  const handleChange = e => {
+    if (e) setInView(e)
   }
 
   return <div className={ css(styles.postWrapper)}>
@@ -51,7 +48,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
           <Image src={ cover } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={1030} height={500} />
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
           { link && <Source link={ link } /> }
-          <Author isArticle={ true } author={ author } />
+          <Author isArticle={ true } author={ author } userId={ userId } />
           <div className={ css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom) }>
             <ArticleStats isArticle={ true } views={ views } />
             <Likes id={ _id } likes={ likes } post={ true } />

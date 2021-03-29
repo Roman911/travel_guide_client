@@ -19,6 +19,6 @@ const Actions = {
       type: 'HIDE_SIDEBAR'
     }
   }
-};
+}
 
 export default Actions

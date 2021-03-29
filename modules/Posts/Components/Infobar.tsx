@@ -22,22 +22,17 @@ type MyInfoBarProps = {
 export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location }): any => {
   const { _id, address, coordinates: [ lat, lng ], isType } = location
   const position = { lat: Number(lat), lng: Number(lng) }
-  const locationOptions = { position, isType }
-  const changeData = {
-    disableDefaultUI: true,
-    mapContainerStyle: { height: "200px", width: "100%" },
-    zoom: 11,
-    center: position
-  }
-
+  const mapContainerStyle={ height: "200px", width: "100%" }
   const viewTickets = tickets.length !== 0 && <div className={ css(styles.content) }>
     <div className={ css(baseStyles.flex, styles.block) }>
       <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faTicketAlt } />
       <p className={ css(styles.title) }>Вхідний Квиток</p>
     </div>
-    {tickets.map((item, index) => {
-      return <p key={ index } className={ css(styles.text, styles.tickets) }>{ item }</p>
-    })}
+    {
+      tickets.map((item, index) => {
+        return <p key={ index } className={ css(styles.text, styles.tickets) }>{ item }</p>
+      })
+    }
   </div>
 
   return <section className={ css( baseStyles.rightBlock) }>
@@ -46,7 +41,7 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location
       query: { _id, lat, lng, isType }
     }} >
       <a>
-        <GoogleMaps search={ false } changeData={ changeData } location={ locationOptions } />
+        <GoogleMaps search={ false } mapContainerStyle={ mapContainerStyle } zoom={ 11 } center={ position } location={ position } isType={ isType } />
       </a>
     </Link>
     <div className={ css(styles.content) }>

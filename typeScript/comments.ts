@@ -1,6 +1,7 @@
 export type Comments = {
   _id?: string | undefined
   author: {
+    _id: string
     avatar: string
     name: string
   }
@@ -8,8 +9,10 @@ export type Comments = {
   postId?: string
   createdAt: string
   content: string
+  userId?: string
   answers?: [{
     author: {
+      _id: string
       avatar: string
       name: string
     }

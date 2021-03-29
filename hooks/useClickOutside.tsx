@@ -9,7 +9,9 @@ export const useClickOutside: (className: string, action: () => void) => void = 
   }
 
   useEffect(() => {
-    window.addEventListener('click', handleClick)
-    return () => window.removeEventListener('click', handleClick)
+    if (className) {
+      window.addEventListener('click', handleClick)
+      return () => window.removeEventListener('click', handleClick)
+    }
   }, [className])
 }

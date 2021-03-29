@@ -14,9 +14,7 @@ type PostShowProps = {
 export const Post: React.FC<PostShowProps> =  ({ _id }): any => {
   const { width } = useWindowDimensions()
   const user = useSelector((state: { user: User }) => state.user)
-  const { loading, error, data } = useQuery(POST, {
-    variables: { _id }
-  })
+  const { loading, error, data } = useQuery(POST, { variables: { _id } })
   if (loading) return <LoadingPost isPost={ true } />
   if (error) return `Error! ${error}`
   const { post } = data

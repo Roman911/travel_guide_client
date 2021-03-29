@@ -4,7 +4,7 @@ import { GoogleMap } from '@react-google-maps/api'
 import { MarkersController } from "./MarkersController"
 import { LocationInformation } from "../Containers"
 import { LoadingSpin } from '../../../Components'
-import { ChangeData, OptionsLocation } from '../../../typeScript/googleMaps'
+import { ChangeData, Location } from '../../../typeScript/googleMaps'
 
 type SearchProps = {
   panTo: any
@@ -12,19 +12,20 @@ type SearchProps = {
 
 type MapsProps = {
   changeData: ChangeData
-  optionsLocation: OptionsLocation
   selectedPark: null | string
   setSelectedPark: (_id: string | null) => void
+  click?: (event) => void
+  options?: {
+    _id?: string
+    isType: string
+    location: Location
+  }
 }
 
-const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, {
-  loading: () => <LoadingSpin />
-})
+const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
-export const Maps: React.FC<MapsProps> = ({ changeData, optionsLocation, selectedPark, setSelectedPark }) => {
-  const { disableDefaultUI, mapContainerStyle, center, zoom } = changeData
-  const { control, location } = optionsLocation
-
+export const Maps: React.FC<MapsProps> = ({ changeData, selectedPark, setSelectedPark, click, options }) => {
+  const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = changeData
   const mapRef = useRef(null)
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
@@ -34,8 +35,6 @@ export const Maps: React.FC<MapsProps> = ({ changeData, optionsLocation, selecte
     mapRef.current.setZoom(12)
   }, [])
 
-  const search = true
-
   return <div style={{ position: 'relative', width: '100%' }}>
     { search && <Search panTo={ panTo } /> }
     <GoogleMap
@@ -44,9 +43,10 @@ export const Maps: React.FC<MapsProps> = ({ changeData, optionsLocation, selecte
       center={ center }
       options={{ disableDefaultUI }}
       onLoad={ onMapLoad }
+      onClick={ click ? event => click(event) : null }
     >
       { selectedPark && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
-      <MarkersController control={ control } options={ location } setSelectedPark={ setSelectedPark } />
+      <MarkersController control={ control } changeData={ changeData } setSelectedPark={ setSelectedPark } options={ options } />
     </GoogleMap>
   </div>
 }

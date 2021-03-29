@@ -12,9 +12,7 @@ const CreatePosts: React.FC = () => {
   const _id = router.query.location
 
   useEffect(() => {
-    if (_id) {
-      getLocation({ variables: { _id } })
-    }
+    if (_id) getLocation({ variables: { _id } })
   }, [_id])
 
   const { data } = useSelector((state: { user: User }) => state.user)

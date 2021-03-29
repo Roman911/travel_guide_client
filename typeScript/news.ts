@@ -8,6 +8,7 @@ export type Item = {
   comments: number
   likes: []
   author: {
+    _id: string
     avatar: string
     name: string
   }

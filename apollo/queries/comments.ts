@@ -7,6 +7,7 @@ export const COMMENTS = gql`
       content
       createdAt
       author {
+        _id
         name
         avatar
       }

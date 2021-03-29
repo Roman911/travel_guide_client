@@ -7,12 +7,22 @@ export default StyleSheet.create({
     position: 'absolute',
     zIndex: 1,
     top: 60,
-    right: 10,
+    right: 62,
     width: 400,
+    overflow: 'hidden',
     '@media (max-width: 920px)': {
       top: 10,
       width: 308
     }
+  },
+  label: {
+    position: 'absolute',
+    top: '50%',
+    right: 1,
+    transform: 'translateY(-50%)',
+    lineHeight: 0,
+    padding: 10,
+    background: '#fff'
   },
   form: {
     display: 'flex',
@@ -21,8 +31,17 @@ export default StyleSheet.create({
   },
   input: {
     padding: 10,
-    fontSize: '1.4rem',
-    border: `1px solid ${ borders.borderInput }`
+    fontSize: '1.2rem',
+    border: `1px solid ${ borders.borderInput }`,
+    transition: '300ms',
+    '@media (max-width: 770px)': {
+      transform: 'translateX(100%)'
+    }
+  },
+  inputActive: {
+    '@media (max-width: 770px)': {
+      transform: 'translateX(0)'
+    }
   },
   select: {
     overflow: 'hidden',

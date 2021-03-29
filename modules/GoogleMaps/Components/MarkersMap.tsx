@@ -1,16 +1,18 @@
 import React from "react"
 import { Marker } from '@react-google-maps/api'
-import { Locations } from '../../../typeScript/locations'
+import { ChangeData } from "../../../typeScript/googleMaps"
 
 type MarkersMapProps = {
   rest: {
-    options: Locations
+    changeData: ChangeData
     setSelectedPark: (_id) => void
   }
 }
 
-const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { options, setSelectedPark } }): any => {
-  return options.map((park) => {
+const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { changeData, setSelectedPark } }): any => {
+  const { locations } = changeData
+
+  return locations.map((park) => {
     const { _id, isType, coordinates } = park
     const [ lat, lng ] = coordinates
     return <Marker
@@ -20,7 +22,7 @@ const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { options, setSelectedPar
       }}
       position={{lat: Number(lat), lng: Number(lng)}}
       icon={{
-        url: `${process.env.STATIC_IMAGES}/${isType}.png`
+        url: `/static/images/${isType}.png`
       }}
     />
   })

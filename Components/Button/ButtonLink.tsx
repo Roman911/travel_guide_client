@@ -8,10 +8,11 @@ type MyButtonLinkProps = {
   nameBtn: string
   handleClick?: () => void
   icon?: IconProp
+  style?: any
 }
 
-export const ButtonLink: React.FC<MyButtonLinkProps> = ({ handleClick, nameBtn, icon }) => {
-  return <span onClick={ () => handleClick && handleClick() } className={ css(styles.btnLink) }>
+export const ButtonLink: React.FC<MyButtonLinkProps> = ({ handleClick, nameBtn, icon, style }) => {
+  return <span onClick={ () => handleClick && handleClick() } className={ css(styles.btnLink, style) }>
     { icon && <FontAwesomeIcon className={ css(styles.icon) } icon={ icon } /> }
     { nameBtn }
   </span>

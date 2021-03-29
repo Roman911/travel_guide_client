@@ -13,11 +13,12 @@ import { Item } from '../../typeScript/news'
 type NewProps = {
   item: Item
   width: number
+  userData: any
 }
 
-export const News: React.FC<NewProps> = ({ item, width }): any => {
+export const News: React.FC<NewProps> = ({ item, width, userData }): any => {
+  const userId = userData ? userData._id : undefined
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
-
   const imgSize = width >= 690 ? { width: 336, height: 190 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }
 
   return <div className={ css(styles.wrapper) }>
@@ -28,7 +29,7 @@ export const News: React.FC<NewProps> = ({ item, width }): any => {
         </a>
       </Link>
       <div className={ css(styles.block, styles.blockMobile) }>
-        <Author isArticle={ false } author={ author } date={ createdAt } />
+        <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />
         <Link href={`/post/[id]`} as={`/post/${ _id }`} >
           <div className={ css(baseStyles.block, baseStyles.blockText) }>
             <h3 className={ css(styles.title) }>{ title }</h3>

@@ -16,6 +16,7 @@ export type PostData = {
   link: string
   rating: number
   author: {
+    _id: string
     avatar: string
     name: string
   }

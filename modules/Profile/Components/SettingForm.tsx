@@ -1,14 +1,19 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
 import { css } from 'aphrodite/no-important'
-import { Button, FormikControl } from "../../../Components"
+import {Button, ButtonLink, FormikControl} from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './settingStyles'
 import { UserData } from '../../../typeScript/user'
+import {locationsType} from "../../../config/locations";
+import {SortLocationInput} from "../../GoogleMaps/Components";
 
 type SettingFormProps = {
   user: UserData
   formik: any
+  setLocationsChange: any
+  locationsChange: any
+  handleClick: () => void
 }
 
 const social = [
@@ -18,7 +23,7 @@ const social = [
   'youtube'
 ]
 
-export const SettingForm: React.FC<SettingFormProps> = ({ formik, user }): any => {
+export const SettingForm: React.FC<SettingFormProps> = ({ formik, user, locationsChange, setLocationsChange, handleClick }): any => {
   const { socials } = user
 
   useEffect(() => {
@@ -34,6 +39,18 @@ export const SettingForm: React.FC<SettingFormProps> = ({ formik, user }): any =
       <div className={ css(styles.center) }>
         <FormikControl control='input' id='name' label="Ім'я:" />
         <FormikControl control='input' id='aboutMy' label='Про себе:' />
+        <div className={ css(baseStyles.flexSB) }>
+          <h5>Локації які вас цікавлять</h5>
+          <ButtonLink nameBtn='Очистити' style={ styles.btnClear } handleClick={ handleClick } />
+        </div>
+        <div className={ css(styles.sort) }>
+          { locationsType.map((item) => {
+            const filterSelect = locationsChange.filter(select => {
+              return item.value === select.type
+            })
+            return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } locationsChange={ locationsChange } setLocationsChange={ setLocationsChange } filterSelect={ filterSelect } />
+          }) }
+        </div>
       </div>
       <div className={ css(styles.socials) }>
         <h5 className={ css(styles.socialHeaderMobile) }>Посилання на соц. мережі:</h5>

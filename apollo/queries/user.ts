@@ -14,6 +14,21 @@ export const USER = gql`
         twitter
         youtube
       }
+      selectedLocations {
+        type
+        select
+      }
+    }
+  }
+`
+
+export const USER_DATA_FOR_MAPS = gql`
+  query user($_id: ID!) {
+    user(_id: $_id) {
+      selectedLocations {
+        type
+        select
+      }
     }
   }
 `

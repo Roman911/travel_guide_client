@@ -11,6 +11,7 @@ export const ALL_POSTS = gql`
       comments
       small_text
       author {
+        _id
         name
         avatar
       }
@@ -46,6 +47,7 @@ export const POST = gql`
       small_text
       cover
       author {
+        _id
         name
         avatar
         rating

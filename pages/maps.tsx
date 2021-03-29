@@ -1,31 +1,53 @@
-import React from "react"
-import { useQuery } from '@apollo/react-hooks'
-import { getDataFromTree } from "@apollo/react-ssr"
-import { ALL_LOCATIONS } from '../apollo/queries'
+import React, { useEffect, useState } from "react"
+import { useQuery, useLazyQuery } from '@apollo/react-hooks'
+import { useSelector } from 'react-redux'
+import { ALL_LOCATIONS, USER_DATA_FOR_MAPS } from '../apollo/queries'
 import { LoadingSpin, MainLayout } from "../Components"
-import withApollo from "../lib/withApollo"
 import { GoogleMaps, SortLocations } from "../modules"
+import { User } from "../typeScript/user"
 
 const Map: React.FC = (): any => {
-  const { loading, error, data } = useQuery( ALL_LOCATIONS )
-  if (loading) return <LoadingSpin />
-  if (error) return `Error! ${error}`
-  const { allLocations } = data
+  const [ locations, setLocations ] = useState(undefined)
+  const [ locationsChange, setLocationsChange ] = useState([])
+  const { data: userData } = useSelector((state: { user: User }) => state.user)
+  const _id = userData ? userData._id : undefined
+  const [ setUserData, { data: userSelectedLocations } ] = useLazyQuery(USER_DATA_FOR_MAPS, { variables: { _id } })
+  const { loading, error, data } = useQuery(ALL_LOCATIONS)
 
-  const changeData = {
-    disableDefaultUI: false,
-    mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" },
-    center: { lat: 49.026151, lng: 31.483070 },
-    zoom: 6
-  }
+  useEffect(() => {
+    if (data) setLocations(allLocations)
+  }, [ data ])
+
+  useEffect(() => {
+    if (_id) setUserData()
+  }, [userData])
+
+  useEffect(() => {
+    if (userSelectedLocations) setLocationsChange(userSelectedLocations.user.selectedLocations)
+  }, [userSelectedLocations])
+
+  useEffect(() => {
+    if (locationsChange.length !== 0) {
+      if (locationsChange.filter(item => item.select).length === 0) {
+        const locationsSelectedFilter = locationsChange.filter(i => !i.select).map(i => i.type)
+        setLocations(locations.filter(item => !locationsSelectedFilter.includes(item.isType)))
+      } else {
+        const locationsSelectedFilter = locationsChange.filter(i => i.select).map(i => i.type)
+        setLocations(allLocations.filter(item => locationsSelectedFilter.includes(item.isType)))
+      }
+    } else setLocations(allLocations)
+  }, [locationsChange])
+
+  if (loading) return <LoadingSpin />
+  if (error) return error
+  const { allLocations } = data
 
   return <MainLayout title='Maps' header='Карти' >
     <div style={{ position: 'relative' }}>
-      <GoogleMaps search={ true } changeData={ changeData } locations={ allLocations } />
-      {/*<GoogleMaps disableDefaultUI={ false } search={ true } width='100%' changeData={ changeData } />*/}
-      <SortLocations />
+      <GoogleMaps disableDefaultUI={ false } zoom={ 6 } locations={ locations } />
+      <SortLocations locationsChange={ locationsChange } setLocationsChange={ setLocationsChange } />
     </div>
   </MainLayout>
 }
 
-export default withApollo(Map, { getDataFromTree })
+export default Map

@@ -30,12 +30,8 @@ type MainLayoutProps = {
   header?: string
 }
 
-const InformWindow = dynamic<InformWindowProps>(() => import('../InformWindow/InformWindow') as any, {
-  loading: () => <LoadingSpin />
-})
-const ProfileSidebar =dynamic<ProfileSidebarProps>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, {
-  loading: () => <LoadingSpin />
-})
+const InformWindow = dynamic<InformWindowProps>(() => import('../InformWindow/InformWindow') as any, { loading: () => <LoadingSpin /> })
+const ProfileSidebar =dynamic<ProfileSidebarProps>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, { loading: () => <LoadingSpin /> })
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authorization, header }) => {
   const dispatch = useDispatch()
@@ -44,9 +40,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
   const { text, timeout } = useSelector((state: { modal: Modal }) => state.modal)
   UseAuth()
   useDocumentOverflowHidden(showSidebar)
-  const handleClick = () => {
-    dispatch(modalActions.handleClick())
-  }
+  const handleClick = () => dispatch(modalActions.handleClick())
 
   return <>
     <Head>
@@ -56,7 +50,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
       </title>
     </Head>
     <UseRoutes authorization={ authorization } data={ data } />
-    <main className={ css(baseStyles.wrapper, authorization && baseStyles.wrapperLogin) }>
+    <main className={ css(baseStyles.wrapper, baseStyles.mt, authorization && baseStyles.wrapperLogin) }>
       { header && <SectionTitle title={ header } /> }
       { children }
     </main>
