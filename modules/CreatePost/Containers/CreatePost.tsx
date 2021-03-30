@@ -1,6 +1,6 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { useDispatch } from 'react-redux'
-import { Form, Formik } from "formik"
+import {Form, Formik, useFormikContext} from "formik"
 import { useMutation } from "@apollo/react-hooks"
 import * as Yup from "yup"
 import { CreatePostForm, WrapperCreatePost } from '../Components'
@@ -20,15 +20,16 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
   const initialValues = {
     editor: '',
     type_material: 'post',
-    title:  location ? location.title : '',
+    title: '',
     tickets: ['Дорослий: 50грн', 'Дитячий: 50грн', 'Студенський: 50грн', 'Пенсійний: 50грн'],
     link: '',
     tag: '',
-    small_text: location ? location.small_text : '',
+    small_text: '',
     work_time: '',
     isPrice: '',
     how_to_get_there: ''
   }
+
   const validationSchema = Yup.object({
     title: Yup.string()
       .min(5, 'Коротка назва')
@@ -67,11 +68,24 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
       onSubmitProps.setSubmitting(false)
     })
   }
+
+  const AutoRef = () => {
+    const { setFieldValue } = useFormikContext()
+    useEffect(() => {
+      if (location) {
+        setFieldValue('title', location.title)
+        setFieldValue('small_text', location.small_text)
+      }
+    }, [location])
+    return null
+  }
+
   return <WrapperCreatePost>
     <Formik initialValues={ initialValues } onSubmit={ onSubmit } validationSchema={ validationSchema } >
       {formik => {
         return <Form >
           <CreatePostForm formik={ formik } location={ location } />
+          <AutoRef />
         </Form>
       }}
     </Formik>
