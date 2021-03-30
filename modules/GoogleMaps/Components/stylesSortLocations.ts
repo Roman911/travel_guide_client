@@ -1,6 +1,13 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { background, borders, text, socSet, shadows } from '../../../variabels'
 
+const element = {
+  opacity: 0,
+  '@media (max-width: 770px)':{
+    opacity: 1
+  }
+}
+
 export default StyleSheet.create({
   wrapper: {
     position: 'absolute',
@@ -45,15 +52,15 @@ export default StyleSheet.create({
     }
   },
   elementLeft: {
-    borderRadius: '4px 0 0 4px',
-    opacity: 0
+    ...element,
+    borderRadius: '4px 0 0 4px'
   },
   elementCenter: {
     width: '100%'
   },
   elementRight: {
-    borderRadius: '0 4px 4px 0',
-    opacity: 0
+    ...element,
+    borderRadius: '0 4px 4px 0'
   },
   elementShow: {
     opacity: 1

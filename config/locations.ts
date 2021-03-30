@@ -22,5 +22,13 @@ export const locationsType = [
   {
     value: 'viaduct',
     title: 'Мости та віадуки'
+  },
+  {
+    value: 'park',
+    title: 'Парки'
+  },
+  {
+    value: 'camping',
+    title: 'Кемпінги'
   }
 ]
