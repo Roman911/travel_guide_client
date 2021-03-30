@@ -26,7 +26,7 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
     tag: '',
     small_text: '',
     work_time: '',
-    isPrice: '',
+    isPrice: false,
     how_to_get_there: ''
   }
 

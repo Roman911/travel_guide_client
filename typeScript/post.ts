@@ -15,6 +15,7 @@ export type PostData = {
   tags: [string]
   link: string
   rating: number
+  isPrice: boolean
   author: {
     _id: string
     avatar: string

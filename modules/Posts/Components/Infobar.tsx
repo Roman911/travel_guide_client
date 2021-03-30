@@ -11,6 +11,7 @@ import styles from './infoBarStyles'
 type MyInfoBarProps = {
   tickets: string[]
   work_time: string
+  isPrice: boolean
   location: {
     _id: string
     address: string[]
@@ -19,20 +20,16 @@ type MyInfoBarProps = {
   }
 }
 
-export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location }): any => {
+export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location, isPrice }): any => {
   const { _id, address, coordinates: [ lat, lng ], isType } = location
   const position = { lat: Number(lat), lng: Number(lng) }
   const mapContainerStyle={ height: "200px", width: "100%" }
-  const viewTickets = tickets.length !== 0 && <div className={ css(styles.content) }>
+  const viewTickets = <div className={ css(styles.content) }>
     <div className={ css(baseStyles.flex, styles.block) }>
       <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faTicketAlt } />
-      <p className={ css(styles.title) }>Вхідний Квиток</p>
+      <p className={ css(styles.title) }>{ isPrice ? 'Вхід вільний' : "Вхідний Квиток" }</p>
     </div>
-    {
-      tickets.map((item, index) => {
-        return <p key={ index } className={ css(styles.text, styles.tickets) }>{ item }</p>
-      })
-    }
+    { isPrice || tickets.map((item, index) => <p key={ index } className={ css(styles.text, styles.tickets) }>{ item }</p>) }
   </div>
 
   return <section className={ css( baseStyles.rightBlock) }>

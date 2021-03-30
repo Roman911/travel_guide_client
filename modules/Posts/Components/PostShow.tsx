@@ -26,7 +26,7 @@ const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/
 export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
   const { data } = user
   const userId = data ? data._id : undefined
-  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link } = post
+  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link, isPrice } = post
   const [ inView, setInView ] = useState(false)
   const widthTransform = width > 1070
   const handleChange = e => {
@@ -60,7 +60,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <InfoBar tickets={ tickets } work_time={ work_time } location={ location } />
+          <InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />
           { data && <InformUserLocation locationId={ location._id } user={ user } /> }
           <PopularsPosts />
         </RightBlock>

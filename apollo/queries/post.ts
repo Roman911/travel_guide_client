@@ -46,6 +46,7 @@ export const POST = gql`
       link
       small_text
       cover
+      isPrice
       author {
         _id
         name
