@@ -30,5 +30,9 @@ export const locationsType = [
   {
     value: 'camping',
     title: 'Кемпінги'
+  },
+  {
+    value: 'temple',
+    title: 'Храми'
   }
 ]
