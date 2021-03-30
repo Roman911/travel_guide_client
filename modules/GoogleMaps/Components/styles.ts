@@ -23,7 +23,6 @@ export default StyleSheet.create({
   },
   block: {
     width: '100%',
-    padding: '10px 20px',
     background: btn
   },
   blockImg: {
@@ -47,7 +46,8 @@ export default StyleSheet.create({
     color: '#fff',
     height: '20px',
     width: 'auto !important',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    marginLeft: 20
   },
   text: {
     fontSize: '0.9rem',

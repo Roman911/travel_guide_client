@@ -22,18 +22,17 @@ type MyInformationProps = {
 export const Information: React.FC<MyInformationProps> = ({ location, selectedPark, handleClick, closeWindow, openWindow, setOpenWindow, setClassName }) => {
   const { cover, small_text, title, post } = location
   const _id = post ? post._id : undefined
+  const className = css(styles.wrapper, openWindow && closeWindow && styles.open)
 
   useEffect(() => {
     setOpenWindow(true)
   }, [selectedPark])
 
-  const wrapper = css(styles.wrapper, openWindow && closeWindow && styles.open)
-
   useEffect(() => {
-    setClassName(wrapper)
-  }, [])
+    setClassName(className)
+  }, [className])
 
-  return <div className={ css(styles.wrapper, openWindow && closeWindow && styles.open) }>
+  return <div className={ className }>
     <div className={ css(styles.blockImg) }>
       <div className={ css(styles.imgWrapper) }>
         <Image src={ cover.url } className={ css(styles.cover) } layout='fill' alt={ title } />

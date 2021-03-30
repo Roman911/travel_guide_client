@@ -2,6 +2,12 @@ import { StyleSheet } from 'aphrodite/no-important'
 
 import { background, btn, icons } from '../../../variabels'
 
+const hover = {
+  transition: '0.1s',
+  ':hover': {
+    color: btn
+  }
+}
 const openModal = {
   'from': {
     transform: 'scaleX(0)',
@@ -25,17 +31,15 @@ const closeModal = {
 
 export default StyleSheet.create({
   block: {
-    position: 'relative'
+    position: 'relative',
+    padding: '10px 20px',
+    cursor: 'pointer'
   },
   iconSetting: {
-    cursor: 'pointer',
-    transition: '0.1s',
-    ':hover': {
-      color: btn
-    }
+    ...hover,
+    cursor: 'pointer'
   },
   iconSettingMapInf: {
-    cursor: 'pointer',
     color: '#fff',
     transition: '0.1s',
     ':hover': {
@@ -66,10 +70,7 @@ export default StyleSheet.create({
     width: 'auto !important',
     height: 22,
     color: icons,
-    transition: '0.1s',
-    ':hover': {
-      color: btn
-    }
+    ...hover
   },
   ul: {
     display: 'flex',
@@ -80,12 +81,8 @@ export default StyleSheet.create({
     padding: 0,
     lineHeight: 1.8,
     color: '#fff',
-    transition: '0.15s',
     cursor: 'pointer',
-    fontSize: '1.1rem',
-    ':hover': {
-      color: btn
-    }
+    ...hover
   },
   a: {
     color: '#fff',
