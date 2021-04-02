@@ -31,8 +31,6 @@ next-env.d.ts
 .graphqlconfig
 schema.graphql
 
-tsconfig.json
-package.json
 package-lock.json
 
 .env.development.local
