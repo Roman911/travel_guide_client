@@ -16,7 +16,8 @@ export default StyleSheet.create({
     background: '#fff',
     height: '100%',
     transform: 'translateX(-350px)',
-    transition: '500ms'
+    transition: '500ms',
+    overflowY: 'auto'
   },
   open: {
     transform: 'translateX(0)'
