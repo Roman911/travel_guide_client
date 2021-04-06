@@ -54,7 +54,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
       { header && <SectionTitle title={ header } /> }
       { children }
     </main>
-    <Footer />
+    { !authorization && <Footer /> }
     { text && <InformWindow id='modal' children={ text } closedModal={ timeout } handleClick={ handleClick } /> }
     { showSidebar && <ProfileSidebar data={ data } /> }
   </>
