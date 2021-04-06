@@ -1,6 +1,7 @@
 export { ArticleStats } from './ArticleStats'
 export { Button, ButtonLink } from './Button'
 export { Date } from './Date'
+export { Footer } from './Footer'
 export { FormikControl } from './Formik'
 export { AuthForm, HeaderForm } from './Forms'
 export { LoadingPost, LoadingSpin } from './Loading'

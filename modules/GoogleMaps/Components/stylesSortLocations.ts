@@ -70,5 +70,8 @@ export default StyleSheet.create({
   },
   sortInputRemove: {
     color: text.hover
+  },
+  btn: {
+    textAlign: 'end'
   }
 })

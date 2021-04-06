@@ -38,6 +38,11 @@ const Map: React.FC = (): any => {
     } else setLocations(allLocations)
   }, [locationsChange])
 
+  const resetLocations = () => {
+    setLocations(allLocations)
+    setLocationsChange([])
+  }
+
   if (loading) return <LoadingSpin />
   if (error) return error
   const { allLocations } = data
@@ -45,7 +50,7 @@ const Map: React.FC = (): any => {
   return <MainLayout title='Maps' header='Карти' >
     <div style={{ position: 'relative' }}>
       <GoogleMaps disableDefaultUI={ false } zoom={ 6 } locations={ locations } />
-      <SortLocations locationsChange={ locationsChange } setLocationsChange={ setLocationsChange } />
+      <SortLocations locationsChange={ locationsChange } setLocationsChange={ setLocationsChange } resetLocations={ resetLocations } />
     </div>
   </MainLayout>
 }

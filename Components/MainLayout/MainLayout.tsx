@@ -3,7 +3,7 @@ import Head from "next/head"
 import dynamic from "next/dynamic"
 import { useSelector, useDispatch } from 'react-redux'
 import { css } from "aphrodite/no-important"
-import { SectionTitle, LoadingSpin } from ".."
+import { SectionTitle, LoadingSpin, Footer } from ".."
 import { modalActions } from '../../redux/actions'
 import { Modal } from "../../typeScript/modal"
 import { User, UserData } from "../../typeScript/user"
@@ -31,7 +31,7 @@ type MainLayoutProps = {
 }
 
 const InformWindow = dynamic<InformWindowProps>(() => import('../InformWindow/InformWindow') as any, { loading: () => <LoadingSpin /> })
-const ProfileSidebar =dynamic<ProfileSidebarProps>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, { loading: () => <LoadingSpin /> })
+const ProfileSidebar = dynamic<ProfileSidebarProps>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, { loading: () => <LoadingSpin /> })
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authorization, header }) => {
   const dispatch = useDispatch()
@@ -54,6 +54,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
       { header && <SectionTitle title={ header } /> }
       { children }
     </main>
+    <Footer />
     { text && <InformWindow id='modal' children={ text } closedModal={ timeout } handleClick={ handleClick } /> }
     { showSidebar && <ProfileSidebar data={ data } /> }
   </>

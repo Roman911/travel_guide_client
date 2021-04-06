@@ -8,6 +8,10 @@ export const locationsType = [
     title: 'Замки'
   },
   {
+    value: 'palace',
+    title: 'Палаці'
+  },
+  {
     value: 'museum',
     title: 'Музеї'
   },
