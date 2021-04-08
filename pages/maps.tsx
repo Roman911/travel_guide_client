@@ -13,7 +13,6 @@ const Map: React.FC = (): any => {
   const _id = userData ? userData._id : undefined
   const [ setUserData, { data: userSelectedLocations } ] = useLazyQuery(USER_DATA_FOR_MAPS, { variables: { _id } })
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
-
   const options = {
     mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" },
     disableDefaultUI: false,
