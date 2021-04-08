@@ -31,6 +31,7 @@ export const Post: React.FC<PostShowProps> =  ({ _id }): any => {
   const position = { lat: Number(lat), lng: Number(lng) }
   const options = {
     disableDefaultUI: true,
+    search: false,
     mapContainerStyle: { height: "200px", width: "100%" },
     zoom: 10,
     location: position,
