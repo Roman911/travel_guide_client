@@ -16,7 +16,10 @@ const Map: React.FC = (): any => {
   const options = {
     mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" },
     disableDefaultUI: false,
-    search: true
+    zoom: 6,
+    search: true,
+    center: { lat: 49.026151, lng: 31.483070 },
+    control: 'MarkersMap'
   }
 
   useEffect(() => {
