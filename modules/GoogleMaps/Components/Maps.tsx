@@ -4,14 +4,14 @@ import { GoogleMap } from '@react-google-maps/api'
 import { MarkersController } from "./MarkersController"
 import { LocationInformation } from "../Containers"
 import { LoadingSpin } from '../../../Components'
-import { ChangeData, Location } from '../../../typeScript/googleMaps'
+import { Location } from '../../../typeScript/googleMaps'
 
 type SearchProps = {
   panTo: any
 }
 
 type MapsProps = {
-  changeData: ChangeData
+  locations: any
   selectedPark: null | string
   setSelectedPark: (_id: string | null) => void
   click?: (event) => void
@@ -24,8 +24,8 @@ type MapsProps = {
 
 const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
-export const Maps: React.FC<MapsProps> = ({ changeData, selectedPark, setSelectedPark, click, options }) => {
-  const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = changeData
+export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, click, options, locations }) => {
+  const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
   const mapRef = useRef(null)
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
@@ -46,7 +46,7 @@ export const Maps: React.FC<MapsProps> = ({ changeData, selectedPark, setSelecte
       onClick={ click ? event => click(event) : null }
     >
       { selectedPark && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
-      <MarkersController control={ control } changeData={ changeData } setSelectedPark={ setSelectedPark } options={ options } />
+      <MarkersController control={ control } setSelectedPark={ setSelectedPark } options={ options } locations={ locations } />
     </GoogleMap>
   </div>
 }

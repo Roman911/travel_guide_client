@@ -1,18 +1,17 @@
 import React from "react"
 import { Marker } from '@react-google-maps/api'
-import { ChangeData } from "../../../typeScript/googleMaps"
 
 type MarkersMapProps = {
   rest: {
-    changeData: ChangeData
+    locations: any
     setSelectedPark: (_id) => void
   }
 }
 
-const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { changeData, setSelectedPark } }): any => {
-  const { locations } = changeData
+const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { locations, setSelectedPark } }): any => {
+  const { locations: allLocations } = locations
 
-  return locations.map((park) => {
+  return allLocations.map((park) => {
     const { _id, isType, coordinates } = park
     const [ lat, lng ] = coordinates
     return <Marker

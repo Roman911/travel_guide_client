@@ -1,10 +1,10 @@
 import React from "react"
 import dynamic from "next/dynamic"
-import {ChangeData, Location} from "../../../typeScript/googleMaps"
+import { Location } from "../../../typeScript/googleMaps"
 
 type MarkersMapProps = {
   rest: {
-    changeData: ChangeData
+    locations: any
     setSelectedPark: (_id) => void
     options?: {
       _id?: string
@@ -15,8 +15,8 @@ type MarkersMapProps = {
 }
 
 type MarkerProps = {
+  locations: any
   control: string
-  changeData: any
   setSelectedPark: (_id) => void
   options?: {
     _id?: string

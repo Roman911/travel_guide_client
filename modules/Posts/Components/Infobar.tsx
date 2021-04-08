@@ -22,8 +22,6 @@ type MyInfoBarProps = {
 
 export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location, isPrice }): any => {
   const { _id, address, coordinates: [ lat, lng ], isType } = location
-  const position = { lat: Number(lat), lng: Number(lng) }
-  const mapContainerStyle={ height: "200px", width: "100%" }
   const viewTickets = <div className={ css(styles.content) }>
     <div className={ css(baseStyles.flex, styles.block) }>
       <FontAwesomeIcon className={ css(baseStyles.icon) } icon={ faTicketAlt } />
@@ -38,7 +36,7 @@ export const InfoBar: React.FC<MyInfoBarProps> = ({ tickets, work_time, location
       query: { _id, lat, lng, isType }
     }} >
       <a>
-        <GoogleMaps search={ false } mapContainerStyle={ mapContainerStyle } zoom={ 11 } center={ position } location={ position } isType={ isType } />
+        <GoogleMaps search={ false } />
       </a>
     </Link>
     <div className={ css(styles.content) }>

@@ -10,7 +10,6 @@ import { ButtonLink } from "../../../Components"
 
 type SortLocationProps = {
   locationsChange: Types[]
-  setLocationsChange: any
   showBar: boolean
   handleClickTitle: () => void
   handleClickReset: () => void
@@ -21,7 +20,7 @@ type Types = {
   select: boolean
 }
 
-export const SortLocation: React.FC<SortLocationProps> = ({ locationsChange, setLocationsChange, showBar, handleClickTitle, handleClickReset }): any => {
+export const SortLocation: React.FC<SortLocationProps> = ({ locationsChange, showBar, handleClickTitle, handleClickReset }): any => {
   return <div className={ css(styles.wrapper) }>
     <div onClick={ () => handleClickTitle() } className={ css(baseStyles.flexSB, styles.content) }>
       <FontAwesomeIcon className={ css(styles.titleIcon) } icon={ faFilter } />
@@ -31,7 +30,7 @@ export const SortLocation: React.FC<SortLocationProps> = ({ locationsChange, set
         const filterSelect = locationsChange.filter(select => {
           return item.value === select.type
         })
-        return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } setLocationsChange={ setLocationsChange } filterSelect={ filterSelect } locationsChange={ locationsChange } />
+        return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } filterSelect={ filterSelect } />
       }) }
       <div className={ css(styles.btn) }>
         <ButtonLink nameBtn='Показати всі' handleClick={ handleClickReset } />

@@ -1,9 +1,10 @@
-import React, {useEffect, useState} from "react"
-import { useSelector } from "react-redux"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Formik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
 import { SettingForm } from "../Components"
 import { UPDATE_USER } from '../../../apollo/mutations'
+import { locationsActions } from '../../../redux/actions'
 import { User, UserData } from '../../../typeScript/user'
 
 type ProfileSettingFormProps = {
@@ -11,10 +12,11 @@ type ProfileSettingFormProps = {
 }
 
 export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) => {
-  const [ locationsChange, setLocationsChange ] = useState([])
+  const dispatch = useDispatch()
   const [ updateUser ] = useMutation(UPDATE_USER)
   const { name, aboutMy, selectedLocations } = user
   const { data } = useSelector((state: { user: User }) => state.user)
+  const { locationsChange } = useSelector(state => state.locations)
   const initialValues = { name, aboutMy: aboutMy || '', socials: {
       facebook: '',
       instagram: '',
@@ -23,7 +25,7 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
   }}
 
   useEffect(() => {
-    setLocationsChange(selectedLocations)
+    dispatch(locationsActions.userLocationsChange(selectedLocations))
   }, [user])
 
   const onSubmit = values => {
@@ -38,14 +40,14 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
     }).then(r => r)
   }
 
-  const handleClick = () => {
-    setLocationsChange([])
+  const resetLocationsChange = () => {
+    dispatch(locationsActions.userLocationsChange([]))
   }
 
   return <Formik initialValues={ initialValues } onSubmit={ onSubmit } >
     {formik => {
       return <Form>
-        <SettingForm formik={ formik } user={ user } locationsChange={ locationsChange } setLocationsChange={ setLocationsChange } handleClick={ handleClick } />
+        <SettingForm formik={ formik } user={ user } locationsChange={ locationsChange } resetLocationsChange={ resetLocationsChange } />
       </Form>
     }}
   </Formik>

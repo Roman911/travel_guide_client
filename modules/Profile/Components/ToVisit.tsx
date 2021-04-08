@@ -17,9 +17,10 @@ type ToVisitProps = {
   }]
   nameSection: string
   handleClick: (arg: string) => void
+  openMapUserLocations: () => void
 }
 
-export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameSection, handleClick }) => {
+export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameSection, handleClick, openMapUserLocations }) => {
   if (locationsUserList.length > 0) {
     const location = locationsUserList.map((item) => {
       return <Location key={ item._id } user={ user } _id={ item._id } locationId={ item.locationId } nameSection={ nameSection } handleClick={ handleClick } />
@@ -28,7 +29,7 @@ export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameS
     return <section>
       <div className={ css(styles.blockBtn) }>
         <FontAwesomeIcon className={ css(baseStyles.icon, styles.iconMap) } icon={ faMapMarkedAlt } />
-        <Button nameBtn='Показати на карті' isSubmitting={ false } />
+        <Button nameBtn='Показати на карті' isSubmitting={ false } handleClick={ openMapUserLocations } />
       </div>
       { location }
     </section>

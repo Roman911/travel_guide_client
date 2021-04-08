@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
 import { Profile } from '../Components'
 import { UserData } from '../../../typeScript/user'
-import { userActions } from "../../../redux/actions"
+import { userActions, userLocationsActions } from "../../../redux/actions"
 import { LoadingSpin } from "../../../Components"
 import { LOCATION_USER_LIST } from '../../../apollo/queries'
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
@@ -38,11 +38,25 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = ({ isUserProfil
     }).then(r => r)
   }
 
+  const openMapUserLocations = () => {
+    const locations = locationsUserList.map(item => item.locationId)
+    dispatch(userLocationsActions.setData(locations))
+  }
+
   const logout = async () => {
     await router.push('/').then()
     await localStorage.removeItem('userData')
     await dispatch(userActions.setData(null))
   }
 
-  return <Profile user={ user } isUserProfile={ isUserProfile } nameSection={ nameSection } locationsUserList={ locationsUserList } handleClick={ handleClick } logout={ logout } width={ width } />
+  return <Profile
+    user={ user }
+    isUserProfile={ isUserProfile }
+    nameSection={ nameSection }
+    locationsUserList={ locationsUserList }
+    handleClick={ handleClick }
+    logout={ logout }
+    width={ width }
+    openMapUserLocations={ openMapUserLocations }
+  />
 }

@@ -1,10 +1,10 @@
 import React from "react"
 import { Marker } from '@react-google-maps/api'
-import { ChangeData, Location } from '../../../typeScript/googleMaps'
+import { Location } from '../../../typeScript/googleMaps'
 
 type MarkerQueryProps = {
   rest: {
-    changeData: ChangeData
+    locations: any
     setSelectedPark?: (_id) => void
     options?: {
       _id?: string
@@ -15,8 +15,8 @@ type MarkerQueryProps = {
 }
 
 const MarkerQuery: React.FC<MarkerQueryProps> = ({ rest }) => {
-  const { changeData, options, setSelectedPark } = rest
-  const { _id, isType, location } = options ? options : changeData
+  const { locations, options, setSelectedPark } = rest
+  const { _id, isType, location } = options ? options : locations
 
   return <Marker
     position={ location }
