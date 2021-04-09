@@ -5,11 +5,10 @@ import { ALL_LOCATIONS, USER_DATA_FOR_MAPS } from '../apollo/queries'
 import { LoadingSpin, MainLayout } from "../Components"
 import { GoogleMaps, SortLocations } from "../modules"
 import { locationsActions } from '../redux/actions'
-import { User } from "../typeScript/user"
 
 const Map: React.FC = (): any => {
   const dispatch = useDispatch()
-  const { data: userData } = useSelector((state: { user: User }) => state.user)
+  const { user: { data: userData}, locations: { locationsUserList } } = useSelector(state => state)
   const _id = userData ? userData._id : undefined
   const [ setUserData, { data: userSelectedLocations } ] = useLazyQuery(USER_DATA_FOR_MAPS, { variables: { _id } })
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
@@ -25,7 +24,8 @@ const Map: React.FC = (): any => {
   useEffect(() => {
     dispatch(locationsActions.changeData(options))
     if (data) {
-      dispatch(locationsActions.setData(allLocations))
+      const locations = locationsUserList ? allLocations.filter(i => locationsUserList.includes(i._id)) : allLocations
+      dispatch(locationsActions.changeData({ allLocations, locations }))
     }
   }, [ data ])
 

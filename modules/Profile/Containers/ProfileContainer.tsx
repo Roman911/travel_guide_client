@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
 import { Profile } from '../Components'
 import { UserData } from '../../../typeScript/user'
-import { userActions, userLocationsActions } from "../../../redux/actions"
+import { locationsActions, userActions } from "../../../redux/actions"
 import { LoadingSpin } from "../../../Components"
 import { LOCATION_USER_LIST } from '../../../apollo/queries'
 import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
@@ -40,7 +40,7 @@ export const ProfileContainer: React.FC<ProfileContainerProps> = ({ isUserProfil
 
   const openMapUserLocations = () => {
     const locations = locationsUserList.map(item => item.locationId)
-    dispatch(userLocationsActions.setData(locations))
+    dispatch(locationsActions.userLocationsList(locations))
   }
 
   const logout = async () => {

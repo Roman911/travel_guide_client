@@ -11,7 +11,8 @@ const initialState = {
   locations: [],
   isType: null,
   _id: null,
-  locationsChange: []
+  locationsChange: [],
+  locationsUserList: null
 }
 
 type ActionType = {
@@ -27,12 +28,6 @@ const locations = (state = initialState, actions: ActionType) => {
   }
 
   switch (actions.type) {
-    case 'LOCATIONS:SET_DATA':
-      return {
-        ...state,
-        allLocations: actions.payload,
-        locations: actions.payload
-      }
     case 'LOCATIONS:CHANGE_DATA':
       return {
         ...state,
@@ -65,13 +60,19 @@ const locations = (state = initialState, actions: ActionType) => {
         locations: state.allLocations,
         control: 'MarkersMap',
         center: { lat: 49.026151, lng: 31.483070 },
-        locationsChange: []
+        locationsChange: [],
+        locationsUserList: null
       }
     case 'LOCATIONS:USER_LOCATIONS_CHANGE':
       return {
         ...state,
         locationsChange: actions.payload,
         locations: locationsFilter(actions.payload)
+      }
+    case 'LOCATIONS:USER_LOCATIONS_LIST':
+      return {
+        ...state,
+        locationsUserList: actions.payload
       }
     default:
       return state

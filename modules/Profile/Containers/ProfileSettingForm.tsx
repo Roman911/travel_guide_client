@@ -24,8 +24,14 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
       youtube: ''
   }}
 
+  const sl = selectedLocations.map(i => {
+    return {
+      type: i.type, select: i.select
+    }
+  })
+
   useEffect(() => {
-    dispatch(locationsActions.userLocationsChange(selectedLocations))
+    dispatch(locationsActions.userLocationsChange(sl))
   }, [user])
 
   const onSubmit = values => {

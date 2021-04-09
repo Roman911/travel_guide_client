@@ -1,10 +1,4 @@
 const Actions = {
-  setData: (data: any | null) => {
-    return {
-      type: 'LOCATIONS:SET_DATA',
-      payload: data
-    }
-  },
   changeData: (data: any | null) => {
     return {
       type: 'LOCATIONS:CHANGE_DATA',
@@ -31,6 +25,12 @@ const Actions = {
   userLocationsChange: (data) => {
     return {
       type: 'LOCATIONS:USER_LOCATIONS_CHANGE',
+      payload: data
+    }
+  },
+  userLocationsList: data => {
+    return {
+      type: 'LOCATIONS:USER_LOCATIONS_LIST',
       payload: data
     }
   }

@@ -1,4 +1,5 @@
 import React from "react"
+import Link from "next/link"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMapMarkedAlt } from "@fortawesome/free-solid-svg-icons"
@@ -29,7 +30,11 @@ export const ToVisit: React.FC<ToVisitProps> = ({ user, locationsUserList, nameS
     return <section>
       <div className={ css(styles.blockBtn) }>
         <FontAwesomeIcon className={ css(baseStyles.icon, styles.iconMap) } icon={ faMapMarkedAlt } />
-        <Button nameBtn='Показати на карті' isSubmitting={ false } handleClick={ openMapUserLocations } />
+        <Link href={ '/maps' } >
+          <a>
+            <Button nameBtn='Показати на карті' isSubmitting={ false } handleClick={ openMapUserLocations } />
+          </a>
+        </Link>
       </div>
       { location }
     </section>
