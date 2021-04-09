@@ -24,6 +24,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, lo
     </li>
   })
 
+  console.log(user)
+
   const viewSidebar = isOpen ? css(styles.sidebar, styles.closeSidebar) : css(styles.sidebar, styles.openSidebar)
 
   useEffect(() => {

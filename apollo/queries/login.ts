@@ -7,6 +7,8 @@ export const LOGIN = gql`
       name
       avatar
       token
+      email
+      rating
     }
   }
 `
