@@ -18,11 +18,12 @@ export const Footer: React.FC = () => {
     <div className={ css(baseStyles.wrapper, baseStyles.flexSB) }>
       <div>
         <Link href={ '/about' } >
-          <a>Про нас</a>
+          <a className={ css(styles.link) }>Про нас</a>
         </Link>
       </div>
       <SocialLink socials={ socials } />
     </div>
-    <Image src="/logo.png" layout="fixed" width={100} height={45} alt="Travel guide logo" />
+    <Image className={ css(styles.img) } src="/logo.png" layout="fixed" width={100} height={45} alt="Travel guide logo" />
+    <p className={ css(styles.p) }>© 2021 TravelGuide.space. При використанні матеріалів зворотнє посилання на сайт обов'язкове</p>
   </div>
 }

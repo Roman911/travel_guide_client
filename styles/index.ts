@@ -13,6 +13,9 @@ export default StyleSheet.create({
   mt: {
     marginTop: 73
   },
+  main: {
+    minHeight: 'calc(100vh - 290px)'
+  },
   wrapperLogin: {
     width: 400,
     margin: '20px auto',

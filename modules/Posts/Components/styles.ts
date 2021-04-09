@@ -30,6 +30,7 @@ export default StyleSheet.create({
   },
   title: {
     marginLeft: 15,
+    width: 'calc(100% - 50px)',
     fontSize: 13,
     letterSpacing: 1,
     lineHeight: '16px'

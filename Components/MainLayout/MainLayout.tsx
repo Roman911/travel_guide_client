@@ -50,7 +50,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
       </title>
     </Head>
     <UseRoutes authorization={ authorization } data={ data } />
-    <main className={ css(baseStyles.wrapper, baseStyles.mt, authorization && baseStyles.wrapperLogin) }>
+    <main className={ css(baseStyles.wrapper, baseStyles.main, baseStyles.mt, authorization && baseStyles.wrapperLogin) }>
       { header && <SectionTitle title={ header } /> }
       { children }
     </main>
