@@ -36,3 +36,13 @@ export const LOCATIONS_SORT = gql`
     }
   }
 `
+
+export const LOCATIONS_SORT_BY_ID = gql`
+  query locationsSortById($_id: [ID]) {
+    locationsSortById(_id: $_id) {
+      _id
+      coordinates
+      isType
+    }
+  }
+`

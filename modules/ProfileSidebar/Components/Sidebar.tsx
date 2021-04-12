@@ -14,9 +14,10 @@ type SidebarProps = {
   isOpen: null | boolean
   logout: () => void
   setClassName: any
+  clickCreateLocation: () => void
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, logout, setClassName }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, logout, setClassName, clickCreateLocation }) => {
   const { name, avatar, email, rating } = user
   const sidebar = sidebarMenuItems.map((item, index) => {
     return <li className={ css(styles.li) } key={ index }>
@@ -24,14 +25,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, lo
     </li>
   })
 
-  const viewSidebar = isOpen ? css(styles.sidebar, styles.closeSidebar) : css(styles.sidebar, styles.openSidebar)
+  const viewSidebar = css(styles.wrapper)
 
   useEffect(() => {
     setClassName(viewSidebar)
   }, [])
 
-  return <section className={ css(styles.wrapper) }>
-    <div className={ viewSidebar }>
+  return <section className={ viewSidebar }>
+    <div className={ css(styles.sidebar, isOpen ? styles.closeSidebar : styles.openSidebar) }>
       <button className={ css(styles.btn) } onClick={ () => closeSidebar() } >
         <FontAwesomeIcon className={ css(styles.icon) } icon={ faTimes } />
       </button>
@@ -52,7 +53,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, lo
         </Link>
         <div className={ css(styles.br) }/>
         <Link href={ '/create-location' }>
-          <a onClick={ () => closeSidebar() }>
+          <a onClick={ () => clickCreateLocation() }>
             <Button nameBtn='Додати локацію' isSubmitting={ false } />
           </a>
         </Link>

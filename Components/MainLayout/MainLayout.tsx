@@ -11,7 +11,6 @@ import { SidebarProps } from '../../typeScript/sidebar'
 import { UseAuth } from "../../hooks/auth.hook"
 import { useDocumentOverflowHidden } from '../../hooks/useDocumentOverflowHidden'
 import baseStyles from "../../styles"
-
 import { UseRoutes } from '../../modules'
 
 type InformWindowProps = {
