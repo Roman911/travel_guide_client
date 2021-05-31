@@ -1,3 +1,5 @@
+export { DirectionLocations } from './DirectionLocations'
+export { InformWindowComponent } from './InformWindowComponent'
 export { MarkersController } from './MarkersController'
 export { Modal } from './Modal'
 export { SearchPresent } from './SearchPresent'

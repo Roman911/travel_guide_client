@@ -1,1 +1,1 @@
-export { PopularsPosts, Post } from './Containers'
+export { PopularsPosts } from './Containers'

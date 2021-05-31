@@ -1,13 +1,12 @@
 import React, { useEffect } from "react"
 import { useQuery, useLazyQuery } from '@apollo/react-hooks'
 import { useDispatch, useSelector } from 'react-redux'
-import { ALL_LOCATIONS, USER_DATA_FOR_MAPS } from '../apollo/queries'
+import { ALL_LOCATIONS, USER_DATA_FOR_MAPS, LOCATIONS_SORT_BY_ID } from '../apollo/queries'
 import { LoadingSpin, MainLayout } from "../Components"
 import { GoogleMaps, SortLocations } from "../modules"
 import { locationsActions } from '../redux/actions'
 import { useRouter } from "next/router"
 import { ParsedUrlQuery } from "querystring"
-import {LOCATIONS_SORT_BY_ID} from "../apollo/queries/location";
 
 const Map: React.FC = (): any => {
   const dispatch = useDispatch()
@@ -44,7 +43,7 @@ const Map: React.FC = (): any => {
 
   useEffect(() => {
     if (locationsUserList) {
-      setUserLocations({ variables: {_id: locationsUserList} })
+      setUserLocations({ variables: { _id: locationsUserList } })
       if (locationsSortById) {
         dispatch(locationsActions.changeData({ allLocations, locations: locationsSortById.locationsSortById }))
       }
@@ -66,7 +65,7 @@ const Map: React.FC = (): any => {
   return <MainLayout title='Maps' header='Карти' >
     <div style={{ position: 'relative' }}>
       <GoogleMaps disableDefaultUI={ false } />
-      <SortLocations />
+      <SortLocations url='/maps' />
     </div>
   </MainLayout>
 }

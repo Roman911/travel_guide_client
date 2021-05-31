@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
 import * as Yup from 'yup'
+import { css } from "aphrodite/no-important"
 import { CREATE_LOCATION } from "../../../apollo/mutations"
 import { modalActions, uploadActions } from '../../../redux/actions'
 import { User } from "../../../typeScript/user"
 import { CreateLocation, WrapperLocationSelector } from '../Components'
-import { css } from "aphrodite/no-important"
 import baseStyles from "../../../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"

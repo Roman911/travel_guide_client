@@ -1,10 +1,14 @@
 import React, { useCallback, useRef } from "react"
-import dynamic from "next/dynamic"
+import dynamic from 'next/dynamic'
+import { useDispatch } from 'react-redux'
 import { GoogleMap } from '@react-google-maps/api'
+import { getGeocode } from "use-places-autocomplete"
 import { MarkersController } from "./MarkersController"
 import { LocationInformation } from "../Containers"
 import { LoadingSpin } from '../../../Components'
 import { Location } from '../../../typeScript/googleMaps'
+import { Directions } from "../Containers/Directions"
+import { directionLocations } from '../../../redux/actions'
 
 type SearchProps = {
   panTo: any
@@ -14,7 +18,9 @@ type MapsProps = {
   locations: any
   selectedPark: null | string
   setSelectedPark: (_id: string | null) => void
-  click?: (event) => void
+  directions?: boolean
+  setLatLnd?: any
+  width?: string
   options?: {
     _id?: string
     isType: string
@@ -24,18 +30,41 @@ type MapsProps = {
 
 const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
-export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, click, options, locations }) => {
+export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, setLatLnd, options, locations, directions, width }) => {
+  const dispatch = useDispatch()
   const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
   const mapRef = useRef(null)
   const onMapLoad = useCallback((map) => {
     mapRef.current = map
   }, [])
+
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng })
     mapRef.current.setZoom(12)
   }, [])
 
-  return <div style={{ position: 'relative', width: '100%' }}>
+  const handleClick = useCallback(event => {
+    const location = {
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng()
+    }
+    if (setLatLnd) {
+      setLatLnd(location)
+    } else {
+      getGeocode({ location: location }).then(r => {
+        const address = r[0].formatted_address.split(' ').filter(i => !['Unnamed', 'Road,'].includes(i))
+        const addressIndex = address.indexOf('Украина,')
+        const newAddress = addressIndex >= 0 ? address.slice(0, addressIndex).concat('Украина') : address
+        dispatch(directionLocations.addPoint({
+          location,
+          address: newAddress.join(' '),
+          typeMarker: 'location'
+        }))
+      })
+    }
+  }, [])
+
+  return <div style={{ position: 'relative', width: width || '100%' }}>
     { search && <Search panTo={ panTo } /> }
     <GoogleMap
       mapContainerStyle={ mapContainerStyle }
@@ -43,10 +72,11 @@ export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, click
       center={ center }
       options={{ disableDefaultUI }}
       onLoad={ onMapLoad }
-      onClick={ click ? event => click(event) : null }
+      onClick={ event => handleClick(event) }
     >
-      { selectedPark && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
+      { selectedPark && !directions && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
       <MarkersController control={ control } setSelectedPark={ setSelectedPark } options={ options } locations={ locations } />
+      { directions && <Directions selectedPark={ selectedPark } /> }
     </GoogleMap>
   </div>
 }

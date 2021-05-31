@@ -9,7 +9,8 @@ type GoogleMapsProps = {
   disableDefaultUI?: boolean
   search?: boolean
   width?: string
-  click?: (event) => void
+  setLatLnd?: any
+  directions?: boolean
   options?: {
     _id?: string
     isType: string
@@ -28,7 +29,15 @@ export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
     // @ts-ignore
     libraries: libRef.current
   })
-  const renderMap = () => <Maps click={ props.click } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } options={ props.options } locations={ locations } />
+  const renderMap = () => <Maps
+    setLatLnd={ props.setLatLnd }
+    selectedPark={ selectedPark }
+    setSelectedPark={ setSelectedPark }
+    options={ props.options }
+    locations={ locations }
+    directions={ props.directions }
+    width={ props.width }
+  />
 
   if (loadError) return <div>Неможливо завантажити карту</div>
 

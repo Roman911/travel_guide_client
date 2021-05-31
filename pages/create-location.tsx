@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch } from 'react-redux'
 import { css } from "aphrodite/no-important"
 import baseStyles from '../styles'
@@ -15,12 +15,6 @@ const CreateLocation: React.FC =() => {
   const [ latLng, setLatLnd ] = useState(null)
   const [ isType, setIsType ] = useState(null)
   const options = { location: latLng, isType, search: true }
-  const click = useCallback(event => {
-    setLatLnd({
-      lat: event.latLng.lat(),
-      lng: event.latLng.lng()
-    })
-  }, [])
 
   useEffect(() => {
     dispatch(locationsActions.changeData({ control: 'MarkerQuery' }))
@@ -31,7 +25,7 @@ const CreateLocation: React.FC =() => {
 
   return <MainLayout title={'Create Location'} header='Редагування'>
     <div className={ css(baseStyles.wrapperCreateLocation) }>
-      <GoogleMaps width={ width > 920 && `calc(100% - ${ widthBlocks.newsBlock }px)` } click={ click } />
+      <GoogleMaps width={ width > 920 && `calc(100% - ${ widthBlocks.newsBlock }px)` } setLatLnd={ setLatLnd } />
       <CreateLocationSelector latLng={ latLng } setIsType={ setIsType } />
     </div>
   </MainLayout>

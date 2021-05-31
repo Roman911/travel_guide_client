@@ -5,7 +5,11 @@ import { SortLocation } from "../Components"
 import { useKeyPress } from '../../../hooks/useKeyPress'
 import { locationsActions } from "../../../redux/actions"
 
-export const SortLocations: React.FC = (): any => {
+type SortLocationsProps = {
+  url?: string
+}
+
+export const SortLocations: React.FC<SortLocationsProps> = ({ url }): any => {
   const router = useRouter()
   const dispatch = useDispatch()
   const { locationsChange } = useSelector(state => state.locations)
@@ -18,7 +22,7 @@ export const SortLocations: React.FC = (): any => {
   useKeyPress('Escape', handleClickTitle)
 
   const handleClickReset = () => {
-    router.replace('/maps', undefined, { shallow: true }).then(r => r)
+    url && router.replace(url, undefined, { shallow: true }).then(r => r)
     dispatch(locationsActions.showAllLocations())
   }
 

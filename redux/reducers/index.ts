@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-const reducers = [ 'locations', 'modal', 'sidebar', 'user', 'uploadFile', 'userLocations' ]
+const reducers = [ 'directionLocations', 'locations', 'modal', 'sidebar', 'user', 'uploadFile' ]
 
 export default combineReducers(
   reducers.reduce((initial: any, name: string) => {

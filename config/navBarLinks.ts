@@ -10,9 +10,9 @@ export const navBarLinks = [
     route: 'Map'
   },
   {
-    path: '/routes',
+    path: '/directions',
     title: 'Маршрути',
-    route: 'Routes'
+    route: 'Directions'
   },
   {
     path: '/about',

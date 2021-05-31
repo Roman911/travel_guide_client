@@ -4,6 +4,7 @@ import { ALL_POSTS } from "../apollo/queries"
 import { PopularsPosts } from "../modules"
 import { MainLayout, News, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
+// import { initializeApollo } from '../lib/apolloClient'
 
 const Home = () => {
   const { width } = useWindowDimensions()
@@ -30,3 +31,17 @@ const Home = () => {
 }
 
 export default Home
+
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo()
+//
+//   await apolloClient.query({
+//     query: ALL_POSTS
+//   })
+//
+//   return {
+//     props: {
+//       initialApolloState: apolloClient.cache.extract()
+//     }
+//   }
+// }

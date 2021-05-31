@@ -1,15 +1,12 @@
-import {
-  InMemoryCache,
-  ApolloClient,
-  NormalizedCacheObject,
-} from "@apollo/client"
+import {ApolloClient, InMemoryCache, NormalizedCacheObject,} from "@apollo/client"
+import {createUploadLink} from 'apollo-upload-client'
+import { useMemo } from 'react'
 
-import { createUploadLink } from 'apollo-upload-client'
-
-let apolloClient: ApolloClient<NormalizedCacheObject>;
+let apolloClient: ApolloClient<NormalizedCacheObject>
 
 function createApolloClient() {
   return new ApolloClient({
+    ssrMode: typeof window === 'undefined',
     link: createUploadLink({
       uri: process.env.GRAPHQL_URI
     }),
@@ -17,11 +14,20 @@ function createApolloClient() {
   });
 }
 
-function initializeApollo() {
-  apolloClient = apolloClient ?? createApolloClient();
-  return apolloClient;
+export function initializeApollo(initialState = null) {
+  const _apolloClient = apolloClient ?? createApolloClient()
+
+  if (initialState) {
+    _apolloClient.cache.restore(initialState)
+  }
+
+  if (typeof window === 'undefined') return _apolloClient
+
+  apolloClient = apolloClient ?? _apolloClient
+
+  return apolloClient
 }
 
-export function useApollo() {
-  return initializeApollo()
+export function useApollo(initialState) {
+  return useMemo(() => initializeApollo(initialState), [initialState])
 }

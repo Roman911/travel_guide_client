@@ -32,5 +32,13 @@ export default StyleSheet.create({
   },
   icon: {
     marginRight: 6
+  },
+  linkRed: {
+    color: btn
+  },
+  // ButtonWrapper
+  btnRight: {
+    margin: '20px 0',
+    textAlign: 'end'
   }
 })

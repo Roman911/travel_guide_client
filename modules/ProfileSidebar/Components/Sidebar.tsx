@@ -40,7 +40,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, lo
       <p className={ css(styles.email) }>{ email }</p>
       <p className={ css(styles.rating) }>рейтинг: { rating }</p>
       <div className={ css(styles.btnWrapper) }>
-        <Link href={ '/create-route' }>
+        <Link href={ '/create-direction' }>
           <a onClick={ () => closeSidebar() }>
             <Button nameBtn='Додати маршрут' isSubmitting={ false } />
           </a>

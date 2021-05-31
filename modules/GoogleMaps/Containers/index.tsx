@@ -1,4 +1,6 @@
+export { DirectionsLocations } from './DirectionsLocations'
 export { GoogleMaps } from './GoogleMaps'
+export { GoogleMapsDirections } from './GoogleMapsDirections'
 export { LocationInformation } from './LocationInformation'
 export { LocationSetting } from './LocationSeting'
 export { SortLocations } from './SortLocations'

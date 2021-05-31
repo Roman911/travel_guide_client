@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { btn } from '../../../variabels'
+import {btn, icons} from '../../../variabels'
 
 const width350 = {
   width: 350,
@@ -65,5 +65,26 @@ export default StyleSheet.create({
     fontSize: '1rem',
     display: 'inline',
     marginRight: 6
-  }
+  },
+  // DirectionLocations
+  dlWrapper: {
+    width: 350
+  },
+  index: {
+    lineHeight: '26px'
+  },
+  address: {
+    marginLeft: 8,
+    lineHeight: '26px'
+  },
+  dlIcon: {
+    width: 'auto !important',
+    height: 20,
+    color: icons,
+    marginTop: 20,
+    marginRight: 10,
+    ':hover': {
+      color: btn
+    }
+  },
 })

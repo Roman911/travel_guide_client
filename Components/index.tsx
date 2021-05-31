@@ -1,5 +1,6 @@
 export { ArticleStats } from './ArticleStats'
-export { Button, ButtonLink } from './Button'
+export { Button, ButtonLink, ButtonWrapper } from './Button'
+export { Header } from './CreateRoute'
 export { Date } from './Date'
 export { Footer } from './Footer'
 export { FormikControl } from './Formik'
