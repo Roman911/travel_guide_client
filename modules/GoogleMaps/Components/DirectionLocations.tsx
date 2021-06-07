@@ -18,6 +18,7 @@ type Waypoints = {
   address: string,
   typeMarker: string,
   title: string,
+  infoLocation: boolean
   cover: {
     url: string
   }
@@ -26,7 +27,7 @@ type Waypoints = {
 export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, endStart }) => {
   return <div className={ css(styles.dlWrapper) }>
     { waypoints.map((i, index) => {
-      const address = i.address || i.title
+      const address = i.infoLocation ? i.title : i.address
       return <div key={ index }>
         <div className={ css(baseStyles.flexVFS) }>
           <div className={ css(baseStyles.flexVFS) }>
@@ -37,9 +38,7 @@ export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoint
             <FontAwesomeIcon className={ css(styles.dlIcon) } icon={ faTimes } />
           </button>
         </div>
-        {
-          i.cover && <Image src={ i.cover.url } layout='intrinsic' alt={ i.title } width={ 260 } height={ 160 } />
-        }
+        { i.infoLocation && <Image src={ i.cover.url } layout='intrinsic' alt={ i.title } width={ 260 } height={ 160 } /> }
       </div>
     }) }
     <FormikControl control='checkbox' id='endStart' label='Повернутись назад' values={ endStart } />

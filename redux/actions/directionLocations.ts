@@ -16,6 +16,12 @@ const Actions = {
       payload: index
     }
   },
+  selectEndDirection: (endStart: boolean) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:SELECT_END_DIRECTION',
+      payload: endStart
+    }
+  }
 }
 
 export default Actions

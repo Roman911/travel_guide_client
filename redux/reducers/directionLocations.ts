@@ -2,9 +2,11 @@ const initialState = {
   waypoints: [{
     address: "Київ",
     location: { lat: 50.44996063947086, lng: 30.52356059271697 },
-    typeMarker: "location"
+    typeMarker: "location",
+    infoLocation: false
   }],
-  point: null
+  point: null,
+  endStart: false
 }
 
 type ActionType = {
@@ -34,6 +36,11 @@ const directionLocations = (state = initialState, actions: ActionType) => {
       state.waypoints.splice(actions.payload, 1)
       return {
         ...state
+      }
+    case 'DIRECTION_LOCATIONS:SELECT_END_DIRECTION':
+      return {
+        ...state,
+        endStart: actions.payload
       }
     default:
       return state

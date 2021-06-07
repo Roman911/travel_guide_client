@@ -16,5 +16,9 @@ export const DirectionsLocations: React.FC<DirectionsLocationsProps> = ({ formik
     dispatch(directionLocations.removePointToWaypoints(index))
   }
 
+  React.useEffect(() => {
+    dispatch(directionLocations.selectEndDirection(endStart))
+  }, [ endStart ])
+
   return <DirectionLocations waypoints={ waypoints } removeLocation={ removeLocation } endStart={ endStart } />
 }

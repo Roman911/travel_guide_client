@@ -58,7 +58,8 @@ export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, setLa
         dispatch(directionLocations.addPoint({
           location,
           address: newAddress.join(' '),
-          typeMarker: 'location'
+          typeMarker: 'location',
+          infoLocation: false
         }))
       })
     }

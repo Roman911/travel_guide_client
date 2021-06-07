@@ -23,8 +23,6 @@ export const GoogleMapsDirections: React.FC = () => {
   })
 
   const directionsCallback = React.useCallback((res) => {
-    console.log(res)
-
     if (res !== null) {
       if (res.status === 'OK') {
         setResponse(res)
@@ -69,7 +67,6 @@ export const GoogleMapsDirections: React.FC = () => {
       )}
     </GoogleMap>
   </div>
-
 
   if (loadError) return <div>Неможливо завантажити карту</div>
 

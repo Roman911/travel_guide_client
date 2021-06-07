@@ -12,7 +12,7 @@ type DirectionsProps = {
 
 export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   const dispatch = useDispatch()
-  const { point, waypoints } = useSelector(state => state.directionLocations)
+  const { point, waypoints, endStart } = useSelector(state => state.directionLocations)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
   const dataLocation = data ? data.location : undefined
@@ -24,7 +24,8 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
         location: { lat: Number(lat), lng: Number(lng) },
         typeMarker: 'coordinates',
         cover: dataLocation.cover,
-        title: dataLocation.title
+        title: dataLocation.title,
+        infoLocation: true
       }))
     }
   }, [ dataLocation ])
