@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { Formik, Form } from "formik"
 import { useQuery } from '@apollo/react-hooks'
 import { useDispatch } from 'react-redux'
@@ -12,9 +12,9 @@ import { DirectionsLocations } from "../modules"
 const CreateDirection: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
-  const initialValues = { title: '', type_rout: 'rout', editor: '', car: false, bicycle: false, walking: false, endStart: false }
+  const initialValues = { title: '', type_rout: 'rout', editor: '', car: true, bicycle: false, walking: false, endStart: false }
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
   }, [ data ])
 

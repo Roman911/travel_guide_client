@@ -21,6 +21,12 @@ const Actions = {
       type: 'DIRECTION_LOCATIONS:SELECT_END_DIRECTION',
       payload: endStart
     }
+  },
+  selectTravelMode: (mode: string) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE',
+      payload: mode
+    }
   }
 }
 

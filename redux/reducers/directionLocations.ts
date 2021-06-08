@@ -6,7 +6,8 @@ const initialState = {
     infoLocation: false
   }],
   point: null,
-  endStart: false
+  endStart: false,
+  travelMode: ['DRIVING']
 }
 
 type ActionType = {
@@ -41,6 +42,12 @@ const directionLocations = (state = initialState, actions: ActionType) => {
       return {
         ...state,
         endStart: actions.payload
+      }
+    case 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE':
+      const modeIndex = state.travelMode.indexOf(actions.payload)
+
+      return {
+        ...state
       }
     default:
       return state

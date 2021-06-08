@@ -47,11 +47,11 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   const directionsServiceOptions = React.useMemo(() => {
     return {
       waypoints: waypoints.length !== 0 ? waypoints.map(i => { return { location: i.location } } ) : null,
-      destination: waypoints.length > 1 && waypoints[waypoints.length -1].location,
+      destination: endStart ? waypoints[0].location : waypoints.length > 1 && waypoints[waypoints.length -1].location,
       origin: waypoints[0].location,
       travelMode: 'DRIVING',
     }
-  }, [ waypoints ])
+  }, [ waypoints, endStart ])
 
   const directionsRendererOptions = React.useMemo(() => {
     return {
