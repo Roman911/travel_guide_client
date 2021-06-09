@@ -27,4 +27,4 @@ const Checkbox: React.FC<CheckboxProps> = ({ rest }) => {
   </label>
 }
 
-export default Checkbox
+export default React.memo(Checkbox)
