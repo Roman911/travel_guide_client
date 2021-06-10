@@ -30,21 +30,20 @@ export const Header: React.FC = () => {
 
   return <div className={ css(styles.wrapper) }>
     <InputControl control='input' id='title' label='Назва маршруту:' />
-    <InputControl control='radio' id='type_rout' label='Тип матеріалу:' options={ options } />
-    {/*<FormikControl control='radio' name='type_rout' label='Тип матеріалу:' options={ options } />*/}
-    {/*<div className={ css(baseStyles.flex) }>*/}
-    {/*  <div onClick={() => console.log('click')}>*/}
-    {/*    <FontAwesomeIcon className={ css(styles.icon) } icon={ faCar } />*/}
-    {/*    <FormikControl control='checkbox' id='car' label='Автомобільний маршрут' values={ car } />*/}
-    {/*  </div>*/}
-    {/*  <div>*/}
-    {/*    <FontAwesomeIcon className={ css(styles.icon) } icon={ faBiking } />*/}
-    {/*    <FormikControl control='checkbox' id='bicycle' label='Велосипедний маршрут' values={ bicycle } />*/}
-    {/*  </div>*/}
-    {/*  <div >*/}
-    {/*    <FontAwesomeIcon className={ css(styles.icon) } icon={ faWalking } />*/}
-    {/*    <FormikControl control='checkbox' id='walking' label='Піший маршрут' values={ walking } />*/}
-    {/*  </div>*/}
-    {/*</div>*/}
+    <InputControl control='radio' id='type_rout' label='Тип матеріалу:' options={ options } defaultValue='rout' />
+    <div className={ css(baseStyles.flex) }>
+      <div onClick={() => console.log('click')}>
+        <FontAwesomeIcon className={ css(styles.icon) } icon={ faCar } />
+        {/*<FormikControl control='checkbox' id='car' label='Автомобільний маршрут' values={ car } />*/}
+      </div>
+      <div>
+        <FontAwesomeIcon className={ css(styles.icon) } icon={ faBiking } />
+        {/*<FormikControl control='checkbox' id='bicycle' label='Велосипедний маршрут' values={ bicycle } />*/}
+      </div>
+      <div >
+        <FontAwesomeIcon className={ css(styles.icon) } icon={ faWalking } />
+        {/*<FormikControl control='checkbox' id='walking' label='Піший маршрут' values={ walking } />*/}
+      </div>
+    </div>
   </div>
 }

@@ -14,7 +14,8 @@ import { DirectionsLocations } from "../modules"
 import { errors } from '../config/errorsText'
 
 const schema = yup.object().shape({
-  title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle)
+  title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle),
+  type_rout: yup.string().required()
 })
 
 const CreateDirection: React.FC = (): any => {
