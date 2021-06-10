@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
 
   return <div className={ css(styles.wrapper) }>
     <InputControl control='input' id='title' label='Назва маршруту:' />
-    {/*<FormikControl control='input' id='title' type='text' label='Назва маршруту:' />*/}
+    <InputControl control='radio' id='type_rout' label='Тип матеріалу:' options={ options } />
     {/*<FormikControl control='radio' name='type_rout' label='Тип матеріалу:' options={ options } />*/}
     {/*<div className={ css(baseStyles.flex) }>*/}
     {/*  <div onClick={() => console.log('click')}>*/}

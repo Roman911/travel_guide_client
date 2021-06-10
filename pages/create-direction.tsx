@@ -11,9 +11,10 @@ import { GoogleMaps, SortLocations } from "../modules"
 import { Editor } from "../hooks/editor"
 import { locationsActions } from "../redux/actions"
 import { DirectionsLocations } from "../modules"
+import { errors } from '../config/errorsText'
 
 const schema = yup.object().shape({
-  title: yup.string().required().min(5, 'Заголовок повинен містити щонайменше 5 символів').max(50, 'Занадто великий заголовок')
+  title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle)
 })
 
 const CreateDirection: React.FC = (): any => {

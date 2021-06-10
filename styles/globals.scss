@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #6b7073;
   background-color: #ffffff;
-  line-height: 26px;
+  line-height: 22px;
   overflow-y: auto;
 }
 
@@ -22,7 +22,7 @@ code {
 }
 p {
   font-size: 1.1rem;
-  line-height: 30px;
+  line-height: 28px;
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   text-rendering: optimizeLegibility;
 }
@@ -51,12 +51,13 @@ a:hover {
 }
 input, textarea, select, option {
   border: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
   padding: 5px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4rem;
   box-shadow: 0 0 0 1000px #fff inset!important;
   width: 100%;
+  color: #2d2d2d;
 }
 label input {
   display: none;
@@ -65,7 +66,7 @@ select {
   cursor: pointer;
 }
 label {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 button {
   border: none;

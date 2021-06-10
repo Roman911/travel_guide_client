@@ -3,10 +3,16 @@ import { borders, error, icons, isOk, text, socSet } from "../../variabels"
 
 export default StyleSheet.create({
   // Input
+  wrapper: {
+    margin: '20px 0 30px',
+  },
   inputWrapper: {
     position: 'relative',
-    margin: '20px 0 30px',
-    borderBottom: `1px solid ${ borders.borderInput }`
+    borderBottom: `1px solid ${ borders.borderInput }`,
+    transition: '200ms'
+  },
+  inputWrapperError: {
+    borderColor: error
   },
   input: {
     padding: '0 0 10px 11px',
@@ -21,11 +27,14 @@ export default StyleSheet.create({
     top: '40%',
     transform: 'translateY(-50%)',
     right: 10,
-    fontSize: 24,
-    color: error,
-    border: `1px solid ${ error }`,
-    padding: '0 12px',
-    borderRadius: '50%'
+    fontSize: 18,
+    color: '#fff',
+    background: error,
+    padding: '0 9px',
+    borderRadius: '50%',
+    lineHeight: '24px',
+    fontWeight: 900,
+    transition: '300ms'
   },
   isOkColor: {
     color: isOk
@@ -35,7 +44,7 @@ export default StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    padding: '0 0 10px 11px',
+    padding: '7px 0 5px 8px',
     transition: 'transform .4s cubic-bezier(.25,.8,.25,1)',
     cursor: 'text'
   },
@@ -140,38 +149,9 @@ export default StyleSheet.create({
     padding: '0 0 0 10px'
   },
   // Error
-  wrapper: {
-    width: 225,
-    position: 'absolute',
-    padding: '8px 16px',
-    background: 'white'
-  },
-  triangle: {
-    position: 'absolute',
-    width: 0,
-    height: 0
-  },
-  left: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    left: -240
-  },
-  bottom: {
-    bottom: -20
-  },
-  triangleForLeft: {
-    top: '50%',
-    transform: 'translateY(-50%)',
-    right: -12,
-    borderTop: '10px solid transparent',
-    borderLeft: '12px solid white',
-    borderBottom: '10px solid transparent'
-  },
-  triangleForBottom: {
-    top: -12,
-    left: 20,
-    borderLeft: '10px solid transparent',
-    borderRight: '10px solid transparent',
-    borderBottom: '12px solid white'
+  errorWrapper: {
+    padding: '0 10px',
+    fontSize: 12,
+    color: error
   }
 })
