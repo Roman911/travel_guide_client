@@ -63,8 +63,8 @@ export default StyleSheet.create({
   checkboxInner: {
     marginRight: 5,
     border: `1px solid ${ borders.borderInput }`,
-    width: 14,
-    height: 14,
+    width: 15,
+    height: 15,
     borderRadius: 4,
     paddingLeft: 1
   },

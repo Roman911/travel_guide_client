@@ -5,16 +5,16 @@ type InputProps = {
   rest: {
     id: string
     label: string
-    defaultValue?: string
+    defaultValue?: string | boolean
     options?: option[]
   }
 }
 
 type InputControlProps = {
-  control: 'input' | 'radio'
+  control: 'checkbox' | 'input' | 'radio'
   id: string
   label: string
-  defaultValue?: string
+  defaultValue?: string | boolean
   options?: option[]
 }
 
@@ -22,12 +22,14 @@ type option = {
   id: string
   title: string
 }
-
+const Checkbox = dynamic<InputProps>(() => import('./Checkbox') as any)
 const Input = dynamic<InputProps>(() => import('./Input') as any)
 const Radio = dynamic<InputProps>(() => import('./Radio') as any)
 
 export const InputControl: React.FC<InputControlProps> = ({ control, ...rest }) => {
   switch (control) {
+    case 'checkbox':
+      return <Checkbox rest={ rest } />
     case 'input':
       return <Input rest={ rest } />
     case 'radio':
