@@ -1,14 +1,12 @@
 import React from "react"
+import { useFormContext } from "react-hook-form"
 import { useDispatch, useSelector } from 'react-redux'
 import { DirectionLocations } from "../Components"
 import { directionLocations } from '../../../redux/actions'
 
-type DirectionsLocationsProps = {
-  formik: any
-}
-
-export const DirectionsLocations: React.FC<DirectionsLocationsProps> = ({ formik }) => {
-  const { values: { endStart } } = formik
+export const DirectionsLocations: React.FC = () => {
+  const { watch } = useFormContext()
+  const endStart = watch('endStart')
   const dispatch = useDispatch()
   const { waypoints } = useSelector(state => state.directionLocations)
 

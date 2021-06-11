@@ -12,7 +12,7 @@ type DirectionsProps = {
 
 export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   const dispatch = useDispatch()
-  const { point, waypoints, endStart } = useSelector(state => state.directionLocations)
+  const { point, waypoints, endStart, travelMode } = useSelector(state => state.directionLocations)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
   const dataLocation = data ? data.location : undefined
@@ -49,9 +49,9 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
       waypoints: waypoints.length !== 0 ? waypoints.map(i => { return { location: i.location } } ) : null,
       destination: endStart ? waypoints[0].location : waypoints.length > 1 && waypoints[waypoints.length -1].location,
       origin: waypoints[0].location,
-      travelMode: 'DRIVING',
+      travelMode: travelMode.length !== 0 ? travelMode[0] : 'DRIVING'
     }
-  }, [ waypoints, endStart ])
+  }, [ waypoints, endStart, travelMode ])
 
   const directionsRendererOptions = React.useMemo(() => {
     return {

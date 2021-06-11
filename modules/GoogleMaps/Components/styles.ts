@@ -68,18 +68,18 @@ export default StyleSheet.create({
   },
   // DirectionLocations
   dlWrapper: {
-    width: 350
+    width: 290
   },
   index: {
     lineHeight: '26px'
   },
   address: {
     marginLeft: 8,
-    lineHeight: '26px'
+    lineHeight: '24px'
   },
   dlIcon: {
     width: 'auto !important',
-    height: 20,
+    height: 16,
     color: icons,
     marginTop: 20,
     marginRight: 10,

@@ -1,15 +1,14 @@
 import React from "react"
 import { useForm, FormProvider } from 'react-hook-form'
-// import { Formik, Form } from "formik"
 import { useQuery } from '@apollo/react-hooks'
 import { useDispatch } from 'react-redux'
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup";
 import { ALL_LOCATIONS } from '../apollo/queries'
 import { Button, ButtonWrapper, Header, LoadingSpin, MainLayout } from "../Components"
 import { GoogleMaps, SortLocations } from "../modules"
 import { Editor } from "../hooks/editor"
-import { locationsActions } from "../redux/actions"
+import { locationsActions, directionLocations } from "../redux/actions"
 import { DirectionsLocations } from "../modules"
 import { errors } from '../config/errorsText'
 
@@ -29,6 +28,12 @@ const CreateDirection: React.FC = (): any => {
     dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
   }, [ data ])
 
+  const { car, bicycle, walking } = methods.watch()
+
+  React.useEffect(() => {
+    dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'WALKING', walking && 'WALKING' ]))
+  }, [ car, bicycle, walking ])
+
   const onSubmit = (values) => {
     console.log(values)
   }
@@ -44,6 +49,7 @@ const CreateDirection: React.FC = (): any => {
       <form onSubmit={ methods.handleSubmit(onSubmit) }>
         <Header />
         <div style={{ position: 'relative', display: 'flex' }}>
+          <DirectionsLocations />
           <GoogleMaps disableDefaultUI={ false } directions={ true } width='calc(100% - 350px)' />
           <SortLocations />
         </div>
@@ -53,24 +59,6 @@ const CreateDirection: React.FC = (): any => {
         </ButtonWrapper>
       </form>
     </FormProvider>
-
-    {/*<Formik initialValues={ initialValues } onSubmit={ onSubmit } >*/}
-    {/*  {formik => {*/}
-    {/*    return <Form >*/}
-    {/*      <Header formik={ formik } />*/}
-    {/*      <div style={{ position: 'relative', display: 'flex' }}>*/}
-    {/*        <DirectionsLocations formik={ formik } />*/}
-    {/*        <GoogleMaps disableDefaultUI={ false } directions={ true } width='calc(100% - 350px)' />*/}
-    {/*        <SortLocations />*/}
-    {/*      </div>*/}
-    {/*      <br/>*/}
-    {/*      <Editor editor={ 'editor' } onChange={ setFieldValue } />*/}
-    {/*      <ButtonWrapper >*/}
-    {/*        <Button type='submit' nameBtn='Зберегти' isSubmitting={ formik.isSubmitting } />*/}
-    {/*      </ButtonWrapper>*/}
-    {/*    </Form>*/}
-    {/*  }}*/}
-    {/*</Formik>*/}
   </MainLayout>
 }
 

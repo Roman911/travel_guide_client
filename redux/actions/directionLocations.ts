@@ -1,3 +1,9 @@
+type ModeProps = [
+  { car: undefined | boolean },
+  { bicycle: undefined | boolean },
+  { walking: undefined | boolean }
+]
+
 const Actions = {
   addPoint: (data: any | null) => {
     return {
@@ -22,7 +28,7 @@ const Actions = {
       payload: endStart
     }
   },
-  selectTravelMode: (mode: string) => {
+  selectTravelMode: (mode: string[]) => {
     return {
       type: 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE',
       payload: mode

@@ -44,12 +44,9 @@ const directionLocations = (state = initialState, actions: ActionType) => {
         endStart: actions.payload
       }
     case 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE':
-      const modeIndex = state.travelMode.indexOf(actions.payload)
-
-        console.log(actions.payload)
-
       return {
-        ...state
+        ...state,
+        travelMode: actions.payload.filter(i => i && i)
       }
     default:
       return state
