@@ -3,5 +3,6 @@ export const errors = {
   minTitle: (num: number) => {
     return `Заголовок повинен містити щонайменше ${ num } символів`
   },
-  maxTitle: 'Занадто великий заголовок'
+  maxTitle: 'Занадто великий заголовок',
+  minText: 'Текст повинен бути більшим'
 }

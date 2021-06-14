@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import {widthsDescTop, heightIcons, shadows, icons, text} from '../variabels'
+import { widthsDescTop, heightIcons, shadows, icons, text } from '../variabels'
 
 export default StyleSheet.create({
   wrapper: {

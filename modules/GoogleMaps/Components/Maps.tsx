@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from "react"
+import React from "react"
 import dynamic from 'next/dynamic'
 import { useDispatch } from 'react-redux'
 import { GoogleMap } from '@react-google-maps/api'
@@ -33,17 +33,17 @@ const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any,
 export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, setLatLnd, options, locations, directions, width }) => {
   const dispatch = useDispatch()
   const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
-  const mapRef = useRef(null)
-  const onMapLoad = useCallback((map) => {
+  const mapRef = React.useRef(null)
+  const onMapLoad = React.useCallback((map) => {
     mapRef.current = map
   }, [])
 
-  const panTo = useCallback(({ lat, lng }) => {
+  const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng })
     mapRef.current.setZoom(12)
   }, [])
 
-  const handleClick = useCallback(event => {
+  const handleClick = React.useCallback(event => {
     const location = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng()

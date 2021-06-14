@@ -1,30 +1,29 @@
 import React from "react"
 import { Path, useFormContext } from "react-hook-form"
+import { ErrorMessage } from "@hookform/error-message"
 import { css } from "aphrodite/no-important"
-import { ErrorMessage } from '@hookform/error-message'
-import { Error } from './Error'
-import styles from "./styles"
+import styles from './styles'
+import { Error } from "./Error"
 
 interface IFormValues {
-  "title": string
+  "id": string
 }
 
-type InputProps = {
+type TextareaProps = {
   rest: {
     id: Path<IFormValues>
     label: string
+    rows?: number
   }
 }
 
-const Input: React.FC<InputProps> = ({ rest: { id, label } }) => {
+const Textarea: React.FC<TextareaProps> = ({ rest: { id, label, rows } }) => {
   const { register, formState: { errors, touchedFields }, watch } = useFormContext()
 
-  return <div className={ css(styles.wrapper) }>
+  return <div className={ css(styles.wrapperTextarea) }>
     <div className={ css(styles.inputWrapper, touchedFields[id] && watch(id) === '' && styles.inputWrapperError, errors[id] && styles.inputWrapperError) }>
-      <label className={ css(styles.label, watch(id) && watch(id) !== '' && styles.labelTouched) } >{ label }</label>
-      <input {...register(id)} />
-      { touchedFields[id] && watch(id) === '' && <p className={ css(styles.icon) }>!</p> }
-      { errors[id] && <p className={ css(styles.icon) }>!</p> }
+      <label className={ css(styles.label, styles.labelTextarea, watch(id) && watch(id) !== '' && styles.labelTouched) } >{ label }</label>
+      <textarea id={ id } className={ css(styles.textarea) } rows={ rows || 5 } { ...register(id) } />
     </div>
     <ErrorMessage
       errors={ errors }
@@ -34,4 +33,4 @@ const Input: React.FC<InputProps> = ({ rest: { id, label } }) => {
   </div>
 }
 
-export default Input
+export default Textarea

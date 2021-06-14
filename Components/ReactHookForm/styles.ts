@@ -101,16 +101,16 @@ export default StyleSheet.create({
   },
   // Textarea
   wrapperTextarea: {
-    position: 'relative'
+    marginBottom: 15
   },
   textarea: {
-    padding: '10px 15px',
+    padding: '10px 5px',
     color: text.textInput,
     fontWeight: 600,
     width: '100%'
   },
   labelTextarea: {
-    padding: '10px 14px'
+    padding: '10px 4px'
   },
   textareaError: {
     bottom: 20

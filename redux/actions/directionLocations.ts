@@ -1,9 +1,3 @@
-type ModeProps = [
-  { car: undefined | boolean },
-  { bicycle: undefined | boolean },
-  { walking: undefined | boolean }
-]
-
 const Actions = {
   addPoint: (data: any | null) => {
     return {

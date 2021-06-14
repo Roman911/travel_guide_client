@@ -7,15 +7,17 @@ type InputProps = {
     label: string
     defaultValue?: string | boolean
     options?: option[]
+    rows?: number
   }
 }
 
 type InputControlProps = {
-  control: 'checkbox' | 'input' | 'radio'
+  control: 'checkbox' | 'input' | 'radio' | 'textarea'
   id: string
   label: string
   defaultValue?: string | boolean
   options?: option[]
+  rows?: number
 }
 
 type option = {
@@ -25,6 +27,7 @@ type option = {
 const Checkbox = dynamic<InputProps>(() => import('./Checkbox') as any)
 const Input = dynamic<InputProps>(() => import('./Input') as any)
 const Radio = dynamic<InputProps>(() => import('./Radio') as any)
+const Textarea = dynamic<InputProps>(() => import('./Textarea') as any)
 
 export const InputControl: React.FC<InputControlProps> = ({ control, ...rest }) => {
   switch (control) {
@@ -34,6 +37,8 @@ export const InputControl: React.FC<InputControlProps> = ({ control, ...rest }) 
       return <Input rest={ rest } />
     case 'radio':
       return <Radio rest={ rest } />
+    case 'textarea':
+      return <Textarea rest={ rest } />
     default:
       return null
   }
