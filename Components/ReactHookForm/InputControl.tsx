@@ -8,6 +8,7 @@ type InputProps = {
     defaultValue?: string | boolean
     options?: option[]
     rows?: number
+    focus?: boolean
   }
 }
 
@@ -18,6 +19,7 @@ type InputControlProps = {
   defaultValue?: string | boolean
   options?: option[]
   rows?: number
+  focus?: boolean
 }
 
 type option = {

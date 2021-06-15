@@ -1,16 +1,18 @@
 import React from "react"
 import { useForm, FormProvider } from 'react-hook-form'
-import { useQuery } from '@apollo/react-hooks'
-import { useDispatch } from 'react-redux'
+import {useMutation, useQuery} from '@apollo/react-hooks'
+import { useDispatch, useSelector } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 import { ALL_LOCATIONS } from '../apollo/queries'
 import { Button, ButtonWrapper, Header, LoadingSpin, MainLayout } from "../Components"
 import { GoogleMaps, SortLocations } from "../modules"
-import { locationsActions, directionLocations } from "../redux/actions"
+import {locationsActions, directionLocations, modalActions} from "../redux/actions"
 import { DirectionsLocations } from "../modules"
-import { errors } from '../config/errorsText'
 import { ReactQuillWithReactHookForm } from "../hooks/ReactQuillWithReactHookForm"
+import { CREATE_DIRECTION } from '../apollo/mutations'
+import { errors } from '../config/errorsText'
+import { User } from "../typeScript/user"
 
 const schema = yup.object().shape({
   title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle),
@@ -23,6 +25,9 @@ const CreateDirection: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema) })
+  const { waypoints: points, endStart, travelMode } = useSelector(state => state.directionLocations)
+  const { data: userData } = useSelector((state: { user: User }) => state.user)
+  const [ createDirection ] = useMutation(CREATE_DIRECTION)
 
   React.useEffect(() => {
     dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
@@ -31,11 +36,47 @@ const CreateDirection: React.FC = (): any => {
   const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
-    dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'WALKING', walking && 'WALKING' ]))
+    dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))
   }, [ car, bicycle, walking ])
 
-  const onSubmit = (values) => {
-    console.log(values)
+  const onSubmit = ({ title, type_rout, small_text, editor }) => {
+    const token = userData ? userData.token : null
+    const waypoints = points.map(i => {
+      if (i.infoLocation) {
+        return {
+          infoLocation: i.infoLocation,
+          location: i._id
+        }
+      } else {
+        return {
+          infoLocation: i.infoLocation,
+          address: i.address
+        }
+      }
+    })
+    createDirection({
+      variables: {
+        directionInput: {
+          token,
+          title,
+          type_rout,
+          small_text,
+          travelMode,
+          waypoints,
+          endStart,
+          editor
+        }
+      }
+    }).then(data => {
+      if (data) {
+        dispatch(modalActions.showModal('Маршрут успішно створено!'))
+        methods.reset()
+        // onSubmitProps.resetForm()
+      }
+      // onSubmitProps.setSubmitting(false)
+    }).catch( () => {
+      // onSubmitProps.setSubmitting(false)
+    })
   }
 
   if (loading) return <LoadingSpin />

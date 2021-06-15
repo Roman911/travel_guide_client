@@ -21,6 +21,7 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
     if (dataLocation) {
       const [ lat, lng ] = dataLocation.coordinates
       dispatch(directionLocations.addPoint({
+        _id: dataLocation._id,
         location: { lat: Number(lat), lng: Number(lng) },
         typeMarker: 'coordinates',
         cover: dataLocation.cover,
@@ -49,7 +50,7 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
       waypoints: waypoints.length !== 0 ? waypoints.map(i => { return { location: i.location } } ) : null,
       destination: endStart ? waypoints[0].location : waypoints.length > 1 && waypoints[waypoints.length -1].location,
       origin: waypoints[0].location,
-      travelMode: travelMode.length !== 0 ? travelMode[0] : 'DRIVING'
+      travelMode: travelMode.length !== 0 ? travelMode[0] === 'BICYCLING' ? 'WALKING' : travelMode[0] : 'DRIVING'
     }
   }, [ waypoints, endStart, travelMode ])
 

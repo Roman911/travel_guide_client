@@ -13,11 +13,18 @@ type InputProps = {
   rest: {
     id: Path<IFormValues>
     label: string
+    focus: boolean
   }
 }
 
-const Input: React.FC<InputProps> = ({ rest: { id, label } }) => {
-  const { register, formState: { errors, touchedFields }, watch } = useFormContext()
+const Input: React.FC<InputProps> = ({ rest: { id, label, focus } }) => {
+  const { register, formState: { errors, touchedFields }, watch, setFocus } = useFormContext()
+
+  React.useEffect(() => {
+    if (focus) {
+      setFocus(id)
+    }
+  }, [ setFocus ])
 
   return <div className={ css(styles.wrapper) }>
     <div className={ css(styles.inputWrapper, touchedFields[id] && watch(id) === '' && styles.inputWrapperError, errors[id] && styles.inputWrapperError) }>

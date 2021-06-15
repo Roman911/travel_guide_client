@@ -1,6 +1,6 @@
-import React, {useEffect} from "react"
+import React from "react"
 import { useDispatch } from 'react-redux'
-import {Form, Formik, useFormikContext} from "formik"
+import { Form, Formik, useFormikContext } from "formik"
 import { useMutation } from "@apollo/react-hooks"
 import * as Yup from "yup"
 import { CreatePostForm, WrapperCreatePost } from '../Components'
@@ -71,7 +71,7 @@ export const CreatePost: React.FC<CreatePostProps> = ({  data, location }) => {
 
   const AutoRef = () => {
     const { setFieldValue } = useFormikContext()
-    useEffect(() => {
+    React.useEffect(() => {
       if (location) {
         setFieldValue('title', location.title)
         setFieldValue('small_text', location.small_text)

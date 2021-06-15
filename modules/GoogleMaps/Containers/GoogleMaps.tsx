@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useSelector } from 'react-redux'
 import { Maps } from "../Components/Maps"
 import { useLoadScript } from "@react-google-maps/api"
@@ -22,7 +22,7 @@ const libraries = ["places"]
 
 export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
   const { locations } = useSelector(state => state)
-  const [ selectedPark, setSelectedPark ] = useState<null | string>(null)
+  const [ selectedPark, setSelectedPark ] = React.useState<null | string>(null)
   let libRef = React.useRef(libraries)
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_KAY,
