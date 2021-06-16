@@ -1,16 +1,12 @@
 import React from "react"
-import { Path, useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { css } from "aphrodite/no-important"
 import baseStyles from "../../styles"
 import styles from "../Formik/styles"
 
-interface IFormValues {
-  "id": string
-}
-
 type InputProps = {
   rest: {
-    id: Path<IFormValues>
+    id: string
     label: string
     defaultValue?: string
     options: option[]
@@ -18,7 +14,7 @@ type InputProps = {
 }
 
 type option = {
-  id: Path<IFormValues>
+  id: string
   title: string
 }
 

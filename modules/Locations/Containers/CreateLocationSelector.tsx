@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
@@ -31,7 +31,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
   const dispatch = useDispatch()
   const { data } = useSelector((state: { user: User }) => state.user)
   const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
-  const [ showMobileMenu, setShowMobileMenu ] = useState(false)
+  const [ showMobileMenu, setShowMobileMenu ] = React.useState(false)
   const [ createLocations ] = useMutation(CREATE_LOCATION)
   const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['область', 'місто', 'вулиця'] }
   const validationSchema = Yup.object({
@@ -68,13 +68,13 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
   }
   const AutoRef = () => {
     const { values, setFieldValue } = useFormikContext()
-    useEffect(() => {
+    React.useEffect(() => {
       if (latLng) {
         setFieldValue( 'coordinateY', String(latLng.lat) )
         setFieldValue( 'coordinateX', String(latLng.lng) )
       }
     }, [latLng])
-    useEffect(() => {
+    React.useEffect(() => {
       // @ts-ignore
       setIsType(values.isType)
       // @ts-ignore

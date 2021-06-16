@@ -7,10 +7,18 @@ import { GoogleMaps, SortLocations } from "../modules"
 import { locationsActions } from '../redux/actions'
 import { useRouter } from "next/router"
 import { ParsedUrlQuery } from "querystring"
+import { User } from "../typeScript/user"
+
+interface RootState {
+  user: User
+  locations: {
+    locationsUserList: string
+  }
+}
 
 const Map: React.FC = (): any => {
   const dispatch = useDispatch()
-  const { user: { data: userData }, locations: { locationsUserList } } = useSelector(state => state)
+  const { user: { data: userData }, locations: { locationsUserList } } = useSelector((state: RootState) => state)
   const _id = userData ? userData._id : undefined
   const router = useRouter()
   const query: ParsedUrlQuery = router.query

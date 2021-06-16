@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useRouter } from "next/router"
 import { useSelector } from 'react-redux'
 import { useLazyQuery } from "@apollo/react-hooks"
@@ -11,7 +11,7 @@ const CreatePosts: React.FC = () => {
   const router = useRouter()
   const _id = router.query.location
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (_id) getLocation({ variables: { _id } })
   }, [_id])
 

@@ -13,15 +13,16 @@ export default StyleSheet.create({
   leftBlock: {
     width: `calc(100% - ${ widthBlocks.rightBlock }px)`
   },
-  leftBlockNews: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
   leftBlockWidth: {
     width: '100%'
   },
   //Right Block
   rightBlock: {
     width: widthBlocks.rightBlock
+  },
+  //HomePageBlock
+  HomePageBlockWrapper: {
+    display: 'flex',
+    flexWrap: 'wrap'
   }
 })

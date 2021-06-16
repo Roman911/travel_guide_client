@@ -1,17 +1,13 @@
 import React from "react"
-import { Path, useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
 import { css } from "aphrodite/no-important"
 import styles from './styles'
 import { Error } from "./Error"
 
-interface IFormValues {
-  "id": string
-}
-
 type TextareaProps = {
   rest: {
-    id: Path<IFormValues>
+    id: string
     label: string
     rows?: number
   }

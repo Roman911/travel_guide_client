@@ -1,18 +1,14 @@
 import React from "react"
-import { Path, useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import styles from "./styles"
 import baseStyles from "../../styles"
 
-interface IFormValues {
-  "id": string
-}
-
 type CheckboxProps = {
   rest: {
-    id: Path<IFormValues>
+    id: string
     label: string
     defaultValue?: boolean
   }

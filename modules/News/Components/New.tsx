@@ -2,13 +2,13 @@ import React from 'react'
 import Link from 'next/link'
 import Image from "next/image"
 import { css } from 'aphrodite/no-important'
-import { Likes } from "../../modules"
-import { Author, ArticleStats } from "../"
+import { Likes } from "../../"
+import { Author, ArticleStats } from "../../../Components"
 
-import baseStyles from '../../styles'
+import baseStyles from '../../../styles'
 import styles from './styles'
 
-import { Item } from '../../typeScript/news'
+import { Item } from '../../../typeScript/news'
 
 type NewProps = {
   item: Item
@@ -16,7 +16,7 @@ type NewProps = {
   userData: any
 }
 
-export const News: React.FC<NewProps> = ({ item, width, userData }): any => {
+export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
   const userId = userData ? userData._id : undefined
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
   const imgSize = width >= 690 ? { width: 336, height: 190 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }

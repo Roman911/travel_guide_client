@@ -1,6 +1,6 @@
 import React from "react"
 import { useForm, FormProvider } from 'react-hook-form'
-import {useMutation, useQuery} from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import { useDispatch, useSelector } from 'react-redux'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
@@ -13,6 +13,12 @@ import { ReactQuillWithReactHookForm } from "../hooks/ReactQuillWithReactHookFor
 import { CREATE_DIRECTION } from '../apollo/mutations'
 import { errors } from '../config/errorsText'
 import { User } from "../typeScript/user"
+import { Direction } from '../typeScript/directions'
+
+interface RootState {
+  user: User
+  directionLocations: Direction
+}
 
 const schema = yup.object().shape({
   title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle),
@@ -25,8 +31,7 @@ const CreateDirection: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema) })
-  const { waypoints: points, endStart, travelMode } = useSelector(state => state.directionLocations)
-  const { data: userData } = useSelector((state: { user: User }) => state.user)
+  const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode }} = useSelector((state: RootState) => state)
   const [ createDirection ] = useMutation(CREATE_DIRECTION)
 
   React.useEffect(() => {
@@ -42,16 +47,11 @@ const CreateDirection: React.FC = (): any => {
   const onSubmit = ({ title, type_rout, small_text, editor }) => {
     const token = userData ? userData.token : null
     const waypoints = points.map(i => {
-      if (i.infoLocation) {
-        return {
-          infoLocation: i.infoLocation,
-          location: i._id
-        }
-      } else {
-        return {
-          infoLocation: i.infoLocation,
-          address: i.address
-        }
+      return {
+        infoLocation: i.infoLocation,
+        location: i.location,
+        address: i.address || 'undefined',
+        locationId: i._id || 'undefined'
       }
     })
     createDirection({
@@ -71,7 +71,6 @@ const CreateDirection: React.FC = (): any => {
       if (data) {
         dispatch(modalActions.showModal('Маршрут успішно створено!'))
         methods.reset()
-        // onSubmitProps.resetForm()
       }
       // onSubmitProps.setSubmitting(false)
     }).catch( () => {

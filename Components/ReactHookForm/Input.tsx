@@ -1,17 +1,13 @@
 import React from "react"
-import { Path, useFormContext } from "react-hook-form"
+import { useFormContext } from "react-hook-form"
 import { css } from "aphrodite/no-important"
 import { ErrorMessage } from '@hookform/error-message'
 import { Error } from './Error'
 import styles from "./styles"
 
-interface IFormValues {
-  "title": string
-}
-
 type InputProps = {
   rest: {
-    id: Path<IFormValues>
+    id: string
     label: string
     focus: boolean
   }

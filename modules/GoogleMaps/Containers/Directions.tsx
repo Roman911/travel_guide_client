@@ -1,10 +1,15 @@
 import React from "react"
-import { DirectionsRenderer, DirectionsService, InfoWindow,  } from "@react-google-maps/api"
+import { DirectionsRenderer, DirectionsService, InfoWindow } from "@react-google-maps/api"
 import { useDispatch, useSelector } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { LOCATION } from './query'
 import { InformWindowComponent } from "../Components"
 import { directionLocations } from "../../../redux/actions"
+import { Direction } from '../../../typeScript/directions'
+
+interface RootState {
+  directionLocations: Direction
+}
 
 type DirectionsProps = {
   selectedPark: string
@@ -12,7 +17,7 @@ type DirectionsProps = {
 
 export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   const dispatch = useDispatch()
-  const { point, waypoints, endStart, travelMode } = useSelector(state => state.directionLocations)
+  const { directionLocations: { point, waypoints, endStart, travelMode } } = useSelector((state: RootState) => state)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
   const dataLocation = data ? data.location : undefined
@@ -69,7 +74,7 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   }
 
   return <>
-    <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/>
+    { waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/> }
     { response !== null && <DirectionsRenderer options={ directionsRendererOptions } /> }
     { point && <InfoWindow position={ point.location } onCloseClick={ () => cancel() }>
       <InformWindowComponent point={ point } addToWaypoints={ addToWaypoints } cancel={ cancel } />
