@@ -10,7 +10,7 @@ const Home = () => {
 
   return <MainLayout title='Home'>
     <WithRightBlock>
-      <LeftBlock isNews={ true } widthBlock={ widthTransform } >
+      <LeftBlock widthBlock={ widthTransform } >
         <News />
         <Directions />
       </LeftBlock>

@@ -15,6 +15,7 @@ type SearchProps = {
 }
 
 type MapsProps = {
+  index?: number
   locations: any
   selectedPark: null | string
   setSelectedPark: (_id: string | null) => void
@@ -30,7 +31,7 @@ type MapsProps = {
 
 const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
-export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, setLatLnd, options, locations, directions, width }) => {
+export const Maps: React.FC<MapsProps> = ({ index, selectedPark, setSelectedPark, setLatLnd, options, locations, directions, width }) => {
   const dispatch = useDispatch()
   const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
   const mapRef = React.useRef(null)
@@ -77,7 +78,7 @@ export const Maps: React.FC<MapsProps> = ({ selectedPark, setSelectedPark, setLa
     >
       { selectedPark && !directions && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
       <MarkersController control={ control } setSelectedPark={ setSelectedPark } options={ options } locations={ locations } />
-      { directions && <Directions selectedPark={ selectedPark } /> }
+      { directions && <Directions index={ index } selectedPark={ selectedPark } /> }
     </GoogleMap>
   </div>
 }

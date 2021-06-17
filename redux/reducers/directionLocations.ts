@@ -7,7 +7,9 @@ const initialState = {
   }],
   point: null,
   endStart: false,
-  travelMode: ['DRIVING']
+  travelMode: ['DRIVING'],
+  news: true,
+  allDirections: []
 }
 
 type ActionType = {
@@ -47,6 +49,18 @@ const directionLocations = (state = initialState, actions: ActionType) => {
       return {
         ...state,
         travelMode: actions.payload.filter(i => i && i)
+      }
+    case 'DIRECTION_LOCATIONS:ALL_DIRECTIONS':
+      return {
+        ...state,
+        allDirections: actions.payload
+      }
+    case 'DIRECTION_LOCATIONS:NEW_WAYPOINTS':
+      return {
+        ...state,
+        waypoints: actions.payload.waypoints,
+        endStart: actions.payload.endStart,
+        travelMode: actions.payload.travelMode
       }
     default:
       return state

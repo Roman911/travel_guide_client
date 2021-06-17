@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
 import { Like } from '../Components'
@@ -13,15 +13,15 @@ type MyLikesProps = {
 }
 
 export const Likes:React.FC<MyLikesProps> = ({ id, likes, post }): any => {
-  const [ quantityLikes, setQuantityLikes ] = useState(likes.length)
-  const [ userLike, setUserLike ] = useState(false)
-  const [ clickLike, setClickLike ] = useState( false )
+  const [ quantityLikes, setQuantityLikes ] = React.useState(likes.length)
+  const [ userLike, setUserLike ] = React.useState(false)
+  const [ clickLike, setClickLike ] = React.useState( false )
   const user = useSelector((state: { user: User }) => state.user)
   const dispatch = useDispatch()
   const { data } = user
   const _id = data ? data._id : undefined
 
-  useEffect(() => {
+  React.useEffect(() => {
     likes.filter((item: string | undefined) => {
       setUserLike(item === _id)
     })

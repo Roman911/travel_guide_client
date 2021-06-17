@@ -1,19 +1,19 @@
 import React from "react"
-import Image from "next/image"
+// import Image from "next/image"
 import dynamic from "next/dynamic"
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
-import { PopularsPosts } from '../'
-import { Likes, Tags, InformUserLocation } from "../../"
-import { InfoBar, Source } from "./"
+// import { PopularsPosts } from '../'
+import { Likes, PopularsPosts, GoogleMaps } from "../../"
+// import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from '../../../styles/post'
-import { PostData } from '../../../typeScript/post'
+import { DirectionData } from '../../../typeScript/directions'
 import { User } from "../../../typeScript/user"
 
-type MyPostProps = {
-  post: PostData
+type ShowDirectionProps = {
+  direction: DirectionData
   user: User
   width: number
 }
@@ -23,10 +23,10 @@ type CommentsProps = {
 
 const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, { loading: () => <LoadingSpin /> })
 
-export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
+export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, width }) => {
   const { data } = user
   const userId = data ? data._id : undefined
-  const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link, isPrice } = post
+  const { _id, title, small_text, views, likes, author, createdAt, editor } = direction
   const [ inView, setInView ] = React.useState(false)
   const widthTransform = width > 1070
   const handleChange = e => {
@@ -40,14 +40,12 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
         <Date date={ createdAt } format='LL'/>
       </div>
     </div>
-    <Tags tags={ tags } />
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <div className={ css(styles.wrapperContent) }>
           <p className={ css(styles.text) }>{ small_text }</p>
-          <Image src={ cover } className={ css(styles.imgPost) } layout='intrinsic' alt={ title } width={1030} height={500} />
+          <GoogleMaps directions={ true } />
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
-          { link && <Source link={ link } /> }
           <Author isArticle={ true } author={ author } userId={ userId } />
           <div className={ css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom) }>
             <ArticleStats isArticle={ true } views={ views } />
@@ -60,8 +58,8 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />
-          { data && <InformUserLocation locationId={ location._id } user={ user } /> }
+          {/*<InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />*/}
+          {/*{ data && <InformUserLocation locationId={ location._id } user={ user } /> }*/}
           <PopularsPosts />
         </RightBlock>
       }

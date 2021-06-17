@@ -6,6 +6,7 @@ import { LoadingSpin } from "../../../Components"
 import { Location } from '../../../typeScript/googleMaps'
 
 type GoogleMapsProps = {
+  index?: number
   disableDefaultUI?: boolean
   search?: boolean
   width?: string
@@ -30,6 +31,7 @@ export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
     libraries: libRef.current
   })
   const renderMap = () => <Maps
+    index={ props.index }
     setLatLnd={ props.setLatLnd }
     selectedPark={ selectedPark }
     setSelectedPark={ setSelectedPark }

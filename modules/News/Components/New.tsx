@@ -6,7 +6,7 @@ import { Likes } from "../../"
 import { Author, ArticleStats } from "../../../Components"
 
 import baseStyles from '../../../styles'
-import styles from './styles'
+import styles from '../../../styles/homeNews'
 
 import { Item } from '../../../typeScript/news'
 
@@ -24,9 +24,7 @@ export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
   return <div className={ css(styles.wrapper) }>
     <div className={ css(styles.content) }>
       <Link href={`/post/[id]`} as={`/post/${ _id }`} >
-        <a>
-          <Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} />
-        </a>
+        <a><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>
       </Link>
       <div className={ css(styles.block, styles.blockMobile) }>
         <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />

@@ -12,15 +12,22 @@ interface RootState {
 }
 
 type DirectionsProps = {
+  index?: number
   selectedPark: string
 }
 
-export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
+export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) => {
   const dispatch = useDispatch()
-  const { directionLocations: { point, waypoints, endStart, travelMode } } = useSelector((state: RootState) => state)
+  const { directionLocations: { point, waypoints, endStart, travelMode, allDirections } } = useSelector((state: RootState) => state)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
   const dataLocation = data ? data.location : undefined
+
+  const directionsOptions = {
+    waypoints: index !== undefined ? allDirections[index].waypoints : waypoints,
+    endStart: index !== undefined ? allDirections[index].endStart : endStart,
+    travelMode: index !== undefined ? allDirections[index].travelMode : travelMode
+  }
 
   React.useEffect(() => {
     if (dataLocation) {
@@ -52,12 +59,12 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
 
   const directionsServiceOptions = React.useMemo(() => {
     return {
-      waypoints: waypoints.length !== 0 ? waypoints.map(i => { return { location: i.location } } ) : null,
-      destination: endStart ? waypoints[0].location : waypoints.length > 1 && waypoints[waypoints.length -1].location,
-      origin: waypoints[0].location,
-      travelMode: travelMode.length !== 0 ? travelMode[0] === 'BICYCLING' ? 'WALKING' : travelMode[0] : 'DRIVING'
+      waypoints: directionsOptions.waypoints.length !== 0 ? directionsOptions.waypoints.map(i => { return { location: i.location } } ) : null,
+      destination: directionsOptions.endStart ? directionsOptions.waypoints[0].location : directionsOptions.waypoints.length > 1 && directionsOptions.waypoints[directionsOptions.waypoints.length -1].location,
+      origin: directionsOptions.waypoints[0].location,
+      travelMode: directionsOptions.travelMode.length !== 0 ? directionsOptions.travelMode[0] === 'BICYCLING' ? 'WALKING' : directionsOptions.travelMode[0] : 'DRIVING'
     }
-  }, [ waypoints, endStart, travelMode ])
+  }, [ directionsOptions.waypoints, directionsOptions.endStart, directionsOptions.travelMode ])
 
   const directionsRendererOptions = React.useMemo(() => {
     return {
@@ -74,7 +81,7 @@ export const Directions: React.FC<DirectionsProps> = ({ selectedPark }) => {
   }
 
   return <>
-    { waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/> }
+    { directionsOptions.waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/> }
     { response !== null && <DirectionsRenderer options={ directionsRendererOptions } /> }
     { point && <InfoWindow position={ point.location } onCloseClick={ () => cancel() }>
       <InformWindowComponent point={ point } addToWaypoints={ addToWaypoints } cancel={ cancel } />

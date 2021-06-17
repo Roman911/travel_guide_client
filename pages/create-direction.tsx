@@ -7,7 +7,7 @@ import * as yup from "yup"
 import { ALL_LOCATIONS } from '../apollo/queries'
 import { Button, ButtonWrapper, Header, LoadingSpin, MainLayout } from "../Components"
 import { GoogleMaps, SortLocations } from "../modules"
-import {locationsActions, directionLocations, modalActions} from "../redux/actions"
+import { locationsActions, directionLocations, modalActions } from "../redux/actions"
 import { DirectionsLocations } from "../modules"
 import { ReactQuillWithReactHookForm } from "../hooks/ReactQuillWithReactHookForm"
 import { CREATE_DIRECTION } from '../apollo/mutations'

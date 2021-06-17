@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { widthBlocks } from "../../../variabels"
+import { widthBlocks } from "../variabels"
 
 export default StyleSheet.create({
   wrapper: {

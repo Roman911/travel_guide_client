@@ -27,6 +27,18 @@ const Actions = {
       type: 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE',
       payload: mode
     }
+  },
+  allDirections: (data: any) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:ALL_DIRECTIONS',
+      payload: data
+    }
+  },
+  newWaypoints: (data: any) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:NEW_WAYPOINTS',
+      payload: data
+    }
   }
 }
 

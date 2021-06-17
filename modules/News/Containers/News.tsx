@@ -7,7 +7,7 @@ import { New } from '../Components'
 import { ALL_POSTS } from "../../../apollo/queries"
 import { User } from '../../../typeScript/user'
 
-export const News = () => {
+export const News: React.FC = (): any => {
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
   const { loading, error, data } = useQuery(ALL_POSTS)
@@ -16,8 +16,6 @@ export const News = () => {
   const { allPosts } = data
 
   return <HomePageBlock title='Новини' >
-    {
-      allPosts.map((item, index) => <New key={ index } item={ item } width={ width } userData={ userData } />)
-    }
+    { allPosts.map((item, index) => <New key={ index } item={ item } width={ width } userData={ userData } />) }
   </HomePageBlock>
 }
