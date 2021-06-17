@@ -16,7 +16,7 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
   const [ updateUser ] = useMutation(UPDATE_USER)
   const { name, aboutMy, selectedLocations } = user
   const { data } = useSelector((state: { user: User }) => state.user)
-  const { locationsChange } = useSelector(state => state.locations)
+  const { locations: { locationsChange } } = useSelector((state: any) => state)
   const initialValues = { name, aboutMy: aboutMy || '', socials: {
       facebook: '',
       instagram: '',

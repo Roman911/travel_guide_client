@@ -12,7 +12,7 @@ type SortLocationsProps = {
 export const SortLocations: React.FC<SortLocationsProps> = ({ url }): any => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const { locationsChange } = useSelector(state => state.locations)
+  const { locations: { locationsChange }} = useSelector((state: any) => state)
   const [ showBar, setShowBar ] = useState( false )
 
   const handleClickTitle = useCallback(() => {
