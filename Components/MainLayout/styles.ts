@@ -4,7 +4,7 @@ import { widthBlocks } from '../../variabels'
 export default StyleSheet.create({
   //With Right Block
   wrapper: {
-    margin: '10px auto',
+    margin: '0 auto',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'flex-start'
@@ -22,6 +22,9 @@ export default StyleSheet.create({
   },
   //HomePageBlock
   HomePageBlockWrapper: {
+    marginBottom: 40
+  },
+  HomePageBlock: {
     display: 'flex',
     flexWrap: 'wrap'
   }

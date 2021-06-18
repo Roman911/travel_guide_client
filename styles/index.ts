@@ -42,12 +42,16 @@ export default StyleSheet.create({
     flexWrap: 'wrap'
   },
   block: {
-    paddingBottom: 10
+    paddingBottom: 4
   },
   blockText: {
-    height: 200,
+    height: 120,
     overflowY: 'hidden',
     position: 'relative',
+    transition: '300ms',
+    ':hover': {
+      height: 250
+    },
     '@media (max-width: 690px)': {
       height: 'auto'
     }

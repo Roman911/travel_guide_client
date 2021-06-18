@@ -8,9 +8,9 @@ type HomePageBlockProps = {
 }
 
 export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title }) => {
-  return <div>
+  return <div className={ css(styles.HomePageBlockWrapper) }>
     <SectionTitle title={ title } />
-    <div className={ css(styles.HomePageBlockWrapper) }>
+    <div className={ css(styles.HomePageBlock) }>
       { children }
     </div>
   </div>

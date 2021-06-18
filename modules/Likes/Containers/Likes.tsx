@@ -8,7 +8,7 @@ type MyLikesProps = {
   id: string
   likes: string[]
   post: boolean
-  changeLike: any
+  changeLike?: any
 }
 
 export const Likes:React.FC<MyLikesProps> = ({ id, likes, post, changeLike }): any => {

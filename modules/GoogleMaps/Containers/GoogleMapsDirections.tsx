@@ -1,7 +1,7 @@
 import React from "react"
 import {GoogleMap, DirectionsService, DirectionsRenderer, useLoadScript } from '@react-google-maps/api'
-import {LocationInformation} from "./LocationInformation";
-import {MarkersController} from "../Components";
+// import {LocationInformation} from "./LocationInformation";
+// import {MarkersController} from "../Components";
 import { LoadingSpin } from "../../../Components"
 
 const libraries = ["places"]
@@ -47,8 +47,6 @@ export const GoogleMapsDirections: React.FC = () => {
       directions: response,
     }
   }, [ response ])
-
-  console.log(directionsRendererOptions)
 
   const renderMap = () => <div style={{ position: 'relative', width: '100%' }}>
     <GoogleMap

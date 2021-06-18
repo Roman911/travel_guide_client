@@ -13,11 +13,12 @@ export const Directions: React.FC = (): any => {
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
   const { loading, error, data } = useQuery(ALL_DIRECTIONS)
+  const widthGM = width > 690 ? "100%" : '140px'
 
   const options = {
     disableDefaultUI: true,
     search: false,
-    mapContainerStyle: { height: "230px", width: "100%" }
+    mapContainerStyle: { height: "156px", width: widthGM }
   }
 
   React.useEffect(() => {

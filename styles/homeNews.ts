@@ -8,16 +8,14 @@ export default StyleSheet.create({
     boxShadow: '5px 5px 8px 2px #a0a0a0',
     transition: '200ms',
     background: '#fff',
-    height: 'max-content',
+    height: '320px',
+    position: 'relative',
     ':hover': {
-      transform: 'scale(1.01, 1.01)',
       boxShadow: '5px 5px 10px 2px #676767'
     },
-    '@media (max-width: 1380px)': {
-      width: 300
-    },
     '@media (max-width: 690px)': {
-      width: '100%'
+      width: '100%',
+      height: 'auto'
     }
   },
   content: {
@@ -37,8 +35,21 @@ export default StyleSheet.create({
   img: {
     objectFit: 'cover'
   },
-  block: {
-    padding: '0 15px'
+  blockCenter: {
+    position: 'absolute',
+    bottom: 0,
+    padding: '6px 15px 0',
+    background: '#fff',
+    '@media (max-width: 690px)': {
+      position: 'relative'
+    }
+  },
+  blockBottom: {
+    padding: '6px 15px 0',
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+    background: '#fff'
   },
   blockMobile: {
     '@media (max-width: 590px)': {
@@ -55,11 +66,15 @@ export default StyleSheet.create({
   },
   title: {
     fontFamily: 'Montserrat, sans-serif',
-    margin: '12px 0 16px',
+    margin: '4px 0 6px',
     fontWeight: 100,
+    height: 74,
     '@media (max-width: 500px)': {
       fontSize: '1.2rem',
       letterSpacing: 4
     }
+  },
+  smallText: {
+    fontSize: '1rem'
   }
 })

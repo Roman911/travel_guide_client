@@ -42,7 +42,7 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
       </button>
       <Link href='/' >
         <a className={ css(styles.logo) }>
-          <Image src="/logo.png" layout="fixed" width={100} height={45} alt="Travel guide logo" />
+          <Image src="/logo.png" layout="fixed" width={90} height={40} alt="Travel guide logo" />
         </a>
       </Link>
       <ul className={ css(styles.mobileUl, showMobileMenu && styles.mobileUlActive) }>

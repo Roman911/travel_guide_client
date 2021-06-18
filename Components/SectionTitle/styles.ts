@@ -7,7 +7,7 @@ export default StyleSheet.create({
     textTransform: 'uppercase',
     letterSpacing: '1.65rem',
     fontFamily: 'Montserrat, sans-serif',
-    margin: '10px 0',
+    margin: '10px 0 -8px',
     '@media (max-width: 900px)': {
       fontSize: 50,
       letterSpacing: '1.25rem'
