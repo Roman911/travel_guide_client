@@ -45,12 +45,12 @@ export default StyleSheet.create({
     paddingBottom: 4
   },
   blockText: {
-    height: 120,
+    height: 90,
     overflowY: 'hidden',
     position: 'relative',
     transition: '300ms',
     ':hover': {
-      height: 250
+      height: 230
     },
     '@media (max-width: 690px)': {
       height: 'auto'

@@ -5,6 +5,7 @@ type InputProps = {
   rest: {
     id: string
     label: string
+    type?: string
     defaultValue?: string | boolean
     options?: option[]
     rows?: number
@@ -16,6 +17,7 @@ type InputControlProps = {
   control: 'checkbox' | 'input' | 'radio' | 'textarea'
   id: string
   label: string
+  type?: string
   defaultValue?: string | boolean
   options?: option[]
   rows?: number

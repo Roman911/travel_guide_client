@@ -8,7 +8,7 @@ export default StyleSheet.create({
     boxShadow: '5px 5px 8px 2px #a0a0a0',
     transition: '200ms',
     background: '#fff',
-    height: '320px',
+    height: '290px',
     position: 'relative',
     ':hover': {
       boxShadow: '5px 5px 10px 2px #676767'
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     fontFamily: 'Montserrat, sans-serif',
     margin: '4px 0 6px',
     fontWeight: 100,
-    height: 74,
+    height: 48,
     '@media (max-width: 500px)': {
       fontSize: '1.2rem',
       letterSpacing: 4

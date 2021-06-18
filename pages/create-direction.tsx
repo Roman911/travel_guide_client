@@ -72,9 +72,6 @@ const CreateDirection: React.FC = (): any => {
         dispatch(modalActions.showModal('Маршрут успішно створено!'))
         methods.reset()
       }
-      // onSubmitProps.setSubmitting(false)
-    }).catch( () => {
-      // onSubmitProps.setSubmitting(false)
     })
   }
 
@@ -94,7 +91,7 @@ const CreateDirection: React.FC = (): any => {
         <br/>
         <ReactQuillWithReactHookForm editor='editor' />
         <ButtonWrapper>
-          <Button type='submit' nameBtn='Зберегти' isSubmitting={ false } />
+          <Button type='submit' nameBtn='Зберегти' isSubmitting={ methods.formState.isSubmitting } />
         </ButtonWrapper>
       </form>
     </FormProvider>

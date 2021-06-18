@@ -1,29 +1,31 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { Formik, Form } from 'formik'
+import { useForm, FormProvider } from 'react-hook-form'
 import { useLazyQuery } from '@apollo/react-hooks'
 import { LOGIN } from '../apollo/queries'
-import validateForm from '../utils/validate'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
 import { userActions, modalActions } from '../redux/actions'
 import Redirect from "../hooks/useRedirect"
 import { loginFormData } from '../config/loginFormData'
+import * as yup from "yup"
+import { errors } from "../config/errorsText"
+import { yupResolver } from "@hookform/resolvers/yup"
+
+const schema = yup.object().shape({
+  email: yup.string().required(errors.required).email(errors.email),
+  password: yup.string().required()
+})
 
 const Login: React.FC = () => {
   const dispatch = useDispatch()
   const [ userData, { loading, data, error } ] = useLazyQuery( LOGIN )
-  const initialValues = { email: '', password: '' }
-  const validate = values => {
-    let errors = {}
-    validateForm({ values, errors })
-    return errors
-  }
-  const onSubmit = (values, onSubmitProps) => {
+  const methods = useForm({ resolver: yupResolver(schema) })
+  const onSubmit = (values) => {
     userData({
       variables: { email: values.email, password: values.password }
     })
-    onSubmitProps.setSubmitting(false)
   }
+
   if (loading) return <LoadingSpin />
   if (error) dispatch(modalActions.showModal('Неправильний логін або пароль'))
   if (data) {
@@ -36,13 +38,11 @@ const Login: React.FC = () => {
 
   return <MainLayout title='Вхід' authorization={ true } >
     <HeaderForm title='Вхід' text='У вас ще нема акаунта?' link='/registration' btn='Створити' />
-    <Formik initialValues={ initialValues } onSubmit={ onSubmit } validate={ validate } >
-      {formik => {
-        return <Form>
-          <AuthForm formik={ formik } formData={ loginFormData } btn='Увійти' />
-        </Form>
-      }}
-    </Formik>
+    <FormProvider { ...methods } >
+      <form onSubmit={ methods.handleSubmit(onSubmit) }>
+        <AuthForm formData={ loginFormData } btn='Увійти' isSubmitting={ methods.formState.isSubmitting } />
+      </form>
+    </FormProvider>
   </MainLayout>
 }
 

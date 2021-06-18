@@ -30,7 +30,7 @@ export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
         <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />
         <Link href={`/post/[id]`} as={`/post/${ _id }`} >
           <div className={ css(baseStyles.block, baseStyles.blockText) }>
-            <h3 className={ css(styles.title) }>{ title }</h3>
+            <h4 className={ css(styles.title) }>{ title }</h4>
             { width >= 690 && <p className={ css(styles.smallText) }>{ small_text }</p> }
             <div className={ css(baseStyles.shadow) } />
           </div>
