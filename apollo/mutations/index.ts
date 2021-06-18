@@ -1,5 +1,5 @@
 export { ADDED_ANSWER, CREATE_COMMENT } from './comments'
-export { LIKE } from './likes'
+export { LIKE_POST, LIKE_DIRECTION } from './likes'
 export { CREATE_DIRECTION } from './directions'
 export { CREATE_LOCATION } from './location'
 export { CREATE_POST } from './post'

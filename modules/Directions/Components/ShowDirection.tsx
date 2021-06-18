@@ -16,6 +16,7 @@ type ShowDirectionProps = {
   direction: DirectionData
   user: User
   width: number
+  changeLike: any
 }
 type CommentsProps = {
   postId: string
@@ -23,7 +24,7 @@ type CommentsProps = {
 
 const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, { loading: () => <LoadingSpin /> })
 
-export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, width }) => {
+export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, width, changeLike }) => {
   const { data } = user
   const userId = data ? data._id : undefined
   const { _id, title, small_text, views, likes, author, createdAt, editor } = direction
@@ -49,7 +50,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
           <Author isArticle={ true } author={ author } userId={ userId } />
           <div className={ css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom) }>
             <ArticleStats isArticle={ true } views={ views } />
-            <Likes id={ _id } likes={ likes } post={ true } />
+            <Likes id={ _id } likes={ likes } post={ true } changeLike={ changeLike } />
           </div>
           <InView onChange={ handleChange } >
             { inView && <Comments postId={ _id } /> }

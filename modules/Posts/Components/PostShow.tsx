@@ -16,6 +16,7 @@ type MyPostProps = {
   post: PostData
   user: User
   width: number
+  changeLike: any
 }
 type CommentsProps = {
   postId: string
@@ -23,7 +24,7 @@ type CommentsProps = {
 
 const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/Comments') as any, { loading: () => <LoadingSpin /> })
 
-export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
+export const PostShow: React.FC<MyPostProps> = ({ user, post, width, changeLike }) => {
   const { data } = user
   const userId = data ? data._id : undefined
   const { _id, title, small_text, cover, views, likes, author, createdAt, tickets, location, work_time, editor, tags, link, isPrice } = post
@@ -51,7 +52,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width }) => {
           <Author isArticle={ true } author={ author } userId={ userId } />
           <div className={ css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom) }>
             <ArticleStats isArticle={ true } views={ views } />
-            <Likes id={ _id } likes={ likes } post={ true } />
+            <Likes id={ _id } likes={ likes } post={ true } changeLike={ changeLike } />
           </div>
           <InView onChange={ handleChange } >
             { inView && <Comments postId={ _id } /> }

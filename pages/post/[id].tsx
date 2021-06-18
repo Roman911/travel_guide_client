@@ -1,17 +1,20 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useMutation } from '@apollo/react-hooks'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { POST } from "../../apollo/queries"
 import { locationsActions } from "../../redux/actions"
 import { PostShow } from "../../modules/Posts/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
+import { LIKE_POST } from '../../apollo/mutations'
 import { User } from "../../typeScript/user"
 
 const Posts:React.FC = ({ data: { loading, data } }: any): any => {
   const dispatch = useDispatch()
   const { width } = useWindowDimensions()
   const user = useSelector((state: { user: User }) => state.user)
+  const [ likePost ] = useMutation(LIKE_POST)
 
   React.useEffect(() => {
     if (data) {
@@ -36,7 +39,7 @@ const Posts:React.FC = ({ data: { loading, data } }: any): any => {
   }
 
   return <MainLayout title='Post'>
-    <PostShow post={ post } user={ user } width={ width } />
+    <PostShow post={ post } user={ user } width={ width } changeLike={ likePost } />
   </MainLayout>
 }
 
