@@ -20,12 +20,12 @@ const options = [
 export const Header: React.FC = () => {
   return <div className={ css(styles.wrapper) }>
     <InputControl control='input' id='title' label='Назва маршруту:' focus={ true } />
-    <InputControl control='radio' id='type_rout' label='Тип матеріалу:' options={ options } defaultValue='rout' />
+    <InputControl control='radio' id='type_rout' label='Тип матеріалу:' options={ options } />
     <InputControl control='textarea' id='small_text' label='Короткий опис маршруту:' rows={ 3 }/>
     <div className={ css(baseStyles.flex) }>
       <div>
         <FontAwesomeIcon className={ css(styles.icon) } icon={ faCar } />
-        <InputControl control='checkbox' id='car' label='Автомобільний маршрут' defaultValue={ true } />
+        <InputControl control='checkbox' id='car' label='Автомобільний маршрут' />
       </div>
       <div>
         <FontAwesomeIcon className={ css(styles.icon) } icon={ faBiking } />

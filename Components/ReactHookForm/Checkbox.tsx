@@ -10,17 +10,12 @@ type CheckboxProps = {
   rest: {
     id: string
     label: string
-    defaultValue?: boolean
   }
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({ rest }) => {
-  const { id, label, defaultValue } = rest
-  const { register, watch, setValue } = useFormContext()
-
-  React.useEffect(() => {
-    defaultValue && setValue(id, defaultValue)
-  }, [])
+  const { id, label } = rest
+  const { register, watch } = useFormContext()
 
   return <label className={ css(styles.text, styles.checkbox, baseStyles.flex) }>
     <input type="checkbox" { ...register(id) } />

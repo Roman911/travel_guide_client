@@ -1,16 +1,16 @@
 import React from "react"
-import { Directions, PopularsPosts } from "../modules"
+import { News, PopularsPosts } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
 
-const Direction = () => {
+const Posts = () => {
   const { width } = useWindowDimensions()
   const widthTransform = width > 1270
 
   return <MainLayout title='Home'>
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
-        <Directions />
+        <News />
       </LeftBlock>
       {
         widthTransform && <RightBlock>
@@ -21,4 +21,4 @@ const Direction = () => {
   </MainLayout>
 }
 
-export default Direction
+export default Posts

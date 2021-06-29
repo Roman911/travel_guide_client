@@ -9,7 +9,7 @@ type InputProps = {
   rest: {
     id: string
     label: string
-    focus: boolean
+    focus?: boolean
     type?: string
   }
 }

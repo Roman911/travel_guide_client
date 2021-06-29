@@ -27,18 +27,24 @@ const schema = yup.object().shape({
   small_text: yup.string().min(20, errors.minText)
 })
 
+const defaultValues = {
+  type_rout: 'rout',
+  car: true,
+  bicycle: false,
+  walking: false
+}
+
 const CreateDirection: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
-  const methods = useForm({ resolver: yupResolver(schema) })
+  const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode }} = useSelector((state: RootState) => state)
   const [ createDirection ] = useMutation(CREATE_DIRECTION)
+  const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
     dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
   }, [ data ])
-
-  const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
     dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))

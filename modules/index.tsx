@@ -1,4 +1,3 @@
-export { CreatePost } from './CreatePost'
 export { Directions } from './Directions'
 export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, SortLocations } from './GoogleMaps'
 export { InformUserLocation } from './InformUserLocation'

@@ -60,6 +60,7 @@ export default StyleSheet.create({
     justifyContent: 'flex-end'
   },
   imgWrapper: {
+    marginBottom: 20,
     position: 'relative',
     width: 350,
     height: 240

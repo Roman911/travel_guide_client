@@ -4,24 +4,25 @@ import React from "react"
 type InputProps = {
   rest: {
     id: string
-    label: string
+    label?: string
     type?: string
     defaultValue?: string | boolean
     options?: option[]
     rows?: number
     focus?: boolean
+    disabled?: boolean
   }
 }
 
 type InputControlProps = {
-  control: 'checkbox' | 'input' | 'radio' | 'textarea'
+  control: 'checkbox' | 'input' | 'inputGroup' | 'radio' | 'textarea'
   id: string
-  label: string
+  label?: string
   type?: string
-  defaultValue?: string | boolean
   options?: option[]
   rows?: number
   focus?: boolean
+  disabled?: boolean
 }
 
 type option = {
@@ -30,6 +31,7 @@ type option = {
 }
 const Checkbox = dynamic<InputProps>(() => import('./Checkbox') as any)
 const Input = dynamic<InputProps>(() => import('./Input') as any)
+const InputGroup = dynamic<InputProps>(() => import('./InputGroup') as any)
 const Radio = dynamic<InputProps>(() => import('./Radio') as any)
 const Textarea = dynamic<InputProps>(() => import('./Textarea') as any)
 
@@ -39,6 +41,8 @@ export const InputControl: React.FC<InputControlProps> = ({ control, ...rest }) 
       return <Checkbox rest={ rest } />
     case 'input':
       return <Input rest={ rest } />
+    case 'inputGroup':
+      return <InputGroup rest={ rest } />
     case 'radio':
       return <Radio rest={ rest } />
     case 'textarea':

@@ -8,7 +8,6 @@ type InputProps = {
   rest: {
     id: string
     label: string
-    defaultValue?: string
     options: option[]
   }
 }
@@ -19,12 +18,8 @@ type option = {
 }
 
 const Radio: React.FC<InputProps> = ({ rest }) => {
-  const { id, label, options, defaultValue } = rest
-  const { register, watch, setValue } = useFormContext()
-
-  React.useEffect(() => {
-    setValue(id, defaultValue)
-  }, [])
+  const { id, label, options } = rest
+  const { register, watch } = useFormContext()
 
   return <div className={ css(styles.inputWrapper) }>
     <label className={ css(styles.label, styles.labelTouched) }>{ label }</label>
