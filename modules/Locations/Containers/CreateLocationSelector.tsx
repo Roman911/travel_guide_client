@@ -1,8 +1,10 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { useForm, FormProvider } from 'react-hook-form'
 import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
-import * as Yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from "yup"
 import { css } from "aphrodite/no-important"
 import { CREATE_LOCATION } from "../../../apollo/mutations"
 import { modalActions, uploadActions } from '../../../redux/actions'
@@ -11,6 +13,7 @@ import { CreateLocation, WrapperLocationSelector } from '../Components'
 import baseStyles from "../../../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { errors } from "../../../config/errorsText"
 
 type clsProps = {
   latLng: {
@@ -27,21 +30,29 @@ type UploadFileType = {
   }
 }
 
+const schema = yup.object().shape({
+  title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(50, errors.maxTitle),
+  type_rout: yup.string().required(),
+  description: yup.string().min(20, errors.minText),
+  small_text: yup.string().min(20, errors.minText)
+})
+
+const defaultValues = {
+  coordinateY: '0.00000',
+  coordinateX: '0.00000',
+  isType: 'other',
+  location: ['область', 'місто', 'вулиця']
+}
+
 export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }: clsProps): any => {
   const dispatch = useDispatch()
   const { data } = useSelector((state: { user: User }) => state.user)
   const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
+  const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const [ showMobileMenu, setShowMobileMenu ] = React.useState(false)
   const [ createLocations ] = useMutation(CREATE_LOCATION)
-  const initialValues = { title: '', cover: '', small_text: '', linkToPost: '', coordinateY: '0.00000', coordinateX: '0.00000', isType: 'other', location: ['область', 'місто', 'вулиця'] }
-  const validationSchema = Yup.object({
-    title: Yup.string()
-      .min(5, 'Коротка назва')
-      .max(50, 'Дуже велика назва')
-      .required('Required')
-  })
 
-  const onSubmit = (values, onSubmitProps) => {
+  const onSubmit = (values) => {
     const coordinates = [ values.coordinateY, values.coordinateX ]
     createLocations({
       variables: {
@@ -57,13 +68,10 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
       }
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Локація успішно добавлена!'))
+        dispatch(modalActions.showModal('Локація успішно створена!'))
         dispatch(uploadActions.setData(null))
-        onSubmitProps.resetForm()
+        methods.reset()
       }
-      onSubmitProps.setSubmitting(false)
-    }).catch( () => {
-      onSubmitProps.setSubmitting(false)
     })
   }
   const AutoRef = () => {
@@ -98,14 +106,19 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
       }
     </button>
     <WrapperLocationSelector showMobileMenu={ showMobileMenu } >
-      <Formik initialValues={ initialValues } onSubmit={ onSubmit } validationSchema={ validationSchema }>
-        {formik => {
-          return <Form>
-            <CreateLocation formik={ formik } file={ file } />
-            <AutoRef />
-          </Form>
-        }}
-      </Formik>
+      <FormProvider { ...methods } >
+        <form onSubmit={ methods.handleSubmit(onSubmit) }>
+          <CreateLocation file={ file } />
+        </form>
+      </FormProvider>
+      {/*<Formik initialValues={ initialValues } onSubmit={ onSubmit } validationSchema={ validationSchema }>*/}
+      {/*  {formik => {*/}
+      {/*    return <Form>*/}
+      {/*      <CreateLocation formik={ formik } file={ file } />*/}
+      {/*      <AutoRef />*/}
+      {/*    </Form>*/}
+      {/*  }}*/}
+      {/*</Formik>*/}
     </WrapperLocationSelector>
   </>
 }

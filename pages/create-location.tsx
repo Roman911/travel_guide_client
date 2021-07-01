@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useDispatch } from 'react-redux'
 import { css } from "aphrodite/no-important"
 import baseStyles from '../styles'
@@ -12,11 +12,11 @@ import { locationsActions } from "../redux/actions"
 const CreateLocation: React.FC =() => {
   const dispatch = useDispatch()
   const { width } = useWindowDimensions()
-  const [ latLng, setLatLnd ] = useState(null)
-  const [ isType, setIsType ] = useState(null)
+  const [ latLng, setLatLnd ] = React.useState(null)
+  const [ isType, setIsType ] = React.useState(null)
   const options = { location: latLng, isType, search: true }
 
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(locationsActions.changeData({ control: 'MarkerQuery' }))
     if (options) {
       dispatch(locationsActions.changeData(options))

@@ -7,19 +7,18 @@ import baseStyle from "../../../styles"
 import { UploadFile } from "../../UploadFile"
 
 type CreateLocationProps = {
-  formik: any
   file: any
 }
 
-export const CreateLocation: React.FC<CreateLocationProps> = ({ formik, file }) => {
-  const { values: { location, title } } = formik
+export const CreateLocation: React.FC<CreateLocationProps> = ({ file }) => {
+  // const { values: { location, title } } = formik
 
   return <>
     <FormikControl control='input' id='title' type='text' label='Назва локації:' />
     <UploadFile label='Обкладинка' nameBtn='Завантажити обкладинку' />
-    {
-      file && <div className={ css(baseStyle.imgWrapper) }><Image src={ file.url } className={ css(baseStyle.img) } layout='fill' alt={ title } /></div>
-    }
+    {/*{*/}
+    {/*  file && <div className={ css(baseStyle.imgWrapper) }><Image src={ file.url } className={ css(baseStyle.img) } layout='fill' alt={ title } /></div>*/}
+    {/*}*/}
     <FormikControl control='select' id='isType' type='text' label='Тип локації:' options={ locationsType } />
     <FormikControl control='inputGroup' id='location' valueMap={ location } />
     <FormikControl control='textarea' name='small_text' type='text' label='Короткий опис:' />
@@ -28,7 +27,7 @@ export const CreateLocation: React.FC<CreateLocationProps> = ({ formik, file }) 
       <FormikControl control='input' id='coordinateX' type='text' label='Довгота:' />
     </div>
     <div className={ css(baseStyle.flexSB) }>
-      <Button type="submit" nameBtn='Зберегти' isSubmitting={ formik.isSubmitting } />
+      <Button type="submit" nameBtn='Зберегти' isSubmitting={ false } />
     </div>
   </>
 }
