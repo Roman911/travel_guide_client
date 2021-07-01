@@ -1,42 +1,42 @@
 export const locationsType = [
   {
-    value: 'other',
+    id: 'other',
     title: 'Інше'
   },
   {
-    value: 'castle',
+    id: 'castle',
     title: 'Замки'
   },
   {
-    value: 'palace',
+    id: 'palace',
     title: 'Палаці'
   },
   {
-    value: 'museum',
+    id: 'museum',
     title: 'Музеї'
   },
   {
-    value: 'little-known-places',
+    id: 'little-known-places',
     title: 'Маловідомі місця'
   },
   {
-    value: 'mountain',
+    id: 'mountain',
     title: 'Гори'
   },
   {
-    value: 'viaduct',
+    id: 'viaduct',
     title: 'Мости та віадуки'
   },
   {
-    value: 'park',
+    id: 'park',
     title: 'Парки'
   },
   {
-    value: 'camping',
+    id: 'camping',
     title: 'Кемпінги'
   },
   {
-    value: 'temple',
+    id: 'temple',
     title: 'Храми'
   }
 ]

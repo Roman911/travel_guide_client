@@ -18,9 +18,7 @@ const Input: React.FC<InputProps> = ({ rest: { id, label, focus, type } }) => {
   const { register, formState: { errors, touchedFields }, watch, setFocus } = useFormContext()
 
   React.useEffect(() => {
-    if (focus) {
-      setFocus(id)
-    }
+    if (focus) setFocus(id)
   }, [ setFocus ])
 
   return <div className={ css(styles.wrapper) }>

@@ -16,13 +16,14 @@ export default StyleSheet.create({
     cursor: 'text'
   },
   btn: {
-    fontSize: '0.8rem',
+    fontSize: '0.75rem',
     boxShadow: `0 5px 12px rgba(0,0,0,.1)`,
     padding: '8px 16px',
     background: btn,
     color: '#fff',
     textTransform: 'uppercase',
     transition: '200ms',
+    cursor: 'pointer',
     ':hover': {
       boxShadow: `0 5px 16px rgba(0,0,0,.16)`,
     }

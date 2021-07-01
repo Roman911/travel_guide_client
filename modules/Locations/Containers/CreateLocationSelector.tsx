@@ -1,7 +1,6 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
-import { useFormikContext, Formik, Form } from "formik"
 import { useMutation } from '@apollo/react-hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
@@ -41,7 +40,7 @@ const defaultValues = {
   coordinateY: '0.00000',
   coordinateX: '0.00000',
   isType: 'other',
-  location: ['область', 'місто', 'вулиця']
+  location: [{ value: 'область' }, { value: 'місто' }, { value: 'вулиця' }]
 }
 
 export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }: clsProps): any => {
@@ -54,6 +53,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
 
   const onSubmit = (values) => {
     const coordinates = [ values.coordinateY, values.coordinateX ]
+    const location = values.location.map(i => i.value)
     createLocations({
       variables: {
         locationsInput: {
@@ -63,7 +63,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
           small_text: values.small_text,
           coordinates: coordinates,
           isType: values.isType,
-          address: values.location
+          address: location
         }
       }
     }).then(data => {
@@ -74,25 +74,17 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
       }
     })
   }
-  const AutoRef = () => {
-    const { values, setFieldValue } = useFormikContext()
-    React.useEffect(() => {
-      if (latLng) {
-        setFieldValue( 'coordinateY', String(latLng.lat) )
-        setFieldValue( 'coordinateX', String(latLng.lng) )
-      }
-    }, [latLng])
-    React.useEffect(() => {
-      // @ts-ignore
-      setIsType(values.isType)
-      // @ts-ignore
-    }, [values.isType])
-    return null
-  }
 
-  const handleClick = () => {
-    setShowMobileMenu(prev => !prev)
-  }
+  React.useEffect(() => {
+    if (latLng) {
+      methods.setValue('coordinateY', String(latLng.lat))
+      methods.setValue('coordinateX', String(latLng.lng))
+    }
+  }, [latLng])
+
+  React.useEffect(() => setIsType(methods.watch('isType')), [methods.watch('isType')])
+
+  const handleClick = () => setShowMobileMenu(prev => !prev)
 
   return <>
     <button onClick={() => handleClick()} className={ css(baseStyles.btnCreateLocation, showMobileMenu && baseStyles.btnClosedLocationSelect) }>
@@ -111,14 +103,6 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
           <CreateLocation file={ file } />
         </form>
       </FormProvider>
-      {/*<Formik initialValues={ initialValues } onSubmit={ onSubmit } validationSchema={ validationSchema }>*/}
-      {/*  {formik => {*/}
-      {/*    return <Form>*/}
-      {/*      <CreateLocation formik={ formik } file={ file } />*/}
-      {/*      <AutoRef />*/}
-      {/*    </Form>*/}
-      {/*  }}*/}
-      {/*</Formik>*/}
     </WrapperLocationSelector>
   </>
 }
