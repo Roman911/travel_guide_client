@@ -69,6 +69,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
   const directionsRendererOptions = React.useMemo(() => {
     return {
       directions: response,
+      suppressMarkers: true
     }
   }, [ response ])
 

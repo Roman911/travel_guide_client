@@ -29,6 +29,13 @@ const Direction:React.FC = ({ data: { loading, data } }: any): any => {
   React.useEffect(() => {
     if (data) {
       dispatch(directionLocations.newWaypoints(direction))
+      dispatch(locationsActions.changeData({ locations: direction.waypoints.map(i => {
+        return {
+          _id: i.locationId,
+          coordinates: [i.location.lat, i.location.lng],
+          isType: "other"
+        }
+      })}))
     }
   }, [ data ])
 

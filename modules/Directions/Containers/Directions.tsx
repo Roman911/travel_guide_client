@@ -26,9 +26,7 @@ export const Directions: React.FC = (): any => {
   }, [])
 
   React.useEffect(() => {
-    if (data) {
-      dispatch(directionLocations.allDirections(allDirections))
-    }
+    if (data) dispatch(directionLocations.allDirections(allDirections))
   }, [ data ])
 
   if (loading) return ''

@@ -81,5 +81,10 @@ export default StyleSheet.create({
   },
   sourceSpan: {
     paddingLeft: 10
+  },
+  icon: {
+    display: 'block',
+    marginRight: 20,
+    fontSize: 30
   }
 })

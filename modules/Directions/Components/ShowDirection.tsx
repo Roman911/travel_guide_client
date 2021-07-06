@@ -3,6 +3,8 @@ import React from "react"
 import dynamic from "next/dynamic"
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCar, faWalking, faBiking } from "@fortawesome/free-solid-svg-icons"
 // import { PopularsPosts } from '../'
 import { Likes, PopularsPosts, GoogleMaps } from "../../"
 // import { InfoBar, Source } from "../"
@@ -44,6 +46,14 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <div className={ css(styles.wrapperContent) }>
+          <div className={ css(baseStyles.flex) }>
+            {
+              direction.travelMode.map(i => {
+                const icon = i === 'BICYCLING' ? faBiking : i === 'WALKING' ? faWalking : faCar
+                return <FontAwesomeIcon className={ css(styles.icon) } icon={ icon } />
+              })
+            }
+          </div>
           <p className={ css(styles.text) }>{ small_text }</p>
           <GoogleMaps directions={ true } />
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>

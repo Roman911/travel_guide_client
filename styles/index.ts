@@ -50,7 +50,7 @@ export default StyleSheet.create({
     position: 'relative',
     transition: '300ms',
     ':hover': {
-      height: 230
+      height: 210
     },
     '@media (max-width: 690px)': {
       height: 'auto'
