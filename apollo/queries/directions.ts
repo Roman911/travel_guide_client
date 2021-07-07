@@ -44,6 +44,7 @@ export const DIRECTION = gql`
       waypoints {
         address
         infoLocation
+        cover
         location {
           lat
           lng

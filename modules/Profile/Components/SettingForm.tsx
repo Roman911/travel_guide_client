@@ -1,12 +1,12 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import { css } from 'aphrodite/no-important'
 import {Button, ButtonLink, FormikControl} from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './settingStyles'
 import { UserData } from '../../../typeScript/user'
-import {locationsType} from "../../../config/locations";
-import {SortLocationInput} from "../../GoogleMaps/Components";
+import { locationsType } from "../../../config/locations"
+import { SortLocationInput } from "../../GoogleMaps/Components"
 
 type SettingFormProps = {
   user: UserData
@@ -25,7 +25,7 @@ const social = [
 export const SettingForm: React.FC<SettingFormProps> = ({ formik, user, locationsChange, resetLocationsChange }): any => {
   const { socials } = user
 
-  useEffect(() => {
+  React.useEffect(() => {
     social.map(item => {
       if (socials[item]) {
         formik.setFieldValue(`socials.${ item }`, socials[item])
@@ -45,9 +45,9 @@ export const SettingForm: React.FC<SettingFormProps> = ({ formik, user, location
         <div className={ css(styles.sort) }>
           { locationsType.map((item) => {
             const filterSelect = locationsChange.filter(select => {
-              return item.value === select.type
+              return item.id === select.type
             })
-            return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } filterSelect={ filterSelect } />
+            return <SortLocationInput key={ item.id } value={ item.id } title={ item.title } filterSelect={ filterSelect } />
           }) }
         </div>
       </div>

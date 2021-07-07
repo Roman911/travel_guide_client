@@ -28,9 +28,9 @@ export const SortLocation: React.FC<SortLocationProps> = ({ locationsChange, sho
     <div className={ css(styles.content, styles.bar, showBar && styles.activeBar) }>
       { locationsType.map((item) => {
         const filterSelect = locationsChange.filter(select => {
-          return item.value === select.type
+          return item.id === select.type
         })
-        return <SortLocationInput key={ item.value } value={ item.value } title={ item.title } filterSelect={ filterSelect } />
+        return <SortLocationInput key={ item.id } value={ item.id } title={ item.title } filterSelect={ filterSelect } />
       }) }
       <div className={ css(styles.btn) }>
         <ButtonLink nameBtn='Показати всі' handleClick={ handleClickReset } />

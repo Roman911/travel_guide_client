@@ -6,7 +6,7 @@ import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCar, faWalking, faBiking } from "@fortawesome/free-solid-svg-icons"
 // import { PopularsPosts } from '../'
-import { Likes, PopularsPosts, GoogleMaps } from "../../"
+import { Likes, PopularsPosts, GoogleMaps, DirectionsLocations } from "../../"
 // import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
@@ -29,7 +29,7 @@ const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/
 export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, width, changeLike }) => {
   const { data } = user
   const userId = data ? data._id : undefined
-  const { _id, title, small_text, views, likes, author, createdAt, editor } = direction
+  const { _id, title, small_text, views, likes, author, createdAt, editor, endStart } = direction
   const [ inView, setInView ] = React.useState(false)
   const widthTransform = width > 1070
   const handleChange = e => {
@@ -48,14 +48,17 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
         <div className={ css(styles.wrapperContent) }>
           <div className={ css(baseStyles.flex) }>
             {
-              direction.travelMode.map(i => {
+              direction.travelMode.map((i, index) => {
                 const icon = i === 'BICYCLING' ? faBiking : i === 'WALKING' ? faWalking : faCar
-                return <FontAwesomeIcon className={ css(styles.icon) } icon={ icon } />
+                return <FontAwesomeIcon key={ index } className={ css(styles.icon) } icon={ icon } />
               })
             }
           </div>
           <p className={ css(styles.text) }>{ small_text }</p>
-          <GoogleMaps directions={ true } />
+          <div style={{ position: 'relative', display: 'flex', marginBottom: '20px' }}>
+            <DirectionsLocations endStartPoint={ endStart } direction={ true } />
+            <GoogleMaps directions={ true } width='calc(100% - 290px)' />
+          </div>
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>
           <Author isArticle={ true } author={ author } userId={ userId } />
           <div className={ css(baseStyles.flexSB, baseStyles.block, baseStyles.bottom) }>

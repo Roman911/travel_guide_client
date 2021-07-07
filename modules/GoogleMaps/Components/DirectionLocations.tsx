@@ -11,6 +11,7 @@ type DirectionLocationsProps = {
   waypoints: Waypoints[]
   removeLocation: (index: number) => void
   endStart: boolean
+  direction?: boolean
 }
 
 type Waypoints = {
@@ -24,23 +25,29 @@ type Waypoints = {
   }
 }
 
-export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, endStart }) => {
+export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, endStart, direction }) => {
+
+  console.log(waypoints)
+
   return <div className={ css(styles.dlWrapper) }>
     { waypoints.map((i, index) => {
-      const address = i.infoLocation ? i.title : i.address
       return <React.Fragment key={ index }>
         <div className={ css(baseStyles.flexVFS) }>
           <div className={ css(baseStyles.flexVFS) }>
             <h5 className={ css(styles.address) }>{ index + 1 }.</h5>
-            <h5 className={ css(styles.address) }>{ address }</h5>
+            <h5 className={ css(styles.address) }>{ i.address }</h5>
           </div>
-          <button onClick={ () => removeLocation(index) } >
-            <FontAwesomeIcon className={ css(styles.dlIcon) } icon={ faTimes } />
-          </button>
+          { !direction && <button onClick={ () => removeLocation(index) } >
+              <FontAwesomeIcon className={ css(styles.dlIcon) } icon={ faTimes } />
+            </button>
+          }
         </div>
-        { i.infoLocation && <Image src={ i.cover.url } layout='intrinsic' alt={ i.title } width={ 240 } height={ 155 } /> }
+        { i.infoLocation &&
+          // @ts-ignore
+          <Image src={ direction ? i.cover : i.cover.url } layout='intrinsic' alt={ i.address } width={ 240 } height={ 155 } />
+        }
       </React.Fragment>
     }) }
-    <InputControl control='checkbox' id='endStart' label='Повернутись на точку старту' />
+    { !direction && <InputControl control='checkbox' id='endStart' label='Повернутись на точку старту' /> }
   </div>
 }

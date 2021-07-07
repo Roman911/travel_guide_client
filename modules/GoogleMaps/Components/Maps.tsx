@@ -10,6 +10,8 @@ import { Location } from '../../../typeScript/googleMaps'
 import { Directions } from "../Containers/Directions"
 import { directionLocations } from '../../../redux/actions'
 
+import mapStyles from "../../../styles/mapStyles"
+
 type SearchProps = {
   panTo: any
 }
@@ -72,7 +74,7 @@ export const Maps: React.FC<MapsProps> = ({ index, selectedPark, setSelectedPark
       mapContainerStyle={ mapContainerStyle }
       zoom={ zoom }
       center={ center }
-      options={{ disableDefaultUI }}
+      options={{ disableDefaultUI, styles: mapStyles }}
       onLoad={ onMapLoad }
       onClick={ event => handleClick(event) }
     >

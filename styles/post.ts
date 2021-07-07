@@ -46,7 +46,7 @@ export default StyleSheet.create({
     }
   },
   postTitle: {
-    fontSize: '2.8rem',
+    fontSize: '2.4rem',
     color: '#5a5858',
     '@media (max-width: 870px)': {
       fontSize: '2.2rem'

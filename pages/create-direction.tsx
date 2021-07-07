@@ -56,8 +56,9 @@ const CreateDirection: React.FC = (): any => {
       return {
         infoLocation: i.infoLocation,
         location: i.location,
-        address: i.address || 'undefined',
-        locationId: i._id || 'undefined'
+        address: i.address || i.title,
+        locationId: i._id || 'undefined',
+        cover: i.cover.url || 'undefined'
       }
     })
     createDirection({

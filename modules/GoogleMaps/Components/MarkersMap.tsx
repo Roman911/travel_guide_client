@@ -11,11 +11,11 @@ type MarkersMapProps = {
 const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { locations, setSelectedPark } }): any => {
   const { locations: allLocations } = locations
 
-  return allLocations.map((park) => {
+  return allLocations.map((park, index) => {
     const { _id, isType, coordinates } = park
     const [ lat, lng ] = coordinates
     return <Marker
-      key={ _id }
+      key={ index }
       onClick={() => {
         setSelectedPark(_id )
       }}
@@ -23,6 +23,7 @@ const MarkersMap: React.FC<MarkersMapProps> = ({ rest: { locations, setSelectedP
       icon={{
         url: `/static/images/${isType}.png`
       }}
+      label={ isType === 'other' && String(index +1) }
     />
   })
 }
