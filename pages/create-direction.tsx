@@ -43,6 +43,7 @@ const CreateDirection: React.FC = (): any => {
   const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
+    dispatch(directionLocations.selectCreateDirection(true))
     dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
   }, [ data ])
 

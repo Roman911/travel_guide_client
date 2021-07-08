@@ -4,6 +4,7 @@ export interface Direction {
   endStart: boolean
   travelMode: any
   allDirections: any[]
+  createDirection?: boolean
 }
 
 export type DirectionData = {

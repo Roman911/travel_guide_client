@@ -10,7 +10,6 @@ import styles from './styles'
 type DirectionLocationsProps = {
   waypoints: Waypoints[]
   removeLocation: (index: number) => void
-  endStart: boolean
   direction?: boolean
 }
 
@@ -25,10 +24,7 @@ type Waypoints = {
   }
 }
 
-export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, endStart, direction }) => {
-
-  console.log(waypoints)
-
+export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction }) => {
   return <div className={ css(styles.dlWrapper) }>
     { waypoints.map((i, index) => {
       return <React.Fragment key={ index }>

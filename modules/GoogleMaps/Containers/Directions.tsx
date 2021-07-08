@@ -18,11 +18,10 @@ type DirectionsProps = {
 
 export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) => {
   const dispatch = useDispatch()
-  const { directionLocations: { point, waypoints, endStart, travelMode, allDirections } } = useSelector((state: RootState) => state)
+  const { directionLocations: { point, waypoints, endStart, travelMode, allDirections, createDirection } } = useSelector((state: RootState) => state)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
   const dataLocation = data ? data.location : undefined
-
   const directionsOptions = {
     waypoints: index !== undefined ? allDirections[index].waypoints : waypoints,
     endStart: index !== undefined ? allDirections[index].endStart : endStart,
@@ -44,9 +43,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
   }, [ dataLocation ])
 
   React.useEffect(() => {
-    if (selectedPark) {
-      setLocation({ variables: { _id: selectedPark } })
-    }
+    if (selectedPark) setLocation({ variables: { _id: selectedPark } })
   }, [ selectedPark ])
 
   const directionsCallback = React.useCallback((res) => {
@@ -73,18 +70,13 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
     }
   }, [ response ])
 
-  const addToWaypoints = () => {
-    dispatch(directionLocations.addPointToWaypoints())
-  }
-
-  const cancel = () => {
-    dispatch(directionLocations.addPoint(null))
-  }
+  const addToWaypoints = () => dispatch(directionLocations.addPointToWaypoints())
+  const cancel = () => dispatch(directionLocations.addPoint(null))
 
   return <>
     { directionsOptions.waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/> }
     { response !== null && <DirectionsRenderer options={ directionsRendererOptions } /> }
-    { point && <InfoWindow position={ point.location } onCloseClick={ () => cancel() }>
+    { createDirection && point && <InfoWindow position={ point.location } onCloseClick={ () => cancel() }>
       <InformWindowComponent point={ point } addToWaypoints={ addToWaypoints } cancel={ cancel } />
     </InfoWindow>}
   </>

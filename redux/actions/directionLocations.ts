@@ -39,6 +39,12 @@ const Actions = {
       type: 'DIRECTION_LOCATIONS:NEW_WAYPOINTS',
       payload: data
     }
+  },
+  selectCreateDirection: (select: boolean) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:SELECT_CREATE_DIRECTION',
+      payload: select
+    }
   }
 }
 

@@ -9,7 +9,8 @@ const initialState = {
   endStart: false,
   travelMode: ['DRIVING'],
   news: true,
-  allDirections: []
+  allDirections: [],
+  createDirection: false
 }
 
 type ActionType = {
@@ -61,6 +62,11 @@ const directionLocations = (state = initialState, actions: ActionType) => {
         waypoints: actions.payload.waypoints,
         endStart: actions.payload.endStart,
         travelMode: actions.payload.travelMode
+      }
+    case 'DIRECTION_LOCATIONS:SELECT_CREATE_DIRECTION':
+      return {
+        ...state,
+        createDirection: actions.payload
       }
     default:
       return state
