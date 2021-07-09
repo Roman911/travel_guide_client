@@ -43,7 +43,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
         <Date date={ createdAt } format='LL'/>
       </div>
     </div>
-    <Tags tags={ tags } />
+    <Tags tags={ tags } path='/directions' />
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <div className={ css(styles.wrapperContent) }>

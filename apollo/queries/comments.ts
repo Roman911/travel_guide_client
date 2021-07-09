@@ -1,4 +1,5 @@
 import { gql } from 'apollo-boost'
+import { Author } from '../variabels'
 
 export const COMMENTS = gql`
   query comments($postId: ID!) {
@@ -6,11 +7,7 @@ export const COMMENTS = gql`
       _id
       content
       createdAt
-      author {
-        _id
-        name
-        avatar
-      }
+      ${Author}
       answers {
         content
         createdAt

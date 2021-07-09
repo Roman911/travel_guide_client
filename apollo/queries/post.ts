@@ -1,22 +1,29 @@
 import gql from 'graphql-tag'
+import { Author } from '../variabels'
+
+const Posts = `
+  {
+    _id
+    title
+    createdAt
+    views
+    likes
+    comments
+    small_text
+    cover
+    ${Author}
+  }
+`
 
 export const ALL_POSTS = gql`
   query allPosts {
-    allPosts {
-      _id
-      title
-      createdAt
-      views
-      likes
-      comments
-      small_text
-      author {
-        _id
-        name
-        avatar
-      }
-      cover
-    }
+    allPosts ${Posts}
+  }
+`
+
+export const POST_SORT_BY_TAG = gql`
+  query postsSortByTag($tag: String!) {
+    postsSortByTag(tag: $tag) ${Posts}
   }
 `
 
@@ -47,19 +54,14 @@ export const POST = gql`
       small_text
       cover
       isPrice
-      author {
-        _id
-        name
-        avatar
-        rating
-      }
+      cover
+      ${Author}
       location {
         _id
         coordinates
         address
         isType
       }
-      cover
     }
   }
 `

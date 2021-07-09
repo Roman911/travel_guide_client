@@ -1,13 +1,13 @@
-import Link from "next/link"
+import React from "react"
 import { css } from "aphrodite/no-important"
 import styles from './styles'
 
-export const Tag = ({ tag }) => {
+type TagProps = {
+  tag: string
+}
+
+export const Tag: React.FC<TagProps> = ({ tag }) => {
   return <span className={ css(styles.tag) }>
-    <Link href={ '/' } >
-      <a className={ css(styles.tagA) }>
-      { tag }
-    </a>
-    </Link>
+    { tag }
   </span>
 }

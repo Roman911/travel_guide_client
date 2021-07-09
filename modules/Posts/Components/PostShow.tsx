@@ -41,7 +41,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width, changeLike 
         <Date date={ createdAt } format='LL'/>
       </div>
     </div>
-    <Tags tags={ tags } />
+    <Tags tags={ tags } path='/posts' />
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <div className={ css(styles.wrapperContent) }>
