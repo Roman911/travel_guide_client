@@ -18,6 +18,7 @@ export type DirectionData = {
   editor: string
   views: number
   likes: string[]
+  tags: string[]
   author: {
     _id: string
     avatar: string

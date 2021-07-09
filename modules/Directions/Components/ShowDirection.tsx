@@ -6,7 +6,7 @@ import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCar, faWalking, faBiking } from "@fortawesome/free-solid-svg-icons"
 // import { PopularsPosts } from '../'
-import { Likes, PopularsPosts, GoogleMaps, DirectionsLocations } from "../../"
+import {Likes, PopularsPosts, GoogleMaps, DirectionsLocations, Tags} from "../../"
 // import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
@@ -29,7 +29,7 @@ const Comments = dynamic<CommentsProps>(() => import('../../Comments/Containers/
 export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, width, changeLike }) => {
   const { data } = user
   const userId = data ? data._id : undefined
-  const { _id, title, small_text, views, likes, author, createdAt, editor, endStart } = direction
+  const { _id, title, small_text, views, likes, author, createdAt, editor, endStart, tags } = direction
   const [ inView, setInView ] = React.useState(false)
   const widthTransform = width > 1070
   const handleChange = e => {
@@ -43,6 +43,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
         <Date date={ createdAt } format='LL'/>
       </div>
     </div>
+    <Tags tags={ tags } />
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <div className={ css(styles.wrapperContent) }>

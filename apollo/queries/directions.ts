@@ -41,6 +41,7 @@ export const DIRECTION = gql`
       small_text
       endStart
       travelMode
+      tags
       waypoints {
         address
         infoLocation

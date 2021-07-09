@@ -29,9 +29,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ location }): any
             <div className={ css(baseStyles.br) } />
             <Link href={{
               pathname: '/create-location',
-              query: {
-                isCreatePost: true
-              }
+              query: { isCreatePost: true }
             }}>
               <a className={ css(styles.btn) }><Button nameBtn='Створити локацію' isSubmitting={ false } /></a>
             </Link>

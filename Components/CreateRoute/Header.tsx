@@ -36,5 +36,6 @@ export const Header: React.FC = () => {
         <InputControl control='checkbox' id='walking' label='Піший маршрут' />
       </div>
     </div>
+    <InputControl control='input' id='tag' type='text' label='Теги:' />
   </div>
 }

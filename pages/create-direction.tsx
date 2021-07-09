@@ -51,7 +51,7 @@ const CreateDirection: React.FC = (): any => {
     dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))
   }, [ car, bicycle, walking ])
 
-  const onSubmit = ({ title, type_rout, small_text, editor }) => {
+  const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
     const token = userData ? userData.token : null
     const waypoints = points.map(i => {
       return {
@@ -62,6 +62,7 @@ const CreateDirection: React.FC = (): any => {
         cover: i.cover.url || 'undefined'
       }
     })
+    const tags = tag.split(' ')
     createDirection({
       variables: {
         directionInput: {
@@ -72,7 +73,8 @@ const CreateDirection: React.FC = (): any => {
           travelMode,
           waypoints,
           endStart,
-          editor
+          editor,
+          tags
         }
       }
     }).then(data => {

@@ -28,5 +28,5 @@ export const DirectionsLocations: React.FC<DirectionsLocationsProps> = ({ endSta
     dispatch(directionLocations.selectEndDirection(endStart))
   }, [ endStart ])
 
-  return <DirectionLocations waypoints={ waypoints } removeLocation={ removeLocation } endStart={ endStart } direction={ direction } />
+  return <DirectionLocations waypoints={ waypoints } removeLocation={ removeLocation } direction={ direction } />
 }

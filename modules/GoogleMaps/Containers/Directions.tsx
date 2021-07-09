@@ -36,7 +36,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
         location: { lat: Number(lat), lng: Number(lng) },
         typeMarker: 'coordinates',
         cover: dataLocation.cover,
-        title: dataLocation.title,
+        address: dataLocation.title,
         infoLocation: true
       }))
     }
