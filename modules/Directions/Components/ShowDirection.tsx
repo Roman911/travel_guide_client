@@ -6,7 +6,7 @@ import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCar, faWalking, faBiking } from "@fortawesome/free-solid-svg-icons"
 // import { PopularsPosts } from '../'
-import {Likes, PopularsPosts, GoogleMaps, DirectionsLocations, Tags} from "../../"
+import { Likes, PopularsPosts, GoogleMaps, DirectionsLocations, Tags } from "../../"
 // import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
@@ -57,7 +57,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
           </div>
           <p className={ css(styles.text) }>{ small_text }</p>
           <div style={{ position: 'relative', display: 'flex', marginBottom: '20px' }}>
-            <DirectionsLocations endStartPoint={ endStart } direction={ true } />
+            <DirectionsLocations endStartPoint={ endStart } direction={ true } height='400px' />
             <GoogleMaps directions={ true } width='calc(100% - 290px)' />
           </div>
           <div className='editorWrapper' dangerouslySetInnerHTML={{__html: editor}}/>

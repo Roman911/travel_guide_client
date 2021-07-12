@@ -49,6 +49,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
   const directionsCallback = React.useCallback((res) => {
     if (res !== null && res.status === 'OK') {
       setResponse(res)
+      dispatch(directionLocations.selectLegs(res.routes[0].legs))
     } else {
       console.log('response: ', res)
     }
@@ -74,7 +75,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
   const cancel = () => dispatch(directionLocations.addPoint(null))
 
   return <>
-    { directionsOptions.waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback }/> }
+    { directionsOptions.waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback } /> }
     { response !== null && <DirectionsRenderer options={ directionsRendererOptions } /> }
     { createDirection && point && <InfoWindow position={ point.location } onCloseClick={ () => cancel() }>
       <InformWindowComponent point={ point } addToWaypoints={ addToWaypoints } cancel={ cancel } />

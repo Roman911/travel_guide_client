@@ -45,6 +45,12 @@ const Actions = {
       type: 'DIRECTION_LOCATIONS:SELECT_CREATE_DIRECTION',
       payload: select
     }
+  },
+  selectLegs: (legs: any[]) => {
+    return {
+      type: 'DIRECTION_LOCATIONS:SELECT_LEGS',
+      payload: legs
+    }
   }
 }
 

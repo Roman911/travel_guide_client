@@ -5,6 +5,7 @@ export interface Direction {
   travelMode: any
   allDirections: any[]
   createDirection?: boolean
+  legs?: any[]
 }
 
 export type DirectionData = {
@@ -19,6 +20,7 @@ export type DirectionData = {
   views: number
   likes: string[]
   tags: string[]
+  legs?: any[]
   author: {
     _id: string
     avatar: string

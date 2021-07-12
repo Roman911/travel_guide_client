@@ -38,7 +38,7 @@ const CreateDirection: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
-  const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode }} = useSelector((state: RootState) => state)
+  const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode, legs }} = useSelector((state: RootState) => state)
   const [ createDirection ] = useMutation(CREATE_DIRECTION)
   const { car, bicycle, walking } = methods.watch()
 
@@ -63,6 +63,12 @@ const CreateDirection: React.FC = (): any => {
       }
     })
     const tags = tag.split(' ')
+    const legsMap = legs.map(i => {
+      return {
+        distance: i.distance.text,
+        duration: i.duration.text
+      }
+    })
     createDirection({
       variables: {
         directionInput: {
@@ -74,7 +80,8 @@ const CreateDirection: React.FC = (): any => {
           waypoints,
           endStart,
           editor,
-          tags
+          tags,
+          legs: legsMap
         }
       }
     }).then(data => {
@@ -94,7 +101,7 @@ const CreateDirection: React.FC = (): any => {
       <form onSubmit={ methods.handleSubmit(onSubmit) }>
         <Header />
         <div style={{ position: 'relative', display: 'flex' }}>
-          <DirectionsLocations />
+          <DirectionsLocations height='calc(100vh - 200px)' />
           <GoogleMaps disableDefaultUI={ false } directions={ true } width='calc(100% - 290px)' />
           <SortLocations />
         </div>

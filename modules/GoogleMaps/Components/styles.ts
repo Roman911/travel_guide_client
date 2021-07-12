@@ -69,7 +69,6 @@ export default StyleSheet.create({
   // DirectionLocations
   dlWrapper: {
     width: 290,
-    height: 400,
     overflowY: 'auto'
   },
   index: {

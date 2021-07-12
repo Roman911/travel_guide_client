@@ -2,7 +2,8 @@ import React from "react"
 import Image from "next/image"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faTimes, faRoad } from "@fortawesome/free-solid-svg-icons"
+import { faClock } from "@fortawesome/free-regular-svg-icons"
 import { InputControl } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './styles'
@@ -11,6 +12,8 @@ type DirectionLocationsProps = {
   waypoints: Waypoints[]
   removeLocation: (index: number) => void
   direction?: boolean
+  legs?: any[]
+  height: string
 }
 
 type Waypoints = {
@@ -24,8 +27,8 @@ type Waypoints = {
   }
 }
 
-export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction }) => {
-  return <div className={ css(styles.dlWrapper) }>
+export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction, legs, height }) => {
+  return <div style={{ height: height }} className={ css(styles.dlWrapper) }>
     { waypoints.map((i, index) => {
       return <React.Fragment key={ index }>
         <div className={ css(baseStyles.flexVFS) }>
@@ -41,6 +44,14 @@ export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoint
         { i.infoLocation &&
           // @ts-ignore
           <Image src={ direction ? i.cover : i.cover.url } layout='intrinsic' alt={ i.address } width={ 240 } height={ 155 } />
+        }
+        {
+          legs.length -1 === index +1 || legs.length !== 0 && <div>
+            <FontAwesomeIcon className={ css(styles.dlIcon) } icon={ faRoad } />
+            <span>{ legs.length !== index +1 && legs[index +1].distance.text }</span>
+            <FontAwesomeIcon className={ css(styles.dlIcon) } icon={ faClock } />
+            <span>{ legs.length !== index +1 && legs[index +1].duration.text }</span>
+          </div>
         }
       </React.Fragment>
     }) }
