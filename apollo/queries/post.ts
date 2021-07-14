@@ -11,6 +11,7 @@ const Posts = `
     comments
     small_text
     cover
+    last_seen
     ${Author}
   }
 `
