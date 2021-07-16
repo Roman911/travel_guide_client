@@ -8,10 +8,11 @@ import baseStyle from "../../../styles"
 import { UploadFile } from "../../UploadFile"
 
 type CreateLocationProps = {
-  file: any
+  file: any,
+  isSubmitting: boolean
 }
 
-export const CreateLocation: React.FC<CreateLocationProps> = ({ file }) => {
+export const CreateLocation: React.FC<CreateLocationProps> = ({ file, isSubmitting }) => {
   const { watch } = useFormContext()
 
   return <>
@@ -27,7 +28,7 @@ export const CreateLocation: React.FC<CreateLocationProps> = ({ file }) => {
       <InputControl control='input' id='coordinateX' type='text' label='Довгота:' />
     </div>
     <div className={ css(baseStyle.flexSB) }>
-      <Button type="submit" nameBtn='Зберегти' isSubmitting={ false } />
+      <Button type="submit" nameBtn='Зберегти' isSubmitting={ isSubmitting } />
     </div>
   </>
 }

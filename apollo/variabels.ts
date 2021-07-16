@@ -3,5 +3,6 @@ export const Author = `
     _id
     name
     avatar
+    rating
   }
 `

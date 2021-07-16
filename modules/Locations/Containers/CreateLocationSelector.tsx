@@ -31,8 +31,6 @@ type UploadFileType = {
 
 const schema = yup.object().shape({
   title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(50, errors.maxTitle),
-  type_rout: yup.string().required(),
-  description: yup.string().min(20, errors.minText),
   small_text: yup.string().min(20, errors.minText)
 })
 
@@ -100,7 +98,7 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
     <WrapperLocationSelector showMobileMenu={ showMobileMenu } >
       <FormProvider { ...methods } >
         <form onSubmit={ methods.handleSubmit(onSubmit) }>
-          <CreateLocation file={ file } />
+          <CreateLocation file={ file } isSubmitting={ methods.formState.isSubmitting } />
         </form>
       </FormProvider>
     </WrapperLocationSelector>
