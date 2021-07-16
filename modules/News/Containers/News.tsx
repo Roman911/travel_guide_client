@@ -18,7 +18,7 @@ export const News: React.FC = (): any => {
   if  (error ) return `Error! ${error}`
   const posts = !tag ? data.allPosts : data.postsSortByTag
 
-  return <HomePageBlock title='Новини' >
+  return <HomePageBlock title='Новини' content={{ value: 'новин', path: '/posts' }} >
     { posts.map((item, index) => <New key={ index } item={ item } width={ width } userData={ userData } />) }
   </HomePageBlock>
 }

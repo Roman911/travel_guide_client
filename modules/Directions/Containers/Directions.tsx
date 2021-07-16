@@ -33,7 +33,7 @@ export const Directions: React.FC = (): any => {
   if  (error ) return `Error! ${error}`
   const { allDirections } = data
 
-  return <HomePageBlock title='Маршрути' >
+  return <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} >
     { allDirections.map((item, index) => <Direction key={ index } index={ index } item={ item } width={ width } userData={ userData } />) }
   </HomePageBlock>
 }

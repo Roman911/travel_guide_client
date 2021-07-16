@@ -27,5 +27,10 @@ export default StyleSheet.create({
   HomePageBlock: {
     display: 'flex',
     flexWrap: 'wrap'
+  },
+  //Link all posts
+  link: {
+    display: 'flex',
+    justifyContent: 'flex-end'
   }
 })
