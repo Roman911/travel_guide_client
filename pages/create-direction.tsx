@@ -53,13 +53,14 @@ const CreateDirection: React.FC = (): any => {
 
   const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
     const token = userData ? userData.token : null
+
     const waypoints = points.map(i => {
       return {
         infoLocation: i.infoLocation,
         location: i.location,
         address: i.address || i.title,
         locationId: i._id || 'undefined',
-        cover: i.cover.url || 'undefined'
+        cover: i.cover ? i.cover.url : 'undefined'
       }
     })
     const tags = tag.split(' ')
