@@ -12,6 +12,7 @@ export const ALL_DIRECTIONS = gql`
       small_text
       endStart
       travelMode
+      last_seen
       waypoints {
         address
         infoLocation
