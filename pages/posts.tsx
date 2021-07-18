@@ -10,7 +10,7 @@ const Posts = () => {
   return <MainLayout title='Home'>
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
-        <News />
+        <News lengthDefault={ 16 } />
       </LeftBlock>
       {
         widthTransform && <RightBlock>

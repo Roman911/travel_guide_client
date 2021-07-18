@@ -15,7 +15,7 @@ const Direction = () => {
   return <MainLayout title='Home'>
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
-        <Directions />
+        <Directions lengthDefault={ 16 } />
       </LeftBlock>
       {
         widthTransform && <RightBlock>
