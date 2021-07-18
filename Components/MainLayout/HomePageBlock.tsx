@@ -12,18 +12,24 @@ type HomePageBlockProps = {
     value: string
     path: string
   }
+  length: {
+    lengthDefault: number
+    length: number
+  }
 }
 
-export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content: { value, path } }) => {
+export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content: { value, path }, length: { lengthDefault, length }}) => {
   return <div className={ css(styles.HomePageBlockWrapper) }>
     <SectionTitle title={ title } />
     <div className={ css(styles.HomePageBlock) }>
       { children }
     </div>
-    <div className={ css(styles.link) }>
-      <Link href={ path }>
-        <a>Показати більше { value } <FontAwesomeIcon icon={ faArrowRight } /></a>
-      </Link>
-    </div>
+    {
+      length > lengthDefault && <div className={ css(styles.link) }>
+        <Link href={ path }>
+          <a>Показати більше { value } <FontAwesomeIcon icon={ faArrowRight } /></a>
+        </Link>
+      </div>
+    }
   </div>
 }

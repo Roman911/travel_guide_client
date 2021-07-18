@@ -16,8 +16,8 @@ const Home = () => {
   return <MainLayout title='Home'>
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
-        <News />
-        <Directions />
+        <News lengthDefault={ 8 } />
+        <Directions lengthDefault={ 8 } />
       </LeftBlock>
       {
         widthTransform && <RightBlock>

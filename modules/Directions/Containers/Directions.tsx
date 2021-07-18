@@ -8,7 +8,11 @@ import { ALL_DIRECTIONS } from "../../../apollo/queries"
 import { User } from '../../../typeScript/user'
 import { locationsActions, directionLocations } from "../../../redux/actions"
 
-export const Directions: React.FC = (): any => {
+type DirectionsProps = {
+  lengthDefault: number
+}
+
+export const Directions: React.FC<DirectionsProps> = ({ lengthDefault }): any => {
   const dispatch = useDispatch()
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
@@ -33,7 +37,7 @@ export const Directions: React.FC = (): any => {
   if  (error ) return `Error! ${error}`
   const { allDirections } = data
 
-  return <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} >
+  return <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} length={{ lengthDefault, length: 3 }} >
     { allDirections.map((item, index) => <Direction key={ index } index={ index } item={ item } width={ width } userData={ userData } />) }
   </HomePageBlock>
 }

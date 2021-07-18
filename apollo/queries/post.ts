@@ -66,3 +66,9 @@ export const POST = gql`
     }
   }
 `
+
+export const LENGTH_POSTS = gql`
+  query lengthPosts {
+    lengthPosts
+  }
+`
