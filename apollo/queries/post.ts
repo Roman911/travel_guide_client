@@ -17,8 +17,8 @@ const Posts = `
 `
 
 export const ALL_POSTS = gql`
-  query allPosts {
-    allPosts ${Posts}
+  query allPosts($page: Int, $limit: Int) {
+    allPosts(page: $page, limit: $limit) ${Posts}
   }
 `
 

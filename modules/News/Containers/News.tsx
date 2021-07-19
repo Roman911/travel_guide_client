@@ -10,14 +10,17 @@ import { User } from '../../../typeScript/user'
 
 type NewsProps = {
   lengthDefault: number
+  page: number
+  limit: number
 }
 
-export const News: React.FC<NewsProps> = ({ lengthDefault }): any => {
+export const News: React.FC<NewsProps> = ({ lengthDefault, page, limit }): any => {
   const router = useRouter()
   const tag = router.query.item
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
-  const { loading, error, data } = useQuery(!tag ? ALL_POSTS : POST_SORT_BY_TAG, { variables: { tag } })
+  const variables = !tag ? { page, limit } : { tag }
+  const { loading, error, data } = useQuery(!tag ? ALL_POSTS : POST_SORT_BY_TAG, { variables })
   const { data: postsData } = useQuery(LENGTH_POSTS)
   if (loading) return ''
   if (error ) return `Error! ${error}`
