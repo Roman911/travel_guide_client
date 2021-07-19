@@ -13,6 +13,9 @@ export default StyleSheet.create({
   mt: {
     marginTop: 73
   },
+  mb: {
+    marginBottom: 10
+  },
   main: {
     minHeight: 'calc(100vh - 290px)'
   },

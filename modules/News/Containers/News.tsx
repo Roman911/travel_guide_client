@@ -1,5 +1,4 @@
 import React from "react"
-import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import { useQuery } from "@apollo/react-hooks"
 import { useWindowDimensions } from "../../../hooks/useWindowDimensions"
@@ -12,11 +11,10 @@ type NewsProps = {
   lengthDefault: number
   page: number
   limit: number
+  tag?: string
 }
 
-export const News: React.FC<NewsProps> = ({ lengthDefault, page, limit }): any => {
-  const router = useRouter()
-  const tag = router.query.item
+export const News: React.FC<NewsProps> = ({ lengthDefault, page, limit, tag }): any => {
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
   const variables = !tag ? { page, limit } : { tag }
