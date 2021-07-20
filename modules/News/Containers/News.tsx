@@ -11,7 +11,7 @@ type NewsProps = {
   lengthDefault: number
   page: number
   limit: number
-  tag?: string
+  tag: string
 }
 
 export const News: React.FC<NewsProps> = ({ lengthDefault, page, limit, tag }): any => {

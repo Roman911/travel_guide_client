@@ -12,7 +12,7 @@ type DirectionsProps = {
   lengthDefault: number
   page: number
   limit: number
-  tag?: string
+  tag: string
 }
 
 export const Directions: React.FC<DirectionsProps> = ({ lengthDefault, page, limit, tag }): any => {
