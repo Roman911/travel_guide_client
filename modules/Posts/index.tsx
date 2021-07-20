@@ -1,1 +1,0 @@
-export { PopularsPosts } from './Containers'

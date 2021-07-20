@@ -1,12 +1,11 @@
 import React from "react"
-// import Image from "next/image"
 import dynamic from "next/dynamic"
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCar, faWalking, faBiking } from "@fortawesome/free-solid-svg-icons"
-// import { PopularsPosts } from '../'
-import { Likes, PopularsPosts, GoogleMaps, DirectionsLocations, Tags } from "../../"
+import { POPULARS_DIRECTIONS } from "../../../apollo/queries"
+import { Likes, Populars, GoogleMaps, DirectionsLocations, Tags } from "../../"
 // import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
 import baseStyles from '../../../styles'
@@ -75,7 +74,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
         widthTransform && <RightBlock>
           {/*<InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />*/}
           {/*{ data && <InformUserLocation locationId={ location._id } user={ user } /> }*/}
-          <PopularsPosts />
+          <Populars query={ POPULARS_DIRECTIONS } />
         </RightBlock>
       }
     </WithRightBlock>

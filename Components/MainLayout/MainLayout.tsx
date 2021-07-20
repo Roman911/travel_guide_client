@@ -43,7 +43,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
 
   return <>
     <Head>
-      <meta name="description" content="Ми про подорожі" />
+      <meta name="keywords" content='маршрути по україні, веломаршрути, подорожі, цікаві місця' />
+      <meta name="description" content='Ми про подорожі' />
       <title>
         { title } | Travel Guide
       </title>

@@ -1,6 +1,7 @@
 import React from "react"
 import { useDispatch } from 'react-redux'
-import { Directions, News, PopularsPosts } from "../modules"
+import { POPULARS_POSTS, POPULARS_DIRECTIONS } from '../apollo/queries'
+import { Directions, News, Populars } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { locationsActions, directionLocations } from '../redux/actions'
@@ -21,7 +22,8 @@ const Home = () => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <PopularsPosts />
+          <Populars query={ POPULARS_POSTS } value='posts' />
+          <Populars query={ POPULARS_DIRECTIONS } />
         </RightBlock>
       }
     </WithRightBlock>

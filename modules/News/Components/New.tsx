@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from "next/head"
 import Link from 'next/link'
 import Image from "next/image"
 import { css } from 'aphrodite/no-important'
@@ -22,6 +23,10 @@ export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
   const imgSize = width >= 690 ? { width: 254, height: 144 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }
 
   return <div className={ css(styles.wrapper) }>
+    <Head>
+      <meta name="keywords" content={ `${title}` } />
+      <meta name="description" content={ small_text } />
+    </Head>
     <div className={ css(styles.content) }>
       <Link href={`/post/[id]`} as={`/post/${ _id }`} >
         <a><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>

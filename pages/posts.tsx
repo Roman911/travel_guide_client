@@ -1,8 +1,9 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { News, PopularsPosts, Tags } from "../modules"
+import { News, Populars, Tags } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
+import { POPULARS_POSTS } from "../apollo/queries"
 
 const Posts = () => {
   const router = useRouter()
@@ -18,7 +19,7 @@ const Posts = () => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <PopularsPosts />
+          <Populars query={ POPULARS_POSTS } value='posts' />
         </RightBlock>
       }
     </WithRightBlock>

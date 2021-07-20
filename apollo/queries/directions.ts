@@ -54,6 +54,15 @@ export const DIRECTION = gql`
   }
 `
 
+export const POPULARS_DIRECTIONS = gql`
+  query popularsDirections {
+    popularsDirections {
+      _id
+      title
+    }
+  }
+`
+
 export const DIRECTIONS_SORT_BY_TAG = gql`
   query directionsSortByTag($tag: String!) {
     directionsSortByTag(tag: $tag) {

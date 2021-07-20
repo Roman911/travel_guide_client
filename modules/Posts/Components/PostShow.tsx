@@ -1,9 +1,11 @@
 import React from "react"
+import Head from "next/head"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { InView } from 'react-intersection-observer'
 import { css } from "aphrodite/no-important"
-import { PopularsPosts } from '../'
+import { POPULARS_POSTS } from "../../../apollo/queries"
+import { Populars } from '../../'
 import { Likes, Tags, InformUserLocation } from "../../"
 import { InfoBar, Source } from "./"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
@@ -35,6 +37,10 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width, changeLike 
   }
 
   return <div className={ css(styles.postWrapper)}>
+    <Head>
+      <meta name="keywords" content={ `${title}` } />
+      <meta name="description" content={ small_text } />
+    </Head>
     <div className={ css(baseStyles.flexSB, styles.postTitleWrapper) }>
       <h1 className={ css(styles.postTitle) }>{ title }</h1>
       <div className={ css(styles.postDate) }>
@@ -63,7 +69,7 @@ export const PostShow: React.FC<MyPostProps> = ({ user, post, width, changeLike 
         widthTransform && <RightBlock>
           <InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />
           { data && <InformUserLocation locationId={ location._id } user={ user } /> }
-          <PopularsPosts />
+          <Populars query={ POPULARS_POSTS } value='posts' />
         </RightBlock>
       }
     </WithRightBlock>

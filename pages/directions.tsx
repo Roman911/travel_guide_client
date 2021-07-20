@@ -1,10 +1,11 @@
 import React from "react"
 import { useRouter } from "next/router"
 import { useDispatch } from 'react-redux'
-import {Directions, PopularsPosts, Tags} from "../modules"
+import { Directions, Populars, Tags } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { locationsActions, directionLocations } from '../redux/actions'
+import { POPULARS_DIRECTIONS } from "../apollo/queries"
 
 const Direction = () => {
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const Direction = () => {
       </LeftBlock>
       {
         widthTransform && <RightBlock>
-          <PopularsPosts />
+          <Populars query={ POPULARS_DIRECTIONS } />
         </RightBlock>
       }
     </WithRightBlock>
