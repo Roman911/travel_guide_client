@@ -10,7 +10,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { data } = await apolloClient.query({ query: ALL_POSTS })
   const { data: directionsData } = await apolloClient.query({ query: ALL_DIRECTIONS })
   const posts = await data.allPosts.map(post => ({ loc: `http://travelguide.space/post/${post._id}`, lastmod: post.last_seen }))
-  const directions: ISitemapField[] = await directionsData.allDirections.map(direction => ({ loc: `http://travelguide.space/direction/${direction._id}`, lastmod: direction.last_seen }))
+  const directions: ISitemapField[] = await directionsData.allDirections.map(direction => ({ loc: `http://travelguide.space/direction/${direction._id}` }))
 
   const fields: ISitemapField[] = [].concat(posts, directions)
 
