@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { Author } from '../variabels'
 
-const Posts = `
+const Post = `
   {
     _id
     title
@@ -18,13 +18,13 @@ const Posts = `
 
 export const ALL_POSTS = gql`
   query allPosts($page: Int, $limit: Int) {
-    allPosts(page: $page, limit: $limit) ${Posts}
+    allPosts(page: $page, limit: $limit) ${Post}
   }
 `
 
 export const POST_SORT_BY_TAG = gql`
   query postsSortByTag($tag: String!) {
-    postsSortByTag(tag: $tag) ${Posts}
+    postsSortByTag(tag: $tag) ${Post}
   }
 `
 

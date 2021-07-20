@@ -14,7 +14,7 @@ const Posts = () => {
     { tag && <Tags tag={ `${tag}` } /> }
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
-        <News lengthDefault={ 16 } page={ 1 } limit={ 12 } tag={ `${tag}` } />
+        <News lengthDefault={ 12 } page={ 1 } limit={ 12 } tag={ `${tag}` } />
       </LeftBlock>
       {
         widthTransform && <RightBlock>

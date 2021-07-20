@@ -17,7 +17,7 @@ const Home = () => {
     <WithRightBlock>
       <LeftBlock widthBlock={ widthTransform } >
         <News lengthDefault={ 8 } page={ 1 } limit={ 8 } />
-        <Directions lengthDefault={ 8 } />
+        <Directions lengthDefault={ 8 } page={ 1 } limit={ 8 } />
       </LeftBlock>
       {
         widthTransform && <RightBlock>

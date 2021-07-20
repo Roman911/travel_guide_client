@@ -17,12 +17,12 @@ type NewsProps = {
 export const News: React.FC<NewsProps> = ({ lengthDefault, page, limit, tag }): any => {
   const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
-  const variables = !tag ? { page, limit } : { tag }
-  const { loading, error, data } = useQuery(!tag ? ALL_POSTS : POST_SORT_BY_TAG, { variables })
+  const variables = tag !== 'undefined' ? { tag } : { page, limit }
+  const { loading, error, data } = useQuery(tag !== 'undefined' ? POST_SORT_BY_TAG : ALL_POSTS, { variables })
   const { data: postsData } = useQuery(LENGTH_POSTS)
   if (loading) return ''
   if (error ) return `Error! ${error}`
-  const posts = !tag ? data.allPosts : data.postsSortByTag
+  const posts = tag !== 'undefined' ? data.postsSortByTag : data.allPosts
   const lengthPosts = postsData ? postsData.lengthPosts : undefined
 
   return <HomePageBlock title='Новини' content={{ value: 'новин', path: '/posts' }} length={{ lengthDefault, length: lengthPosts }} >

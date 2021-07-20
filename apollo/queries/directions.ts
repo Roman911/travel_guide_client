@@ -1,18 +1,20 @@
 import gql from 'graphql-tag'
+import { Author } from '../variabels'
 
 export const ALL_DIRECTIONS = gql`
-  query allDirections {
-    allDirections {
+  query allDirections($page: Int, $limit: Int) {
+    allDirections(page: $page, limit: $limit) {
+      comments
+      last_seen
       _id
       title
       createdAt
       views
       likes
-      comments
       small_text
       endStart
       travelMode
-      last_seen
+      ${Author}
       waypoints {
         address
         infoLocation
@@ -21,11 +23,6 @@ export const ALL_DIRECTIONS = gql`
           lng
         }
       }
-      author {
-        _id
-        name
-        avatar
-      }
     }
   }
 `
@@ -33,16 +30,17 @@ export const ALL_DIRECTIONS = gql`
 export const DIRECTION = gql`
   query direction($_id: ID!) {
     direction(_id: $_id) {
+      editor
+      tags
       _id
       title
       createdAt
       views
       likes
-      editor
       small_text
       endStart
       travelMode
-      tags
+      ${Author}
       waypoints {
         address
         infoLocation
@@ -52,12 +50,38 @@ export const DIRECTION = gql`
           lng
         }
       }
-      author {
-        _id
-        name
-        avatar
-        rating
+    }
+  }
+`
+
+export const DIRECTIONS_SORT_BY_TAG = gql`
+  query directionsSortByTag($tag: String!) {
+    directionsSortByTag(tag: $tag) {
+    comments
+      last_seen
+      _id
+      title
+      createdAt
+      views
+      likes
+      small_text
+      endStart
+      travelMode
+      ${Author}
+      waypoints {
+        address
+        infoLocation
+        location {
+          lat
+          lng
+        }
       }
     }
+  }
+`
+
+export const LENGTH_DIRECTIONS = gql`
+  query lengthPosts {
+    lengthPosts
   }
 `
