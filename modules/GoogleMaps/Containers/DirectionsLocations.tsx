@@ -20,14 +20,11 @@ export const DirectionsLocations: React.FC<DirectionsLocationsProps> = ({ endSta
   const endStart = endStartPoint !== undefined ? endStartPoint : method.watch('endStart')
   const dispatch = useDispatch()
   const { directionLocations: { waypoints, legs }} = useSelector((state: RootState) => state)
+  const removeLocation = index => dispatch(directionLocations.removePointToWaypoints(index))
 
-  const removeLocation = (index) => {
-    dispatch(directionLocations.removePointToWaypoints(index))
-  }
-
-  React.useEffect(() => {
-    dispatch(directionLocations.selectEndDirection(endStart))
+  const handleClick = React.useCallback(() => {
+    dispatch(directionLocations.selectEndDirection(!endStart))
   }, [ endStart ])
 
-  return <DirectionLocations waypoints={ waypoints } removeLocation={ removeLocation } direction={ direction } legs={ legs } height={ height } />
+  return <DirectionLocations waypoints={ waypoints } removeLocation={ removeLocation } direction={ direction } legs={ legs } height={ height } handleClick={ handleClick } />
 }

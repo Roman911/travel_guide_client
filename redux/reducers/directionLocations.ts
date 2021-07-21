@@ -20,6 +20,8 @@ type ActionType = {
 }
 
 const directionLocations = (state = initialState, actions: ActionType) => {
+  const waypointsLength = state.waypoints.length
+  const stateWaypoints = state.waypoints
   switch (actions.type) {
     case 'DIRECTION_LOCATIONS:ADD_POINT':
       return {
@@ -34,18 +36,20 @@ const directionLocations = (state = initialState, actions: ActionType) => {
     case 'DIRECTION_LOCATIONS:ADD_POINT_TO_WAYPOINTS':
       return {
         ...state,
-        waypoints: state.waypoints.concat(state.point),
+        waypoints: state.endStart ? stateWaypoints.slice(0, -1).concat(state.point, state.waypoints[0]) : stateWaypoints.concat(state.point),
         point: null
       }
     case 'DIRECTION_LOCATIONS:REMOVE_POINT_TO_WAYPOINTS':
-      state.waypoints.splice(actions.payload, 1)
+      stateWaypoints.splice(actions.payload, 1)
       return {
         ...state
       }
     case 'DIRECTION_LOCATIONS:SELECT_END_DIRECTION':
+      const waypoints = actions.payload ? stateWaypoints.concat(state.waypoints[0]) : stateWaypoints.slice(0, waypointsLength -1)
       return {
         ...state,
-        endStart: actions.payload
+        endStart: actions.payload,
+        waypoints
       }
     case 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE':
       return {

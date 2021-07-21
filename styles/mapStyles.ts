@@ -54,15 +54,6 @@ export default [
     ],
   },
   {
-    featureType: "poi",
-    elementType: "all",
-    stylers: [
-      {
-        visibility: "off",
-      },
-    ],
-  },
-  {
     featureType: "road",
     elementType: "all",
     stylers: [

@@ -58,7 +58,7 @@ export const Directions: React.FC<DirectionsProps> = ({ index, selectedPark }) =
   const directionsServiceOptions = React.useMemo(() => {
     return {
       waypoints: directionsOptions.waypoints.length !== 0 ? directionsOptions.waypoints.map(i => { return { location: i.location } } ) : null,
-      destination: directionsOptions.endStart ? directionsOptions.waypoints[0].location : directionsOptions.waypoints.length > 1 && directionsOptions.waypoints[directionsOptions.waypoints.length -1].location,
+      destination: directionsOptions.waypoints[directionsOptions.waypoints.length -1].location,
       origin: directionsOptions.waypoints[0].location,
       travelMode: directionsOptions.travelMode.length !== 0 ? directionsOptions.travelMode[0] === 'BICYCLING' ? 'WALKING' : directionsOptions.travelMode[0] : 'DRIVING'
     }

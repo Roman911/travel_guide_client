@@ -14,6 +14,7 @@ type DirectionLocationsProps = {
   direction?: boolean
   legs?: any[]
   height: string
+  handleClick?: () => void
 }
 
 type Waypoints = {
@@ -27,7 +28,7 @@ type Waypoints = {
   }
 }
 
-export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction, legs, height }) => {
+export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction, legs, height, handleClick }) => {
   return <div style={{ height: height }} className={ css(styles.dlWrapper) }>
     { waypoints.map((i, index) => {
       return <React.Fragment key={ index }>
@@ -55,6 +56,6 @@ export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoint
         }
       </React.Fragment>
     }) }
-    { !direction && <InputControl control='checkbox' id='endStart' label='Повернутись на точку старту' /> }
+    { !direction && <InputControl control='checkbox' id='endStart' label='Повернутись на точку старту' handleClick={ handleClick } /> }
   </div>
 }

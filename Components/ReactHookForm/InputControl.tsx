@@ -11,6 +11,7 @@ type InputProps = {
     rows?: number
     focus?: boolean
     disabled?: boolean
+    handleClick?: () => void
   }
 }
 
@@ -23,6 +24,7 @@ type InputControlProps = {
   rows?: number
   focus?: boolean
   disabled?: boolean
+  handleClick?: () => void
 }
 
 type option = {

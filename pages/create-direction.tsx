@@ -31,7 +31,15 @@ const defaultValues = {
   type_rout: 'rout',
   car: true,
   bicycle: false,
-  walking: false
+  walking: false,
+  endStart: false
+}
+
+type UploadFileType = {
+  file: {
+    _id: string
+    url: string
+  }
 }
 
 const CreateDirection: React.FC = (): any => {
@@ -39,6 +47,7 @@ const CreateDirection: React.FC = (): any => {
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode, legs }} = useSelector((state: RootState) => state)
+  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
   const [ createDirection ] = useMutation(CREATE_DIRECTION)
   const { car, bicycle, walking } = methods.watch()
 
@@ -82,6 +91,7 @@ const CreateDirection: React.FC = (): any => {
           endStart,
           editor,
           tags,
+          cover: file._id,
           legs: legsMap
         }
       }
