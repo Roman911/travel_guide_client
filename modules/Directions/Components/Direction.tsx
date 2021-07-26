@@ -1,7 +1,8 @@
 import React from 'react'
+import Image from "next/image"
 import Link from 'next/link'
 import { css } from 'aphrodite/no-important'
-import { GoogleMaps, Likes } from "../../"
+import { Likes } from "../../"
 import { Author, ArticleStats } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from '../../../styles/homeNews'
@@ -14,14 +15,15 @@ type DirectionProps = {
   userData: any
 }
 
-export const Direction: React.FC<DirectionProps> = ({ index, item, width, userData }): any => {
+export const Direction: React.FC<DirectionProps> = ({ item, width, userData }): any => {
   const userId = userData ? userData._id : undefined
-  const { _id, author, comments, createdAt, likes, title, small_text, views  } = item
+  const { _id, author, comments, createdAt, likes, title, small_text, views, cover  } = item
+  const imgSize = width >= 690 ? { width: 254, height: 144 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }
 
   return <div className={ css(styles.wrapper) }>
     <div className={ css(styles.content) }>
       <Link href={`/direction/[id]`} as={`/direction/${ _id }`} >
-        <a><GoogleMaps directions={ true } index={ index } /></a>
+        <a><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>
       </Link>
       <div className={ css(styles.blockCenter, styles.blockMobile) }>
         <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />

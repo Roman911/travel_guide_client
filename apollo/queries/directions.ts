@@ -14,6 +14,7 @@ export const ALL_DIRECTIONS = gql`
       small_text
       endStart
       travelMode
+      cover
       ${Author}
       waypoints {
         address
@@ -40,6 +41,7 @@ export const DIRECTION = gql`
       small_text
       endStart
       travelMode
+      cover
       ${Author}
       waypoints {
         address
@@ -59,6 +61,7 @@ export const POPULARS_DIRECTIONS = gql`
     popularsDirections {
       _id
       title
+      cover
     }
   }
 `
@@ -76,6 +79,7 @@ export const DIRECTIONS_SORT_BY_TAG = gql`
       small_text
       endStart
       travelMode
+      cover
       ${Author}
       waypoints {
         address
