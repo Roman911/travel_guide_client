@@ -1,23 +1,23 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useQuery } from "@apollo/react-hooks"
-import { useWindowDimensions } from "../../../hooks/useWindowDimensions"
-import { HomePageBlock } from "../../../Components"
-import { Direction } from '../Components'
+import { New } from '../../News/Components'
 import { ALL_DIRECTIONS, DIRECTIONS_SORT_BY_TAG, LENGTH_DIRECTIONS } from "../../../apollo/queries"
 import { User } from '../../../typeScript/user'
 import { locationsActions, directionLocations } from "../../../redux/actions"
 
 type DirectionsProps = {
-  lengthDefault: number
-  page: number
-  limit: number
-  tag: string
+  options: {
+    page: number
+    limit: number
+    tag: string
+  }
+  width: number
+  setLength: any
 }
 
-export const Directions: React.FC<DirectionsProps> = ({ lengthDefault, page, limit, tag }): any => {
+export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, tag }, width, setLength }: DirectionsProps): any => {
   const dispatch = useDispatch()
-  const { width } = useWindowDimensions()
   const { data: userData } = useSelector((state: User) => state)
   const variables = tag !== 'undefined' ? { tag } : { page, limit }
   const { loading, error, data } = useQuery(tag !== 'undefined' ? DIRECTIONS_SORT_BY_TAG : ALL_DIRECTIONS, { variables })
@@ -38,13 +38,16 @@ export const Directions: React.FC<DirectionsProps> = ({ lengthDefault, page, lim
     if (allDirections) dispatch(directionLocations.allDirections(allDirections))
   }, [ data ])
 
+  React.useEffect(() => {
+    if (directionsData) {
+      setLength(directionsData.lengthDirections)
+    }
+  }, [ directionsData ])
+
   if (loading) return ''
   if  (error ) return `Error! ${error}`
 
   const allDirections = tag !== 'undefined' ? data.directionsSortByTag : data.allDirections
-  const lengthDirections = directionsData ? directionsData.lengthDirections : undefined
 
-  return <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} length={{ lengthDefault, length: lengthDirections }} >
-    { allDirections.map((item, index) => <Direction key={ index } index={ index } item={ item } width={ width } userData={ userData } />) }
-  </HomePageBlock>
+  return allDirections.map(item => <New key={ item._id } item={ item } width={ width } userData={ userData } type='/direction' />)
 }

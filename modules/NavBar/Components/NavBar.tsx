@@ -28,7 +28,7 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
     </li>
   })
 
-  return <header className={ css(styles.headerWrapper) }>
+  return <nav className={ css(styles.headerWrapper) }>
     <div className={ css(styles.header, baseStyles.wrapper) }>
       <button onClick={ () => handleClick() } className={ css(styles.btnMenu) } >
         {
@@ -54,5 +54,5 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
         { data ? <IsActiveUser data={ data } showSidebar={ showSidebar } /> : <IsNotActiveUser /> }
       </div>
     </div>
-  </header>
+  </nav>
 }

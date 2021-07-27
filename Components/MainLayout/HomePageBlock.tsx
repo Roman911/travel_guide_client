@@ -1,33 +1,32 @@
 import React from "react"
-import Link from "next/link"
 import { css } from "aphrodite/no-important"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { SectionTitle } from "../SectionTitle"
 import styles from './styles'
+import Link from "next/link";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 type HomePageBlockProps = {
   title: string
-  content: {
-    value: string
-    path: string
+  content?: {
+    value: 'новин' | 'маршрутів'
+    path: '/posts' | '/directions'
   }
-  length: {
-    lengthDefault: number
-    length: number
-  }
+  lengthDefault: number
+  length: number | undefined
+  home?: boolean
 }
 
-export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content: { value, path }, length: { lengthDefault, length }}) => {
+export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content, lengthDefault, length, home }) => {
   return <div className={ css(styles.HomePageBlockWrapper) }>
     <SectionTitle title={ title } />
-    <div className={ css(styles.HomePageBlock) }>
+    <div className={ css(styles.HomePageBlock, home && styles.HPBHome) }>
       { children }
     </div>
     {
-      length > lengthDefault && <div className={ css(styles.link) }>
-        <Link href={ path }>
-          <a>Показати більше { value } <FontAwesomeIcon icon={ faArrowRight } /></a>
+      content && length > lengthDefault && <div className={ css(styles.link) }>
+        <Link href={ content.path }>
+          <a>Показати більше { content.value } <FontAwesomeIcon icon={ faArrowRight } /></a>
         </Link>
       </div>
     }

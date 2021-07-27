@@ -12,18 +12,8 @@ export const ALL_DIRECTIONS = gql`
       views
       likes
       small_text
-      endStart
-      travelMode
       cover
       ${Author}
-      waypoints {
-        address
-        infoLocation
-        location {
-          lat
-          lng
-        }
-      }
     }
   }
 `

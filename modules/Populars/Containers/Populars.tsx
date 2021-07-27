@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from "@apollo/react-hooks"
 import { LoadingSpin } from '../../../Components'
-import { Popular, WrapperPopulars } from '../Components'
+import { Popular } from '../Components'
 
 type PopularsProps = {
   query: any
@@ -14,11 +14,7 @@ export const Populars: React.FC<PopularsProps> = ({ query, value }): any => {
   if (error) return `Error! ${error}`
   const populars = value === 'posts' ? data.popularsPosts : data.popularsDirections
 
-  const popularsMap = data && populars.map((item, index) => {
+  return data && populars.map((item, index) => {
     return <Popular key={index} item={ item } />
   })
-
-  return <WrapperPopulars value={ value } >
-    { popularsMap }
-  </WrapperPopulars>
 }

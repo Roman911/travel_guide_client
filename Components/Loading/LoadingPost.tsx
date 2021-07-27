@@ -8,7 +8,7 @@ interface LoadingPostProps {
 
 export const LoadingPost: React.FC<LoadingPostProps> = ({ isPost }) => {
   const widthContent = isPost ? styles.widthPost : styles.widthNews
-  return <section className={ css(styles.wrapper, styles.content, widthContent) }>
+  return <section className={ css(styles.wrapper, widthContent, isPost && styles.content) }>
     <div className={ css(styles.line, styles.line70) } />
     <div className={ css(styles.line, styles.line85) } />
     <div className={ css(styles.line, styles.line100) } />
@@ -22,6 +22,6 @@ export const LoadingPost: React.FC<LoadingPostProps> = ({ isPost }) => {
     <div className={ css(styles.line, styles.line100) } />
     <div className={ css(styles.line, styles.line70) } />
     <div className={ css(styles.line, styles.line70) } />
-    <div className={ css(styles.line, styles.line80) } />
+    {/*<div className={ css(styles.line, styles.line80) } />*/}
   </section>
 }

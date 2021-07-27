@@ -15,12 +15,17 @@ type NewProps = {
   item: Item
   width: number
   userData: any
+  type: string
 }
 
-export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
+export const New: React.FC<NewProps> = ({ item, width, userData, type }): any => {
   const userId = userData ? userData._id : undefined
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
   const imgSize = width >= 690 ? { width: 254, height: 144 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }
+  const link = {
+    href: `${type}/[id]`,
+    as: `${type}/${ _id }`
+  }
 
   return <div className={ css(styles.wrapper) }>
     <Head>
@@ -28,12 +33,12 @@ export const New: React.FC<NewProps> = ({ item, width, userData }): any => {
       <meta name="description" content={ small_text } />
     </Head>
     <div className={ css(styles.content) }>
-      <Link href={`/post/[id]`} as={`/post/${ _id }`} >
+      <Link href={ link.href } as={ link.as } >
         <a><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>
       </Link>
       <div className={ css(styles.blockCenter, styles.blockMobile) }>
         <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />
-        <Link href={`/post/[id]`} as={`/post/${ _id }`} >
+        <Link href={ link.href } as={ link.as } >
           <div className={ css(baseStyles.block, baseStyles.blockText) }>
             <h4 className={ css(styles.title) }>{ title }</h4>
             { width >= 690 && <p className={ css(styles.smallText) }>{ small_text }</p> }

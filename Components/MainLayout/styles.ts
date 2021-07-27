@@ -11,10 +11,10 @@ export default StyleSheet.create({
   },
   //Left Block
   leftBlock: {
-    width: `calc(100% - ${ widthBlocks.rightBlock }px)`
-  },
-  leftBlockWidth: {
-    width: '100%'
+    width: `calc(100% - ${ widthBlocks.rightBlock }px)`,
+    '@media (max-width: 1270px)': {
+      width: '100%'
+    }
   },
   //Right Block
   rightBlock: {
@@ -27,6 +27,9 @@ export default StyleSheet.create({
   HomePageBlock: {
     display: 'flex',
     flexWrap: 'wrap'
+  },
+  HPBHome: {
+    height: 620
   },
   //Link all posts
   link: {

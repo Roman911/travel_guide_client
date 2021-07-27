@@ -44,7 +44,7 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
     </div>
     <Tags tags={ tags } path='/directions' />
     <WithRightBlock>
-      <LeftBlock widthBlock={ widthTransform } >
+      <LeftBlock>
         <div className={ css(styles.wrapperContent) }>
           <div className={ css(baseStyles.flex) }>
             {

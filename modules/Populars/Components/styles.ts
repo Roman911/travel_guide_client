@@ -3,7 +3,8 @@ import { btn } from '../../../variabels'
 
 export default StyleSheet.create({
   wrapper: {
-    padding: 10
+    padding: 10,
+    height: 329
   },
   //Wrapper Populars Post
   wrapperTitle: {

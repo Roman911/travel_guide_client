@@ -25,7 +25,7 @@ const ldsRing = {
 
 export default StyleSheet.create({
   wrapper: {
-    margin: '10px 7px',
+    padding: '10px 7px',
     textAlign: 'center'
   },
   //LoadingPost
@@ -40,8 +40,8 @@ export default StyleSheet.create({
     width: widthBlocks.newsBlock
   },
   line: {
-    height: 18,
-    marginBottom: 13,
+    height: 12,
+    marginBottom: 8,
     borderRadius: 2,
     animationName: [lineAnimation],
     animationDuration: '2.2s',
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     width: '60%'
   },
   lineMB30: {
-    marginBottom: 26
+    marginBottom: 16
   },
   //Spin
   wrapperSpin: {
