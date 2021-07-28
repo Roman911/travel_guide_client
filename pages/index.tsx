@@ -11,6 +11,8 @@ const Home = () => {
   const dispatch = useDispatch()
   const [ lengthPosts, setLengthPosts ] = React.useState(undefined)
   const [ lengthDirections, setLengthDirections ] = React.useState(undefined)
+  const [ loadPosts, setLoadPosts ] = React.useState(false)
+  const [ loadDirections, setLoadDirections ] = React.useState(false)
   const { width } = useWindowDimensions()
   const widthTransform = width > 1270
   dispatch(locationsActions.changeData({ allLocations: [], locations: [] }))
@@ -25,11 +27,11 @@ const Home = () => {
   return <MainLayout title='Home'>
     <WithRightBlock>
       <LeftBlock>
-        <HomePageBlock title='Новини' content={{ value: 'новин', path: '/posts' }} lengthDefault={ lengthDefault } length={ lengthPosts } home={ true } >
-          <News options={ options } width={ width } setLength={ setLengthPosts } />
+        <HomePageBlock title='Новини' content={{ value: 'новин', path: '/posts' }} lengthDefault={ lengthDefault } length={ lengthPosts } home={ true } load={ loadPosts } >
+          <News options={ options } width={ width } setLength={ setLengthPosts } setLoadPosts={ setLoadPosts } />
         </HomePageBlock>
-        <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} lengthDefault={ lengthDefault } length={ lengthDirections } home={ true } >
-          <Directions options={ options } width={ width } setLength={ setLengthDirections } />
+        <HomePageBlock title='Маршрути' content={{ value: 'маршрутів', path: '/directions' }} lengthDefault={ lengthDefault } length={ lengthDirections } home={ true } load={ loadDirections } >
+          <Directions options={ options } width={ width } setLength={ setLengthDirections } setLoadDirections={ setLoadDirections } />
         </HomePageBlock>
       </LeftBlock>
       {

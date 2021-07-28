@@ -14,9 +14,10 @@ type DirectionsProps = {
   }
   width: number
   setLength: any
+  setLoadDirections?: any
 }
 
-export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, tag }, width, setLength }: DirectionsProps): any => {
+export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, tag }, width, setLength, setLoadDirections }: DirectionsProps): any => {
   const dispatch = useDispatch()
   const { data: userData } = useSelector((state: User) => state)
   const variables = tag !== 'undefined' ? { tag } : { page, limit }
@@ -43,6 +44,12 @@ export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, 
       setLength(directionsData.lengthDirections)
     }
   }, [ directionsData ])
+
+  React.useEffect(() => {
+    if (setLoadDirections !== undefined && !loading) {
+      setLoadDirections(true)
+    }
+  }, [loading])
 
   if (loading) return ''
   if  (error ) return `Error! ${error}`

@@ -1,10 +1,10 @@
 import React from "react"
+import Link from "next/link"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { css } from "aphrodite/no-important"
 import { SectionTitle } from "../SectionTitle"
 import styles from './styles'
-import Link from "next/link";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 
 type HomePageBlockProps = {
   title: string
@@ -15,12 +15,13 @@ type HomePageBlockProps = {
   lengthDefault: number
   length: number | undefined
   home?: boolean
+  load?: boolean
 }
 
-export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content, lengthDefault, length, home }) => {
+export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content, lengthDefault, length, home, load }) => {
   return <div className={ css(styles.HomePageBlockWrapper) }>
     <SectionTitle title={ title } />
-    <div className={ css(styles.HomePageBlock, home && styles.HPBHome) }>
+    <div className={ css(styles.HomePageBlock, home && !load && styles.HPBHome) }>
       { children }
     </div>
     {

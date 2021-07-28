@@ -13,9 +13,10 @@ type NewsProps = {
   }
   width: number
   setLength: any
+  setLoadPosts?: any
 }
 
-export const News: React.FC<NewsProps> = ({ options: { page, limit, tag }, width, setLength }: NewsProps): any => {
+export const News: React.FC<NewsProps> = ({ options: { page, limit, tag }, width, setLength, setLoadPosts }: NewsProps): any => {
   const { data: userData } = useSelector((state: User) => state)
   const variables = tag !== 'undefined' ? { tag } : { page, limit }
   const { loading, error, data } = useQuery(tag !== 'undefined' ? POST_SORT_BY_TAG : ALL_POSTS, { variables })
@@ -26,6 +27,12 @@ export const News: React.FC<NewsProps> = ({ options: { page, limit, tag }, width
       setLength(postsData.lengthPosts)
     }
   }, [ postsData ])
+
+  React.useEffect(() => {
+    if (setLoadPosts !== undefined && !loading) {
+      setLoadPosts(true)
+    }
+  }, [loading])
 
   if (loading) return ''
   if (error ) return `Error! ${error}`
