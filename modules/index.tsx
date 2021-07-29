@@ -1,3 +1,4 @@
+export { CreateDirections } from './CreateDirections'
 export { Directions } from './Directions'
 export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, GoogleMapsMain, SortLocations } from './GoogleMaps'
 export { InformUserLocation } from './InformUserLocation'

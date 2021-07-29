@@ -32,6 +32,16 @@ export const DIRECTION = gql`
       endStart
       travelMode
       cover
+      legs {
+        distance {
+          text
+          value
+        }
+        duration {
+          text
+          value
+        }
+      }
       ${Author}
       waypoints {
         address

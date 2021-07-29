@@ -2,7 +2,7 @@ import React from "react"
 import Image from "next/image"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTimes, faRoad } from "@fortawesome/free-solid-svg-icons"
+import { faTimes, faRoad, faMapMarkerAlt, faRoute } from "@fortawesome/free-solid-svg-icons"
 import { faClock } from "@fortawesome/free-regular-svg-icons"
 import { InputControl } from "../../../Components"
 import baseStyles from '../../../styles'
@@ -29,7 +29,25 @@ type Waypoints = {
 }
 
 export const DirectionLocations: React.FC<DirectionLocationsProps> = ({ waypoints, removeLocation, direction, legs, height, handleClick }) => {
+  let allLegs = legs.map(i => i.distance.value).reduce((sum, current) => sum + current, 0) / 1000
+
   return <div style={{ height: height }} className={ css(styles.dlWrapper) }>
+    <div className={ css(baseStyles.flex) }>
+      <div className={ css(styles.dlBlock) }>
+        <span>Місця</span>
+        <div className={ css(styles.dlCenter) }>
+          <FontAwesomeIcon className={ css(styles.dlIcon, styles.dlcIcon) } icon={ faMapMarkerAlt } />
+          <span className={ css(styles.dlSpan) }>{ waypoints.length }</span>
+        </div>
+      </div>
+      <div className={ css(styles.dlBlock) }>
+        <span>Км</span>
+        <div className={ css(styles.dlCenter) }>
+          <FontAwesomeIcon className={ css(styles.dlIcon, styles.dlcIcon) } icon={ faRoute } />
+          <span className={ css(styles.dlSpan) }>{ Math.round(allLegs) } км</span>
+        </div>
+      </div>
+    </div>
     { waypoints.map((i, index) => {
       return <React.Fragment key={ index }>
         <div className={ css(baseStyles.flexVFS) }>

@@ -25,7 +25,7 @@ export const LocationInformationBox: React.FC<LocationInformationWrapperProps> =
       setSelectedPark(null)
       setCloseWindow(true)
       setOpenWindow(false)
-    }, 500)
+    }, 400)
   }
   useKeyPress('Escape', handleClick)
   useClickOutside(className, handleClick)

@@ -88,4 +88,19 @@ export default StyleSheet.create({
       color: btn
     }
   },
+  dlBlock: {
+    width: '50%',
+    padding: 10
+  },
+  dlCenter: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between'
+  },
+  dlcIcon: {
+    height: 22
+  },
+  dlSpan: {
+    fontWeight: 800
+  }
 })
