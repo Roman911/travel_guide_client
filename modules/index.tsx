@@ -1,5 +1,5 @@
 export { Directions } from './Directions'
-export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, SortLocations } from './GoogleMaps'
+export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, GoogleMapsMain, SortLocations } from './GoogleMaps'
 export { InformUserLocation } from './InformUserLocation'
 export { Likes } from './Likes'
 export { CreateLocationSelector } from './Locations'

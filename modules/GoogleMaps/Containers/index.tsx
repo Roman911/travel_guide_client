@@ -1,6 +1,8 @@
 export { DirectionsLocations } from './DirectionsLocations'
 export { GoogleMaps } from './GoogleMaps'
 export { GoogleMapsDirections } from './GoogleMapsDirections'
+export { GoogleMapsMain } from './GoogleMapsMain'
 export { LocationInformation } from './LocationInformation'
+export { LocationInformationBox } from './LocationInformationBox'
 export { LocationSetting } from './LocationSeting'
 export { SortLocations } from './SortLocations'

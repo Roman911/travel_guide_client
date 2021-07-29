@@ -41,7 +41,7 @@ export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
     width={ props.width }
   />
 
-  if (loadError) return <div>Неможливо завантажити карту</div>
+  if (loadError) return <p>Неможливо завантажити карту</p>
 
   return isLoaded ? renderMap() : <LoadingSpin />
 }

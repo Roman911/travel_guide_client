@@ -1,1 +1,1 @@
-export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, LocationInformation, SortLocations } from './Containers'
+export { DirectionsLocations, GoogleMaps, GoogleMapsDirections, GoogleMapsMain, LocationInformation, SortLocations } from './Containers'

@@ -1,5 +1,5 @@
 import Image from "next/image"
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -11,28 +11,14 @@ import { Location } from '../../../typeScript/locations'
 
 type MyInformationProps = {
   location: Location
-  selectedPark: null | string
   handleClick: () => void
-  closeWindow: boolean
-  openWindow: boolean
-  setOpenWindow: (action) => void
-  setClassName: any
 }
 
-export const Information: React.FC<MyInformationProps> = ({ location, selectedPark, handleClick, closeWindow, openWindow, setOpenWindow, setClassName }) => {
+export const Information: React.FC<MyInformationProps> = ({ location, handleClick }) => {
   const { cover, small_text, title, post } = location
   const _id = post ? post._id : undefined
-  const className = css(styles.wrapper, openWindow && closeWindow && styles.open)
 
-  useEffect(() => {
-    setOpenWindow(true)
-  }, [selectedPark])
-
-  useEffect(() => {
-    setClassName(className)
-  }, [className])
-
-  return <div className={ className }>
+  return <>
     <div className={ css(styles.blockImg) }>
       <div className={ css(styles.imgWrapper) }>
         <Image src={ cover.url } className={ css(styles.cover) } layout='fill' alt={ title } />
@@ -54,5 +40,5 @@ export const Information: React.FC<MyInformationProps> = ({ location, selectedPa
         </Link>
       </div>
     }
-  </div>
+  </>
 }

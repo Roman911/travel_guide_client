@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import {btn, icons} from '../../../variabels'
+import { btn, icons } from '../../../variabels'
 
 const width350 = {
   width: 350,
@@ -16,7 +16,7 @@ export default StyleSheet.create({
     background: '#fff',
     height: '100%',
     transform: 'translateX(-350px)',
-    transition: '500ms',
+    transition: '350ms',
     overflowY: 'auto'
   },
   open: {

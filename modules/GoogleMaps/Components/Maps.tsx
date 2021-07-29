@@ -4,10 +4,10 @@ import { useDispatch } from 'react-redux'
 import { GoogleMap } from '@react-google-maps/api'
 import { getGeocode } from "use-places-autocomplete"
 import { MarkersController } from "./MarkersController"
-import { LocationInformation } from "../Containers"
 import { LoadingSpin } from '../../../Components'
 import { Location } from '../../../typeScript/googleMaps'
 import { Directions } from "../Containers/Directions"
+import { LocationInformationBox } from "../Containers"
 import { directionLocations } from '../../../redux/actions'
 
 import mapStyles from "../../../styles/mapStyles"
@@ -78,7 +78,7 @@ export const Maps: React.FC<MapsProps> = ({ index, selectedPark, setSelectedPark
       onLoad={ onMapLoad }
       onClick={ event => handleClick(event) }
     >
-      { selectedPark && !directions && <LocationInformation _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
+      { selectedPark && !directions && <LocationInformationBox _id={ selectedPark } selectedPark={ selectedPark } setSelectedPark={ setSelectedPark } /> }
       <MarkersController control={ control } setSelectedPark={ setSelectedPark } options={ options } locations={ locations } />
       { directions && <Directions index={ index } selectedPark={ selectedPark } /> }
     </GoogleMap>
