@@ -60,7 +60,7 @@ export const CreateDirections: React.FC = (): any => {
   }, [ car, bicycle, walking ])
 
   const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
-    const token = userData ? userData.token : null
+    const token = userData?.token
 
     const waypoints = points.map(i => {
       return {
@@ -96,7 +96,7 @@ export const CreateDirections: React.FC = (): any => {
           endStart,
           editor,
           tags,
-          cover: file._id,
+          cover: file.url,
           legs: legsMap
         }
       }
