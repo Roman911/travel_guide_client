@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useRouter } from "next/router"
 import { useSelector } from "react-redux"
 import { UseAuth } from "./auth.hook"
@@ -10,7 +10,7 @@ export const useSettingData = (setUserData) => {
   const { data: userData } = useSelector((state: { user: User }) => state.user)
   const _id = userData ? userData._id : undefined
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (userData === undefined) {
       router.push('/login').then()
     } else if (_id) {

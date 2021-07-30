@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React from "react"
 
 export const useClickOutside: (className: string, action: () => void) => void = (className, action) => {
   const handleClick = (event: MouseEvent) => {
@@ -9,7 +9,7 @@ export const useClickOutside: (className: string, action: () => void) => void = 
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (className) {
       window.addEventListener('click', handleClick)
       return () => window.removeEventListener('click', handleClick)

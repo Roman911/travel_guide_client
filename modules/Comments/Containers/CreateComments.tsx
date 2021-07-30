@@ -1,11 +1,13 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import { Formik, Form } from 'formik'
+import { useForm, FormProvider } from 'react-hook-form'
 import { useMutation } from '@apollo/react-hooks'
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
 import { ADDED_ANSWER, CREATE_COMMENT } from '../../../apollo/mutations'
-import { COMMENTS } from "../../../apollo/queries"
 import { User } from "../../../typeScript/user"
 import { CreateComment } from '../Components'
+import { errors } from "../../../config/errorsText"
 
 type CreateCommentProps = {
   postId: string
@@ -15,16 +17,17 @@ type CreateCommentProps = {
   commentsId?: string
 }
 
+const schema = yup.object().shape({
+  content: yup.string().required(errors.required).min(5, errors.minText)
+})
+
 export const CreateComments: React.FC<CreateCommentProps> = ({ postId, _id, isFirstComment, handleClick, commentsId }: CreateCommentProps): any => {
   const { data } = useSelector((state: { user: User }) => state.user)
+  const methods = useForm({ resolver: yupResolver(schema) })
   const [ createComment ] = useMutation(CREATE_COMMENT)
   const [ addedAnswer ] = useMutation(ADDED_ANSWER)
-  const initialValues = { content: '' }
-  const onSubmit = (values, { resetForm }) => {
-    const ref = [{
-      query: COMMENTS,
-      variables: { postId }
-    }]
+
+  const onSubmit = (values) => {
     if (isFirstComment) {
       createComment({
         variables: {
@@ -33,11 +36,10 @@ export const CreateComments: React.FC<CreateCommentProps> = ({ postId, _id, isFi
             postId,
             content: values.content
           }
-        },
-        refetchQueries: ref
+        }
       }).then(data => {
         if (data) {
-          resetForm()
+          methods.reset()
         }
       })
     } else {
@@ -48,22 +50,19 @@ export const CreateComments: React.FC<CreateCommentProps> = ({ postId, _id, isFi
             _id: _id ? _id : commentsId,
             content: values.content
           }
-        },
-        refetchQueries: ref
+        }
       }).then(data => {
         if (data) {
           handleClick && handleClick()
-          resetForm()
+          methods.reset()
         }
       })
     }
   }
 
-  return <Formik initialValues={ initialValues } onSubmit={ onSubmit } >
-    {formik => {
-      return <Form>
-        <CreateComment formik={ formik } data={ data } isFirstComment={ isFirstComment } handleClick={ handleClick } />
-      </Form>
-    }}
-  </Formik>
+  return <FormProvider { ...methods } >
+    <form onSubmit={ methods.handleSubmit(onSubmit) }>
+      <CreateComment data={ data } isFirstComment={ isFirstComment } handleClick={ handleClick } />
+    </form>
+  </FormProvider>
 }

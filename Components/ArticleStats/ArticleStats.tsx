@@ -11,14 +11,14 @@ interface ArticleStatsProps {
 }
 
 export const ArticleStats: React.FC<ArticleStatsProps> = ({isArticle, views, comments}) => {
-  return <div className={css(baseStyles.flex)}>
-      <span className={css(baseStyles.views)}>
-        <FontAwesomeIcon className={css(baseStyles.iconS)} icon={faEye}/>
+  return <div className={ css(baseStyles.flex) }>
+      <span className={ css(baseStyles.views) }>
+        <FontAwesomeIcon className={ css(baseStyles.iconS) } icon={ faEye }/>
         { views }
       </span>
     { !isArticle &&
-    <span className={css(baseStyles.comment)}>
-      <FontAwesomeIcon className={css(baseStyles.iconS)} icon={faCommentAlt}/>
+    <span className={ css(baseStyles.comment) }>
+      <FontAwesomeIcon className={ css(baseStyles.iconS) } icon={ faCommentAlt }/>
       { comments }
     </span>
     }

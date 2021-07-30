@@ -1,19 +1,21 @@
-import { useRef, useEffect } from 'react'
+import React from 'react'
 
 function createRootElement(id: string) {
   const rootContainer: HTMLDivElement = document.createElement('div')
   rootContainer.setAttribute('id', id)
   return rootContainer
 }
+
 function addRootElement(rootElem: Element) {
   document.body.insertBefore(
     rootElem,
     document.body.lastElementChild.nextElementSibling,
   )
 }
+
 function usePortal(id: string) {
-  const rootElemRef = useRef<HTMLElement | null>(null)
-  useEffect(function setupElement() {
+  const rootElemRef = React.useRef<HTMLElement | null>(null)
+  React.useEffect(function setupElement() {
     const existingParent = document.querySelector(`#${id}`)
     const parentElem = existingParent || createRootElement(id)
     if (!existingParent) {
@@ -27,6 +29,7 @@ function usePortal(id: string) {
       }
     }
   }, [id])
+
   function getRootElem() {
     if (!rootElemRef.current) {
       rootElemRef.current = document.createElement('div')

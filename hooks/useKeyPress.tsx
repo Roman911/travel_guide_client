@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import React from "react"
 
 export const useKeyPress: (keyCode: string, action: () => void) => void = (keyCode, action) => {
   const upHandler = ({ key }) => {
@@ -7,7 +7,7 @@ export const useKeyPress: (keyCode: string, action: () => void) => void = (keyCo
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener('keyup', upHandler)
     return () => window.removeEventListener('keyup', upHandler)
   }, [])

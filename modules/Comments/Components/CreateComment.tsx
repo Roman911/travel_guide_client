@@ -3,11 +3,10 @@ import Link from "next/link"
 import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faOptinMonster } from "@fortawesome/free-brands-svg-icons"
-import { Avatar, Button, ButtonLink, FormikControl } from "../../../Components"
+import {Avatar, Button, ButtonLink, InputControl} from "../../../Components"
 import styles from "./styles"
 
 type CreateCommentProps = {
-  formik: any
   data: {
     name: string
     avatar: string
@@ -17,18 +16,12 @@ type CreateCommentProps = {
 }
 
 export const CreateComment: React.FC<CreateCommentProps> = ({ data, isFirstComment, handleClick }: CreateCommentProps): any => {
-
   return <>
     <div className={ css(styles.wrapper) }>
       {data ? <>
         <Avatar avatar={ data.avatar } name={ data.name } size='S' />
         <div className={ css(styles.block) }>
-          <FormikControl
-            control='textarea'
-            // @ts-ignore
-            name='content'
-            label='Ваш коментар...'
-          />
+          <InputControl control='textarea' id='content' label='Ваш коментар...' />
         </div>
       </> :<>
         <FontAwesomeIcon className={ css(styles.iconNoAvatar) } icon={ faOptinMonster } />

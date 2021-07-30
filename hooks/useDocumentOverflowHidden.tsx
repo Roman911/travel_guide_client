@@ -1,7 +1,7 @@
-import { useEffect } from "react"
+import React from "react"
 
 export const useDocumentOverflowHidden = (isHidden) => {
-  useEffect(() => {
+  React.useEffect(() => {
     if (isHidden) {
       document.body.style.overflow = 'hidden'
     } else {

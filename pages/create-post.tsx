@@ -77,7 +77,7 @@ const CreatePosts: React.FC = () => {
   }
 
   if (loading) return <LoadingSpin />
-  const location = locationData ? locationData.location : undefined
+  const location = locationData?.location
 
   return <MainLayout title={'Create Post'} header='Редагування' >
     <WrapperCreatePost >

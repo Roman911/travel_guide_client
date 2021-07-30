@@ -1,6 +1,6 @@
-import {ApolloClient, InMemoryCache, NormalizedCacheObject,} from "@apollo/client"
-import {createUploadLink} from 'apollo-upload-client'
-import { useMemo } from 'react'
+import React from 'react'
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from "@apollo/client"
+import { createUploadLink } from 'apollo-upload-client'
 
 let apolloClient: ApolloClient<NormalizedCacheObject>
 
@@ -29,5 +29,5 @@ export function initializeApollo(initialState = null) {
 }
 
 export function useApollo(initialState) {
-  return useMemo(() => initializeApollo(initialState), [initialState])
+  return React.useMemo(() => initializeApollo(initialState), [initialState])
 }

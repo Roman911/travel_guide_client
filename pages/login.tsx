@@ -2,14 +2,14 @@ import React from "react"
 import { useDispatch } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
 import { useLazyQuery } from '@apollo/react-hooks'
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
 import { LOGIN } from '../apollo/queries'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
 import { userActions, modalActions } from '../redux/actions'
 import Redirect from "../hooks/useRedirect"
 import { loginFormData } from '../config/loginFormData'
-import * as yup from "yup"
 import { errors } from "../config/errorsText"
-import { yupResolver } from "@hookform/resolvers/yup"
 
 const schema = yup.object().shape({
   email: yup.string().required(errors.required).email(errors.email),

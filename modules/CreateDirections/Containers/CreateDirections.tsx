@@ -61,7 +61,6 @@ export const CreateDirections: React.FC = (): any => {
 
   const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
     const token = userData?.token
-
     const waypoints = points.map(i => {
       return {
         infoLocation: i.infoLocation,
@@ -114,7 +113,7 @@ export const CreateDirections: React.FC = (): any => {
 
   return <FormProvider { ...methods } >
     <form onSubmit={ methods.handleSubmit(onSubmit) }>
-      <Header />
+      <Header file={ file } />
       <div style={{ position: 'relative', display: 'flex' }}>
         <DirectionsLocations height='calc(100vh - 200px)' />
         <GoogleMaps disableDefaultUI={ false } directions={ true } width='calc(100% - 290px)' />

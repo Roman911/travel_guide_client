@@ -2,11 +2,11 @@ import React from "react"
 import { useRouter } from "next/router"
 import { useDispatch } from 'react-redux'
 import { Directions, Populars, Tags } from "../modules"
-import {MainLayout, WithRightBlock, LeftBlock, RightBlock, HomePageBlock} from '../Components'
+import { MainLayout, WithRightBlock, LeftBlock, RightBlock, HomePageBlock } from '../Components'
+import { WrapperPopulars } from "../modules/Populars/Components"
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { locationsActions, directionLocations } from '../redux/actions'
 import { POPULARS_DIRECTIONS } from "../apollo/queries"
-import {WrapperPopulars} from "../modules/Populars/Components";
 
 const Direction = () => {
   const dispatch = useDispatch()

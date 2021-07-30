@@ -1,10 +1,10 @@
 import { useRouter } from "next/router"
-import { useEffect } from "react"
+import React from "react"
 
 function Redirect({ to }) {
   const router = useRouter()
 
-  useEffect(() => {
+  React.useEffect(() => {
     router.push(to).then()
   }, [to])
 

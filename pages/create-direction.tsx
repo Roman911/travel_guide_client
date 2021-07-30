@@ -10,8 +10,6 @@ const CreateDirection: React.FC = (): any => {
     dispatch(locationsActions.changeData({ mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" }} ))
   }, [])
 
-  console.log('render CreateDirection')
-
   return <MainLayout title='Create Route' header='РЕДАГУВАННЯ' >
     <CreateDirections />
   </MainLayout>

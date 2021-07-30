@@ -12,7 +12,7 @@ type CommentsMapProps = {
 
 export const CommentsMap: React.FC<CommentsMapProps> = ({ comments, postId, commentsId }: CommentsMapProps): any => {
   const { data } = useSelector((state: { user: User }) => state.user)
-  const userId = data ? data._id : undefined
+  const userId = data?._id
 
   return comments.map(item => {
     return <Comment

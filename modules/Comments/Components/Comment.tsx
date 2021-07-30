@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import Link from "next/link"
 import { css } from "aphrodite/no-important"
 import baseStyle from "../../../styles"
@@ -8,7 +8,7 @@ import { CommentsMap, CreateComments } from "../Containers"
 import { Comments } from '../../../typeScript/comments'
 
 export const Comment: React.FC<Comments> = ({ _id, author, createdAt, content, answers, postId, commentsId, userId }: Comments): any => {
-  const [ showCreateComment, setShowCreateComment ] = useState(false)
+  const [ showCreateComment, setShowCreateComment ] = React.useState(false)
   const link = userId && userId === author._id ? [`/profile`, `/profile`] : [`/profile/[id]`, `/profile/${ author._id }`]
   const [ href, as ] = link
   const handleClick = () => setShowCreateComment(!showCreateComment)
