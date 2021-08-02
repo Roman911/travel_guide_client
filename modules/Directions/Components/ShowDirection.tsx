@@ -8,6 +8,7 @@ import { POPULARS_DIRECTIONS } from "../../../apollo/queries"
 import { Likes, Populars, GoogleMaps, DirectionsLocations, Tags } from "../../"
 // import { InfoBar, Source } from "../"
 import { ArticleStats, Author, Date, LeftBlock, LoadingSpin, RightBlock, WithRightBlock } from "../../../Components"
+import { WrapperPopulars } from "../../Populars/Components"
 import baseStyles from '../../../styles'
 import styles from '../../../styles/post'
 import { DirectionData } from '../../../typeScript/directions'
@@ -74,7 +75,9 @@ export const ShowDirection: React.FC<ShowDirectionProps> = ({ user, direction, w
         widthTransform && <RightBlock>
           {/*<InfoBar tickets={ tickets } work_time={ work_time } location={ location } isPrice={ isPrice } />*/}
           {/*{ data && <InformUserLocation locationId={ location._id } user={ user } /> }*/}
-          <Populars query={ POPULARS_DIRECTIONS } />
+          <WrapperPopulars >
+            <Populars query={ POPULARS_DIRECTIONS } />
+          </WrapperPopulars>
         </RightBlock>
       }
     </WithRightBlock>

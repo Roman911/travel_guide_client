@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from 'react-redux'
-import { Maps } from "../Components/Maps"
 import { useLoadScript } from "@react-google-maps/api"
+import { Maps } from "../Components/Maps"
 import { LoadingSpin } from "../../../Components"
 import { Location } from '../../../typeScript/googleMaps'
 
