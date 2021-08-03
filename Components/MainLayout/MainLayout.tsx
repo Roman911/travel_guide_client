@@ -11,6 +11,7 @@ import { SidebarProps } from '../../typeScript/sidebar'
 import { UseAuth } from "../../hooks/auth.hook"
 import { useDocumentOverflowHidden } from '../../hooks/useDocumentOverflowHidden'
 import baseStyles from "../../styles"
+import styles from './styles'
 import { UseRoutes } from '../../modules'
 
 type InformWindowProps = {
@@ -37,6 +38,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
   const { data } = useSelector((state: { user: User }) => state.user)
   const { showSidebar } = useSelector((state: { sidebar: SidebarProps }) => state.sidebar)
   const { text, timeout } = useSelector((state: { modal: Modal }) => state.modal)
+  const { loading } = useSelector((state: { loadingPage }) => state.loadingPage)
   UseAuth()
   useDocumentOverflowHidden(showSidebar)
   const handleClick = () => dispatch(modalActions.handleClick())
@@ -49,6 +51,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authori
         { title } | Travel Guide
       </title>
     </Head>
+    { loading && <div className={ css(styles.loadingPage) } /> }
     <UseRoutes authorization={ authorization } data={ data } />
     <main className={ css(baseStyles.wrapper, baseStyles.main, baseStyles.mt, authorization && baseStyles.wrapperLogin) }>
       { header && <SectionTitle title={ header } /> }

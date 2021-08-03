@@ -39,7 +39,8 @@ export default StyleSheet.create({
     width: 300,
     boxShadow: `2px 2px 8px 2px ${ shadows.shadowDark }`,
     padding: '15px 20px',
-    background: '#505050'
+    background: '#505050',
+    zIndex: 5
   },
   openModal: {
     animationName: [translateKeyframes, opacityKeyframes],

@@ -17,7 +17,7 @@ type InformWindowProps = {
 
 const InformWindow: React.FC<InformWindowProps> = ({ id, children, closedModal, handleClick }) => {
   const target = usePortal(id)
-  const cln = closedModal ? css(styles.wrapper, styles.closedModal) : css(styles.wrapper, styles.openModal)
+  const cln = css(styles.wrapper, closedModal ? styles.closedModal : styles.openModal)
 
   return createPortal(
     <div className={ cln }>

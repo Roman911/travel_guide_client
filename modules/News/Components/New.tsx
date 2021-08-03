@@ -5,10 +5,9 @@ import Image from "next/image"
 import { css } from 'aphrodite/no-important'
 import { Likes } from "../../"
 import { Author, ArticleStats } from "../../../Components"
-
 import baseStyles from '../../../styles'
 import styles from '../../../styles/homeNews'
-
+import { useLoadingPage } from '../../../hooks/useLoadingPage'
 import { Item } from '../../../typeScript/news'
 
 type NewProps = {
@@ -19,7 +18,8 @@ type NewProps = {
 }
 
 export const New: React.FC<NewProps> = ({ item, width, userData, type }): any => {
-  const userId = userData ? userData._id : undefined
+  const userId = userData?._id
+  const { handleClick } = useLoadingPage()
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
   const imgSize = width >= 690 ? { width: 254, height: 144 } : width >= 450 ? { width: 90, height: 90 } : { width: 80, height: 80 }
   const link = {
@@ -34,12 +34,12 @@ export const New: React.FC<NewProps> = ({ item, width, userData, type }): any =>
     </Head>
     <div className={ css(styles.content) }>
       <Link href={ link.href } as={ link.as } >
-        <a><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>
+        <a onClick={ () => handleClick() }><Image className={ css(styles.img) } src={ cover } layout='intrinsic' alt={ title } width={imgSize.width} height={imgSize.height} /></a>
       </Link>
       <div className={ css(styles.blockCenter, styles.blockMobile) }>
         <Author isArticle={ false } author={ author } date={ createdAt } userId={ userId } />
         <Link href={ link.href } as={ link.as } >
-          <div className={ css(baseStyles.block, baseStyles.blockText) }>
+          <div onClick={ () => handleClick() } className={ css(baseStyles.block, baseStyles.blockText) }>
             <h4 className={ css(styles.title) }>{ title }</h4>
             { width >= 690 && <p className={ css(styles.smallText) }>{ small_text }</p> }
             <div className={ css(baseStyles.shadow) } />

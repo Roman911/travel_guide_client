@@ -1,5 +1,14 @@
 import { StyleSheet } from 'aphrodite/no-important'
-import { widthBlocks } from '../../variabels'
+import { widthBlocks, btn } from '../../variabels'
+
+const keyframes = {
+  'from': {
+    width: 0
+  },
+  'to': {
+    width: '100%'
+  }
+}
 
 export default StyleSheet.create({
   //With Right Block
@@ -35,5 +44,17 @@ export default StyleSheet.create({
   link: {
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  //Load page
+  loadingPage: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    background: btn,
+    width: '100%',
+    height: 2,
+    zIndex: 11,
+    animationName: keyframes,
+    animationDuration: '2s'
   }
 })

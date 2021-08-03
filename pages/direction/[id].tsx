@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { DIRECTION } from "../../apollo/queries"
-import { locationsActions, directionLocations } from "../../redux/actions"
+import { locationsActions, directionLocations, loadingActions } from "../../redux/actions"
 import { ShowDirection } from "../../modules/Directions/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
 import { LIKE_DIRECTION } from '../../apollo/mutations'
@@ -24,6 +24,7 @@ const Direction:React.FC = ({ data: { loading, data } }: any): any => {
 
   React.useEffect(() => {
     dispatch(locationsActions.changeData(options))
+    dispatch(loadingActions.hideLoading())
   }, [])
 
   React.useEffect(() => {

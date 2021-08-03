@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { POST } from "../../apollo/queries"
-import { locationsActions } from "../../redux/actions"
+import { locationsActions, loadingActions } from "../../redux/actions"
 import { PostShow } from "../../modules/Posts/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
 import { LIKE_POST } from '../../apollo/mutations'
@@ -17,6 +17,7 @@ const Posts:React.FC = ({ data: { loading, data } }: any): any => {
   const [ likePost ] = useMutation(LIKE_POST)
 
   React.useEffect(() => {
+    dispatch(loadingActions.hideLoading())
     if (data) {
       dispatch(locationsActions.changeData(options))
     }
