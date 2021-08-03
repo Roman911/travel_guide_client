@@ -4,12 +4,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { css } from 'aphrodite/no-important'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons"
+import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { IsActiveUser, IsNotActiveUser } from './'
 import baseStyles from '../../../styles'
 import styles from './styles'
 import { navBarLinks } from "../../../config/navBarLinks"
 import { UserData } from "../../../typeScript/user"
+import {Search} from "../../Search";
 
 type NavBarProps = {
   data: UserData
@@ -49,8 +50,7 @@ export const NavBar: React.FC<NavBarProps> = ({ data, showSidebar, showMobileMen
         { links }
       </ul>
       <div className={ css(baseStyles.flexSB, styles.wrapperInput) }>
-        <input className={ css(styles.input) } placeholder='Search' type="text"/>
-        <FontAwesomeIcon className={ css(baseStyles.icon, styles.searchIcon) } icon={ faSearch }/>
+        <Search />
         { data ? <IsActiveUser data={ data } showSidebar={ showSidebar } /> : <IsNotActiveUser /> }
       </div>
     </div>

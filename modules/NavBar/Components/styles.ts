@@ -21,27 +21,10 @@ export default StyleSheet.create({
     zIndex: 10
   },
   wrapperInput: {
-    borderLeft: '1px solid #333',
     position: 'absolute',
     top: '50%',
     right: 20,
     transform: 'translateY(-50%)',
-    width: 200,
-    '@media (max-width: 590px)': {
-      border: 'none',
-      width: 'auto'
-    }
-  },
-  input: {
-    '@media (max-width: 590px)': {
-      display: 'none'
-    }
-  },
-  searchIcon: {
-    marginRight: 10,
-    '@media (max-width: 370px)': {
-      display: 'none'
-    }
   },
   linkActive: {
     color: btn
