@@ -19,8 +19,6 @@ type SearchProps = {
 type MapsProps = {
   index?: number
   locations: any
-  selectedPark: null | string
-  setSelectedPark: (_id: string | null) => void
   directions?: boolean
   setLatLnd?: any
   width?: string
@@ -33,8 +31,9 @@ type MapsProps = {
 
 const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
-export const Maps: React.FC<MapsProps> = ({ index, selectedPark, setSelectedPark, setLatLnd, options, locations, directions, width }) => {
+export const Maps: React.FC<MapsProps> = ({ index, setLatLnd, options, locations, directions, width }) => {
   const dispatch = useDispatch()
+  const [ selectedPark, setSelectedPark ] = React.useState<null | string>(null)
   const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
   const mapRef = React.useRef(null)
   const onMapLoad = React.useCallback((map) => {

@@ -3,13 +3,17 @@ import { useForm, FormProvider } from 'react-hook-form'
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { errors } from "../../../config/errorsText"
-import { SearchComponent } from "../Components"
+import { SearchComponent, SearchPageComponents } from "../Components"
 
 const schema = yup.object().shape({
   value: yup.string().required(errors.required).min(3, errors.minText)
 })
 
-export const Search = () => {
+type SearchProps = {
+  searchPage?: boolean
+}
+
+export const Search: React.FC<SearchProps> = ({ searchPage }) => {
   const methods = useForm({ resolver: yupResolver(schema) })
   const onSubmit = (values) => {
     console.log(values)
@@ -17,7 +21,7 @@ export const Search = () => {
 
   return <FormProvider { ...methods } >
     <form onSubmit={ methods.handleSubmit(onSubmit) }>
-      <SearchComponent />
+      { searchPage ? <SearchPageComponents /> : <SearchComponent /> }
     </form>
   </FormProvider>
 }

@@ -1,7 +1,12 @@
 import React from "react"
+import { MainLayout } from "../Components"
+import { Search } from "../modules"
 
-const Search: React.FC = () => {
-  return <div>12321321</div>
+const SearchPage: React.FC = () => {
+  return <MainLayout title='Search' header='Пошук'>
+    <Search searchPage={ true } />
+    1231231
+  </MainLayout>
 }
 
-export default Search
+export default SearchPage

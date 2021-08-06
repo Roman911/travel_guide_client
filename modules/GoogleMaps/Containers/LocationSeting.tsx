@@ -13,8 +13,8 @@ type LocationSettingProps = {
 }
 
 export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation, location }) => {
-  const { data } = useSelector((state: { user: User }) => state.user)
   const dispatch = useDispatch()
+  const { data } = useSelector((state: { user: User }) => state.user)
   const [showModalSetting, setShowModalSetting] = useState(false)
   const [closeModalSetting, setCloseModalSetting] = useState(false)
   const [addLocationsUserList] = useMutation(ADD_LOCATION_USER_LIST)

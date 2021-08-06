@@ -23,7 +23,6 @@ const libraries = ["places"]
 
 export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
   const { locations } = useSelector((state: any) => state)
-  const [ selectedPark, setSelectedPark ] = React.useState<null | string>(null)
   let libRef = React.useRef(libraries)
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_KAY,
@@ -33,8 +32,6 @@ export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
   const renderMap = () => <Maps
     index={ props.index }
     setLatLnd={ props.setLatLnd }
-    selectedPark={ selectedPark }
-    setSelectedPark={ setSelectedPark }
     options={ props.options }
     locations={ locations }
     directions={ props.directions }
