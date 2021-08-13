@@ -10,7 +10,7 @@ type DirectionsProps = {
   options: {
     page: number
     limit: number
-    tag: string
+    tag?: string
   }
   width: number
   setLength: any
@@ -20,8 +20,8 @@ type DirectionsProps = {
 export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, tag }, width, setLength, setLoadDirections }: DirectionsProps): any => {
   const dispatch = useDispatch()
   const { data: userData } = useSelector((state: User) => state)
-  const variables = tag !== 'undefined' ? { tag } : { page, limit }
-  const { loading, error, data } = useQuery(tag !== 'undefined' ? DIRECTIONS_SORT_BY_TAG : ALL_DIRECTIONS, { variables })
+  const variables = tag ? { tag } : { page, limit }
+  const { loading, error, data } = useQuery(tag ? DIRECTIONS_SORT_BY_TAG : ALL_DIRECTIONS, { variables })
   const { data: directionsData } = useQuery(LENGTH_DIRECTIONS)
   const widthGM = width > 690 ? "100%" : '140px'
 
@@ -54,7 +54,7 @@ export const Directions: React.FC<DirectionsProps> = ({ options: { page, limit, 
   if (loading) return ''
   if  (error ) return `Error! ${error}`
 
-  const allDirections = tag !== 'undefined' ? data.directionsSortByTag : data.allDirections
+  const allDirections = tag ? data.directionsSortByTag : data.allDirections
 
   return allDirections.map(item => <New key={ item._id } item={ item } width={ width } userData={ userData } type='/direction' />)
 }

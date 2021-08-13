@@ -7,7 +7,7 @@ import { SectionTitle } from "../SectionTitle"
 import styles from './styles'
 
 type HomePageBlockProps = {
-  title: string
+  title?: string
   content?: {
     value: 'новин' | 'маршрутів'
     path: '/posts' | '/directions'
@@ -20,7 +20,7 @@ type HomePageBlockProps = {
 
 export const HomePageBlock: React.FC<HomePageBlockProps> = ({ children, title, content, lengthDefault, length, home, load }) => {
   return <div className={ css(styles.HomePageBlockWrapper) }>
-    <SectionTitle title={ title } />
+    { title && <SectionTitle title={ title } /> }
     <div className={ css(styles.HomePageBlock, home && !load && styles.HPBHome) }>
       { children }
     </div>

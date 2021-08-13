@@ -16,11 +16,11 @@ const Posts = () => {
   const options = {
     page: 1,
     limit: 12,
-    tag: `${tag}`
+    tag: tag
   }
 
   return <MainLayout title='Home'>
-    { tag && <Tags tag={ `${tag}` } /> }
+    { tag && <Tags tag={ tag } /> }
     <WithRightBlock>
       <LeftBlock>
         <HomePageBlock title='Новини' lengthDefault={ lengthDefault } length={ lengthPosts } >

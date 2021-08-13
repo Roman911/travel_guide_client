@@ -1,4 +1,5 @@
 import { StyleSheet } from 'aphrodite/no-important'
+import { borders } from "../../../variabels"
 
 const openInputKeyframes = {
   'from': {
@@ -78,5 +79,21 @@ export default StyleSheet.create({
   openBtn: {
     animationName: openBtnKeyframes,
     animationDuration: '600ms'
+  },
+  //SearchPage
+  SPWrapper: {
+    borderBottom: `1px solid ${borders.borderInput}`,
+    paddingBottom: 10,
+    position: 'relative',
+    margin: '15px 0'
+  },
+  SPIcon: {
+    height: 22,
+    background: '#fff',
+    position: 'absolute'
+  },
+  SPInput: {
+    fontSize: 26,
+    paddingLeft: 40
   }
 })

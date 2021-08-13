@@ -20,8 +20,7 @@ const Home = () => {
   const lengthDefault = 8
   const options = {
     page: 1,
-    limit: 8,
-    tag: 'undefined'
+    limit: 8
   }
 
   return <MainLayout title='Home'>

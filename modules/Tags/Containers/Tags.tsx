@@ -5,8 +5,8 @@ import { Tag } from '../Components'
 import baseStyles from '../../../styles'
 
 type TagsProps = {
-  tag?: string
-  tags?: string[]
+  tag?: any
+  tags?: any[]
   path?: string
 }
 

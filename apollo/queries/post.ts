@@ -72,3 +72,9 @@ export const LENGTH_POSTS = gql`
     lengthPosts
   }
 `
+
+export const SEARCH_POSTS = gql`
+  query searchPosts($value: String!) {
+    searchPosts(value: $value) ${Post}
+  }
+`
