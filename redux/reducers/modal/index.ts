@@ -1,4 +1,4 @@
-import {ModalAction, ModalActionEnum, ModalState} from "./types"
+import { ModalAction, ModalActionEnum, ModalState } from "./types"
 
 const initialState: ModalState = {
   text: null,
@@ -6,7 +6,7 @@ const initialState: ModalState = {
 }
 
 export default function modalReducer(state = initialState, actions: ModalAction) {
-  switch (actions.type) {
+   switch(actions.type) {
     case ModalActionEnum.SHOW:
       return {
         ...state,

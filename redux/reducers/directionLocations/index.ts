@@ -1,4 +1,4 @@
-import {DirectionLocationsAction, DirectionLocationsActionEnum, DirectionLocationsState} from "./types"
+import { DirectionLocationsAction, DirectionLocationsActionEnum, DirectionLocationsState } from "./types"
 
 const initialState: DirectionLocationsState = {
   waypoints: [{
@@ -24,6 +24,7 @@ export default function directionLocationsReducer(state = initialState, actions:
         ...state,
         point: actions.payload
       }
+
     // case 'LOCATIONS:USER_LOCATIONS_LIST':
     //   return {
     //     ...state,
