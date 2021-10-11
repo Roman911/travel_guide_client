@@ -11,17 +11,17 @@ type ActionType = {
 
 const modal = (state = initialState, actions: ActionType) => {
   switch (actions.type) {
-    case 'SHOW_MODAL':
+    case 'MODAL:SHOW':
       return {
         ...state,
         text: actions.payload
       }
-    case 'HIDE_MODAL':
+    case 'MODAL:HIDE':
       return {
         ...state,
         text: null
       }
-    case 'HIDE_TIMEOUT':
+    case 'MODAL:HIDE_TIMEOUT':
       return {
         ...state,
         timeout: actions.payload

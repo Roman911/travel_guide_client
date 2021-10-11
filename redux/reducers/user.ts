@@ -1,17 +1,21 @@
-import { UserData } from "../../typeScript/user"
+import { User, UserData } from "../../typeScript/user"
 
-const initialState = {
+const initialState: User = {
   data: null
 }
 
-type ActionType = {
-  payload: UserData
-  type: string
+enum UserActionEnum {
+  USER__SET_DATA='USER:SET_DATA'
 }
 
-const user = (state = initialState, actions: ActionType) => {
+type UserAction = {
+  payload: UserData
+  type: UserActionEnum.USER__SET_DATA
+}
+
+const user = (state = initialState, actions: UserAction): User => {
   switch (actions.type) {
-    case 'USER:SET_DATA':
+    case UserActionEnum.USER__SET_DATA:
       return {
         ...state,
         data: actions.payload

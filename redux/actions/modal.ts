@@ -1,18 +1,18 @@
+import { ModalActionEnum } from '../reducers/modal/types'
+
 const Actions = {
   showModal: (text: null | string) => {
     return (dispatch: (arg0: { type: string; payload?: any; }) => void) => {
       dispatch({
-        type: 'SHOW_MODAL',
+        type: ModalActionEnum.SHOW,
         payload: text,
       })
-
       setTimeout(() => {
         dispatch(Actions.hideTimeout(true));
         setTimeout(() => {
           dispatch(Actions.hideTimeout(null))
         }, 1500)
       }, 2500)
-
       setTimeout(() => {
         dispatch(Actions.hideModal())
       }, 3500)
@@ -29,13 +29,13 @@ const Actions = {
   },
   hideTimeout: (timeout: null | boolean) => {
     return {
-      type: 'HIDE_TIMEOUT',
+      type: ModalActionEnum.HIDE_TIMEOUT,
       payload: timeout
     }
   },
   hideModal: () => {
     return {
-      type: 'HIDE_MODAL'
+      type: ModalActionEnum.HIDE
     }
   }
 }

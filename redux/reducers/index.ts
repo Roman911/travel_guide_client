@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux'
-const reducers = [ 'directionLocations', 'loadingPage', 'locations', 'modal', 'sidebar', 'user', 'uploadFile' ]
+import directionLocations from './directionLocations'
+import modal from './modal'
+import user from './user'
 
-export default combineReducers(
-  reducers.reduce((initial: any, name: string) => {
-    initial[name] = require(`./${ name }`).default
-    return initial
-  }, {})
-)
+export default {
+  directionLocations,
+  modal,
+  user
+}

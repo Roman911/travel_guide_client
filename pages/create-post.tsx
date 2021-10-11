@@ -1,17 +1,17 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useForm, FormProvider } from 'react-hook-form'
 import { useLazyQuery, useMutation } from "@apollo/react-hooks"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { LoadingSpin, MainLayout } from "../Components"
-import { User } from '../typeScript/user'
 import { LOCATION } from "../apollo/queries"
 import { CreatePostForm, WrapperCreatePost } from "../modules/CreatePost/Components"
 import { errors } from "../config/errorsText"
 import { CREATE_POST } from "../apollo/mutations"
 import { modalActions } from '../redux/actions'
+import { useTypedSelector } from '../hooks/useTypedSelector'
 
 const schema = yup.object().shape({
   title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle)
@@ -30,7 +30,7 @@ const CreatePosts: React.FC = () => {
   const _id = router.query.location
   const dispatch = useDispatch()
   const [ createPost ] = useMutation(CREATE_POST)
-  const { data } = useSelector((state: { user: User }) => state.user)
+  const { data } = useTypedSelector(state => state.user)
   const [getLocation, { loading, data: locationData }] = useLazyQuery(LOCATION)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues })
 

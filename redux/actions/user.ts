@@ -1,9 +1,10 @@
 import { UserData } from '../../typeScript/user'
+import { UserActionEnum } from '../reducers/user/types'
 
 const Actions = {
   setData: (data: UserData | null) => {
     return {
-      type: 'USER:SET_DATA',
+      type: UserActionEnum.SET_DATA,
       payload: data
     }
   }

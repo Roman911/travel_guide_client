@@ -1,54 +1,56 @@
+import { DirectionLocationsActionEnum } from '../reducers/directionLocations/types'
+
 const Actions = {
   addPoint: (data: any | null) => {
     return {
-      type: 'DIRECTION_LOCATIONS:ADD_POINT',
+      type: DirectionLocationsActionEnum.ADD_POINT,
       payload: data
     }
   },
   addPointToWaypoints: () => {
     return {
-      type: 'DIRECTION_LOCATIONS:ADD_POINT_TO_WAYPOINTS'
+      type: DirectionLocationsActionEnum.ADD_POINT_TO_WAYPOINTS
     }
   },
   removePointToWaypoints: (index: number) => {
     return {
-      type: 'DIRECTION_LOCATIONS:REMOVE_POINT_TO_WAYPOINTS',
+      type: DirectionLocationsActionEnum.REMOVE_POINT_TO_WAYPOINTS,
       payload: index
     }
   },
-  selectEndDirection: (endStart: boolean) => {
+  setEndDirection: (endStart: boolean) => {
     return {
-      type: 'DIRECTION_LOCATIONS:SELECT_END_DIRECTION',
+      type: DirectionLocationsActionEnum.SET_END_DIRECTION,
       payload: endStart
     }
   },
-  selectTravelMode: (mode: string[]) => {
+  setTravelMode: (mode: string[]) => {
     return {
-      type: 'DIRECTION_LOCATIONS:SELECT_TRAVEL_MODE',
+      type: DirectionLocationsActionEnum.SET_TRAVEL_MODE,
       payload: mode
     }
   },
   allDirections: (data: any) => {
     return {
-      type: 'DIRECTION_LOCATIONS:ALL_DIRECTIONS',
+      type: DirectionLocationsActionEnum.ALL_DIRECTIONS,
       payload: data
     }
   },
   newWaypoints: (data: any) => {
     return {
-      type: 'DIRECTION_LOCATIONS:NEW_WAYPOINTS',
+      type: DirectionLocationsActionEnum.NEW_WAYPOINTS,
       payload: data
     }
   },
-  selectCreateDirection: (select: boolean) => {
+  setCreateDirection: (select: boolean) => {
     return {
-      type: 'DIRECTION_LOCATIONS:SELECT_CREATE_DIRECTION',
+      type: DirectionLocationsActionEnum.SET_CREATE_DIRECTION,
       payload: select
     }
   },
-  selectLegs: (legs: any[]) => {
+  setLegs: (legs: any[]) => {
     return {
-      type: 'DIRECTION_LOCATIONS:SELECT_LEGS',
+      type: DirectionLocationsActionEnum.SET_LEGS,
       payload: legs
     }
   }
