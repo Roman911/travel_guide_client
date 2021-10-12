@@ -1,13 +1,12 @@
 import React from "react"
 import { useForm, FormProvider } from 'react-hook-form'
-import { useDispatch } from "react-redux"
 import { useMutation, useQuery } from "@apollo/react-hooks"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { ALL_LOCATIONS } from "../../../apollo/queries"
 import { CREATE_DIRECTION } from "../../../apollo/mutations"
-import { DirectionLocationsActionCreators, LocationsActionCreators, ModalActionCreators } from "../../../redux/actionCreators"
 import { Button, ButtonWrapper, Header, LoadingSpin } from "../../../Components"
 import { DirectionsLocations, GoogleMaps, SortLocations } from "../../GoogleMaps"
 import { UseReactQuillWithReactHookForm } from "../../../hooks/useReactQuillWithReactHookForm"
@@ -29,7 +28,7 @@ const defaultValues = {
 }
 
 export const CreateDirections: React.FC = (): any => {
-  const dispatch = useDispatch()
+  const { changeData, setCreateDirection, setTravelMode, showModal } = useActions()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode, legs }, uploadFiles: { file } } = useTypedSelector(state => state)
@@ -37,12 +36,12 @@ export const CreateDirections: React.FC = (): any => {
   const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
-    dispatch(DirectionLocationsActionCreators.setCreateDirection(true))
-    dispatch(LocationsActionCreators.changeData({ allLocations, locations: allLocations }))
+    setCreateDirection(true)
+    changeData({ allLocations, locations: allLocations })
   }, [ data ])
 
   React.useEffect(() => {
-    dispatch(DirectionLocationsActionCreators.setTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))
+    setTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ])
   }, [ car, bicycle, walking ])
 
   const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
@@ -87,7 +86,7 @@ export const CreateDirections: React.FC = (): any => {
       }
     }).then(data => {
       if (data) {
-        dispatch(ModalActionCreators.showModal('Маршрут успішно створено!'))
+        showModal('Маршрут успішно створено!')
         methods.reset()
       }
     })

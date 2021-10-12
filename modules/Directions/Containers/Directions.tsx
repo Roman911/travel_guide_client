@@ -1,10 +1,9 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { useQuery } from "@apollo/react-hooks"
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { New } from '../../News/Components'
 import { ALL_DIRECTIONS, DIRECTIONS_SORT_BY_TAG, LENGTH_DIRECTIONS } from "../../../apollo/queries"
-import { LocationsActionCreators, DirectionLocationsActionCreators } from "../../../redux/actionCreators"
 
 type IDirections = {
   options: {
@@ -18,7 +17,7 @@ type IDirections = {
 }
 
 export const Directions: React.FC<IDirections> = ({ options: { page, limit, tag }, width, setLength, setLoadDirections }: IDirections): any => {
-  const dispatch = useDispatch()
+  const { changeData, setAllDirections } = useActions()
   const { data: userData } = useTypedSelector(state => state.user)
   const variables = tag ? { tag } : { page, limit }
   const { loading, error, data } = useQuery(tag ? DIRECTIONS_SORT_BY_TAG : ALL_DIRECTIONS, { variables })
@@ -32,11 +31,11 @@ export const Directions: React.FC<IDirections> = ({ options: { page, limit, tag 
   }
 
   React.useEffect(() => {
-    dispatch(LocationsActionCreators.changeData(options))
+    changeData(options)
   }, [])
 
   React.useEffect(() => {
-    if (allDirections) dispatch(DirectionLocationsActionCreators.allDirections(allDirections))
+    if (allDirections) setAllDirections(allDirections)
   }, [ data ])
 
   React.useEffect(() => {

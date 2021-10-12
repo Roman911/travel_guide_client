@@ -1,6 +1,6 @@
 export interface SidebarState {
   showSidebar: string,
-  isOpen: string
+  isOpen: boolean
 }
 
 export enum SidebarActionEnum {

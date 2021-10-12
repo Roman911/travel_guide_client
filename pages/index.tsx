@@ -1,22 +1,21 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
+import { useActions } from '../hooks/useActions'
 import { POPULARS_POSTS, POPULARS_DIRECTIONS } from '../apollo/queries'
 import { Directions, News, Populars } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock, HomePageBlock } from '../Components'
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { DirectionLocationsActionCreators, LocationsActionCreators } from '../redux/actionCreators'
 import { WrapperPopulars } from "../modules/Populars/Components"
 
 const Home = () => {
-  const dispatch = useDispatch()
+  const { changeData, setCreateDirection } = useActions()
   const [ lengthPosts, setLengthPosts ] = React.useState(undefined)
   const [ lengthDirections, setLengthDirections ] = React.useState(undefined)
   const [ loadPosts, setLoadPosts ] = React.useState(false)
   const [ loadDirections, setLoadDirections ] = React.useState(false)
   const { width } = useWindowDimensions()
   const widthTransform = width > 1270
-  dispatch(LocationsActionCreators.changeData({ allLocations: [], locations: [] }))
-  dispatch(DirectionLocationsActionCreators.setCreateDirection(false))
+  changeData({ allLocations: [], locations: [] })
+  setCreateDirection(false)
   const lengthDefault = 8
   const options = {
     page: 1,

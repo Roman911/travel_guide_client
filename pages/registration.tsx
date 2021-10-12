@@ -2,10 +2,9 @@ import React from "react"
 import { useRouter } from "next/router"
 import { useMutation } from "@apollo/client"
 import { useForm, FormProvider } from 'react-hook-form'
-import { useDispatch } from "react-redux"
+import { useActions } from "../hooks/useActions"
 import { MainLayout, HeaderForm, AuthForm } from "../Components"
 import { CREATE_USER } from "../apollo/mutations"
-import { UserActionCreators, ModalActionCreators } from "../redux/actionCreators"
 import { registerFormData } from '../config/registerFormData'
 import * as yup from "yup"
 import { errors } from "../config/errorsText"
@@ -19,7 +18,7 @@ const schema = yup.object().shape({
 
 const Registration: React.FC = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
+  const { setData, showModal } = useActions()
   const [createUse] = useMutation(CREATE_USER)
   const methods = useForm({ resolver: yupResolver(schema) })
   const onSubmit = ( values ) => {
@@ -28,13 +27,13 @@ const Registration: React.FC = () => {
     }).then(data => {
       if (data) {
         const { registerUser }: any = data.data
-        dispatch(UserActionCreators.setData(registerUser))
+        setData(registerUser)
         localStorage.setItem('userData', JSON.stringify({ ...registerUser }))
-        dispatch(ModalActionCreators.showModal('Користувач успішно створений! Увійдіть в свій акаунт'))
+        showModal('Користувач успішно створений! Увійдіть в свій акаунт')
         router.push('/').then()
       }
     }).catch(errors => {
-      if (errors) dispatch(ModalActionCreators.showModal('Користувач з таким емейлом зайнятий'))
+      if (errors) showModal('Користувач з таким емейлом зайнятий')
     })
   }
 

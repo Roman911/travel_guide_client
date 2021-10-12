@@ -1,14 +1,13 @@
 import React from "react"
 import dynamic from 'next/dynamic'
-import { useDispatch } from 'react-redux'
 import { GoogleMap } from '@react-google-maps/api'
 import { getGeocode } from "use-places-autocomplete"
+import { useActions } from '../../../hooks/useActions'
 import { MarkersController } from "./MarkersController"
 import { LoadingSpin } from '../../../Components'
 import { Location } from '../../../typeScript/googleMaps'
 import { Directions } from "../Containers/Directions"
 import { LocationInformationBox } from "../Containers"
-import { DirectionLocationsActionCreators } from '../../../redux/actionCreators'
 
 import mapStyles from "../../../styles/mapStyles"
 
@@ -32,7 +31,7 @@ type MapsProps = {
 const Search = dynamic<SearchProps>(() => import('../Containers/Search') as any, { loading: () => <LoadingSpin /> })
 
 export const Maps: React.FC<MapsProps> = ({ index, setLatLnd, options, locations, directions, width }) => {
-  const dispatch = useDispatch()
+  const { addPoint } = useActions()
   const [ selectedPark, setSelectedPark ] = React.useState<null | string>(null)
   const { disableDefaultUI, search, mapContainerStyle, center, zoom, control } = locations
   const mapRef = React.useRef(null)
@@ -57,12 +56,12 @@ export const Maps: React.FC<MapsProps> = ({ index, setLatLnd, options, locations
         const address = r[0].formatted_address.split(' ').filter(i => !['Unnamed', 'Road,'].includes(i))
         const addressIndex = address.indexOf('Украина,')
         const newAddress = addressIndex >= 0 ? address.slice(0, addressIndex).concat('Украина') : address
-        dispatch(DirectionLocationsActionCreators.addPoint({
+        addPoint({
           location,
           address: newAddress.join(' '),
           typeMarker: 'location',
           infoLocation: false
-        }))
+        })
       })
     }
   }, [])

@@ -1,26 +1,23 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { useMutation } from '@apollo/react-hooks'
+import { useActions } from '../../hooks/useActions'
 import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { POST } from "../../apollo/queries"
-import { LocationsActionCreators, LoadingPageActionCreators } from "../../redux/actionCreators"
 import { PostShow } from "../../modules/Posts/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
 import { LIKE_POST } from '../../apollo/mutations'
 
 const Posts:React.FC = ({ data: { loading, data } }: any): any => {
-  const dispatch = useDispatch()
+  const { changeData, hideLoading } = useActions()
   const { width } = useWindowDimensions()
   const { user } = useTypedSelector(state => state)
   const [ likePost ] = useMutation(LIKE_POST)
 
   React.useEffect(() => {
-    dispatch(LoadingPageActionCreators.hideLoading())
-    if (data) {
-      dispatch(LocationsActionCreators.changeData(options))
-    }
+    hideLoading()
+    if (data) changeData(options)
   }, [ data ])
 
   if (loading) return <LoadingPost isPost={ true } />

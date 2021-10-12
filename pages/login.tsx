@@ -1,12 +1,11 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
 import { useLazyQuery } from '@apollo/react-hooks'
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useActions } from '../hooks/useActions'
 import { LOGIN } from '../apollo/queries'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
-import { UserActionCreators, ModalActionCreators } from '../redux/actionCreators'
 import Redirect from "../hooks/useRedirect"
 import { loginFormData } from '../config/loginFormData'
 import { errors } from "../config/errorsText"
@@ -17,7 +16,7 @@ const schema = yup.object().shape({
 })
 
 const Login: React.FC = () => {
-  const dispatch = useDispatch()
+  const { showModal, setData } = useActions()
   const [ userData, { loading, data, error } ] = useLazyQuery( LOGIN )
   const methods = useForm({ resolver: yupResolver(schema) })
   const onSubmit = (values) => {
@@ -27,12 +26,12 @@ const Login: React.FC = () => {
   }
 
   if (loading) return <LoadingSpin />
-  if (error) dispatch(ModalActionCreators.showModal('Неправильний логін або пароль'))
+  if (error) showModal('Неправильний логін або пароль')
   if (data) {
     const { loginUser } = data
-    dispatch(UserActionCreators.setData(loginUser))
+    setData(loginUser)
     localStorage.setItem('userData', JSON.stringify({ ...loginUser }))
-    dispatch(ModalActionCreators.showModal('Ви успішно увійшли!'))
+    showModal('Ви успішно увійшли!')
     return <Redirect to={ '/' } />
   }
 

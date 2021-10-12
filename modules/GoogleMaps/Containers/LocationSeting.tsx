@@ -1,9 +1,8 @@
 import React, { useState } from "react"
-import { useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Modal } from "../Components"
-import { ModalActionCreators } from "../../../redux/actionCreators"
 import { ADD_LOCATION_USER_LIST } from '../../../apollo/mutations'
 import { Location } from '../../../typeScript/locations'
 
@@ -13,7 +12,7 @@ type ILocationSetting = {
 }
 
 export const LocationSetting: React.FC<ILocationSetting> = ({ mapInformation, location }) => {
-  const dispatch = useDispatch()
+  const { showModal } = useActions()
   const { data } = useTypedSelector(state => state.user)
   const [showModalSetting, setShowModalSetting] = useState(false)
   const [closeModalSetting, setCloseModalSetting] = useState(false)
@@ -30,7 +29,7 @@ export const LocationSetting: React.FC<ILocationSetting> = ({ mapInformation, lo
         setShowModalSetting(true)
       }
     } else {
-      dispatch(ModalActionCreators.showModal('Для виконання данної дії потрібно авторизоватись'))
+      showModal('Для виконання данної дії потрібно авторизоватись')
     }
   }
   const addLocationMyList = (action: string) => {
@@ -45,7 +44,7 @@ export const LocationSetting: React.FC<ILocationSetting> = ({ mapInformation, lo
       }
     }).then(data => {
       if (data) {
-        dispatch(ModalActionCreators.showModal('Локація успішно добавлена у ваш список'))
+        showModal('Локація успішно добавлена у ваш список')
       }
     })
   }

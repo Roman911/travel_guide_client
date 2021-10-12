@@ -1,23 +1,22 @@
 import React from "react"
 import { useMutation } from '@apollo/client'
-import { useDispatch } from "react-redux"
+import { useActions } from "../../../hooks/useActions"
 import { UploadFileInput } from "../Component"
 import { UPLOAD_FILE } from './mutations'
-import { UploadFilesActionCreators } from '../../../redux/actionCreators'
 
-type UploadFileProps = {
+type IUploadFile = {
   label?: string
   nameBtn: string
   setUrl?: any
 }
 
-export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn, setUrl }) => {
-  const dispatch = useDispatch()
+export const UploadFile: React.FC<IUploadFile> = ({ label, nameBtn, setUrl }) => {
+  const { setData } = useActions()
   const [uploadFile] = useMutation(UPLOAD_FILE, {
     onCompleted: data => {
       if (data) {
         const { uploadFile }: any = data
-        dispatch(UploadFilesActionCreators.setData(uploadFile))
+        setData(uploadFile)
       }
     }
   })

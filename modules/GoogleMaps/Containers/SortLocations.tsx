@@ -1,18 +1,17 @@
 import React, { useCallback, useState } from "react"
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { SortLocation } from "../Components"
 import { useKeyPress } from '../../../hooks/useKeyPress'
-import { LocationsActionCreators } from "../../../redux/actionCreators"
 
-type SortLocationsProps = {
+type ISortLocations = {
   url?: string
 }
 
-export const SortLocations: React.FC<SortLocationsProps> = ({ url }): any => {
+export const SortLocations: React.FC<ISortLocations> = ({ url }): any => {
   const router = useRouter()
-  const dispatch = useDispatch()
+  const { showAllLocations } = useActions()
   const { locationsChange } = useTypedSelector(state => state.locations)
   const [ showBar, setShowBar ] = useState( false )
 
@@ -24,7 +23,7 @@ export const SortLocations: React.FC<SortLocationsProps> = ({ url }): any => {
 
   const handleClickReset = () => {
     url && router.replace(url, undefined, { shallow: true }).then(r => r)
-    dispatch(LocationsActionCreators.showAllLocations())
+    showAllLocations()
   }
 
   return <SortLocation locationsChange={ locationsChange } showBar={ showBar } handleClickTitle={ handleClickTitle } handleClickReset={ handleClickReset } />

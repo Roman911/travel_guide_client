@@ -2,7 +2,7 @@ import { SidebarAction, SidebarActionEnum, SidebarState } from './types'
 
 const initialState: SidebarState = {
   showSidebar: null,
-  isOpen: null
+  isOpen: false
 }
 
 export default function sidebarReducer(state = initialState, actions: SidebarAction) {
@@ -16,7 +16,7 @@ export default function sidebarReducer(state = initialState, actions: SidebarAct
       return {
         ...state,
         showSidebar: null,
-        isOpen: null
+        isOpen: false
       }
     case SidebarActionEnum.CLOSED:
       return {

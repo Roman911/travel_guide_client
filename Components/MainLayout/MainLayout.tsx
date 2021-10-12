@@ -1,43 +1,42 @@
 import React from "react"
 import Head from "next/head"
 import dynamic from "next/dynamic"
-import { useDispatch } from 'react-redux'
 import { css } from "aphrodite/no-important"
 import { SectionTitle, LoadingSpin, Footer } from ".."
 import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { ModalActionCreators } from '../../redux/actionCreators'
-import { UserData } from "../../typeScript/user"
+import { useActions } from '../../hooks/useActions'
 import { useAuth } from "../../hooks/useAuth"
 import { useDocumentOverflowHidden } from '../../hooks/useDocumentOverflowHidden'
 import baseStyles from "../../styles"
 import styles from './styles'
 import { UseRoutes } from '../../modules'
+import { UserData } from "../../typeScript/user"
 
-type InformWindowProps = {
+type IInformWindow = {
   id: string
   children: string
   closedModal: null | boolean
   handleClick: () => void
 }
-type ProfileSidebarProps = {
+type IProfileSidebar = {
   data: UserData
 }
-type MainLayoutProps = {
+type IMainLayout = {
   children: any
   title: string
   authorization?: boolean
   header?: string
 }
 
-const InformWindow = dynamic<InformWindowProps>(() => import('../InformWindow/InformWindow') as any, { loading: () => <LoadingSpin /> })
-const ProfileSidebar = dynamic<ProfileSidebarProps>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, { loading: () => <LoadingSpin /> })
+const InformWindow = dynamic<IInformWindow>(() => import('../InformWindow/InformWindow') as any, { loading: () => <LoadingSpin /> })
+const ProfileSidebar = dynamic<IProfileSidebar>(() => import('../../modules/ProfileSidebar/Containers/ProfileSidebar') as any, { loading: () => <LoadingSpin /> })
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ children, title, authorization, header }) => {
-  const dispatch = useDispatch()
+export const MainLayout: React.FC<IMainLayout> = ({ children, title, authorization, header }) => {
+  const { handleClickModal } = useActions()
   const { user, sidebar, modal, loadingPage } = useTypedSelector(state => state)
   useAuth()
   useDocumentOverflowHidden(sidebar.showSidebar)
-  const handleClick = () => dispatch(ModalActionCreators.handleClick())
+  const handleClick = () => handleClickModal()
 
   return <>
     <Head>

@@ -1,17 +1,16 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { UserActionCreators } from "../redux/actionCreators"
+import { useActions } from './useActions'
 
 const storageName = 'userData'
 
 export const useAuth = () => {
-  const dispatch = useDispatch()
+  const { setData } = useActions()
   React.useEffect(() => {
     const data = JSON.parse(localStorage.getItem(storageName) as string)
     if (data) {
-      dispatch(UserActionCreators.setData(data))
+      setData(data)
     } else {
-      dispatch(UserActionCreators.setData(undefined))
+      setData(undefined)
     }
-  }, [dispatch])
+  }, [setData])
 }

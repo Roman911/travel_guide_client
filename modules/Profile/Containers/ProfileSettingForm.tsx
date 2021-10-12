@@ -1,11 +1,10 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { Formik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { SettingForm } from "../Components"
 import { UPDATE_USER } from '../../../apollo/mutations'
-import { LocationsActionCreators } from '../../../redux/actionCreators'
 import { UserData } from '../../../typeScript/user'
 
 type IProfileSettingForm = {
@@ -13,7 +12,7 @@ type IProfileSettingForm = {
 }
 
 export const ProfileSettingForm: React.FC<IProfileSettingForm> = ({ user }) => {
-  const dispatch = useDispatch()
+  const { userLocationsChange } = useActions()
   const [ updateUser ] = useMutation(UPDATE_USER)
   const { name, aboutMy, selectedLocations } = user
   const { user: { data }, locations: { locationsChange } } = useTypedSelector(state => state)
@@ -31,7 +30,7 @@ export const ProfileSettingForm: React.FC<IProfileSettingForm> = ({ user }) => {
   })
 
   React.useEffect(() => {
-    dispatch(LocationsActionCreators.userLocationsChange(sl))
+    userLocationsChange(sl)
   }, [user])
 
   const onSubmit = values => {
@@ -47,7 +46,7 @@ export const ProfileSettingForm: React.FC<IProfileSettingForm> = ({ user }) => {
   }
 
   const resetLocationsChange = () => {
-    dispatch(LocationsActionCreators.userLocationsChange([]))
+    userLocationsChange([])
   }
 
   return <Formik initialValues={ initialValues } onSubmit={ onSubmit } >

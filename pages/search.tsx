@@ -1,18 +1,17 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useDispatch } from "react-redux"
+import { useActions } from "../hooks/useActions"
 import { HomePageBlock, MainLayout } from "../Components"
 import { News, Search } from "../modules"
 import { useWindowDimensions } from "../hooks/useWindowDimensions"
-import { LocationsActionCreators } from "../redux/actionCreators"
 
 const SearchPage: React.FC = () => {
-  const dispatch = useDispatch()
+  const { changeData } = useActions()
   const router = useRouter()
   const [ lengthPosts, setLengthPosts ] = React.useState(undefined)
   const [ loadPosts, setLoadPosts ] = React.useState(false)
   const { width } = useWindowDimensions()
-  dispatch(LocationsActionCreators.changeData({ allLocations: [], locations: [] }))
+  changeData({ allLocations: [], locations: [] })
   const lengthDefault = 8
   const options = {
     page: 1,

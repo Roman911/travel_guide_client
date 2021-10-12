@@ -1,16 +1,15 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useDispatch } from 'react-redux'
 import { useForm, FormProvider } from 'react-hook-form'
 import { useLazyQuery, useMutation } from "@apollo/react-hooks"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useActions } from '../hooks/useActions'
 import { LoadingSpin, MainLayout } from "../Components"
 import { LOCATION } from "../apollo/queries"
 import { CreatePostForm, WrapperCreatePost } from "../modules/CreatePost/Components"
 import { errors } from "../config/errorsText"
 import { CREATE_POST } from "../apollo/mutations"
-import { ModalActionCreators } from '../redux/actionCreators'
 import { useTypedSelector } from '../hooks/useTypedSelector'
 
 const schema = yup.object().shape({
@@ -28,7 +27,7 @@ const defaultValues = {
 const CreatePosts: React.FC = () => {
   const router = useRouter()
   const _id = router.query.location
-  const dispatch = useDispatch()
+  const { showModal } = useActions()
   const [ createPost ] = useMutation(CREATE_POST)
   const { data } = useTypedSelector(state => state.user)
   const [getLocation, { loading, data: locationData }] = useLazyQuery(LOCATION)
@@ -70,7 +69,7 @@ const CreatePosts: React.FC = () => {
       }
     }).then(data => {
       if (data) {
-        dispatch(ModalActionCreators.showModal('Статю успішно створено!'))
+        showModal('Статю успішно створено!')
         methods.reset()
       }
     })

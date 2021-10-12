@@ -14,7 +14,7 @@ export const ModalActionCreators = {
       dispatch(ModalActionCreators.hideModal())
     }, 3500)
   },
-  handleClick: () => (dispatch: AppDispatch) => {
+  handleClickModal: () => (dispatch: AppDispatch) => {
     dispatch(ModalActionCreators.hideTimeout(true))
     setTimeout(() => {
       dispatch(ModalActionCreators.hideModal())

@@ -1,8 +1,7 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
 import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useActions } from '../../../hooks/useActions'
 import { InformLocation } from "../Components"
-import { ModalActionCreators } from "../../../redux/actionCreators"
 import { User } from "../../../typeScript/user"
 import { LOCATION_USER } from '../../../apollo/queries'
 import { ADD_LOCATION_USER_LIST } from "../../../apollo/mutations"
@@ -23,7 +22,7 @@ type IVariables = {
 }
 
 export const InformUserLocation: React.FC<IInformUserLocation> = ({ user, locationId }): any => {
-  const dispatch = useDispatch()
+  const { showModal } = useActions()
   const [ addLocationsUserList ] = useMutation(ADD_LOCATION_USER_LIST)
   const { loading, error, data } = useQuery(LOCATION_USER, {
     variables: {
@@ -52,7 +51,7 @@ export const InformUserLocation: React.FC<IInformUserLocation> = ({ user, locati
       }]
     }).then(data => {
       if (data) {
-        dispatch(ModalActionCreators.showModal('Локація успішно добавлена у ваш список'))
+        showModal('Локація успішно добавлена у ваш список')
       }
     })
   }

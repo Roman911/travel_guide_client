@@ -1,17 +1,16 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useDispatch } from "react-redux"
 import { useLazyQuery, useQuery } from "@apollo/react-hooks"
 import { ParsedUrlQuery } from "querystring"
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { GoogleMaps } from "./GoogleMaps"
 import { SortLocations } from "./SortLocations"
 import { ALL_LOCATIONS, LOCATIONS_SORT_BY_ID, USER_DATA_FOR_MAPS } from "../../../apollo/queries"
-import { LocationsActionCreators } from "../../../redux/actionCreators"
 import { LoadingSpin } from "../../../Components"
 
 export const GoogleMapsMain: React.FC = (): any => {
-  const dispatch = useDispatch()
+  const { changeData, userLocationsChange } = useActions()
   const { user: { data: userData }, locations: { locationsUserList } } = useTypedSelector(state => state)
   const _id = userData ? userData._id : undefined
   const router = useRouter()
@@ -35,24 +34,24 @@ export const GoogleMapsMain: React.FC = (): any => {
       center: { lat: 49.026151, lng: 31.483070 },
       control: 'MarkersMap'
     }
-    dispatch(LocationsActionCreators.changeData({
+    changeData({
       mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" },
       disableDefaultUI: false,
       search: true,
       ...options
-    }))
+    })
   }, [ isType ])
 
   React.useEffect(() => {
     if (locationsUserList) {
       setUserLocations({ variables: { _id: locationsUserList } })
       if (locationsSortById) {
-        dispatch(LocationsActionCreators.changeData({ allLocations, locations: locationsSortById.locationsSortById }))
+        changeData({ allLocations, locations: locationsSortById.locationsSortById })
       }
     } else if (data) {
       const locations = locationsUserList ? allLocations.filter(i => locationsUserList.includes(i._id)) : allLocations
-      dispatch(LocationsActionCreators.changeData({ allLocations, locations }))
-      if (userSelectedLocations) dispatch(LocationsActionCreators.userLocationsChange(userSelectedLocations.user.selectedLocations))
+      changeData({ allLocations, locations })
+      if (userSelectedLocations) userLocationsChange(userSelectedLocations.user.selectedLocations)
     }
   }, [ data, locationsSortById, userSelectedLocations ])
 

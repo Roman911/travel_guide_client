@@ -8,16 +8,16 @@ import styles from "./styles"
 import { Avatar, Button } from "../../../Components"
 import { UserData } from '../../../typeScript/user'
 
-type SidebarProps = {
+type ISidebar = {
   user: UserData
   closeSidebar: () => void
-  isOpen: null | boolean
+  isOpen: boolean
   logout: () => void
   setClassName: any
   clickCreateLocation: () => void
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, logout, setClassName, clickCreateLocation }) => {
+export const Sidebar: React.FC<ISidebar> = ({ user, closeSidebar, isOpen, logout, setClassName, clickCreateLocation }) => {
   const { name, avatar, email, rating } = user
   const sidebar = sidebarMenuItems.map((item, index) => {
     return <li className={ css(styles.li) } key={ index }>

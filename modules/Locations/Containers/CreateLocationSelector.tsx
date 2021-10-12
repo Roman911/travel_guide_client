@@ -1,13 +1,12 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
 import { useMutation } from '@apollo/react-hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 import { css } from "aphrodite/no-important"
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { CREATE_LOCATION } from "../../../apollo/mutations"
-import { ModalActionCreators, UploadFilesActionCreators } from '../../../redux/actionCreators'
 import { CreateLocation, WrapperLocationSelector } from '../Components'
 import baseStyles from "../../../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -35,7 +34,7 @@ const defaultValues = {
 }
 
 export const CreateLocationSelector: React.FC<ICls> = ({ latLng, setIsType }: ICls): any => {
-  const dispatch = useDispatch()
+  const { showModal, setData } = useActions()
   const { user: { data }, uploadFiles: { file } } = useTypedSelector(state => state)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const [ showMobileMenu, setShowMobileMenu ] = React.useState(false)
@@ -58,8 +57,8 @@ export const CreateLocationSelector: React.FC<ICls> = ({ latLng, setIsType }: IC
       }
     }).then(data => {
       if (data) {
-        dispatch(ModalActionCreators.showModal('Локація успішно створена!'))
-        dispatch(UploadFilesActionCreators.setData(null))
+        showModal('Локація успішно створена!')
+        setData(null)
         methods.reset()
       }
     })

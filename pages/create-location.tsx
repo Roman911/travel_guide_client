@@ -1,26 +1,23 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
 import { css } from "aphrodite/no-important"
+import { useActions } from '../hooks/useActions'
 import baseStyles from '../styles'
 import { MainLayout } from "../Components"
 import { GoogleMaps } from '../modules'
 import { CreateLocationSelector } from '../modules'
 import { widthBlocks } from "../variabels"
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { LocationsActionCreators } from "../redux/actionCreators"
 
 const CreateLocation: React.FC =() => {
-  const dispatch = useDispatch()
+  const { changeData } = useActions()
   const { width } = useWindowDimensions()
   const [ latLng, setLatLnd ] = React.useState(null)
   const [ isType, setIsType ] = React.useState(null)
   const options = { location: latLng, isType, search: true }
 
   React.useEffect(() => {
-    dispatch(LocationsActionCreators.changeData({ control: 'MarkerQuery' }))
-    if (options) {
-      dispatch(LocationsActionCreators.changeData(options))
-    }
+    changeData({ control: 'MarkerQuery' })
+    if (options) changeData(options)
   }, [options])
 
   return <MainLayout title={'Create Location'} header='Редагування'>

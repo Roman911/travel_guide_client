@@ -1,11 +1,10 @@
 import React from "react"
 import { DirectionsRenderer, DirectionsService, InfoWindow } from "@react-google-maps/api"
-import { useDispatch } from 'react-redux'
 import { useLazyQuery } from '@apollo/react-hooks'
+import { useActions } from '../../../hooks/useActions'
 import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { LOCATION } from './query'
 import { InformWindowComponent } from "../Components"
-import { DirectionLocationsActionCreators } from "../../../redux/actionCreators"
 
 type IDirections = {
   index?: number
@@ -13,7 +12,7 @@ type IDirections = {
 }
 
 export const Directions: React.FC<IDirections> = ({ index, selectedPark }) => {
-  const dispatch = useDispatch()
+  const { addPoint, addPointToWaypoints, setLegs } = useActions()
   const { point, waypoints, endStart, travelMode, allDirections, createDirection } = useTypedSelector(state => state.directionLocations)
   const [ response, setResponse ] = React.useState(null)
   const [ setLocation, { data } ] = useLazyQuery(LOCATION)
@@ -27,14 +26,14 @@ export const Directions: React.FC<IDirections> = ({ index, selectedPark }) => {
   React.useEffect(() => {
     if (dataLocation) {
       const [ lat, lng ] = dataLocation.coordinates
-      dispatch(DirectionLocationsActionCreators.addPoint({
+      addPoint({
         _id: dataLocation._id,
         location: { lat: Number(lat), lng: Number(lng) },
         typeMarker: 'coordinates',
         cover: dataLocation.cover,
         address: dataLocation.title,
         infoLocation: true
-      }))
+      })
     }
   }, [ dataLocation ])
 
@@ -45,7 +44,7 @@ export const Directions: React.FC<IDirections> = ({ index, selectedPark }) => {
   const directionsCallback = React.useCallback((res) => {
     if (res !== null && res.status === 'OK') {
       setResponse(res)
-      dispatch(DirectionLocationsActionCreators.setLegs(res.routes[0].legs))
+      setLegs(res.routes[0].legs)
     } else {
       console.log('response: ', res)
     }
@@ -67,8 +66,8 @@ export const Directions: React.FC<IDirections> = ({ index, selectedPark }) => {
     }
   }, [ response ])
 
-  const addToWaypoints = () => dispatch(DirectionLocationsActionCreators.addPointToWaypoints())
-  const cancel = () => dispatch(DirectionLocationsActionCreators.addPoint(null))
+  const addToWaypoints = () => addPointToWaypoints()
+  const cancel = () => addPoint(null)
 
   return <>
     { directionsOptions.waypoints.length > 1 && <DirectionsService options={ directionsServiceOptions } callback={ directionsCallback } /> }
