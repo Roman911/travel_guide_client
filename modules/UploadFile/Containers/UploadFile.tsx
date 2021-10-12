@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { useDispatch } from "react-redux"
 import { UploadFileInput } from "../Component"
 import { UPLOAD_FILE } from './mutations'
-import { uploadActions } from '../../../redux/actions'
+import { UploadFilesActionCreators } from '../../../redux/reducers/uploadFiles/action-creators'
 
 type UploadFileProps = {
   label?: string
@@ -17,7 +17,7 @@ export const UploadFile: React.FC<UploadFileProps> = ({ label, nameBtn, setUrl }
     onCompleted: data => {
       if (data) {
         const { uploadFile }: any = data
-        dispatch(uploadActions.setData(uploadFile))
+        dispatch(UploadFilesActionCreators.setData(uploadFile))
       }
     }
   })

@@ -1,8 +1,8 @@
 import { ModalAction, ModalActionEnum, ModalState } from "./types"
 
 const initialState: ModalState = {
-  text: null,
-  timeout: null
+  text: '',
+  timeout: false
 }
 
 export default function modalReducer(state = initialState, actions: ModalAction) {
@@ -15,7 +15,7 @@ export default function modalReducer(state = initialState, actions: ModalAction)
     case ModalActionEnum.HIDE:
       return {
         ...state,
-        text: null
+        text: ''
       }
     case ModalActionEnum.HIDE_TIMEOUT:
       return {
