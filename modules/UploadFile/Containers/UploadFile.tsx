@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { useDispatch } from "react-redux"
 import { UploadFileInput } from "../Component"
 import { UPLOAD_FILE } from './mutations'
-import { UploadFilesActionCreators } from '../../../redux/reducers/uploadFiles/action-creators'
+import { UploadFilesActionCreators } from '../../../redux/actionCreators'
 
 type UploadFileProps = {
   label?: string

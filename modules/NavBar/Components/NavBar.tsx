@@ -10,7 +10,7 @@ import baseStyles from '../../../styles'
 import styles from './styles'
 import { navBarLinks } from "../../../config/navBarLinks"
 import { UserData } from "../../../typeScript/user"
-import {Search} from "../../Search";
+import { Search } from "../../Search"
 
 type NavBarProps = {
   data: UserData

@@ -14,6 +14,13 @@ export const ModalActionCreators = {
       dispatch(ModalActionCreators.hideModal())
     }, 3500)
   },
+  handleClick: () => (dispatch: AppDispatch) => {
+    dispatch(ModalActionCreators.hideTimeout(true))
+    setTimeout(() => {
+      dispatch(ModalActionCreators.hideModal())
+      dispatch(ModalActionCreators.hideTimeout(false))
+    }, 1000)
+  },
   hideTimeout: (timeout: boolean): ModalAction => ({ type: ModalActionEnum.HIDE_TIMEOUT, payload: timeout }),
   hideModal: (): ModalAction => ({ type: ModalActionEnum.HIDE })
 }

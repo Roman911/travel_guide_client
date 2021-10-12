@@ -5,7 +5,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { useDispatch } from "react-redux"
 import { MainLayout, HeaderForm, AuthForm } from "../Components"
 import { CREATE_USER } from "../apollo/mutations"
-import { userActions, modalActions } from "../redux/actions"
+import { UserActionCreators, ModalActionCreators } from "../redux/actionCreators"
 import { registerFormData } from '../config/registerFormData'
 import * as yup from "yup"
 import { errors } from "../config/errorsText"
@@ -28,13 +28,13 @@ const Registration: React.FC = () => {
     }).then(data => {
       if (data) {
         const { registerUser }: any = data.data
-        dispatch(userActions.setData(registerUser))
+        dispatch(UserActionCreators.setData(registerUser))
         localStorage.setItem('userData', JSON.stringify({ ...registerUser }))
-        dispatch(modalActions.showModal('Користувач успішно створений! Увійдіть в свій акаунт'))
+        dispatch(ModalActionCreators.showModal('Користувач успішно створений! Увійдіть в свій акаунт'))
         router.push('/').then()
       }
     }).catch(errors => {
-      if (errors) dispatch(modalActions.showModal('Користувач з таким емейлом зайнятий'))
+      if (errors) dispatch(ModalActionCreators.showModal('Користувач з таким емейлом зайнятий'))
     })
   }
 

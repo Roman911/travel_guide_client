@@ -1,11 +1,10 @@
 import React from "react"
-import { useSelector } from "react-redux"
 import { useQuery } from "@apollo/react-hooks"
-import { ALL_POSTS, POST_SORT_BY_TAG, LENGTH_POSTS, SEARCH_POSTS } from '../../../apollo/queries'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
+import { ALL_POSTS, POST_SORT_BY_TAG, LENGTH_POSTS } from '../../../apollo/queries'
 import { New } from '../Components'
-import { User } from '../../../typeScript/user'
 
-type NewsProps = {
+type INews = {
   options: {
     page: number
     limit: number
@@ -17,10 +16,10 @@ type NewsProps = {
   setLoadPosts?: any
 }
 
-export const News: React.FC<NewsProps> = ({ options: { page, limit, tag, search }, width, setLength, setLoadPosts }: NewsProps): any => {
-  const { data: userData } = useSelector((state: User) => state)
+export const News: React.FC<INews> = ({ options: { page, limit, tag, search }, width, setLength, setLoadPosts }: INews): any => {
+  const { data: userData } = useTypedSelector(state => state.user)
   const variables = tag ? { tag } : { page, limit }
-  const query = tag
+  // const query = tag
   const { loading, error, data } = useQuery(tag ? POST_SORT_BY_TAG : ALL_POSTS, { variables })
   const { data: postsData } = useQuery(LENGTH_POSTS)
 

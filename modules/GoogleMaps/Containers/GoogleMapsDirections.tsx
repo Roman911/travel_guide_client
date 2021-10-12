@@ -1,7 +1,7 @@
 import React from "react"
-import {GoogleMap, DirectionsService, DirectionsRenderer, useLoadScript } from '@react-google-maps/api'
-// import {LocationInformation} from "./LocationInformation";
-// import {MarkersController} from "../Components";
+import { GoogleMap, DirectionsService, DirectionsRenderer, useLoadScript } from '@react-google-maps/api'
+// import {LocationInformation} from "./LocationInformation"
+// import {MarkersController} from "../Components"
 import { LoadingSpin } from "../../../Components"
 
 const libraries = ["places"]

@@ -1,25 +1,25 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useMutation } from '@apollo/react-hooks'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { POST } from "../../apollo/queries"
-import { locationsActions, loadingActions } from "../../redux/actions"
+import { LocationsActionCreators, LoadingPageActionCreators } from "../../redux/actionCreators"
 import { PostShow } from "../../modules/Posts/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
 import { LIKE_POST } from '../../apollo/mutations'
-import { User } from "../../typeScript/user"
 
 const Posts:React.FC = ({ data: { loading, data } }: any): any => {
   const dispatch = useDispatch()
   const { width } = useWindowDimensions()
-  const user = useSelector((state: { user: User }) => state.user)
+  const { user } = useTypedSelector(state => state)
   const [ likePost ] = useMutation(LIKE_POST)
 
   React.useEffect(() => {
-    dispatch(loadingActions.hideLoading())
+    dispatch(LoadingPageActionCreators.hideLoading())
     if (data) {
-      dispatch(locationsActions.changeData(options))
+      dispatch(LocationsActionCreators.changeData(options))
     }
   }, [ data ])
 

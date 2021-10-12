@@ -1,11 +1,10 @@
 import React from "react"
-import { useSelector } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
 import { useMutation } from '@apollo/react-hooks'
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { ADDED_ANSWER, CREATE_COMMENT } from '../../../apollo/mutations'
-import { User } from "../../../typeScript/user"
 import { CreateComment } from '../Components'
 import { errors } from "../../../config/errorsText"
 
@@ -22,7 +21,7 @@ const schema = yup.object().shape({
 })
 
 export const CreateComments: React.FC<CreateCommentProps> = ({ postId, _id, isFirstComment, handleClick, commentsId }: CreateCommentProps): any => {
-  const { data } = useSelector((state: { user: User }) => state.user)
+  const { data } = useTypedSelector(state => state.user)
   const methods = useForm({ resolver: yupResolver(schema) })
   const [ createComment ] = useMutation(CREATE_COMMENT)
   const [ addedAnswer ] = useMutation(ADDED_ANSWER)

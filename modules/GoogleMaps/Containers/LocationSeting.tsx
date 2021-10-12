@@ -1,20 +1,20 @@
 import React, { useState } from "react"
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Modal } from "../Components"
-import { modalActions } from "../../../redux/actions"
+import { ModalActionCreators } from "../../../redux/actionCreators"
 import { ADD_LOCATION_USER_LIST } from '../../../apollo/mutations'
-import { User } from "../../../typeScript/user"
 import { Location } from '../../../typeScript/locations'
 
-type LocationSettingProps = {
+type ILocationSetting = {
   mapInformation?: boolean
   location: Location
 }
 
-export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation, location }) => {
+export const LocationSetting: React.FC<ILocationSetting> = ({ mapInformation, location }) => {
   const dispatch = useDispatch()
-  const { data } = useSelector((state: { user: User }) => state.user)
+  const { data } = useTypedSelector(state => state.user)
   const [showModalSetting, setShowModalSetting] = useState(false)
   const [closeModalSetting, setCloseModalSetting] = useState(false)
   const [addLocationsUserList] = useMutation(ADD_LOCATION_USER_LIST)
@@ -30,7 +30,7 @@ export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation
         setShowModalSetting(true)
       }
     } else {
-      dispatch(modalActions.showModal('Для виконання данної дії потрібно авторизоватись'))
+      dispatch(ModalActionCreators.showModal('Для виконання данної дії потрібно авторизоватись'))
     }
   }
   const addLocationMyList = (action: string) => {
@@ -45,7 +45,7 @@ export const LocationSetting: React.FC<LocationSettingProps> = ({ mapInformation
       }
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Локація успішно добавлена у ваш список'))
+        dispatch(ModalActionCreators.showModal('Локація успішно добавлена у ваш список'))
       }
     })
   }

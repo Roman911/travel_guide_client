@@ -1,8 +1,7 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Comment } from "../Components"
 import { Comments } from '../../../typeScript/comments'
-import { User } from "../../../typeScript/user"
 
 type CommentsMapProps = {
   comments: Comments[]
@@ -11,7 +10,7 @@ type CommentsMapProps = {
 }
 
 export const CommentsMap: React.FC<CommentsMapProps> = ({ comments, postId, commentsId }: CommentsMapProps): any => {
-  const { data } = useSelector((state: { user: User }) => state.user)
+  const { data } = useTypedSelector(state => state.user)
   const userId = data?._id
 
   return comments.map(item => {

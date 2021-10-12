@@ -1,13 +1,12 @@
 import React from "react"
 import { useRouter } from "next/router"
-import { useSelector } from "react-redux"
-import { UseAuth } from "./auth.hook"
-import { User } from '../typeScript/user'
+import { useTypedSelector } from './useTypedSelector'
+import { useAuth } from "./useAuth"
 
 export const useSettingData = (setUserData) => {
   const router = useRouter()
-  UseAuth()
-  const { data: userData } = useSelector((state: { user: User }) => state.user)
+  useAuth()
+  const { data: userData } = useTypedSelector(state => state.user)
   const _id = userData ? userData._id : undefined
 
   React.useEffect(() => {

@@ -1,5 +1,8 @@
 export interface UploadFilesState {
-  file: any
+  file: {
+    _id: string
+    url: string
+  }
 }
 
 export enum UploadFilesActionEnum {

@@ -1,22 +1,22 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React from "react"
+import { useDispatch } from "react-redux"
 import { Formik, Form } from 'formik'
 import { useMutation } from '@apollo/react-hooks'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { SettingForm } from "../Components"
 import { UPDATE_USER } from '../../../apollo/mutations'
-import { locationsActions } from '../../../redux/actions'
-import { User, UserData } from '../../../typeScript/user'
+import { LocationsActionCreators } from '../../../redux/actionCreators'
+import { UserData } from '../../../typeScript/user'
 
-type ProfileSettingFormProps = {
+type IProfileSettingForm = {
   user: UserData
 }
 
-export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) => {
+export const ProfileSettingForm: React.FC<IProfileSettingForm> = ({ user }) => {
   const dispatch = useDispatch()
   const [ updateUser ] = useMutation(UPDATE_USER)
   const { name, aboutMy, selectedLocations } = user
-  const { data } = useSelector((state: { user: User }) => state.user)
-  const { locations: { locationsChange } } = useSelector((state: any) => state)
+  const { user: { data }, locations: { locationsChange } } = useTypedSelector(state => state)
   const initialValues = { name, aboutMy: aboutMy || '', socials: {
       facebook: '',
       instagram: '',
@@ -30,8 +30,8 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
     }
   })
 
-  useEffect(() => {
-    dispatch(locationsActions.userLocationsChange(sl))
+  React.useEffect(() => {
+    dispatch(LocationsActionCreators.userLocationsChange(sl))
   }, [user])
 
   const onSubmit = values => {
@@ -47,7 +47,7 @@ export const ProfileSettingForm: React.FC<ProfileSettingFormProps> = ({ user }) 
   }
 
   const resetLocationsChange = () => {
-    dispatch(locationsActions.userLocationsChange([]))
+    dispatch(LocationsActionCreators.userLocationsChange([]))
   }
 
   return <Formik initialValues={ initialValues } onSubmit={ onSubmit } >

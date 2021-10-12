@@ -9,7 +9,7 @@ import styles from "./styles"
 import inputStyles from "../../../Components/Formik/styles"
 import { options } from './options.config'
 import { Location } from '../../../typeScript/locations'
-import { ReactQuillWithReactHookForm } from "../../../hooks/ReactQuillWithReactHookForm"
+import { UseReactQuillWithReactHookForm } from "../../../hooks/useReactQuillWithReactHookForm"
 
 type CreatePostFormProps = {
   location: Location | undefined
@@ -66,7 +66,7 @@ export const CreatePostForm: React.FC<CreatePostFormProps> = ({ location }): any
         <InputControl control='textarea' id='how_to_get_there' label='Як дістатися:' />
       </>
     }
-    <ReactQuillWithReactHookForm editor='editor' />
+    <UseReactQuillWithReactHookForm editor='editor' />
     <div className={ css(baseStyles.flexSB, styles.submit) }>
       <Button type="submit" nameBtn='Зберегти' isSubmitting={ false } />
     </div>

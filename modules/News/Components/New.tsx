@@ -10,14 +10,14 @@ import styles from '../../../styles/homeNews'
 import { useLoadingPage } from '../../../hooks/useLoadingPage'
 import { Item } from '../../../typeScript/news'
 
-type NewProps = {
+type INew = {
   item: Item
   width: number
   userData: any
   type: string
 }
 
-export const New: React.FC<NewProps> = ({ item, width, userData, type }): any => {
+export const New: React.FC<INew> = ({ item, width, userData, type }): any => {
   const userId = userData?._id
   const { handleClick } = useLoadingPage()
   const { _id, author, cover, comments, createdAt, likes, title, small_text, views  } = item
@@ -31,6 +31,7 @@ export const New: React.FC<NewProps> = ({ item, width, userData, type }): any =>
     <Head>
       <meta name="keywords" content={ `${title}` } />
       <meta name="description" content={ small_text } />
+      <title>{ title }</title>
     </Head>
     <div className={ css(styles.content) }>
       <Link href={ link.href } as={ link.as } >

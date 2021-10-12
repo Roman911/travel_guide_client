@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
@@ -27,7 +27,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ user, closeSidebar, isOpen, lo
 
   const viewSidebar = css(styles.wrapper)
 
-  useEffect(() => {
+  React.useEffect(() => {
     setClassName(viewSidebar)
   }, [])
 

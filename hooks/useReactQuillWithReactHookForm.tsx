@@ -8,11 +8,11 @@ interface IFormValues {
   editor: string
 }
 
-type ReactQuillWithReactHookFormProps = {
+type IUseReactQuillWithReactHookForm = {
   editor: Path<IFormValues>
 }
 
-export const ReactQuillWithReactHookForm: React.FC<ReactQuillWithReactHookFormProps> = ({ editor }): any => {
+export const UseReactQuillWithReactHookForm: React.FC<IUseReactQuillWithReactHookForm> = ({ editor }): any => {
   const { control } = useFormContext()
   const modules = {
     toolbar: [

@@ -5,7 +5,7 @@ import { Directions, Populars, Tags } from "../modules"
 import { MainLayout, WithRightBlock, LeftBlock, RightBlock, HomePageBlock } from '../Components'
 import { WrapperPopulars } from "../modules/Populars/Components"
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { locationsActions, directionLocations } from '../redux/actions'
+import { LocationsActionCreators, DirectionLocationsActionCreators } from '../redux/actionCreators'
 import { POPULARS_DIRECTIONS } from "../apollo/queries"
 
 const Direction = () => {
@@ -15,8 +15,8 @@ const Direction = () => {
   const tag = router.query.item
   const { width } = useWindowDimensions()
   const widthTransform = width > 1270
-  dispatch(locationsActions.changeData({ allLocations: [], locations: [] }))
-  dispatch(directionLocations.selectCreateDirection(false))
+  dispatch(LocationsActionCreators.changeData({ allLocations: [], locations: [] }))
+  dispatch(DirectionLocationsActionCreators.setCreateDirection(false))
   const lengthDefault = 12
   const options = {
     page: 1,

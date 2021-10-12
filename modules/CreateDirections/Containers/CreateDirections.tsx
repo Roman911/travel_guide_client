@@ -1,23 +1,17 @@
 import React from "react"
 import { useForm, FormProvider } from 'react-hook-form'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useMutation, useQuery } from "@apollo/react-hooks"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { ALL_LOCATIONS } from "../../../apollo/queries"
 import { CREATE_DIRECTION } from "../../../apollo/mutations"
-import { directionLocations, locationsActions, modalActions } from "../../../redux/actions"
+import { DirectionLocationsActionCreators, LocationsActionCreators, ModalActionCreators } from "../../../redux/actionCreators"
 import { Button, ButtonWrapper, Header, LoadingSpin } from "../../../Components"
 import { DirectionsLocations, GoogleMaps, SortLocations } from "../../GoogleMaps"
-import { ReactQuillWithReactHookForm } from "../../../hooks/ReactQuillWithReactHookForm"
-import { User } from "../../../typeScript/user"
-import { Direction } from "../../../typeScript/directions"
+import { UseReactQuillWithReactHookForm } from "../../../hooks/useReactQuillWithReactHookForm"
 import { errors } from "../../../config/errorsText"
-
-interface RootState {
-  user: User
-  directionLocations: Direction
-}
 
 const schema = yup.object().shape({
   title: yup.string().required(errors.required).min(5, errors.minTitle(5)).max(40, errors.maxTitle),
@@ -34,29 +28,21 @@ const defaultValues = {
   endStart: false
 }
 
-type UploadFileType = {
-  file: {
-    _id: string
-    url: string
-  }
-}
-
 export const CreateDirections: React.FC = (): any => {
   const dispatch = useDispatch()
   const { loading, error, data } = useQuery(ALL_LOCATIONS)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
-  const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode, legs }} = useSelector((state: RootState) => state)
-  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
+  const { user: { data: userData }, directionLocations: { waypoints: points, endStart, travelMode, legs }, uploadFiles: { file } } = useTypedSelector(state => state)
   const [ createDirection ] = useMutation(CREATE_DIRECTION)
   const { car, bicycle, walking } = methods.watch()
 
   React.useEffect(() => {
-    dispatch(directionLocations.selectCreateDirection(true))
-    dispatch(locationsActions.changeData({ allLocations, locations: allLocations }))
+    dispatch(DirectionLocationsActionCreators.setCreateDirection(true))
+    dispatch(LocationsActionCreators.changeData({ allLocations, locations: allLocations }))
   }, [ data ])
 
   React.useEffect(() => {
-    dispatch(directionLocations.selectTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))
+    dispatch(DirectionLocationsActionCreators.setTravelMode([ car && 'DRIVING', bicycle && 'BICYCLING', walking && 'WALKING' ]))
   }, [ car, bicycle, walking ])
 
   const onSubmit = ({ title, type_rout, small_text, editor, tag }) => {
@@ -101,7 +87,7 @@ export const CreateDirections: React.FC = (): any => {
       }
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Маршрут успішно створено!'))
+        dispatch(ModalActionCreators.showModal('Маршрут успішно створено!'))
         methods.reset()
       }
     })
@@ -120,7 +106,7 @@ export const CreateDirections: React.FC = (): any => {
         <SortLocations />
       </div>
       <br/>
-      <ReactQuillWithReactHookForm editor='editor' />
+      <UseReactQuillWithReactHookForm editor='editor' />
       <ButtonWrapper>
         <Button type='submit' nameBtn='Зберегти' isSubmitting={ methods.formState.isSubmitting } />
       </ButtonWrapper>

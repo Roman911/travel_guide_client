@@ -6,7 +6,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { LOGIN } from '../apollo/queries'
 import { AuthForm, HeaderForm, LoadingSpin, MainLayout } from "../Components"
-import { userActions, modalActions } from '../redux/actions'
+import { UserActionCreators, ModalActionCreators } from '../redux/actionCreators'
 import Redirect from "../hooks/useRedirect"
 import { loginFormData } from '../config/loginFormData'
 import { errors } from "../config/errorsText"
@@ -27,12 +27,12 @@ const Login: React.FC = () => {
   }
 
   if (loading) return <LoadingSpin />
-  if (error) dispatch(modalActions.showModal('Неправильний логін або пароль'))
+  if (error) dispatch(ModalActionCreators.showModal('Неправильний логін або пароль'))
   if (data) {
     const { loginUser } = data
-    dispatch(userActions.setData(loginUser))
+    dispatch(UserActionCreators.setData(loginUser))
     localStorage.setItem('userData', JSON.stringify({ ...loginUser }))
-    dispatch(modalActions.showModal('Ви успішно увійшли!'))
+    dispatch(ModalActionCreators.showModal('Ви успішно увійшли!'))
     return <Redirect to={ '/' } />
   }
 

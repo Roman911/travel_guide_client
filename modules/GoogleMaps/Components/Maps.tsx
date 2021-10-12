@@ -8,7 +8,7 @@ import { LoadingSpin } from '../../../Components'
 import { Location } from '../../../typeScript/googleMaps'
 import { Directions } from "../Containers/Directions"
 import { LocationInformationBox } from "../Containers"
-import { directionLocations } from '../../../redux/actions'
+import { DirectionLocationsActionCreators } from '../../../redux/actionCreators'
 
 import mapStyles from "../../../styles/mapStyles"
 
@@ -57,7 +57,7 @@ export const Maps: React.FC<MapsProps> = ({ index, setLatLnd, options, locations
         const address = r[0].formatted_address.split(' ').filter(i => !['Unnamed', 'Road,'].includes(i))
         const addressIndex = address.indexOf('Украина,')
         const newAddress = addressIndex >= 0 ? address.slice(0, addressIndex).concat('Украина') : address
-        dispatch(directionLocations.addPoint({
+        dispatch(DirectionLocationsActionCreators.addPoint({
           location,
           address: newAddress.join(' '),
           typeMarker: 'location',

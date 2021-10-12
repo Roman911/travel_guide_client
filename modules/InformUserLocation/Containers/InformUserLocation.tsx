@@ -2,18 +2,18 @@ import React from "react"
 import { useDispatch } from 'react-redux'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { InformLocation } from "../Components"
-import { modalActions } from "../../../redux/actions"
+import { ModalActionCreators } from "../../../redux/actionCreators"
 import { User } from "../../../typeScript/user"
 import { LOCATION_USER } from '../../../apollo/queries'
 import { ADD_LOCATION_USER_LIST } from "../../../apollo/mutations"
 import { LoadingSpin } from "../../../Components"
 
-type InformUserLocationProps = {
+type IInformUserLocation = {
   user: User
   locationId: string
 }
 
-type variablesProps = {
+type IVariables = {
   addLocation: {
     userId: string
     locationId: string
@@ -22,7 +22,7 @@ type variablesProps = {
   }
 }
 
-export const InformUserLocation: React.FC<InformUserLocationProps> = ({ user, locationId }): any => {
+export const InformUserLocation: React.FC<IInformUserLocation> = ({ user, locationId }): any => {
   const dispatch = useDispatch()
   const [ addLocationsUserList ] = useMutation(ADD_LOCATION_USER_LIST)
   const { loading, error, data } = useQuery(LOCATION_USER, {
@@ -33,7 +33,7 @@ export const InformUserLocation: React.FC<InformUserLocationProps> = ({ user, lo
   })
   const addLocationMyList = (action: string) => {
     const { locationUser } = data
-    const variables: variablesProps = {
+    const variables: IVariables = {
       addLocation: {
         userId: user.data._id,
         locationId,
@@ -52,7 +52,7 @@ export const InformUserLocation: React.FC<InformUserLocationProps> = ({ user, lo
       }]
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Локація успішно добавлена у ваш список'))
+        dispatch(ModalActionCreators.showModal('Локація успішно добавлена у ваш список'))
       }
     })
   }

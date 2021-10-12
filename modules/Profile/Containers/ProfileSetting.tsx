@@ -1,26 +1,20 @@
-import React, { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import React from "react"
+import { useDispatch } from "react-redux"
 import { useMutation } from "@apollo/react-hooks"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Setting } from "../Components"
 import { ADD_AVATAR } from '../../../apollo/mutations'
-import { userActions } from '../../../redux/actions'
+import { UserActionCreators } from '../../../redux/actionCreators'
 import { UserData } from "../../../typeScript/user"
 
-type ProfileSettingProps = {
+type IProfileSetting = {
   user: UserData
 }
 
-type UploadFileType = {
-  file: {
-    _id: string
-    url: string
-  }
-}
-
-export const ProfileSetting: React.FC<ProfileSettingProps> = ({ user }): any => {
+export const ProfileSetting: React.FC<IProfileSetting> = ({ user }): any => {
   const dispatch = useDispatch()
-  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
-  const [ url, setUrl ] = useState(null)
+  const { file } = useTypedSelector(state => state.uploadFiles)
+  const [ url, setUrl ] = React.useState(null)
   const [ addAvatar ] = useMutation(ADD_AVATAR)
   const { _id } = user
 
@@ -31,7 +25,7 @@ export const ProfileSetting: React.FC<ProfileSettingProps> = ({ user }): any => 
     localStorage.setItem('userData', JSON.stringify({
       ...data
     }))
-    dispatch(userActions.setData(data))
+    dispatch(UserActionCreators.setData(data))
   }
 
   return <Setting user={ user } setUrl={ setUrl } file={ file } handleClick={ handleClick } />

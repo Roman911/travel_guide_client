@@ -1,20 +1,20 @@
-import React, { useState } from "react"
-import { useSelector, useDispatch } from 'react-redux'
-import {locationsActions, sidebarActions, userActions} from '../../../redux/actions'
+import React from "react"
+import { useDispatch } from 'react-redux'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
+import { LocationsActionCreators, SidebarActionCreators, UserActionCreators } from '../../../redux/actionCreators'
 import { Sidebar } from '../Components'
 import { useKeyPress } from '../../../hooks/useKeyPress'
 import { useClickOutside } from '../../../hooks/useClickOutside'
 import { UserData } from '../../../typeScript/user'
-import { SidebarProps } from '../../../typeScript/sidebar'
 
-type ProfileSidebarProps = {
+type IProfileSidebar = {
   data: UserData
 }
 
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ data }) => {
-  const [ className, setClassName ] = useState(null)
+const ProfileSidebar: React.FC<IProfileSidebar> = ({ data }) => {
+  const [ className, setClassName ] = React.useState(null)
   const dispatch = useDispatch()
-  const { isOpen } = useSelector((state: { sidebar: SidebarProps }) => state.sidebar)
+  const { isOpen } = useTypedSelector(state => state.sidebar)
   const options = {
     mapContainerStyle: { height: "calc(100vh - 200px)", width: "100%" },
     disableDefaultUI: false,
@@ -24,20 +24,20 @@ const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ data }) => {
     control: 'MarkerQuery'
   }
   const logout = () => {
-    dispatch(sidebarActions.closeSidebar())
+    dispatch(SidebarActionCreators.closeSidebar())
     localStorage.removeItem('userData')
     setTimeout(() => {
-      dispatch(userActions.setData(null))
+      dispatch(UserActionCreators.setData(null))
     }, 600)
   }
 
   const closeSidebar = (): void => {
-    dispatch(sidebarActions.closeSidebar())
+    dispatch(SidebarActionCreators.closeSidebar())
   }
 
   const clickCreateLocation = () => {
     closeSidebar()
-    dispatch(locationsActions.changeData(options))
+    dispatch(LocationsActionCreators.changeData(options))
   }
 
   useKeyPress('Escape', closeSidebar)

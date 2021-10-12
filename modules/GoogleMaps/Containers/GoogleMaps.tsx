@@ -1,6 +1,6 @@
 import React from "react"
-import { useSelector } from 'react-redux'
 import { useLoadScript } from "@react-google-maps/api"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Maps } from "../Components/Maps"
 import { LoadingSpin } from "../../../Components"
 import { Location } from '../../../typeScript/googleMaps'
@@ -22,7 +22,7 @@ type GoogleMapsProps = {
 const libraries = ["places"]
 
 export const GoogleMaps: React.FC<GoogleMapsProps> = (props): any => {
-  const { locations } = useSelector((state: any) => state)
+  const { locations } = useTypedSelector(state => state)
   let libRef = React.useRef(libraries)
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_KAY,

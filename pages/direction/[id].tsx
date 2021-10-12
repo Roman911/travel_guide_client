@@ -1,19 +1,19 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useMutation } from '@apollo/react-hooks'
+import { useTypedSelector } from '../../hooks/useTypedSelector'
 import { LoadingPost, MainLayout } from '../../Components'
 import { initializeApollo } from "../../lib/apolloClient"
 import { DIRECTION } from "../../apollo/queries"
-import { locationsActions, directionLocations, loadingActions } from "../../redux/actions"
+import { LoadingPageActionCreators, LocationsActionCreators, DirectionLocationsActionCreators } from "../../redux/actionCreators"
 import { ShowDirection } from "../../modules/Directions/Components"
 import { useWindowDimensions } from "../../hooks/useWindowDimensions"
 import { LIKE_DIRECTION } from '../../apollo/mutations'
-import { User } from "../../typeScript/user"
 
 const Direction:React.FC = ({ data: { loading, data } }: any): any => {
   const dispatch = useDispatch()
   const { width } = useWindowDimensions()
-  const user = useSelector((state: { user: User }) => state.user)
+  const { user } = useTypedSelector(state => state)
   const [ likeDirection ] = useMutation(LIKE_DIRECTION)
 
   const options = {
@@ -23,14 +23,14 @@ const Direction:React.FC = ({ data: { loading, data } }: any): any => {
   }
 
   React.useEffect(() => {
-    dispatch(locationsActions.changeData(options))
-    dispatch(loadingActions.hideLoading())
+    dispatch(LocationsActionCreators.changeData(options))
+    dispatch(LoadingPageActionCreators.hideLoading())
   }, [])
 
   React.useEffect(() => {
     if (data) {
-      dispatch(directionLocations.newWaypoints(direction))
-      dispatch(locationsActions.changeData({ locations: direction.waypoints.map(i => {
+      dispatch(DirectionLocationsActionCreators.newWaypoints(direction))
+      dispatch(LocationsActionCreators.changeData({ locations: direction.waypoints.map(i => {
         return {
           _id: i.locationId,
           coordinates: [i.location.lat, i.location.lng],

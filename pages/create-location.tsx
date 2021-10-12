@@ -7,7 +7,7 @@ import { GoogleMaps } from '../modules'
 import { CreateLocationSelector } from '../modules'
 import { widthBlocks } from "../variabels"
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { locationsActions } from "../redux/actions"
+import { LocationsActionCreators } from "../redux/actionCreators"
 
 const CreateLocation: React.FC =() => {
   const dispatch = useDispatch()
@@ -17,9 +17,9 @@ const CreateLocation: React.FC =() => {
   const options = { location: latLng, isType, search: true }
 
   React.useEffect(() => {
-    dispatch(locationsActions.changeData({ control: 'MarkerQuery' }))
+    dispatch(LocationsActionCreators.changeData({ control: 'MarkerQuery' }))
     if (options) {
-      dispatch(locationsActions.changeData(options))
+      dispatch(LocationsActionCreators.changeData(options))
     }
   }, [options])
 

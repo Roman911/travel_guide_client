@@ -1,5 +1,5 @@
 import React from "react"
-import {faFacebookF, faInstagram, faTwitter, faYoutube} from "@fortawesome/free-brands-svg-icons"
+import { faFacebookF, faInstagram, faTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons"
 import socialIcon from "../../styles/socialIconStyle"
 
 type IconSocialProps = {

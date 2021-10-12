@@ -1,32 +1,25 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { useForm, FormProvider } from 'react-hook-form'
 import { useMutation } from '@apollo/react-hooks'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from "yup"
 import { css } from "aphrodite/no-important"
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { CREATE_LOCATION } from "../../../apollo/mutations"
-import { modalActions, uploadActions } from '../../../redux/actions'
-import { User } from "../../../typeScript/user"
+import { ModalActionCreators, UploadFilesActionCreators } from '../../../redux/actionCreators'
 import { CreateLocation, WrapperLocationSelector } from '../Components'
 import baseStyles from "../../../styles"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTimes } from "@fortawesome/free-solid-svg-icons"
 import { errors } from "../../../config/errorsText"
 
-type clsProps = {
+type ICls = {
   latLng: {
     lat: number,
     lng: number
   } | null
   setIsType: (isType) => void
-}
-
-type UploadFileType = {
-  file: {
-    _id: string
-    url: string
-  }
 }
 
 const schema = yup.object().shape({
@@ -41,10 +34,9 @@ const defaultValues = {
   location: [{ value: 'область' }, { value: 'місто' }, { value: 'вулиця' }]
 }
 
-export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }: clsProps): any => {
+export const CreateLocationSelector: React.FC<ICls> = ({ latLng, setIsType }: ICls): any => {
   const dispatch = useDispatch()
-  const { data } = useSelector((state: { user: User }) => state.user)
-  const { file } = useSelector((state: { uploadFile: UploadFileType }) => state.uploadFile)
+  const { user: { data }, uploadFiles: { file } } = useTypedSelector(state => state)
   const methods = useForm({ resolver: yupResolver(schema), defaultValues: defaultValues })
   const [ showMobileMenu, setShowMobileMenu ] = React.useState(false)
   const [ createLocations ] = useMutation(CREATE_LOCATION)
@@ -66,8 +58,8 @@ export const CreateLocationSelector: React.FC<clsProps> = ({ latLng, setIsType }
       }
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Локація успішно створена!'))
-        dispatch(uploadActions.setData(null))
+        dispatch(ModalActionCreators.showModal('Локація успішно створена!'))
+        dispatch(UploadFilesActionCreators.setData(null))
         methods.reset()
       }
     })

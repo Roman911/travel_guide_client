@@ -1,23 +1,22 @@
 import React from "react"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { useTypedSelector } from '../../../hooks/useTypedSelector'
 import { Like } from '../Components'
-import { modalActions } from "../../../redux/actions"
-import { User } from "../../../typeScript/user"
+import { ModalActionCreators } from "../../../redux/actionCreators"
 
-type MyLikesProps = {
+type ILikes = {
   id: string
   likes: string[]
   post: boolean
   changeLike?: any
 }
 
-export const Likes:React.FC<MyLikesProps> = ({ id, likes, post, changeLike }): any => {
+export const Likes:React.FC<ILikes> = ({ id, likes, post, changeLike }): any => {
   const [ quantityLikes, setQuantityLikes ] = React.useState(likes.length)
   const [ userLike, setUserLike ] = React.useState(false)
   const [ clickLike, setClickLike ] = React.useState( false )
-  const user = useSelector((state: { user: User }) => state.user)
+  const { data } = useTypedSelector(state => state.user)
   const dispatch = useDispatch()
-  const { data } = user
   const _id = data ? data._id : undefined
 
   React.useEffect(() => {
@@ -41,7 +40,7 @@ export const Likes:React.FC<MyLikesProps> = ({ id, likes, post, changeLike }): a
           setClickLike(prevState => !prevState)
         }, 250)
       } else {
-        dispatch(modalActions.showModal('Щоб залишити палець вгору, Вам потрібно авторизоватись'))
+        dispatch(ModalActionCreators.showModal('Щоб залишити палець вгору, Вам потрібно авторизоватись'))
       }
     }
   }

@@ -16,11 +16,9 @@ type MyLikeProps = {
 
 export const Like:React.FC<MyLikeProps> = ({ post, quantityLikes, userLike, handleClick, clickLike }) => {
   const likeNumber = quantityLikes !== 0 && <p className={ css(styles.text) }>{ quantityLikes }</p>
-
   const isPost = post && styles.iconPost
   const isUserLike = userLike && styles.iconActive
   const isClick = clickLike && styles.iconAnimations
-
   const className = css(baseStyles.icon, styles.icon, isPost, isUserLike, isClick)
   const iconHearts = userLike ? faThumbSolid : faThumbRegular
   const likeActive = <LikeIcon className={ className } handleClick={ handleClick } iconHearts={ iconHearts } />

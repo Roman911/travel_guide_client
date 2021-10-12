@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "next/link"
 import { css } from 'aphrodite/no-important'
-import {Button, ButtonLink, FormikControl} from "../../../Components"
+import { Button, ButtonLink, FormikControl } from "../../../Components"
 import baseStyles from '../../../styles'
 import styles from './settingStyles'
 import { UserData } from '../../../typeScript/user'

@@ -3,7 +3,7 @@ import { css } from "aphrodite/no-important"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import styles from './stylesSearchPresent'
-import baseStyles from "../../../styles";
+import baseStyles from "../../../styles"
 
 type SearchPresentProps = {
   data: any

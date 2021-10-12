@@ -1,12 +1,12 @@
 import React from "react"
 import { useDispatch } from 'react-redux'
-import { loadingActions } from '../redux/actions'
+import { LoadingPageActionCreators } from '../redux/actionCreators'
 
 export const useLoadingPage = () => {
   const dispatch = useDispatch()
 
   const handleClick = React.useCallback(() => {
-    dispatch(loadingActions.showLoading())
+    dispatch(LoadingPageActionCreators.showLoading())
   }, [])
 
   return { handleClick }

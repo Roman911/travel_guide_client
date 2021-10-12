@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import React from "react"
 import { Formik, Form } from "formik"
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete'
 import { SearchPresent } from "../Components"
 
 const Search = ({ panTo }) => {
-  const [ showSearch, setShowSearch ] = useState(false)
+  const [ showSearch, setShowSearch ] = React.useState(false)
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
       // @ts-ignore

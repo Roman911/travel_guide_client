@@ -10,7 +10,7 @@ import { LOCATION } from "../apollo/queries"
 import { CreatePostForm, WrapperCreatePost } from "../modules/CreatePost/Components"
 import { errors } from "../config/errorsText"
 import { CREATE_POST } from "../apollo/mutations"
-import { modalActions } from '../redux/actions'
+import { ModalActionCreators } from '../redux/actionCreators'
 import { useTypedSelector } from '../hooks/useTypedSelector'
 
 const schema = yup.object().shape({
@@ -70,7 +70,7 @@ const CreatePosts: React.FC = () => {
       }
     }).then(data => {
       if (data) {
-        dispatch(modalActions.showModal('Статю успішно створено!'))
+        dispatch(ModalActionCreators.showModal('Статю успішно створено!'))
         methods.reset()
       }
     })
